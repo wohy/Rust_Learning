@@ -37,3 +37,15 @@ Cargo.lock 文件是 cargo 工具根据同一项目的 toml 文件生成的项�
 # 项目运行
 ``$ cargo run``默认是运行 debug 模式
 ``$ cargo run --release`` 生产发布模式下的运行
+
+## 热启动 
+### 使用 cargo watch
+cargo watch 是一个 Rust 工具，它可以监视你的源代码文件的更改，并在检测到更改时自动重新编译项目。首先，你需要安装 cargo-watch 命令：
+```sh
+cargo install cargo-watch
+```
+然后，在项目根目录下运行以下命令：
+```sh
+cargo watch -x run
+```
+这将监视你的项目文件，并在文件更改时执行 cargo run 命令。
