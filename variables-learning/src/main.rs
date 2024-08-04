@@ -69,7 +69,7 @@ fn variable_learning() {
     let spaces = "   ";
     // usize数值类型
     let spaces = spaces.len();
-
+    print!("{}", spaces);
 
     // 编译器会进行自动推导，给予twenty i32的类型
     let twenty = 20;
@@ -92,9 +92,47 @@ fn variable_learning() {
     // 打印数组中第一个值，并控制小数位为2位
     println!("{:.2}", forty_twos[0]);
 
+
+    // 所有权转移
+    let parent = String::from("123");
+    let child = parent;
+    // // 报错 error[E0382]: borrow of moved value: `parent`
+    // println!("{}", parent);
+    // 123
+    println!("{}", child);
+
+    // 使用深拷贝 赋值
+    let parent2 = String::from("456");
+    let child2 = parent2.clone();
+    println!("parent2: {}, chilid2: {}", parent2, child2);
+
+
+    // String / str
+    let s = String::from("hello world");
+    let hello = &s[0..5];
+    let world = &s[6..11];
+    let hello1 = &s[..5];
+    let world1 = &s[6..];
+    let all = &s[..];
+    let s_str = s.as_str();
+    println!("hello:{}, world:{}, hello1:{}, world1:{}, all:{}, s_str:{}", hello, world, hello1, world1, all, s_str)
+
+}
+
+// 引用、解引用
+fn str_add(a: &mut String, b: &String) -> String {
+    println!("解引用，a: {} b: {}", *a, *b);
+    a.push_str(b);
+    a.clone()
 }
 
 
+
 fn main() {
-    variable_learning()
+    variable_learning();
+    let mut a = String::from("Hello");
+    let b = String::from(" Rust");
+    let res = str_add(&mut a, &b);
+    // Hello Rust
+    println!("{}", res)
 }
