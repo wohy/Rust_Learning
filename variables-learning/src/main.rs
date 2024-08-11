@@ -1,4 +1,4 @@
-fn variable_learning() {
+fn _variable_learning() {
     // let a = 1;
     // a = 3; //error[E0384]:  cannot assign twice to immutable variable `a`
     let mut a = 1;
@@ -126,13 +126,61 @@ fn str_add(a: &mut String, b: &String) -> String {
     a.clone()
 }
 
+// 元组学习
+fn tuple_learning() {
+    let tuples: (i32, f64, u8) = (12, 0.62, 9);
+    let (x, y, z) =  tuples;
+    // x is 12, y is 0.62, z is 9
+    println!("x is {}, y is {}, z is {}", x, y, z);
+    println!("the second one is {}", tuples.1);
+}
+fn tuple_to_use(s: String) -> (String, usize) {
+    let len = s.len();
+    (s, len)
+}
+
+
+// 结构体学习
+
+fn struct_learning() {
+    struct User {
+        active: bool,
+        username: String,
+        email: String,
+        sign_in_count: u64,
+    }
+
+    let user1 = User {
+        email: String::from("yi.hu@example.com"),
+        username: String::from("yi.hu"),
+        active: true,
+        sign_in_count: 1,
+    };
+    let user2 = User {
+        username: String::from("xiaohuang"),
+        email: String::from("123@qq.com"),
+        ..user1
+    };
+    println!("用户1，用户名：{}, 账号：{}, 登陆次数：{}, 是否有效用户：{}", user1.username, user1.email, user1.sign_in_count, user1.active);
+    println!("用户2，用户名：{}, 账号：{}", user2.username, user2.email);
+}
+
+
+
 
 
 fn main() {
-    variable_learning();
+    // variable_learning();
     let mut a = String::from("Hello");
     let b = String::from(" Rust");
     let res = str_add(&mut a, &b);
     // Hello Rust
-    println!("{}", res)
+    println!("{}", res);
+
+    tuple_learning();
+    let (s, len) = tuple_to_use(String::from("12345678"));
+    println!("the length of '{}' is {}", s, len);
+
+
+    struct_learning()
 }
