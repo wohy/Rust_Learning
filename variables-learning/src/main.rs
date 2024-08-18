@@ -1,3 +1,5 @@
+use std::collections::btree_map::Keys;
+
 fn _variable_learning() {
     // let a = 1;
     // a = 3; //error[E0384]:  cannot assign twice to immutable variable `a`
@@ -128,6 +130,21 @@ fn str_add(a: &mut String, b: &String) -> String {
     a.push_str(b);
     a.clone()
 }
+fn first_word(the_string: &String) -> &str {
+    // split_whitespace 将返回一个迭代器，迭代器 通过 next 访问第一个元素。通过 nth 访问某个元素 返回一个 Option<&str>
+    let mut all_words: std::str::SplitWhitespace = the_string.split_whitespace();
+
+    if let Some(first) = all_words.next() {
+        return first;
+    } else {
+        return "";
+    }
+
+    // match all_words.nth(0) {
+    //     Some(word) => return word,
+    //     None => return ""
+    // }
+}
 
 // 元组学习
 fn tuple_learning() {
@@ -142,15 +159,51 @@ fn tuple_to_use(s: String) -> (String, usize) {
     (s, len)
 }
 
-// 结构体、Vector(可变数组)学习
+// 结构体、Vector(可变数组)、方法学习
 fn _struct_learning() {
     struct User {
         active: bool,
         username: String,
         email: String,
-        sign_in_count: u64,
+        sign_in_count: u64
     }
 
+    impl User {
+        fn get_info(&self, field: &str) {
+            match field {
+                "active" => {
+                    let is_active;
+                    if self.active {
+                        is_active = "有效"
+                    } else {
+                        is_active = "无效"
+                    }
+                    println!("该用户是{}", is_active)
+                },
+                "username" => {
+                    println!("该用户名为{}", self.username)
+                },
+                "email" => {
+                    println!("该用户邮箱为{}", self.email)
+                },
+                "sign_in_count" => {
+                    println!("该用户登录了 {} 次",self.sign_in_count)
+                }
+                _ => println!("没有对应字段"),
+            }
+        }
+        fn create_normal_user(name: &str, email: &str) -> Self {
+            Self {
+                active: true,
+                username: name.to_string(),
+                email: email.to_string(),
+                sign_in_count: 1
+            }
+        }
+        fn update_sign_count(&mut self) {
+            self.sign_in_count += 1
+        }
+    }
     struct PhoneNumber {
         name: String,
         number: String,
@@ -160,7 +213,7 @@ fn _struct_learning() {
         email: String::from("yi.hu@example.com"),
         username: String::from("yi.hu"),
         active: true,
-        sign_in_count: 1,
+        sign_in_count: 1
     };
     let user2 = User {
         username: String::from("xiaohuang"),
@@ -173,6 +226,17 @@ fn _struct_learning() {
         user1.username, user1.email, user1.sign_in_count, user1.active
     );
     println!("用户2，用户名：{}, 账号：{}", user2.username, user2.email);
+    user1.get_info("username");
+    user1.get_info("active");
+
+    let user3 = User::create_normal_user("xiaohu", "123@qq.com");
+    user3.get_info("username");
+    user3.get_info("email");
+
+    let mut user4 = User::create_normal_user("xiaosi", "1234@qq.com");
+    user4.update_sign_count();
+    user4.get_info("sign_in_count");
+
 
     // 可变结构体 只能将结构体设置为可变，无法将结构体中某个字段设置为可变
     // let mut user1_phone_number = PhoneNumber {
@@ -271,36 +335,41 @@ fn _vec_learning() {
 }
 
 // HashMap<K,V> 学习
-fn _hashmap_learning() {
+fn hashmap_learning() {
     use std::collections::HashMap;
 
-    let teams_list = vec![
-        ("中国队", 100),
-        ("美国队", 10),
-        ("日本队", 50),
-    ];
+    let teams_list = vec![("中国队", 100), ("美国队", 10), ("日本队", 50)];
 
     let mut teams_map = HashMap::new();
     for team in &teams_list {
-
         // 若 team.0 为复杂类型 例如 String，不使用引用的话，所有权将转移给 teams_map。后续操作将无法访问
         teams_map.insert(team.0, team.1);
     }
     teams_map.insert("韩国队", 20);
-    println!("{:?}",teams_map);
+    println!("{:?}", teams_map);
 
     fn get_score<'a>(the_map: &mut HashMap<&'a str, i32>, country: &'a str) -> i32 {
-        match the_map.get(country) {
-            Some(&score) => {
-                println!("{}得分为 {}", country, score);
-                score // 返回对分数的引用的值
-            }
-            None => {
-                let score = 0; // 插入前的默认分数
-                the_map.insert(country, score); // 插入新条目
-                println!("{}得分为 {}", country, score);
-                score // 返回新插入的分数
-            }
+        // match the_map.get(country) {
+        //     Some(&score) => {
+        //         println!("{}得分为 {}", country, score);
+        //         score // 返回对分数的引用的值
+        //     }
+        //     None => {
+        //         let score = 0; // 插入前的默认分数
+        //         the_map.insert(country, score); // 插入新条目
+        //         println!("{}得分为 {}", country, score);
+        //         score // 返回新插入的分数
+        //     }
+        // }
+        // 使用 if let 简化。 match 只匹配一种特殊情况及其他情况。可使用 if let 简化
+        if let Some(score) = the_map.get(country) {
+            println!("{}得分为 {}", country, score);
+            *score // 返回对分数的引用的值
+        } else {
+            let score = 0; // 插入前的默认分数
+            the_map.insert(country, score); // 插入新条目
+            println!("{}得分为 {}", country, score);
+            score // 返回新插入的分数
         }
     }
     get_score(&mut teams_map, "英国队");
@@ -312,16 +381,14 @@ fn _hashmap_learning() {
     }
     get_score_by_entry(&mut teams_map, "德国队");
 
-
     for (key, value) in &teams_map {
         println!("{}: {}", key, value);
     }
     println!("最终分数记录为：{:?}", teams_map);
-
 }
 
-// 枚举学习
-fn enum_learning() {
+// 枚举学习 if let、match 结合使用
+fn _enum_learning() {
     // #[derive(Debug)] 是一个属性宏，它的作用是自动派生（derive）Debug trait 对结构体或枚举类型的实现。
     // Debug trait 允许你使用格式化宏（如 println!）以调试格式打印变量的值
     #[derive(Debug)]
@@ -344,8 +411,51 @@ fn enum_learning() {
     let spades_3: PokerSuit = PokerSuit::Spades(3);
     let diamonds_a: PokerSuit = PokerSuit::Diamonds('A');
     let hearts_k: PokerSuit = PokerSuit::Hearts('K');
-    println!("获取到 PokerSuit 中枚举 Clubs、Spades、Diamonds、Hearts 的实例化后的值分别为 {:?}、{:?}、{:?}、{:?}", clubs_2, spades_3, diamonds_a, hearts_k);
-    
+    fn get_color(the_poker: &PokerSuit) {
+        // match 与结构体的结合
+        match the_poker {
+            PokerSuit::Clubs(_) => println!("♣️"),
+            PokerSuit::Spades(_) => println!("♠️"),
+            PokerSuit::Diamonds(_) => println!("♦️"),
+            PokerSuit::Hearts(_) => println!("♥️"),
+        }
+    }
+    fn is_hearts(poker: &PokerSuit) -> bool {
+        if let PokerSuit::Hearts(_) = poker {
+            true
+        } else {
+            false
+        }
+    }
+    // fn is_hearts_get_value(poker: &PokerSuit) -> &str {
+    //     if let PokerSuit::Hearts(value) = poker {
+    //         return &value.to_string()
+    //     } else {
+    //         ""
+    //     }
+    // }
+
+    fn is_hearts_get_value(poker: &PokerSuit) -> String {
+        if let PokerSuit::Hearts(value) = poker {
+            // 将 char 转换为 String，然后返回 String 的切片作为 &str
+            return value.to_string();
+        } else {
+            // 如果不是 Hearts，返回一个空的 &str
+            String::new()
+        }
+    }
+
+    get_color(&clubs_2);
+    get_color(&spades_3);
+    get_color(&diamonds_a);
+    get_color(&hearts_k);
+    if is_hearts(&hearts_k) {
+        println!("这张牌是红桃花色")
+    }
+    let value = is_hearts_get_value(&hearts_k);
+    println!("值为 {}", value);
+
+
     // 如下 Option<T> 则是 rust 实现的一个枚举类，可以避免 空指针错误，值为空时 会走到 None 中进行处理，只有值可以走到 Some 逻辑中去
     // enum Option<T> {
     //     Some(T),
@@ -361,10 +471,7 @@ fn enum_learning() {
     // let five = Some(5);
     // let six = plus_one(five);
     // let none = plus_one(None);
-
-
 }
-
 
 fn main() {
     // variable_learning();
@@ -373,6 +480,8 @@ fn main() {
     let res = str_add(&mut a, &b);
     // Hello Rust
     println!("{}", res);
+    let word = first_word(&res);
+    println!("空格前的第一个元素为 {}", word); // 空格前的第一个元素为 Hello
 
     tuple_learning();
     let (s, len) = tuple_to_use(String::from("12345678"));
@@ -380,7 +489,7 @@ fn main() {
 
     // struct_learning();
     // vec_learning();
-    // hashmap_learning();
+    hashmap_learning();
 
-    enum_learning();
+    // enum_learning();
 }
