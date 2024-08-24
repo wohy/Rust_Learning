@@ -1,5 +1,3 @@
-use std::collections::btree_map::Keys;
-
 fn _variable_learning() {
     // let a = 1;
     // a = 3; //error[E0384]:  cannot assign twice to immutable variable `a`
@@ -283,7 +281,7 @@ fn _vec_learning() {
     let mut _vec_3: Vec<i32> = [1, 2].to_vec();
 
     vec_2.extend(['a', 'b', 'c']);
-    // 使用 get 获取元素，安全（有值的时候返回 Some(T)，无值的时候返回 None），但是较下标访问消耗更大。
+    // 使用 get 获取元素，返回值为一个 options， 使用match 匹配，安全（有值的时候返回 Some(T)，无值的时候返回 None），但是较下标访问消耗更大。
     match vec_2.get(1) {
         Some(value) => println!("vec_2的第二个元素为: {}", value),
         None => println!("没有找到元素"),
