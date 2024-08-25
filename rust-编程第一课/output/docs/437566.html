@@ -1,0 +1,1485 @@
+
+<!DOCTYPE HTML>
+<html lang="zh" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>31｜FFI：Rust如何和你的语言架起沟通桥梁？ · 陈天 · Rust 编程第一课</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="437569.html" />
+    
+    
+    <link rel="prev" href="435484.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="輸入並搜尋" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="408400.html">
+            
+                <a href="408400.html">
+            
+                    
+                    开篇词｜让Rust成为你的下一门主力语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="408409.html">
+            
+                <a href="408409.html">
+            
+                    
+                    01｜内存：值放堆上还是放栈上，这是一个问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="410038.html">
+            
+                <a href="410038.html">
+            
+                    
+                    02｜串讲：编程开发中，那些你需要掌握的基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="411089.html">
+            
+                <a href="411089.html">
+            
+                    
+                    加餐｜这个专栏你可以怎么学，以及Rust是否值得学？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="411632.html">
+            
+                <a href="411632.html">
+            
+                    
+                    03｜初窥门径：从你的第一个Rust程序开始！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="412883.html">
+            
+                <a href="412883.html">
+            
+                    
+                    04｜get hands dirty：来写个实用的CLI小工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="413634.html">
+            
+                <a href="413634.html">
+            
+                    
+                    05｜get hands dirty：做一个图片服务器有多难？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="414478.html">
+            
+                <a href="414478.html">
+            
+                    
+                    06｜get hands dirty：SQL查询工具怎么一鱼多吃？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="415098.html">
+            
+                <a href="415098.html">
+            
+                    
+                    07｜所有权：值的生杀大权到底在谁手上？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="415988.html">
+            
+                <a href="415988.html">
+            
+                    
+                    08｜所有权：值的借用是如何工作的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="416722.html">
+            
+                <a href="416722.html">
+            
+                    
+                    09｜所有权：一个值可以有多个所有者么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="417384.html">
+            
+                <a href="417384.html">
+            
+                    
+                    10｜生命周期：你创建的值究竟能活多久？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="418235.html">
+            
+                <a href="418235.html">
+            
+                    
+                    11｜内存管理：从创建到消亡，值都经历了什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="418778.html">
+            
+                <a href="418778.html">
+            
+                    
+                    加餐｜愚昧之巅：你的Rust学习常见问题汇总
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="420021.html">
+            
+                <a href="420021.html">
+            
+                    
+                    12｜类型系统：Rust的类型系统有什么特点？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="420028.html">
+            
+                <a href="420028.html">
+            
+                    
+                    13｜类型系统：如何使用trait来定义接口？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="421324.html">
+            
+                <a href="421324.html">
+            
+                    
+                    14｜类型系统：有哪些必须掌握的trait？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="422182.html">
+            
+                <a href="422182.html">
+            
+                    
+                    15｜数据结构：这些浓眉大眼的结构竟然都是智能指针？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="422975.html">
+            
+                <a href="422975.html">
+            
+                    
+                    16｜数据结构：Vec、&[T]、Box<[T]> ，你真的了解集合容器么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="423923.html">
+            
+                <a href="423923.html">
+            
+                    
+                    17｜数据结构：软件系统核心部件哈希表，内存如何布局？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="424002.html">
+            
+                <a href="424002.html">
+            
+                    
+                    18｜错误处理：为什么Rust的错误处理与众不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="424009.html">
+            
+                <a href="424009.html">
+            
+                    
+                    19｜闭包：FnOnce、FnMut和Fn，为什么有这么多类型？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="424017.html">
+            
+                <a href="424017.html">
+            
+                    
+                    20｜4 Steps ：如何更好地阅读Rust源码？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="425001.html">
+            
+                <a href="425001.html">
+            
+                    
+                    21｜阶段实操（1）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="425005.html">
+            
+                <a href="425005.html">
+            
+                    
+                    22｜阶段实操（2）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.27" data-path="425013.html">
+            
+                <a href="425013.html">
+            
+                    
+                    加餐｜期中测试：来写一个简单的grep命令行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.28" data-path="425015.html">
+            
+                <a href="425015.html">
+            
+                    
+                    加餐｜期中测试：参考实现讲解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.29" data-path="427082.html">
+            
+                <a href="427082.html">
+            
+                    
+                    23｜类型系统：如何在实战中使用泛型编程？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.30" data-path="428018.html">
+            
+                <a href="428018.html">
+            
+                    
+                    24｜类型系统：如何在实战中使用trait object？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.31" data-path="429063.html">
+            
+                <a href="429063.html">
+            
+                    
+                    25｜类型系统：如何围绕trait来设计和架构系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.32" data-path="429665.html">
+            
+                <a href="429665.html">
+            
+                    
+                    加餐｜Rust2021版次问世了！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.33" data-path="429666.html">
+            
+                <a href="429666.html">
+            
+                    
+                    26｜阶段实操（3）：构建一个简单的KV server-高级trait技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.34" data-path="429673.html">
+            
+                <a href="429673.html">
+            
+                    
+                    27｜生态系统：有哪些常有的Rust库可以为我所用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.35" data-path="432162.html">
+            
+                <a href="432162.html">
+            
+                    
+                    28｜网络开发（上）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.36" data-path="432168.html">
+            
+                <a href="432168.html">
+            
+                    
+                    29｜网络开发（下）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.37" data-path="435484.html">
+            
+                <a href="435484.html">
+            
+                    
+                    30｜Unsafe Rust：如何用C++的方式打开Rust？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.38" data-path="437566.html">
+            
+                <a href="437566.html">
+            
+                    
+                    31｜FFI：Rust如何和你的语言架起沟通桥梁？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.39" data-path="437569.html">
+            
+                <a href="437569.html">
+            
+                    
+                    32｜实操项目：使用PyO3开发Python3模块
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.40" data-path="442216.html">
+            
+                <a href="442216.html">
+            
+                    
+                    33｜并发处理（上）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.41" data-path="442217.html">
+            
+                <a href="442217.html">
+            
+                    
+                    34｜并发处理（下）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.42" data-path="445814.html">
+            
+                <a href="445814.html">
+            
+                    
+                    35｜实操项目：如何实现一个基本的MPSC channel？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.43" data-path="445818.html">
+            
+                <a href="445818.html">
+            
+                    
+                    用户故事｜绝望之谷：改变从学习开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.44" data-path="446948.html">
+            
+                <a href="446948.html">
+            
+                    
+                    36｜阶段实操（4）：构建一个简单的KV server-网络处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.45" data-path="446949.html">
+            
+                <a href="446949.html">
+            
+                    
+                    37｜阶段实操（5）：构建一个简单的KV server-网络安全
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.46" data-path="455413.html">
+            
+                <a href="455413.html">
+            
+                    
+                    38｜异步处理：Future是什么？它和async/await是什么关系？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.47" data-path="455412.html">
+            
+                <a href="455412.html">
+            
+                    
+                    39｜异步处理：async/await内部是怎么实现的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.48" data-path="461695.html">
+            
+                <a href="461695.html">
+            
+                    
+                    40｜异步处理：如何处理异步IO？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.49" data-path="461997.html">
+            
+                <a href="461997.html">
+            
+                    
+                    41｜阶段实操（6）：构建一个简单的KV server-异步处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.50" data-path="461999.html">
+            
+                <a href="461999.html">
+            
+                    
+                    42｜阶段实操（7）：构建一个简单的KV server-如何做大的重构？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.51" data-path="464856.html">
+            
+                <a href="464856.html">
+            
+                    
+                    43｜生产环境：真实世界下的一个Rust项目包含哪些要素？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.52" data-path="464855.html">
+            
+                <a href="464855.html">
+            
+                    
+                    44｜数据处理：应用程序和数据如何打交道？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.53" data-path="466825.html">
+            
+                <a href="466825.html">
+            
+                    
+                    45｜阶段实操（8）：构建一个简单的KV server-配置/测试/监控/CI/CD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.54" data-path="468066.html">
+            
+                <a href="468066.html">
+            
+                    
+                    46｜软件架构：如何用Rust架构复杂系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.55" data-path="468940.html">
+            
+                <a href="468940.html">
+            
+                    
+                    大咖助场｜开悟之坡（上）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.56" data-path="468948.html">
+            
+                <a href="468948.html">
+            
+                    
+                    大咖助场｜开悟之坡（下）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.57" data-path="470490.html">
+            
+                <a href="470490.html">
+            
+                    
+                    用户故事｜语言不仅是工具，还是思维方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.58" data-path="481355.html">
+            
+                <a href="481355.html">
+            
+                    
+                    加餐｜代码即数据：为什么我们需要宏编程能力？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.59" data-path="481359.html">
+            
+                <a href="481359.html">
+            
+                    
+                    加餐｜宏编程（上）：用最“笨”的方式撰写宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.60" data-path="481369.html">
+            
+                <a href="481369.html">
+            
+                    
+                    加餐｜宏编程（下）：用 syn/quote 优雅地构建宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.61" data-path="470420.html">
+            
+                <a href="470420.html">
+            
+                    
+                    结束语｜永续之原：Rust学习，如何持续精进？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.62" data-path="470440.html">
+            
+                <a href="470440.html">
+            
+                    
+                    期末测试｜来赴一场满分之约！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.63" data-path="482856.html">
+            
+                <a href="482856.html">
+            
+                    
+                    特别策划｜学习锦囊（一）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.64" data-path="483045.html">
+            
+                <a href="483045.html">
+            
+                    
+                    特别策划｜学习锦囊（二）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.65" data-path="483050.html">
+            
+                <a href="483050.html">
+            
+                    
+                    特别策划｜学习锦囊（三）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.66" data-path="653131.html">
+            
+                <a href="653131.html">
+            
+                    
+                    特别策划｜生成式AI：哪些开发环节可能被颠覆？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本書使用 GitBook 釋出
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >31｜FFI：Rust如何和你的语言架起沟通桥梁？</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="31&#xFF5C;ffi&#xFF1A;rust&#x5982;&#x4F55;&#x548C;&#x4F60;&#x7684;&#x8BED;&#x8A00;&#x67B6;&#x8D77;&#x6C9F;&#x901A;&#x6865;&#x6881;&#xFF1F;">31&#xFF5C;FFI&#xFF1A;Rust&#x5982;&#x4F55;&#x548C;&#x4F60;&#x7684;&#x8BED;&#x8A00;&#x67B6;&#x8D77;&#x6C9F;&#x901A;&#x6865;&#x6881;&#xFF1F;</h1>
+<pre><code>&#x4F60;&#x597D;&#xFF0C;&#x6211;&#x662F;&#x9648;&#x5929;&#x3002;
+</code></pre><p>FFI&#xFF08;Foreign Function Interface&#xFF09;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5916;&#x90E8;&#x51FD;&#x6570;&#x63A5;&#x53E3;&#xFF0C;&#x6216;&#x8005;&#x8BF4;&#x8BED;&#x8A00;&#x4EA4;&#x4E92;&#x63A5;&#x53E3;&#xFF0C;&#x5BF9;&#x4E8E;&#x5927;&#x90E8;&#x5206;&#x5F00;&#x53D1;&#x8005;&#x6765;&#x8BF4;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x795E;&#x79D8;&#x7684;&#x5B58;&#x5728;&#xFF0C;&#x5E73;&#x65F6;&#x53EF;&#x80FD;&#x51E0;&#x4E4E;&#x4E0D;&#x4F1A;&#x63A5;&#x89E6;&#x5230;&#x5B83;&#xFF0C;&#x66F4;&#x522B;&#x8BF4;&#x64B0;&#x5199; FFI &#x4EE3;&#x7801;&#x4E86;&#x3002;</p>
+<p>&#x5176;&#x5B9E;&#x4F60;&#x7528;&#x7684;&#x8BED;&#x8A00;&#x751F;&#x6001;&#x6709;&#x5F88;&#x5927;&#x4E00;&#x90E8;&#x5206;&#x662F;&#x7531; FFI &#x6784;&#x5EFA;&#x7684;&#x3002;&#x6BD4;&#x5982;&#x4F60;&#x5728; Python &#x4E0B;&#x4F7F;&#x7528;&#x7740; NumPy &#x6109;&#x5FEB;&#x5730;&#x505A;&#x7740;&#x6570;&#x503C;&#x8BA1;&#x7B97;&#xFF0C;&#x6B8A;&#x4E0D;&#x77E5; NumPy &#x7684;&#x5E95;&#x5C42;&#x7EC6;&#x8282;&#x90FD;&#x662F;&#x7531; C &#x6784;&#x5EFA;&#x7684;&#xFF1B;&#x5F53;&#x4F60;&#x7528; Rust &#x65F6;&#xFF0C;&#x80FD;&#x5F00;&#x5FC3;&#x5730;&#x4F7F;&#x7528;&#x7740; OpenSSL &#x4E3A;&#x4F60;&#x7684; HTTP &#x670D;&#x52A1;&#x4FDD;&#x9A7E;&#x62A4;&#x822A;&#xFF0C;&#x5176;&#x5B9E;&#x5E95;&#x4E0B;&#x4E5F;&#x662F; C &#x5728;&#x5904;&#x7406;&#x7740;&#x4E00;&#x5207;&#x534F;&#x8BAE;&#x7B97;&#x6CD5;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x6240;&#x5904;&#x7684;&#x8F6F;&#x4EF6;&#x4E16;&#x754C;&#xFF0C;&#x51E0;&#x4E4E;&#x6240;&#x6709;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x90FD;&#x5728;&#x548C; C &#x6253;&#x9020;&#x51FA;&#x6765;&#x7684;&#x751F;&#x6001;&#x7CFB;&#x7EDF;&#x6253;&#x4EA4;&#x9053;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;<strong>&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF0C;&#x5982;&#x679C;&#x80FD;&#x8DDF; C ABI&#xFF08;Application Binary Interface&#xFF09;&#x5904;&#x7406;&#x597D;&#x5173;&#x7CFB;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x51E0;&#x4E4E;&#x53EF;&#x4EE5;&#x548C;&#x4EFB;&#x4F55;&#x8BED;&#x8A00;&#x4E92;&#x901A;</strong>&#x3002;</p>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x5BF9;&#x4E8E;&#x5927;&#x90E8;&#x5206;&#x5176;&#x4ED6;&#x8BED;&#x8A00;&#x7684;&#x4F7F;&#x7528;&#x8005;&#x6765;&#x8BF4;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;&#x5982;&#x4F55;&#x548C; C &#x4E92;&#x901A;&#x4E5F;&#x65E0;&#x6240;&#x8C13;&#xFF0C;&#x56E0;&#x4E3A;&#x5F00;&#x6E90;&#x4E16;&#x754C;&#x91CC;&#x603B;&#x6709;&#x201C;&#x524D;&#x8F88;&#x201D;&#x4EEC;&#x66FF;&#x6211;&#x4EEC;&#x94FA;&#x597D;&#x8DEF;&#x8BA9;&#x6211;&#x4EEC;&#x524D;&#x8FDB;&#xFF1B;&#x4F46;&#x5BF9;&#x4E8E; Rust &#x8BED;&#x8A00;&#x7684;&#x4F7F;&#x7528;&#x8005;&#x6765;&#x8BF4;&#xFF0C;&#x5728;&#x522B;&#x4EBA;&#x94FA;&#x597D;&#x7684;&#x8DEF;&#x4E0A;&#x524D;&#x8FDB;&#x4E4B;&#x4F59;&#xFF0C;&#x5076;&#x5C14;&#xFF0C;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x4E5F;&#x9700;&#x8981;&#x4E3A;&#x81EA;&#x5DF1;&#x3001;&#x4E3A;&#x522B;&#x4EBA;&#x94FA;&#x4E00;&#x94FA;&#x8DEF;&#x3002;&#x8C01;&#x8BA9; Rust &#x662F;&#x4E00;&#x95E8;&#x7CFB;&#x7EDF;&#x7EA7;&#x522B;&#x7684;&#x8BED;&#x8A00;&#x5462;&#x3002;&#x6240;&#x8C13;&#xFF0C;&#x80FD;&#x529B;&#x8D8A;&#x5927;&#xFF0C;&#x8D23;&#x4EFB;&#x8D8A;&#x5927;&#x561B;&#x3002;</p>
+<p>&#x4E5F;&#x6B63;&#x56E0;&#x4E3A;&#x6B64;&#xFF0C;&#x5F53;&#x5927;&#x90E8;&#x5206;&#x8BED;&#x8A00;&#x90FD;&#x8FD8;&#x5728;&#x5438;&#x8840; C &#x7684;&#x751F;&#x6001;&#x65F6;&#xFF0C;Rust &#x5728;&#x5927;&#x5927;&#x65B9;&#x65B9;&#x5730;&#x6781;&#x5C3D;&#x6240;&#x80FD;&#x53CD;&#x54FA;&#x751F;&#x6001;&#x3002;&#x6BD4;&#x5982; cloudflare &#x548C;&#x767E;&#x5EA6;&#x7684; <a href="https://github.com/mesalock-linux/mesalink" target="_blank">mesalink</a> &#x5C31;&#x5206;&#x522B;&#x628A;&#x7EAF; Rust &#x7684; HTTP/3 &#x5B9E;&#x73B0; quiche &#x548C; TLS &#x5B9E;&#x73B0; Rustls&#xFF0C;&#x5F15;&#x5165;&#x5230; C/C++ &#x7684;&#x751F;&#x6001;&#x91CC;&#xFF0C;&#x8BA9; C/C++ &#x7684;&#x751F;&#x6001;&#x66F4;&#x7F8E;&#x597D;&#x3001;&#x66F4;&#x5B89;&#x5168;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x73B0;&#x5728;&#xFF0C;&#x9664;&#x4E86;&#x7528; C/C++ &#x505A;&#x5E95;&#x5C42;&#x5916;&#xFF0C;&#x8D8A;&#x6765;&#x8D8A;&#x591A;&#x7684;&#x5E93;&#x4F1A;&#x5148;&#x7528; Rust &#x5B9E;&#x73B0;&#xFF0C;&#x518D;&#x6784;&#x5EFA;&#x51FA;&#x5BF9;&#x5E94; Python&#xFF08;<a href="https://github.com/PyO3/pyo3" target="_blank">pyo3</a>&#xFF09;&#x3001;JavaScript&#xFF08;wasm&#xFF09;&#x3001;Node.js&#xFF08;<a href="https://github.com/neon-bindings/neon" target="_blank">neon</a>&#xFF09;&#x3001;Swift&#xFF08;<a href="https://github.com/mozilla/uniffi-rs" target="_blank">uniffi</a>&#xFF09;&#x3001;Kotlin&#xFF08;uniffi&#xFF09;&#x7B49;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x5B66;&#x4E60; Rust &#x6709;&#x4E00;&#x4E2A;&#x597D;&#x5904;&#x5C31;&#x662F;&#xFF0C;&#x5B66;&#x7740;&#x5B66;&#x7740;&#xFF0C;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#xFF0C;&#x4E0D;&#x4F46;&#x80FD;&#x9020;&#x4E00;&#x5927;&#x5806;&#x8F6E;&#x5B50;&#x7ED9;&#x81EA;&#x5DF1;&#x7528;&#xFF0C;&#x8FD8;&#x80FD;&#x9020;&#x4E00;&#x5927;&#x5806;&#x8F6E;&#x5B50;&#x7ED9;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x7528;&#xFF0C;&#x5E76;&#x4E14; Rust &#x7684;&#x751F;&#x6001;&#x8FD8;&#x5F88;&#x652F;&#x6301;&#x548C;&#x9F13;&#x52B1;&#x4F60;&#x9020;&#x8F6E;&#x5B50;&#x7ED9;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x7528;&#x3002;&#x4E8E;&#x662F;&#x4E4E;&#xFF0C;Java &#x7684;&#x7406;&#x60F3;&#x201C;&#x4E00;&#x6B21;&#x64B0;&#x5199;&#xFF0C;&#x5230;&#x5904;&#x4F7F;&#x7528;&#x201D;&#xFF0C;<strong>&#x5728; Rust &#x8FD9;&#x91CC;&#x6210;&#x4E86;&#x201C;&#x4E00;&#x6B21;&#x64B0;&#x5199;&#xFF0C;&#x5230;&#x5904;&#x8C03;&#x7528;&#x201D;</strong>&#x3002;</p>
+<p>&#x597D;&#xFF0C;&#x804A;&#x4E86;&#x8FD9;&#x4E48;&#x591A;&#xFF0C;&#x4F60;&#x662F;&#x4E0D;&#x662F;&#x5DF2;&#x7ECF;&#x975E;&#x5E38;&#x597D;&#x5947; Rust FFI &#x80FD;&#x529B;&#x5230;&#x5E95;&#x5982;&#x4F55;&#xFF1F;&#x5176;&#x5B9E;&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x89C1;&#x8BC6;&#x8FC7;&#x51B0;&#x5C71;&#x4E00;&#x89D2;&#xFF0C;&#x5728;<a href="https://time.geekbang.org/column/article/414478" target="_blank">&#x7B2C; 6 &#x8BB2;</a> get hands dirty &#x505A;&#x7684;&#x90A3;&#x4E2A; SQL &#x67E5;&#x8BE2;&#x5DE5;&#x5177;&#xFF0C;&#x6211;&#x4EEC;&#x5B9E;&#x73B0;&#x4E86; Python &#x548C; Node.js &#x7684;&#x7ED1;&#x5B9A;&#x3002;&#x4ECA;&#x5929;&#xFF0C;&#x5C31;&#x6765;&#x66F4;&#x5E7F;&#x6CDB;&#x5730;&#x5B66;&#x4E60;&#x4E00;&#x4E0B; Rust &#x5982;&#x4F55;&#x8DDF;&#x4F60;&#x7684;&#x8BED;&#x8A00;&#x67B6;&#x6784;&#x8D77;&#x6C9F;&#x901A;&#x7684;&#x6865;&#x6881;&#x3002;</p>
+<h2 id="rust-&#x8C03;&#x7528;c&#x7684;&#x5E93;">Rust &#x8C03;&#x7528;C&#x7684;&#x5E93;</h2>
+<p>&#x9996;&#x5148;&#x770B; Rust &#x548C; C/C++ &#x7684;&#x4E92;&#x64CD;&#x4F5C;&#x3002;&#x4E00;&#x822C;&#x800C;&#x8A00;&#xFF0C;&#x5F53;&#x770B;&#x5230;&#x4E00;&#x4E2A; C/C++ &#x5E93;&#xFF0C;&#x6211;&#x4EEC;&#x60F3;&#x5728; Rust &#x4E2D;&#x4F7F;&#x7528;&#x5B83;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x4EE5;&#x5148;&#x64B0;&#x5199;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x7684; shim &#x4EE3;&#x7801;&#xFF0C;&#x628A;&#x60F3;&#x8981;&#x66B4;&#x9732;&#x51FA;&#x6765;&#x7684;&#x63A5;&#x53E3;&#x66B4;&#x9732;&#x51FA;&#x6765;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528; <a href="https://github.com/rust-lang/rust-bindgen" target="_blank">bindgen</a> &#x6765;&#x751F;&#x6210;&#x5BF9;&#x5E94;&#x7684; Rust FFI &#x4EE3;&#x7801;&#x3002;</p>
+<p>bindgen &#x4F1A;&#x751F;&#x6210;&#x4F4E;&#x5C42;&#x7684; Rust API&#xFF0C;Rust &#x4E0B;&#x7EA6;&#x5B9A;&#x4FD7;&#x6210;&#x7684;&#x65B9;&#x5F0F;&#x662F;<strong>&#x5C06;&#x4F7F;&#x7528; bindgen &#x7684; crate &#x547D;&#x540D;&#x4E3A; xxx-sys</strong>&#xFF0C;&#x91CC;&#x9762;&#x5305;&#x542B;&#x56E0;&#x4E3A; FFI &#x800C;&#x5BFC;&#x81F4;&#x7684;&#x5927;&#x91CF; unsafe &#x4EE3;&#x7801;&#x3002;&#x7136;&#x540E;&#xFF0C;<strong>&#x5728;&#x8FD9;&#x4E2A;&#x57FA;&#x7840;&#x4E0A;&#x751F;&#x6210; xxx crate</strong>&#xFF0C;&#x7528;&#x66F4;&#x9AD8;&#x5C42;&#x7684;&#x4EE3;&#x7801;&#x6765;&#x5C01;&#x88C5;&#x8FD9;&#x4E9B;&#x4F4E;&#x5C42;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x4E3A;&#x5176;&#x5B83; Rust &#x5F00;&#x53D1;&#x8005;&#x63D0;&#x4F9B;&#x4E00;&#x5957;&#x611F;&#x89C9;&#x66F4;&#x52A0; Rusty &#x7684;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#xFF0C;&#x56F4;&#x7ED5;&#x7740;&#x4F4E;&#x5C42;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x51FD;&#x6570;&#xFF0C;&#x63D0;&#x4F9B; Rust &#x81EA;&#x5DF1;&#x7684; struct / enum / trait &#x63A5;&#x53E3;&#x3002;<br><img src="https://static001.geekbang.org/resource/image/64/79/6437fe182c32a45f482fae5c6b859079.jpg?wh=2364x1526" alt=""></p>
+<p>&#x6211;&#x4EEC;&#x4EE5;&#x4F7F;&#x7528; bindgen &#x6765;&#x5C01;&#x88C5;&#x7528;&#x4E8E;&#x538B;&#x7F29;/&#x89E3;&#x538B;&#x7F29;&#x7684; bz2 &#x4E3A;&#x4F8B;&#xFF0C;&#x770B;&#x770B; Rust &#x5982;&#x4F55;&#x8C03;&#x7528; C &#x7684;&#x5E93;&#xFF08;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#x8BF7;&#x5728; OS X/Linux &#x4E0B;&#x6D4B;&#x8BD5;&#xFF0C;&#x4F7F;&#x7528; Windows &#x7684;&#x540C;&#x5B66;&#x53EF;&#x4EE5;&#x53C2;&#x8003; <a href="https://github.com/alexcrichton/bzip2-rs/tree/master/bzip2-sys" target="_blank">bzip2-sys</a>&#xFF09;&#x3002;</p>
+<p>&#x9996;&#x5148; cargo new bzlib-sys --lib &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#xFF0C;&#x7136;&#x540E;&#x5728; Cargo.toml &#x4E2D;&#x6DFB;&#x5165;&#xFF1A;</p>
+<pre><code class="lang-rust">[dependencies]
+anyhow = <span class="hljs-string">&quot;1&quot;</span>
+
+[build-dependencies]
+bindgen = <span class="hljs-string">&quot;0.59&quot;</span>
+</code></pre>
+<p>&#x5176;&#x4E2D; bindgen &#x9700;&#x8981;&#x5728;&#x7F16;&#x8BD1;&#x671F;&#x4F7F;&#x7528;&#xFF0C; &#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5728;&#x6839;&#x76EE;&#x5F55;&#x4E0B;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; <a href="http://build.rs" target="_blank">build.rs</a> &#x4F7F;&#x5176;&#x5728;&#x7F16;&#x8BD1;&#x671F;&#x8FD0;&#x884C;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-comment">// &#x544A;&#x8BC9; rustc &#x9700;&#x8981; link bzip2</span>
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;cargo:rustc-link-lib=bz2&quot;</span>);
+
+    <span class="hljs-comment">// &#x544A;&#x8BC9; cargo &#x5F53; wrapper.h &#x53D8;&#x5316;&#x65F6;&#x91CD;&#x65B0;&#x8FD0;&#x884C;</span>
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;cargo:rerun-if-changed=wrapper.h&quot;</span>);
+
+    <span class="hljs-comment">// &#x914D;&#x7F6E; bindgen&#xFF0C;&#x5E76;&#x751F;&#x6210; Bindings &#x7ED3;&#x6784;</span>
+    <span class="hljs-keyword">let</span> bindings = bindgen::Builder::default()
+        .header(<span class="hljs-string">&quot;wrapper.h&quot;</span>)
+        .parse_callbacks(<span class="hljs-built_in">Box</span>::new(bindgen::CargoCallbacks))
+        .generate()
+        .expect(<span class="hljs-string">&quot;Unable to generate bindings&quot;</span>);
+
+    <span class="hljs-comment">// &#x751F;&#x6210; Rust &#x4EE3;&#x7801;</span>
+    bindings
+        .write_to_file(<span class="hljs-string">&quot;src/bindings.rs&quot;</span>)
+        .expect(<span class="hljs-string">&quot;Failed to write bindings&quot;</span>);
+}
+</code></pre>
+<p>&#x5728; build.rs &#x91CC;&#xFF0C;&#x5F15;&#x5165;&#x4E86;&#x4E00;&#x4E2A; wrapper.h&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x6839;&#x76EE;&#x5F55;&#x521B;&#x5EFA;&#x5B83;&#xFF0C;&#x5E76;&#x5F15;&#x7528; bzlib.h&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bzlib.h&gt;</span></span>
+</code></pre>
+<p>&#x6B64;&#x65F6;&#x8FD0;&#x884C; <code>cargo build</code>&#xFF0C;&#x4F1A;&#x5728; src &#x76EE;&#x5F55;&#x4E0B;&#x751F;&#x6210; src/bindings.rs&#xFF0C;&#x91CC;&#x9762;&#x5927;&#x6982;&#x6709;&#x4E24;&#x5343;&#x884C;&#x4EE3;&#x7801;&#xFF0C;&#x662F; bindgen &#x6839;&#x636E; bzlib.h &#x4E2D;&#x66B4;&#x9732;&#x7684;&#x5E38;&#x91CF;&#x5B9A;&#x4E49;&#x3001;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x51FD;&#x6570;&#x7B49;&#x751F;&#x6210;&#x7684; Rust &#x4EE3;&#x7801;&#x3002;&#x611F;&#x5174;&#x8DA3;&#x7684;&#x8BDD;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x770B;&#x3002;</p>
+<p>&#x6709;&#x4E86;&#x751F;&#x6210;&#x597D;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x6211;&#x4EEC;&#x5728; src/lib.rs &#x4E2D;&#x5F15;&#x7528;&#x5B83;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-comment">// &#x751F;&#x6210;&#x7684; bindings &#x4EE3;&#x7801;&#x6839;&#x636E; C/C++ &#x4EE3;&#x7801;&#x751F;&#x6210;&#xFF0C;&#x91CC;&#x9762;&#x6709;&#x4E00;&#x4E9B;&#x4E0D;&#x7B26;&#x5408; Rust &#x7EA6;&#x5B9A;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x8BA9;&#x7F16;&#x8BD1;&#x671F;&#x62A5;&#x8B66;</span>
+<span class="hljs-meta">#![allow(non_upper_case_globals)]</span>
+<span class="hljs-meta">#![allow(non_camel_case_types)]</span>
+<span class="hljs-meta">#![allow(non_snake_case)]</span>
+<span class="hljs-meta">#![allow(deref_nullptr)]</span>
+
+<span class="hljs-keyword">use</span> anyhow::{anyhow, <span class="hljs-built_in">Result</span>};
+<span class="hljs-keyword">use</span> std::mem;
+
+<span class="hljs-keyword">mod</span> bindings;
+
+<span class="hljs-keyword">pub</span> <span class="hljs-keyword">use</span> bindings::*;
+</code></pre>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x53EF;&#x4EE5;&#x64B0;&#x5199;&#x4E24;&#x4E2A;&#x9AD8;&#x9636;&#x7684;&#x63A5;&#x53E3; compress / decompress&#xFF0C;&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#x5E94;&#x8BE5;&#x521B;&#x5EFA;&#x53E6;&#x4E00;&#x4E2A; crate &#x6765;&#x64B0;&#x5199;&#x8FD9;&#x6837;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x4E4B;&#x524D;&#x8BB2;&#x8FD9;&#x662F; Rust &#x5904;&#x7406; FFI &#x7684;&#x60EF;&#x4F8B;&#xFF0C;&#x6709;&#x52A9;&#x4E8E;&#x628A;&#x9AD8;&#x9636;&#x63A5;&#x53E3;&#x548C;&#x4F4E;&#x9636;&#x63A5;&#x53E3;&#x5206;&#x79BB;&#x3002;&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x76F4;&#x63A5;&#x5199;&#x5728; src/lib.rs &#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-comment">// &#x9AD8;&#x5C42;&#x7684; API&#xFF0C;&#x5904;&#x7406;&#x538B;&#x7F29;&#xFF0C;&#x4E00;&#x822C;&#x5E94;&#x8BE5;&#x51FA;&#x73B0;&#x5728;&#x53E6;&#x4E00;&#x4E2A; crate</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">compress</span></span>(input: &amp;[<span class="hljs-keyword">u8</span>]) -&gt; <span class="hljs-built_in">Result</span>&lt;<span class="hljs-built_in">Vec</span>&lt;<span class="hljs-keyword">u8</span>&gt;&gt; {
+    <span class="hljs-keyword">let</span> output = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0u8</span>; input.len()];
+    <span class="hljs-keyword">unsafe</span> {
+        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> stream: bz_stream = mem::zeroed();
+        <span class="hljs-keyword">let</span> result = BZ2_bzCompressInit(&amp;<span class="hljs-keyword">mut</span> stream <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> _, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+        <span class="hljs-keyword">if</span> result != BZ_OK <span class="hljs-keyword">as</span> _ {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;Failed to initialize&quot;</span>));
+        }
+
+        <span class="hljs-comment">// &#x4F20;&#x5165; input / output &#x8FDB;&#x884C;&#x538B;&#x7F29;</span>
+        stream.next_in = input.as_ptr() <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> _;
+        stream.avail_in = input.len() <span class="hljs-keyword">as</span> _;
+        stream.next_out = output.as_ptr() <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> _;
+        stream.avail_out = output.len() <span class="hljs-keyword">as</span> _;
+        <span class="hljs-keyword">let</span> result = BZ2_bzCompress(&amp;<span class="hljs-keyword">mut</span> stream <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> _, BZ_FINISH <span class="hljs-keyword">as</span> _);
+        <span class="hljs-keyword">if</span> result != BZ_STREAM_END <span class="hljs-keyword">as</span> _ {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;Failed to compress&quot;</span>));
+        }
+
+        <span class="hljs-comment">// &#x7ED3;&#x675F;&#x538B;&#x7F29;</span>
+        <span class="hljs-keyword">let</span> result = BZ2_bzCompressEnd(&amp;<span class="hljs-keyword">mut</span> stream <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> _);
+        <span class="hljs-keyword">if</span> result != BZ_OK <span class="hljs-keyword">as</span> _ {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;Failed to end compression&quot;</span>));
+        }
+    }
+
+    <span class="hljs-literal">Ok</span>(output)
+}
+
+<span class="hljs-comment">// &#x9AD8;&#x5C42;&#x7684; API&#xFF0C;&#x5904;&#x7406;&#x89E3;&#x538B;&#x7F29;&#xFF0C;&#x4E00;&#x822C;&#x5E94;&#x8BE5;&#x51FA;&#x73B0;&#x5728;&#x53E6;&#x4E00;&#x4E2A; crate</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">decompress</span></span>(input: &amp;[<span class="hljs-keyword">u8</span>]) -&gt; <span class="hljs-built_in">Result</span>&lt;<span class="hljs-built_in">Vec</span>&lt;<span class="hljs-keyword">u8</span>&gt;&gt; {
+    <span class="hljs-keyword">let</span> output = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0u8</span>; input.len()];
+    <span class="hljs-keyword">unsafe</span> {
+        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> stream: bz_stream = mem::zeroed();
+        <span class="hljs-keyword">let</span> result = BZ2_bzDecompressInit(&amp;<span class="hljs-keyword">mut</span> stream <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> _, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+        <span class="hljs-keyword">if</span> result != BZ_OK <span class="hljs-keyword">as</span> _ {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;Failed to initialize&quot;</span>));
+        }
+
+        <span class="hljs-comment">// &#x4F20;&#x5165; input / output &#x8FDB;&#x884C;&#x89E3;&#x538B;&#x7F29;</span>
+        stream.next_in = input.as_ptr() <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> _;
+        stream.avail_in = input.len() <span class="hljs-keyword">as</span> _;
+        stream.next_out = output.as_ptr() <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> _;
+        stream.avail_out = output.len() <span class="hljs-keyword">as</span> _;
+        <span class="hljs-keyword">let</span> result = BZ2_bzDecompress(&amp;<span class="hljs-keyword">mut</span> stream <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> _);
+        <span class="hljs-keyword">if</span> result != BZ_STREAM_END <span class="hljs-keyword">as</span> _ {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;Failed to compress&quot;</span>));
+        }
+
+        <span class="hljs-comment">// &#x7ED3;&#x675F;&#x89E3;&#x538B;&#x7F29;</span>
+        <span class="hljs-keyword">let</span> result = BZ2_bzDecompressEnd(&amp;<span class="hljs-keyword">mut</span> stream <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> _);
+        <span class="hljs-keyword">if</span> result != BZ_OK <span class="hljs-keyword">as</span> _ {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;Failed to end compression&quot;</span>));
+        }
+    }
+
+    <span class="hljs-literal">Ok</span>(output)
+}
+</code></pre>
+<p>&#x6700;&#x540E;&#xFF0C;&#x4E0D;&#x8981;&#x5FD8;&#x8BB0;&#x4E86;&#x6211;&#x4EEC;&#x7684;&#x597D;&#x4E60;&#x60EF;&#xFF0C;&#x5199;&#x4E2A;&#x6D4B;&#x8BD5;&#x786E;&#x4FDD;&#x5DE5;&#x4F5C;&#x6B63;&#x5E38;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[cfg(test)]</span>
+<span class="hljs-keyword">mod</span> tests {
+    <span class="hljs-keyword">use</span> super::*;
+
+    <span class="hljs-meta">#[test]</span>
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">compression_decompression_should_work</span></span>() {
+        <span class="hljs-keyword">let</span> input = <span class="hljs-built_in">include_str!</span>(<span class="hljs-string">&quot;bindings.rs&quot;</span>).as_bytes();
+        <span class="hljs-keyword">let</span> compressed = compress(input).unwrap();
+        <span class="hljs-keyword">let</span> decompressed = decompress(&amp;compressed).unwrap();
+
+        <span class="hljs-built_in">assert_eq!</span>(input, &amp;decompressed);
+    }
+}
+</code></pre>
+<p>&#x8FD0;&#x884C; <code>cargo test</code>&#xFF0C;&#x6D4B;&#x8BD5;&#x80FD;&#x591F;&#x6B63;&#x5E38;&#x901A;&#x8FC7;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x751F;&#x6210;&#x7684; <a href="http://bindings.rs" target="_blank">bindings.rs</a> &#x91CC;&#x4E5F;&#x6709;&#x4E0D;&#x5C11;&#x6D4B;&#x8BD5;&#xFF0C;cargo test &#x603B;&#x5171;&#x6267;&#x884C;&#x4E86; 16 &#x4E2A;&#x6D4B;&#x8BD5;&#x3002;</p>
+<p>&#x600E;&#x4E48;&#x6837;&#xFF0C;&#x6211;&#x4EEC;&#x603B;&#x5171;&#x5199;&#x4E86;&#x5927;&#x6982; 100 &#x884C;&#x4EE3;&#x7801;&#xFF0C;&#x5C31;&#x7528; Rust &#x96C6;&#x6210;&#x4E86; bz2 &#x8FD9;&#x4E2A; C &#x5E93;&#x3002;&#x662F;&#x4E0D;&#x662F;&#x975E;&#x5E38;&#x65B9;&#x4FBF;&#xFF1F;&#x5982;&#x679C;&#x4F60;&#x66FE;&#x7ECF;&#x5904;&#x7406;&#x8FC7;&#x5176;&#x4ED6;&#x8BED;&#x8A00;&#x7C7B;&#x4F3C;&#x7684; C &#x7ED1;&#x5B9A;&#xFF0C;&#x5BF9;&#x6BD4;&#x4E4B;&#x4E0B;&#xFF0C;&#x5C31;&#x4F1A;&#x53D1;&#x73B0;&#x7528; Rust &#x505A; FFI &#x5F00;&#x53D1;&#x771F;&#x662F;&#x592A;&#x65B9;&#x4FBF;&#xFF0C;&#x592A;&#x8D34;&#x5FC3;&#x4E86;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x89C9;&#x5F97;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x8FC7;&#x4E8E;&#x7B80;&#x5355;&#xFF0C;&#x4E0D;&#x591F;&#x8FC7;&#x763E;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x770B; Rust <a href="https://github.com/rust-rocksdb/rust-rocksdb" target="_blank">RocksDB</a> &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5B83;&#x975E;&#x5E38;&#x9002;&#x5408;&#x4F60;&#x8FDB;&#x4E00;&#x6B65;&#x4E86;&#x89E3;&#x590D;&#x6742;&#x7684;&#x3001;&#x9700;&#x8981;&#x989D;&#x5916;&#x96C6;&#x6210; C &#x6E90;&#x7801;&#x7684;&#x5E93;&#x5982;&#x4F55;&#x96C6;&#x6210;&#x5230; Rust &#x4E2D;&#x3002;</p>
+<h3 id="&#x5904;&#x7406;-ffi-&#x7684;&#x6CE8;&#x610F;&#x4E8B;&#x9879;">&#x5904;&#x7406; FFI &#x7684;&#x6CE8;&#x610F;&#x4E8B;&#x9879;</h3>
+<p>bindgen &#x8FD9;&#x6837;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x5E2E;&#x6211;&#x4EEC;&#x5E72;&#x4E86;&#x5F88;&#x591A;&#x810F;&#x6D3B;&#x7D2F;&#x6D3B;&#xFF0C;&#x867D;&#x7136;&#x5927;&#x90E8;&#x5206;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x4E0D;&#x592A;&#x9700;&#x8981;&#x5173;&#x5FC3;&#x751F;&#x6210;&#x7684; FFI &#x4EE3;&#x7801;&#xFF0C;&#x4F46;&#x5728;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x6784;&#x5EFA;&#x66F4;&#x9AD8;&#x5C42;&#x7684; API &#x65F6;&#xFF0C;&#x8FD8;&#x662F;&#x8981;&#x6CE8;&#x610F;&#x4E09;&#x4E2A;&#x5173;&#x952E;&#x95EE;&#x9898;&#x3002;</p>
+<ul>
+<li>&#x5982;&#x4F55;&#x5904;&#x7406;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x5DEE;&#x5F02;&#xFF1F;</li>
+</ul>
+<p>&#x6BD4;&#x5982; C string &#x662F; NULL &#x7ED3;&#x5C3E;&#xFF0C;&#x800C; Rust String &#x662F;&#x5B8C;&#x5168;&#x4E0D;&#x540C;&#x7684;&#x7ED3;&#x6784;&#x3002;&#x6211;&#x4EEC;&#x8981;&#x6E05;&#x695A;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7EC4;&#x7EC7;&#x7684;&#x5DEE;&#x5F02;&#xFF0C;&#x624D;&#x80FD;&#x59A5;&#x5584;&#x5730;&#x5904;&#x7406;&#x5B83;&#x4EEC;&#x3002;Rust &#x63D0;&#x4F9B;&#x4E86; <a href="https://doc.rust-lang.org/std/ffi/index.html" target="_blank">std::ffi</a> &#x6765;&#x5904;&#x7406;&#x8FD9;&#x6837;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x6BD4;&#x5982; <a href="https://doc.rust-lang.org/std/ffi/struct.CStr.html" target="_blank">CStr</a> &#x548C; <a href="https://doc.rust-lang.org/std/ffi/struct.CString.html" target="_blank">CString</a> &#x6765;&#x5904;&#x7406;&#x5B57;&#x7B26;&#x4E32;&#x3002;</p>
+<ul>
+<li>&#x8C01;&#x6765;&#x91CA;&#x653E;&#x5185;&#x5B58;&#xFF1F;</li>
+</ul>
+<p>&#x6CA1;&#x6709;&#x7279;&#x6B8A;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x8C01;&#x5206;&#x914D;&#x7684;&#x5185;&#x5B58;&#xFF0C;&#x8C01;&#x8981;&#x8D1F;&#x8D23;&#x91CA;&#x653E;&#x3002;Rust &#x7684;&#x5185;&#x5B58;&#x5206;&#x914D;&#x5668;&#x548C;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x7684;&#x53EF;&#x80FD;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;Rust &#x5206;&#x914D;&#x7684;&#x5185;&#x5B58;&#x5728; C &#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x91CA;&#x653E;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x672A;&#x5B9A;&#x4E49;&#x7684;&#x884C;&#x4E3A;&#x3002;</p>
+<ul>
+<li>&#x5982;&#x4F55;&#x8FDB;&#x884C;&#x9519;&#x8BEF;&#x5904;&#x7406;&#xFF1F;</li>
+</ul>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x91CC;&#x6211;&#x4EEC;&#x4E5F;&#x770B;&#x5230;&#x4E86;&#xFF0C;C &#x901A;&#x8FC7;&#x8FD4;&#x56DE;&#x7684; error code &#x6765;&#x62A5;&#x544A;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x9519;&#x8BEF;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x4E86; <a href="https://docs.rs/anyhow/1.0.44/anyhow/macro.anyhow.html" target="_blank">anyhow!</a> &#x5B8F;&#x6765;&#x968F;&#x624B;&#x751F;&#x6210;&#x4E86;&#x9519;&#x8BEF;&#xFF0C;&#x8FD9;&#x662F;&#x4E0D;&#x597D;&#x7684;&#x793A;&#x4F8B;&#x3002;&#x5728;&#x6B63;&#x5F0F;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x5E94;&#x8BE5;&#x4F7F;&#x7528; thiserror &#x6216;&#x8005;&#x7C7B;&#x4F3C;&#x7684;&#x673A;&#x5236;&#x6765;&#x5B9A;&#x4E49;&#x6240;&#x6709; error code &#x5BF9;&#x5E94;&#x7684;&#x9519;&#x8BEF;&#x60C5;&#x51B5;&#xFF0C;&#x7136;&#x540E;&#x76F8;&#x5E94;&#x5730;&#x751F;&#x6210;&#x9519;&#x8BEF;&#x3002;</p>
+<h3 id="rust-&#x8C03;&#x7528;&#x5176;&#x5B83;&#x8BED;&#x8A00;">Rust &#x8C03;&#x7528;&#x5176;&#x5B83;&#x8BED;&#x8A00;</h3>
+<p>&#x76EE;&#x524D;&#x8BF4;&#x4E86;&#x534A;&#x5929;&#xFF0C;&#x90FD;&#x662F;&#x5728;&#x8BF4; Rust &#x5982;&#x4F55;&#x8C03;&#x7528; C/C++&#x3002;&#x90A3;&#x4E48;&#xFF0C;Rust&#xFF0C;&#x8C03;&#x7528;&#x5176;&#x4ED6;&#x8BED;&#x8A00;&#x5462;&#xFF1F;</p>
+<p>&#x524D;&#x9762;&#x4E5F;&#x63D0;&#x5230;&#xFF0C;&#x56E0;&#x4E3A; C ABI &#x6DF1;&#x5165;&#x4EBA;&#x5FC3;&#xFF0C;&#x4E24;&#x95E8;&#x8BED;&#x8A00;&#x4E4B;&#x95F4;&#x7684;&#x63A5;&#x53E3;&#x5F80;&#x5F80;&#x91C7;&#x7528; C ABI&#x3002;&#x4ECE;&#x8FD9;&#x4E2A;&#x89D2;&#x5EA6;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x9700;&#x8981; Rust &#x8C03;&#x7528; Golang &#x7684;&#x4EE3;&#x7801;&#xFF08;&#x5148;&#x4E0D;&#x7BA1;&#x8FD9;&#x5408;&#x4E0D;&#x5408;&#x7406;&#xFF09;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;<strong>&#x9996;&#x5148;&#x628A; Golang &#x7684;&#x4EE3;&#x7801;&#x4F7F;&#x7528; cgo &#x7F16;&#x8BD1;&#x6210;&#x517C;&#x5BB9; C &#x7684;&#x5E93;&#xFF1B;&#x7136;&#x540E;&#xFF0C;Rust &#x5C31;&#x53EF;&#x4EE5;&#x50CF;&#x8C03;&#x7528; C/C++ &#x90A3;&#x6837;&#xFF0C;&#x4F7F;&#x7528; bindgen &#x6765;&#x751F;&#x6210;&#x5BF9;&#x5E94;&#x7684; API &#x4E86;</strong>&#x3002;</p>
+<p>&#x81F3;&#x4E8E; Rust &#x8C03;&#x7528;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#xFF0C;&#x4E5F;&#x662F;&#x7C7B;&#x4F3C;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x50CF; JavaScript / Python &#x8FD9;&#x6837;&#x7684;&#xFF0C;&#x4E0E;&#x5176;&#x628A;&#x5B83;&#x4EEC;&#x7684;&#x4EE3;&#x7801;&#x60F3;&#x529E;&#x6CD5;&#x7F16;&#x8BD1;&#x6210; C &#x5E93;&#xFF0C;&#x4E0D;&#x5982;&#x628A;&#x4ED6;&#x4EEC;&#x7684;&#x89E3;&#x91CA;&#x5668;&#x7F16;&#x8BD1;&#x6210; C &#x5E93;&#x6216;&#x8005; WASM&#xFF0C;&#x7136;&#x540E;&#x5728; Rust &#x91CC;&#x8C03;&#x7528;&#x5176;&#x89E3;&#x91CA;&#x5668;&#x4F7F;&#x7528;&#x76F8;&#x5173;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x6765;&#x7684;&#x65B9;&#x4FBF;&#x548C;&#x75DB;&#x5FEB;&#x3002;&#x6BD5;&#x7ADF;&#xFF0C;JavaScript / Python &#x662F;&#x811A;&#x672C;&#x8BED;&#x8A00;&#x3002;</p>
+<h2 id="&#x628A;-rust-&#x4EE3;&#x7801;&#x7F16;&#x8BD1;&#x6210;-c-&#x5E93;">&#x628A; Rust &#x4EE3;&#x7801;&#x7F16;&#x8BD1;&#x6210; C &#x5E93;</h2>
+<p>&#x8BB2;&#x5B8C;&#x4E86; Rust &#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x6765;&#x770B;&#x770B;&#x5982;&#x4F55;&#x628A; Rust &#x4EE3;&#x7801;&#x7F16;&#x8BD1;&#x6210;&#x7B26;&#x5408; C ABI &#x7684;&#x5E93;&#xFF0C;&#x8FD9;&#x6837;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x5C31;&#x53EF;&#x4EE5;&#x50CF;&#x4F7F;&#x7528; C &#x90A3;&#x6837;&#x4F7F;&#x7528; Rust &#x4E86;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x7684;&#x5904;&#x7406;&#x903B;&#x8F91;&#x548C;&#x4E0A;&#x9762;&#x7684; Rust &#x8C03;&#x7528; C &#x662F;&#x7C7B;&#x4F3C;&#x7684;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x89D2;&#x8272;&#x5BF9;&#x8C03;&#x4E86;&#x4E00;&#x4E0B;&#xFF1A;<br><img src="https://static001.geekbang.org/resource/image/96/c8/9665eb19f00c6314e15e064a3e79e1c8.jpg?wh=2364x1526" alt=""></p>
+<p>&#x8981;&#x628A; Rust &#x4EE3;&#x7801;&#x548C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x63D0;&#x4F9B;&#x7ED9; C &#x4F7F;&#x7528;&#xFF0C;&#x6211;&#x4EEC;&#x9996;&#x5148;&#x8981;&#x6784;&#x9020;&#x76F8;&#x5E94;&#x7684; Rust shim &#x5C42;&#xFF0C;&#x628A;&#x539F;&#x6709;&#x7684;&#x3001;&#x6B63;&#x5E38;&#x7684; Rust &#x5B9E;&#x73B0;&#x5C01;&#x88C5;&#x4E00;&#x4E0B;&#xFF0C;&#x4FBF;&#x4E8E; C &#x8C03;&#x7528;&#x3002;</p>
+<p>Rust shim &#x4E3B;&#x8981;&#x505A;&#x56DB;&#x4EF6;&#x4E8B;&#x60C5;&#xFF1A;</p>
+<ul>
+<li>&#x63D0;&#x4F9B; Rust &#x65B9;&#x6CD5;&#x3001;trait &#x65B9;&#x6CD5;&#x7B49;&#x516C;&#x5F00;&#x63A5;&#x53E3;&#x7684;&#x72EC;&#x7ACB;&#x51FD;&#x6570;&#x3002;&#x6CE8;&#x610F; C &#x662F;&#x4E0D;&#x652F;&#x6301;&#x6CDB;&#x578B;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5BF9;&#x4E8E;&#x6CDB;&#x578B;&#x51FD;&#x6570;&#xFF0C;&#x9700;&#x8981;&#x63D0;&#x4F9B;&#x5177;&#x4F53;&#x7684;&#x7528;&#x4E8E;&#x67D0;&#x4E2A;&#x7C7B;&#x578B;&#x7684; shim &#x51FD;&#x6570;&#x3002;</li>
+<li>&#x6240;&#x6709;&#x8981;&#x66B4;&#x9732;&#x7ED9; C &#x7684;&#x72EC;&#x7ACB;&#x51FD;&#x6570;&#xFF0C;&#x90FD;&#x8981;&#x58F0;&#x660E;&#x6210; #[no_mangle]&#xFF0C;&#x4E0D;&#x505A;&#x51FD;&#x6570;&#x540D;&#x79F0;&#x7684;&#x6539;&#x5199;&#x3002;</li>
+</ul>
+<p>&#x5982;&#x679C;&#x4E0D;&#x7528; #[no_mangle]&#xFF0C;Rust &#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x4E3A;&#x51FD;&#x6570;&#x751F;&#x6210;&#x5F88;&#x590D;&#x6742;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x6211;&#x4EEC;&#x5F88;&#x96BE;&#x5728; C &#x4E2D;&#x5F97;&#x5230;&#x6B63;&#x786E;&#x7684;&#x6539;&#x5199;&#x540E;&#x7684;&#x540D;&#x5B57;&#x3002;&#x540C;&#x65F6;&#xFF0C;&#x8FD9;&#x4E9B;&#x51FD;&#x6570;&#x7684;&#x63A5;&#x53E3;&#x8981;&#x4F7F;&#x7528; C &#x517C;&#x5BB9;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;</p>
+<ul>
+<li>&#x6570;&#x636E;&#x7ED3;&#x6784;&#x9700;&#x8981;&#x5904;&#x7406;&#x6210;&#x548C; C &#x517C;&#x5BB9;&#x7684;&#x7ED3;&#x6784;&#x3002;</li>
+</ul>
+<p>&#x5982;&#x679C;&#x662F;&#x4F60;&#x81EA;&#x5DF1;&#x5B9A;&#x4E49;&#x7684;&#x7ED3;&#x6784;&#x4F53;&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528; #[repr&#xA9;]&#xFF0C;&#x5BF9;&#x4E8E;&#x8981;&#x66B4;&#x9732;&#x7ED9; C &#x7684;&#x51FD;&#x6570;&#xFF0C;&#x4E0D;&#x80FD;&#x4F7F;&#x7528; String / Vec / Result &#x8FD9;&#x4E9B; C &#x65E0;&#x6CD5;&#x6B63;&#x786E;&#x64CD;&#x4F5C;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;</p>
+<ul>
+<li>&#x8981;&#x4F7F;&#x7528; <a href="https://doc.rust-lang.org/std/panic/fn.catch_unwind.html" target="_blank">catch_unwind</a> &#x628A;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x4EA7;&#x751F; panic! &#x7684;&#x4EE3;&#x7801;&#x5305;&#x88F9;&#x8D77;&#x6765;&#x3002;</li>
+</ul>
+<p>&#x5207;&#x8BB0;&#xFF0C;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x8C03;&#x7528; Rust &#x65F6;&#xFF0C;&#x9047;&#x5230; Rust &#x7684; panic!()&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x672A;&#x5B9A;&#x4E49;&#x7684;&#x884C;&#x4E3A;&#xFF0C;&#x6240;&#x4EE5;&#x5728; FFI &#x7684;&#x8FB9;&#x754C;&#x5904;&#xFF0C;&#x8981; catch_unwind&#xFF0C;&#x963B;&#x6B62; Rust &#x6808;&#x56DE;&#x6EAF;&#x8DD1;&#x51FA; Rust &#x7684;&#x4E16;&#x754C;&#x3002;</p>
+<p>&#x6765;&#x770B;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-comment">// &#x4F7F;&#x7528; no_mangle &#x7981;&#x6B62;&#x51FD;&#x6570;&#x540D;&#x6539;&#x7F16;&#xFF0C;&#x8FD9;&#x6837;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; C ABI &#x8C03;&#x7528;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;</span>
+<span class="hljs-meta">#[no_mangle]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">hello_world</span></span>() -&gt; *<span class="hljs-keyword">const</span> c_char {
+    <span class="hljs-comment">// C String &#x4EE5; &quot;\\0&quot; &#x7ED3;&#x5C3E;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x628A; &quot;\\0&quot; &#x53BB;&#x6389;&#x770B;&#x770B;&#x4F1A;&#x53D1;&#x751F;&#x4EC0;&#x4E48;</span>
+    <span class="hljs-string">&quot;hello world!\\0&quot;</span>.as_ptr() <span class="hljs-keyword">as</span> *<span class="hljs-keyword">const</span> c_char
+}
+</code></pre>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x4F7F;&#x7528;&#x4E86; #[no_mangle] &#xFF0C;&#x5728;&#x4F20;&#x56DE;&#x53BB;&#x5B57;&#x7B26;&#x4E32;&#x65F6;&#x4F7F;&#x7528; &#x201C;\0&#x201D; &#x7ED3;&#x5C3E;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x7531;&#x4E8E;&#x8FD9;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x5728; RODATA &#x6BB5;&#xFF0C;&#x662F; &apos;static &#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF0C;&#x6240;&#x4EE5;&#x5C06;&#x5176;&#x8F6C;&#x6362;&#x6210;&#x88F8;&#x6307;&#x9488;&#x8FD4;&#x56DE;&#xFF0C;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#x3002;&#x5982;&#x679C;&#x8981;&#x628A;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x7F16;&#x8BD1;&#x4E3A;&#x4E00;&#x4E2A;&#x53EF;&#x7528;&#x7684; C &#x5E93;&#xFF0C;&#x5728; Cargo.toml &#x4E2D;&#xFF0C;crate &#x7C7B;&#x578B;&#x8981;&#x8BBE;&#x7F6E;&#x4E3A; crate-type = [&#x201C;cdylib&#x201D;]&#x3002;</p>
+<p>&#x521A;&#x624D;&#x90A3;&#x4E2A;&#x4F8B;&#x5B50;&#x592A;&#x7B80;&#x5355;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x6765;&#x770B;&#x4E00;&#x4E2A;&#x8FDB;&#x9636;&#x7684;&#x4F8B;&#x5B50;&#x3002;&#x5728;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x91CC;&#xFF0C;C &#x8BED;&#x8A00;&#x90A3;&#x7AEF;&#x4F1A;&#x4F20;&#x8FC7;&#x6765;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x6307;&#x9488;&#xFF0C; format!() &#x4E00;&#x4E0B;&#x540E;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x6307;&#x9488;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[no_mangle]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">hello_bad</span></span>(name: *<span class="hljs-keyword">const</span> c_char) -&gt; *<span class="hljs-keyword">const</span> c_char {
+    <span class="hljs-keyword">let</span> s = <span class="hljs-keyword">unsafe</span> { CStr::from_ptr(name).to_str().unwrap() };
+
+    <span class="hljs-built_in">format!</span>(<span class="hljs-string">&quot;hello {}!\\0&quot;</span>, s).as_ptr() <span class="hljs-keyword">as</span> *<span class="hljs-keyword">const</span> c_char
+}
+</code></pre>
+<p>&#x4F60;&#x80FD;&#x53D1;&#x73B0;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x7684;&#x95EE;&#x9898;&#x4E48;&#xFF1F;&#x5B83;&#x72AF;&#x4E86;&#x521D;&#x5B66;&#x8005;&#x51E0;&#x4E4E;&#x4F1A;&#x72AF;&#x7684;&#x6240;&#x6709;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x4F20;&#x5165;&#x7684; name &#x4F1A;&#x4E0D;&#x4F1A;&#x662F;&#x4E00;&#x4E2A; NULL &#x6307;&#x9488;&#xFF1F;&#x662F;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x5408;&#x6CD5;&#x7684;&#x5730;&#x5740;&#xFF1F;&#x867D;&#x7136;&#x662F;&#x5426;&#x662F;&#x5408;&#x6CD5;&#x7684;&#x5730;&#x5740;&#x6211;&#x4EEC;&#x65E0;&#x6CD5;&#x68C0;&#x6D4B;&#xFF0C;&#x4F46;&#x8D77;&#x7801;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x68C0;&#x6D4B; NULL&#x3002;</p>
+<p>&#x5176;&#x6B21;&#xFF0C;unwrap() &#x4F1A;&#x9020;&#x6210; panic!()&#xFF0C;&#x5982;&#x679C;&#x628A; CStr &#x8F6C;&#x6362;&#x6210; &amp;str &#x65F6;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#xFF0C;&#x8FD9;&#x4E2A; panic!() &#x5C31;&#x4F1A;&#x9020;&#x6210;&#x672A;&#x5B9A;&#x4E49;&#x7684;&#x884C;&#x4E3A;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x505A; catch_unwind()&#xFF0C;&#x4F46;&#x66F4;&#x597D;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x8FDB;&#x884C;&#x9519;&#x8BEF;&#x5904;&#x7406;&#x3002;</p>
+<p>&#x6700;&#x540E;&#xFF0C;<code>format!(&quot;hello {}!\\0&quot;, s)</code> &#x751F;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x7ED3;&#x6784;&#xFF0C;as_ptr() &#x53D6;&#x5230;&#x5B83;&#x5806;&#x4E0A;&#x7684;&#x8D77;&#x59CB;&#x4F4D;&#x7F6E;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x4FDD;&#x8BC1;&#x4E86;&#x5806;&#x4E0A;&#x7684;&#x5185;&#x5B58;&#x4EE5; NULL &#x7ED3;&#x5C3E;&#xFF0C;&#x770B;&#x4E0A;&#x53BB;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#x3002;&#x7136;&#x800C;&#xFF0C;<strong>&#x5728;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x7ED3;&#x675F;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x7531;&#x4E8E;&#x5B57;&#x7B26;&#x4E32; s &#x9000;&#x51FA;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x7684;&#x5806;&#x5185;&#x5B58;&#x4F1A;&#x88AB;&#x8FDE;&#x5E26; drop &#x6389;</strong>&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x60AC;&#x7A7A;&#x7684;&#x6307;&#x9488;&#xFF0C;&#x5728; C &#x90A3;&#x4FA7;&#x8C03;&#x7528;&#x65F6;&#x5C31;&#x4F1A;&#x5D29;&#x6E83;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x6B63;&#x786E;&#x7684;&#x5199;&#x6CD5;&#x5E94;&#x8BE5;&#x662F;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[no_mangle]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">hello</span></span>(name: *<span class="hljs-keyword">const</span> c_char) -&gt; *<span class="hljs-keyword">const</span> c_char {
+    <span class="hljs-keyword">if</span> name.is_null() {
+        <span class="hljs-keyword">return</span> ptr::null();
+    }
+
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-literal">Ok</span>(s) = <span class="hljs-keyword">unsafe</span> { CStr::from_ptr(name).to_str() } {
+        <span class="hljs-keyword">let</span> result = <span class="hljs-built_in">format!</span>(<span class="hljs-string">&quot;hello {}!&quot;</span>, s);
+        <span class="hljs-comment">// &#x53EF;&#x4EE5;&#x4F7F;&#x7528; unwrap&#xFF0C;&#x56E0;&#x4E3A; result &#x4E0D;&#x5305;&#x542B; \\0</span>
+        <span class="hljs-keyword">let</span> s = CString::new(result).unwrap();
+
+        s.into_raw()
+        <span class="hljs-comment">// &#x76F8;&#x5F53;&#x4E8E;&#xFF1A;</span>
+        <span class="hljs-comment">// let p = s.as_ptr();</span>
+        <span class="hljs-comment">// std::mem::forget(s);</span>
+        <span class="hljs-comment">// p</span>
+    } <span class="hljs-keyword">else</span> {
+        ptr::null()
+    }
+}
+</code></pre>
+<p>&#x5728;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x68C0;&#x67E5;&#x4E86; NULL &#x6307;&#x9488;&#xFF0C;&#x8FDB;&#x884C;&#x4E86;&#x9519;&#x8BEF;&#x5904;&#x7406;&#xFF0C;&#x8FD8;&#x7528; <a href="https://doc.rust-lang.org/std/ffi/struct.CString.html#method.into_raw" target="_blank">into_raw()</a> &#x6765;&#x8BA9; Rust &#x4FA7;&#x653E;&#x5F03;&#x5BF9;&#x5185;&#x5B58;&#x7684;&#x6240;&#x6709;&#x6743;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#x524D;&#x9762;&#x7684;&#x4E09;&#x4E2A;&#x5173;&#x952E;&#x95EE;&#x9898;&#x8BF4;&#x8FC7;&#xFF0C;&#x8C01;&#x5206;&#x914D;&#x7684;&#x5185;&#x5B58;&#xFF0C;&#x8C01;&#x6765;&#x91CA;&#x653E;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x9700;&#x8981;&#x63D0;&#x4F9B;&#x53E6;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x4F9B; C &#x8BED;&#x8A00;&#x4FA7;&#x4F7F;&#x7528;&#xFF0C;&#x6765;&#x91CA;&#x653E; Rust &#x5206;&#x914D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[no_mangle]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">free_str</span></span>(s: *<span class="hljs-keyword">mut</span> c_char) {
+    <span class="hljs-keyword">if</span> !s.is_null() {
+        <span class="hljs-keyword">unsafe</span> { CString::from_raw(s) };
+    }
+}
+</code></pre>
+<p>C &#x4EE3;&#x7801;&#x5FC5;&#x987B;&#x8981;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x5B89;&#x5168;&#x91CA;&#x653E; Rust &#x521B;&#x5EFA;&#x7684; CString&#x3002;&#x5982;&#x679C;&#x4E0D;&#x8C03;&#x7528;&#xFF0C;&#x4F1A;&#x6709;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#xFF1B;&#x5982;&#x679C;&#x4F7F;&#x7528; C &#x81EA;&#x5DF1;&#x7684; free()&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x672A;&#x5B9A;&#x4E49;&#x7684;&#x9519;&#x8BEF;&#x3002;</p>
+<p>&#x6709;&#x4EBA;&#x53EF;&#x80FD;&#x4F1A;&#x597D;&#x5947;&#xFF0C;CString::from_raw(s) &#x53EA;&#x662F;&#x4ECE;&#x88F8;&#x6307;&#x9488;&#x4E2D;&#x6062;&#x590D;&#x51FA; CString&#xFF0C;&#x4E5F;&#x6CA1;&#x6709;&#x91CA;&#x653E;&#x554A;&#xFF1F;</p>
+<p>&#x4F60;&#x8981;&#x4E60;&#x60EF;&#x8FD9;&#x6837;&#x7684;&#x201C;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x201D;&#x7684;&#x5199;&#x6CD5;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x5B9E;&#x9645;&#x4E0A;&#x501F;&#x52A9;&#x4E86; Rust &#x7684;&#x6240;&#x6709;&#x6743;&#x89C4;&#x5219;&#xFF1A;&#x5F53;&#x6240;&#x6709;&#x8005;&#x79BB;&#x5F00;&#x4F5C;&#x7528;&#x57DF;&#x65F6;&#xFF0C;&#x62E5;&#x6709;&#x7684;&#x5185;&#x5B58;&#x4F1A;&#x88AB;&#x91CA;&#x653E;&#x3002;<strong>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6709;&#x6240;&#x6709;&#x6743;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5C31;&#x662F;&#x4E3A;&#x4E86;&#x51FD;&#x6570;&#x7ED3;&#x675F;&#x65F6;&#x7684;&#x81EA;&#x52A8;&#x91CA;&#x653E;</strong>&#x3002;&#x5982;&#x679C;&#x4F60;&#x770B;&#x6807;&#x51C6;&#x5E93;&#x6216;&#x7B2C;&#x4E09;&#x65B9;&#x5E93;&#xFF0C;&#x7ECF;&#x5E38;&#x6709;&#x7C7B;&#x4F3C;&#x7684;&#x201C;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x201D;&#x7684;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x4E0A;&#x9762;&#x7684; hello &#x4EE3;&#x7801;&#xFF0C;&#x5176;&#x5B9E;&#x8FD8;&#x4E0D;&#x591F;&#x5B89;&#x5168;&#x3002;&#x56E0;&#x4E3A;&#x867D;&#x7136;&#x770B;&#x4E0A;&#x53BB;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#x4EFB;&#x4F55;&#x4F1A;&#x5BFC;&#x81F4;&#x76F4;&#x63A5;&#x6216;&#x8005;&#x95F4;&#x63A5; panic! &#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x4F46;&#x96BE;&#x4FDD;&#x4EE3;&#x7801;&#x590D;&#x6742;&#x540E;&#xFF0C;&#x9690;&#x5F0F;&#x5730;&#x8C03;&#x7528;&#x4E86; panic!()&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x4EE5;&#x540E;&#x6211;&#x4EEC;&#x65B0;&#x52A0;&#x4E00;&#x4E9B;&#x903B;&#x8F91;&#xFF0C;&#x4F7F;&#x7528;&#x4E86; <a href="https://doc.rust-lang.org/src/core/slice/mod.rs.html#3039-3065" target="_blank">copy_from_slice()</a>&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x5185;&#x90E8;&#x4F1A;&#x8C03;&#x7528; panic!()&#xFF0C;&#x5C31;&#x4F1A;&#x5BFC;&#x81F4;&#x95EE;&#x9898;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x6700;&#x597D;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x628A;&#x4E3B;&#x8981;&#x7684;&#x903B;&#x8F91;&#x5C01;&#x88C5;&#x5728; catch_unwind &#x91CC;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[no_mangle]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">hello</span></span>(name: *<span class="hljs-keyword">const</span> c_char) -&gt; *<span class="hljs-keyword">const</span> c_char {
+    <span class="hljs-keyword">if</span> name.is_null() {
+        <span class="hljs-keyword">return</span> ptr::null();
+    }
+
+    <span class="hljs-keyword">let</span> result = catch_unwind(|| {
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-literal">Ok</span>(s) = <span class="hljs-keyword">unsafe</span> { CStr::from_ptr(name).to_str() } {
+            <span class="hljs-keyword">let</span> result = <span class="hljs-built_in">format!</span>(<span class="hljs-string">&quot;hello {}!&quot;</span>, s);
+            <span class="hljs-comment">// &#x53EF;&#x4EE5;&#x4F7F;&#x7528; unwrap&#xFF0C;&#x56E0;&#x4E3A; result &#x4E0D;&#x5305;&#x542B; \\0</span>
+            <span class="hljs-keyword">let</span> s = CString::new(result).unwrap();
+
+            s.into_raw()
+        } <span class="hljs-keyword">else</span> {
+            ptr::null()
+        }
+    });
+
+    <span class="hljs-keyword">match</span> result {
+        <span class="hljs-literal">Ok</span>(s) =&gt; s,
+        <span class="hljs-literal">Err</span>(_) =&gt; ptr::null(),
+    }
+}
+</code></pre>
+<p>&#x8FD9;&#x51E0;&#x6BB5;&#x4EE3;&#x7801;&#x4F60;&#x53EF;&#x4EE5;&#x591A;&#x591A;&#x4F53;&#x4F1A;&#xFF0C;&#x5B8C;&#x6574;&#x4F8B;&#x5B50;&#x653E;&#x5728; <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=5b9fe627194e30b4260e1187b52ac218" target="_blank">playground</a>&#x3002;</p>
+<p>&#x5199;&#x597D; Rust shim &#x4EE3;&#x7801;&#x540E;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x662F;&#x751F;&#x6210; C &#x7684; FFI &#x63A5;&#x53E3;&#x4E86;&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x4E2A;&#x73AF;&#x8282;&#x53EF;&#x4EE5;&#x7528;&#x5DE5;&#x5177;&#x6765;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <a href="https://github.com/eqrion/cbindgen" target="_blank">cbindgen</a>&#x3002;&#x5982;&#x679C;&#x4F7F;&#x7528; cbindgen&#xFF0C;&#x4E0A;&#x8FF0;&#x7684;&#x4EE3;&#x7801;&#x4F1A;&#x751F;&#x6210;&#x7C7B;&#x4F3C;&#x8FD9;&#x6837;&#x7684; bindings.h&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdarg&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdint&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;ostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;new&gt;</span></span>
+
+<span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> {
+
+<span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *<span class="hljs-title">hello_world</span><span class="hljs-params">()</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *<span class="hljs-title">hello_bad</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *name)</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *<span class="hljs-title">hello</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *name)</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">free_str</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *s)</span></span>;
+
+} <span class="hljs-comment">// extern &quot;C&quot;</span>
+</code></pre>
+<p>&#x6709;&#x4E86;&#x7F16;&#x8BD1;&#x597D;&#x7684;&#x5E93;&#x4EE3;&#x7801;&#x4EE5;&#x53CA;&#x5934;&#x6587;&#x4EF6;&#x540E;&#xFF0C;&#x5728;&#x5176;&#x4ED6;&#x8BED;&#x8A00;&#x4E2D;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x7528;&#x8BE5;&#x8BED;&#x8A00;&#x7684;&#x5DE5;&#x5177;&#x8FDB;&#x4E00;&#x6B65;&#x751F;&#x6210;&#x90A3;&#x95E8;&#x8BED;&#x8A00;&#x7684; FFI &#x7ED1;&#x5B9A;&#xFF0C;&#x7136;&#x540E;&#x6B63;&#x5E38;&#x4F7F;&#x7528;&#x3002;</p>
+<h2 id="&#x548C;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x7684;&#x4E92;&#x64CD;&#x4F5C;">&#x548C;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x7684;&#x4E92;&#x64CD;&#x4F5C;</h2>
+<p>&#x597D;&#xFF0C;&#x641E;&#x660E;&#x767D; Rust &#x4EE3;&#x7801;&#x5982;&#x4F55;&#x7F16;&#x8BD1;&#x6210; C &#x5E93;&#x4F9B; C/C++ &#x548C;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x4F7F;&#x7528;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x770B;&#x770B;&#x5177;&#x4F53;&#x8BED;&#x8A00;&#x6709;&#x6CA1;&#x6709;&#x989D;&#x5916;&#x7684;&#x5DE5;&#x5177;&#x66F4;&#x65B9;&#x4FBF;&#x5730;&#x548C; Rust &#x4E92;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E; Python &#x548C; Node.js&#xFF0C;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x5DF2;&#x7ECF;&#x89C1;&#x5230;&#x4E86; <a href="https://github.com/PyO3/pyo3" target="_blank">PyO3</a> &#x548C; <a href="https://github.com/neon-bindings/neon" target="_blank">Neon</a> &#x8FD9;&#x4E24;&#x4E2A;&#x5E93;&#xFF0C;&#x7528;&#x8D77;&#x6765;&#x90FD;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x76F4;&#x89C2;&#xFF0C;&#x4E0B;&#x4E00;&#x8BB2;&#x4F1A;&#x518D;&#x6DF1;&#x5165;&#x4F7F;&#x7528;&#x4E00;&#x4E0B;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E; Erlang/Elixir&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x975E;&#x5E38;&#x4E0D;&#x9519;&#x7684; <a href="https://github.com/rusterlium/rustler" target="_blank">rustler</a>&#x3002;&#x5982;&#x679C;&#x4F60;&#x5BF9;&#x6B64;&#x611F;&#x5174;&#x8DA3;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x8FD9;&#x4E2A; <a href="https://github.com/tyrchen/elixir-meet-rust" target="_blank">repo</a> &#x4E2D;&#x7684;&#x6F14;&#x793A;&#x6587;&#x7A3F;&#x548C;&#x4F8B;&#x5B50;&#x3002;&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E2A;&#x628A; Rust &#x4EE3;&#x7801;&#x5B89;&#x5168;&#x5730;&#x7ED9; Erlang/Elixir &#x4F7F;&#x7528;&#x7684;&#x7B80;&#x5355;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[rustler::nif]</span>
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">add</span></span>(a: <span class="hljs-keyword">i64</span>, b: <span class="hljs-keyword">i64</span>) -&gt; <span class="hljs-keyword">i64</span> {
+    a + b
+}
+
+rustler::init!(<span class="hljs-string">&quot;Elixir.Math&quot;</span>, [add]);
+</code></pre>
+<p>&#x5BF9;&#x4E8E; C++&#xFF0C;&#x867D;&#x7136; cbindgen &#x5C31;&#x8DB3;&#x591F;&#xFF0C;&#x4F46;&#x793E;&#x533A;&#x91CC;&#x8FD8;&#x6709; <a href="https://github.com/dtolnay/cxx" target="_blank">cxx</a>&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x5E2E;&#x52A9;&#x6211;&#x4EEC;&#x5F88;&#x65B9;&#x4FBF;&#x5730;&#x5BF9; Rust &#x548C; C++ &#x8FDB;&#x884C;&#x4E92;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x8981;&#x505A; Kotlin / Swift &#x5F00;&#x53D1;&#xFF0C;&#x53EF;&#x4EE5;&#x5C1D;&#x8BD5;&#x4E00;&#x4E0B; mozilla &#x7528;&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E0B;&#x7684; <a href="https://github.com/mozilla/uniffi-rs" target="_blank">uniffi</a>&#x3002;&#x4F7F;&#x7528; uniffi&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A; UDL&#xFF0C;&#x8FD9;&#x6837; uniffi-bindgen &#x4F1A;&#x5E2E;&#x4F60;&#x751F;&#x6210;&#x5404;&#x79CD;&#x8BED;&#x8A00;&#x7684; FFI &#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x5177;&#x4F53;&#x600E;&#x4E48;&#x7528;&#x53EF;&#x4EE5;&#x770B;&#x8FD9;&#x95E8;&#x8BFE;&#x7684; <a href="https://github.com/tyrchen/geektime-rust" target="_blank">GitHub repo</a> &#x4E0B;&#x8FD9;&#x4E00;&#x8BB2;&#x7684; ffi-math crate &#x7684;&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#x3002;&#x8FD9;&#x91CC;&#x5C31;&#x8BB2;&#x4E00;&#x4E0B;&#x91CD;&#x70B9;&#xFF0C;&#x6211;&#x5199;&#x4E86;&#x4E2A;&#x7B80;&#x5355;&#x7684; <a href="https://mozilla.github.io/uniffi-rs/udl_file_spec.html" target="_blank">uniffi &#x63A5;&#x53E3;</a>&#xFF08;math.udl&#xFF09;&#xFF1A;</p>
+<pre><code class="lang-rust">namespace math {
+    <span class="hljs-keyword">u32</span> add(<span class="hljs-keyword">u32</span> a, <span class="hljs-keyword">u32</span> b);
+    string hello([ByRef]string name);
+};
+</code></pre>
+<p>&#x5E76;&#x63D0;&#x4F9B;&#x4E86; Rust &#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre><code class="lang-rust">uniffi_macros::include_scaffolding!(<span class="hljs-string">&quot;math&quot;</span>);
+
+<span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">add</span></span>(a: <span class="hljs-keyword">u32</span>, b: <span class="hljs-keyword">u32</span>) -&gt; <span class="hljs-keyword">u32</span> {
+    a + b
+}
+
+<span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">hello</span></span>(name: &amp;<span class="hljs-keyword">str</span>) -&gt; <span class="hljs-built_in">String</span> {
+    <span class="hljs-built_in">format!</span>(<span class="hljs-string">&quot;hello {}!&quot;</span>, name)
+}
+</code></pre>
+<p>&#x4E4B;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x7528;&#xFF1A;</p>
+<pre><code class="lang-bash">uniffi-bindgen generate src/math.udl --language swift
+uniffi-bindgen generate src/math.udl --language kotlin
+</code></pre>
+<p>&#x751F;&#x6210;&#x5BF9;&#x5E94;&#x7684; Swift &#x548C; Kotlin &#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x770B;&#x751F;&#x6210;&#x7684; hello() &#x51FD;&#x6570;&#x7684;&#x4EE3;&#x7801;&#x3002;&#x6BD4;&#x5982; Kotlin &#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-swift">fun hello(name: <span class="hljs-type">String</span>): <span class="hljs-type">String</span> {
+    val _retval =
+        rustCall() { status -&gt;
+            _UniFFILib.<span class="hljs-type">INSTANCE</span>.math_6c3d_hello(name.lower(), status)
+        }
+    <span class="hljs-keyword">return</span> <span class="hljs-type">String</span>.lift(_retval)
+}
+</code></pre>
+<p>&#x518D;&#x6BD4;&#x5982; Swift &#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-swift"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">hello</span><span class="hljs-params">(name: String)</span></span> -&gt; <span class="hljs-type">String</span> {
+    <span class="hljs-keyword">let</span> _retval = <span class="hljs-keyword">try</span>!
+
+        rustCall {
+            math_6c3d_hello(name.lower(), $<span class="hljs-number">0</span>)
+        }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">try</span>! <span class="hljs-type">String</span>.lift(_retval)
+}
+</code></pre>
+<p>&#x4F60;&#x4E5F;&#x8BB8;&#x6CE8;&#x610F;&#x5230;&#x4E86;&#x8FD9;&#x4E2A; RustCall&#xFF0C;&#x5B83;&#x662F;&#x7528;&#x6765;&#x8C03;&#x7528; Rust FFI &#x4EE3;&#x7801;&#x7684;&#xFF0C;&#x770B;&#x6E90;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-swift"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">rustCall</span>&lt;T&gt;<span class="hljs-params">(<span class="hljs-number">_</span> callback: <span class="hljs-params">(UnsafeMutablePointer&lt;RustCallStatus&gt;)</span></span></span> -&gt; <span class="hljs-type">T</span>) <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">T</span> {
+    <span class="hljs-keyword">try</span> makeRustCall(callback, errorHandler: {
+        $<span class="hljs-number">0</span>.deallocate()
+        <span class="hljs-keyword">return</span> <span class="hljs-type">UniffiInternalError</span>.unexpectedRustCallError
+    })
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">makeRustCall</span>&lt;T&gt;<span class="hljs-params">(<span class="hljs-number">_</span> callback: <span class="hljs-params">(UnsafeMutablePointer&lt;RustCallStatus&gt;)</span></span></span> -&gt; <span class="hljs-type">T</span>, errorHandler: (<span class="hljs-type">RustBuffer</span>) <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Error</span>) <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">T</span> {
+    <span class="hljs-keyword">var</span> callStatus = <span class="hljs-type">RustCallStatus</span>()
+    <span class="hljs-keyword">let</span> returnedVal = callback(&amp;callStatus)
+    <span class="hljs-keyword">switch</span> callStatus.code {
+    <span class="hljs-keyword">case</span> <span class="hljs-type">CALL_SUCCESS</span>:
+        <span class="hljs-keyword">return</span> returnedVal
+
+    <span class="hljs-keyword">case</span> <span class="hljs-type">CALL_ERROR</span>:
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">try</span> errorHandler(callStatus.errorBuf)
+
+    <span class="hljs-keyword">case</span> <span class="hljs-type">CALL_PANIC</span>:
+        <span class="hljs-comment">// When the rust code sees a panic, it tries to construct a RustBuffer</span>
+        <span class="hljs-comment">// with the message.  But if that code panics, then it just sends back</span>
+        <span class="hljs-comment">// an empty buffer.</span>
+        <span class="hljs-keyword">if</span> callStatus.errorBuf.len &gt; <span class="hljs-number">0</span> {
+            <span class="hljs-keyword">throw</span> <span class="hljs-type">UniffiInternalError</span>.rustPanic(<span class="hljs-keyword">try</span> <span class="hljs-type">String</span>.lift(callStatus.errorBuf))
+        } <span class="hljs-keyword">else</span> {
+            callStatus.errorBuf.deallocate()
+            <span class="hljs-keyword">throw</span> <span class="hljs-type">UniffiInternalError</span>.rustPanic(<span class="hljs-string">&quot;Rust panic&quot;</span>)
+        }
+
+    <span class="hljs-keyword">default</span>:
+        <span class="hljs-keyword">throw</span> <span class="hljs-type">UniffiInternalError</span>.unexpectedRustCallStatusCode
+    }
+}
+</code></pre>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x5B83;&#x8FD8;&#x8003;&#x8651;&#x4E86;&#x5982;&#x679C; Rust &#x4EE3;&#x7801; panic! &#x540E;&#x7684;&#x5904;&#x7406;&#x3002;&#x90A3;&#x4E48; Rust &#x7533;&#x8BF7;&#x7684;&#x5185;&#x5B58;&#x4F1A;&#x88AB; Rust &#x91CA;&#x653E;&#x4E48;&#xFF1F;</p>
+<p>&#x4F1A;&#x7684;&#x3002;hello() &#x91CC;&#x7684; String.lift() &#x5C31;&#x5728;&#x505A;&#x8FD9;&#x4E2A;&#x4E8B;&#x60C5;&#xFF0C;&#x6211;&#x4EEC;&#x770B;&#x751F;&#x6210;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-swift"><span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">String</span>: <span class="hljs-title">ViaFfi</span> </span>{
+    fileprivate <span class="hljs-keyword">typealias</span> <span class="hljs-type">FfiType</span> = <span class="hljs-type">RustBuffer</span>
+
+    fileprivate <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">lift</span><span class="hljs-params">(<span class="hljs-number">_</span> v: FfiType)</span></span> <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Self</span> {
+        <span class="hljs-keyword">defer</span> {
+            v.deallocate()
+        }
+        <span class="hljs-keyword">if</span> v.data == <span class="hljs-literal">nil</span> {
+            <span class="hljs-keyword">return</span> <span class="hljs-type">String</span>()
+        }
+        <span class="hljs-keyword">let</span> bytes = <span class="hljs-type">UnsafeBufferPointer</span>&lt;<span class="hljs-type">UInt8</span>&gt;(start: v.data!, <span class="hljs-built_in">count</span>: <span class="hljs-type">Int</span>(v.len))
+        <span class="hljs-keyword">return</span> <span class="hljs-type">String</span>(bytes: bytes, encoding: <span class="hljs-type">String</span>.<span class="hljs-type">Encoding</span>.utf8)!
+    }
+    ...
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">RustBuffer</span> </span>{
+    ...
+    <span class="hljs-comment">// Frees the buffer in place.</span>
+    <span class="hljs-comment">// The buffer must not be used after this is called.</span>
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">deallocate</span><span class="hljs-params">()</span></span> {
+        <span class="hljs-keyword">try</span>! rustCall { ffi_math_6c3d_rustbuffer_free(<span class="hljs-keyword">self</span>, $<span class="hljs-number">0</span>) }
+    }
+}
+</code></pre>
+<p>&#x5728; lift &#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x5206;&#x914D;&#x4E00;&#x4E2A; swift String&#xFF0C;&#x7136;&#x540E;&#x5728;&#x51FD;&#x6570;&#x9000;&#x51FA;&#x65F6;&#x8C03;&#x7528; deallocate()&#xFF0C;&#x6B64;&#x65F6;&#x4F1A;&#x53D1;&#x9001;&#x4E00;&#x4E2A; rustCall &#x7ED9; ffi_math_rustbuffer_free()&#x3002;</p>
+<p>&#x4F60;&#x770B;&#xFF0C;uniffi &#x628A;&#x524D;&#x9762;&#x8BF4;&#x7684;&#x5904;&#x7406; FFI &#x7684;&#x4E09;&#x4E2A;&#x5173;&#x952E;&#x95EE;&#x9898;&#xFF1A;<strong>&#x5904;&#x7406;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x5DEE;&#x5F02;&#x3001;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x3001;&#x9519;&#x8BEF;&#x5904;&#x7406;</strong>&#xFF0C;&#x90FD;&#x59A5;&#x5584;&#x5730;&#x89E3;&#x51B3;&#x4E86;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x8981;&#x5728; Swift / Kotlin &#x4EE3;&#x7801;&#x4E2D;&#x4F7F;&#x7528; Rust&#xFF0C;&#x975E;&#x5E38;&#x5EFA;&#x8BAE;&#x4F60;&#x4F7F;&#x7528; uniffi&#x3002;&#x6B64;&#x5916;&#xFF0C;uniffi &#x8FD8;&#x652F;&#x6301; Python &#x548C; Ruby&#x3002;</p>
+<h2 id="ffi-&#x7684;&#x5176;&#x5B83;&#x65B9;&#x5F0F;">FFI &#x7684;&#x5176;&#x5B83;&#x65B9;&#x5F0F;</h2>
+<p>&#x6700;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x7B80;&#x5355;&#x804A;&#x4E00;&#x804A;&#x5904;&#x7406; FFI &#x7684;&#x5176;&#x5B83;&#x65B9;&#x5F0F;&#x3002;&#x5176;&#x5B9E;&#x4EE3;&#x7801;&#x7684;&#x8DE8;&#x8BED;&#x8A00;&#x5171;&#x4EAB;&#x5E76;&#x975E;&#x53EA;&#x6709; FFI &#x4E00;&#x6761;&#x8DEF;&#x5B50;&#x3002;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; REST API&#x3001;gRPC &#x6765;&#x8FBE;&#x5230;&#x4EE3;&#x7801;&#x8DE8;&#x8BED;&#x8A00;&#x4F7F;&#x7528;&#x7684;&#x76EE;&#x7684;&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;&#x8FD9;&#x6837;&#x8981;&#x989D;&#x5916;&#x8D70;&#x4E00;&#x5708;&#x7F51;&#x7EDC;&#xFF0C;&#x5373;&#x4FBF;&#x662F;&#x672C;&#x5730;&#x7F51;&#x7EDC;&#xFF0C;&#x4E5F;&#x6548;&#x7387;&#x592A;&#x4F4E;&#xFF0C;&#x4E14;&#x4E0D;&#x591F;&#x5B89;&#x5168;&#x3002;&#x6709;&#x6CA1;&#x6709;&#x66F4;&#x9AD8;&#x6548;&#x4E00;&#x4E9B;&#x7684;&#x65B9;&#x6CD5;&#xFF1F;</p>
+<p>&#x6709;&#xFF01;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x4E24;&#x4E2A;&#x8BED;&#x8A00;&#x4E2D;&#x4F7F;&#x7528; protobuf &#x6765;&#x5E8F;&#x5217;&#x5316;/&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x8981;&#x4F20;&#x9012;&#x7684;&#x6570;&#x636E;&#x3002;&#x5728; Mozilla &#x7684;&#x4E00;&#x7BC7;&#x535A;&#x6587; <a href="https://hacks.mozilla.org/2019/04/crossing-the-rust-ffi-frontier-with-protocol-buffers/" target="_blank">Crossing the Rust FFI frontier with Protocol Buffers</a>&#xFF0C;&#x63D0;&#x5230;&#x4E86;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#xFF1A;<br><img src="https://static001.geekbang.org/resource/image/09/af/09782bc7a625c97c5d58118f1c1300af.png?wh=1887x1620" alt=""></p>
+<p>&#x611F;&#x5174;&#x8DA3;&#x7684;&#x540C;&#x5B66;&#xFF0C;&#x53EF;&#x4EE5;&#x8BFB;&#x8BFB;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x3002;&#x4E5F;&#x53EF;&#x4EE5;&#x770B;&#x770B;&#x6211;&#x4E4B;&#x524D;&#x5199;&#x7684;&#x6587;&#x7AE0;<a href="https://mp.weixin.qq.com/s?__biz=MzA3NDM0ODQwMw==&amp;mid=2649828742&amp;idx=1&amp;sn=e1a0e02cbb9d5d505523c05bd2600bc9&amp;chksm=8704af9ab073268c3264243af8776e90a5844f1dd7d106bbd1746593e5ce2d8615fc78c3574d&amp;token=2057764633&amp;lang=zh_CN#rd" target="_blank">&#x6DF1;&#x5EA6;&#x63A2;&#x7D22;&#xFF1A;&#x524D;&#x7AEF;&#x4E2D;&#x7684;&#x540E;&#x7AEF;</a>&#xFF0C;&#x8BE6;&#x7EC6;&#x63A2;&#x8BA8;&#x4E86;&#x628A; Rust &#x7528;&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x53EF;&#x80FD;&#x6027;&#x4EE5;&#x53CA;&#x5982;&#x4F55;&#x505A; Rust bridge&#x3002;</p>
+<h2 id="&#x5C0F;&#x7ED3;">&#x5C0F;&#x7ED3;</h2>
+<p>FFI &#x662F; Rust &#x53C8;&#x4E00;&#x4E2A;&#x5904;&#x4E8E;&#x9886;&#x5148;&#x5730;&#x4F4D;&#x7684;&#x9886;&#x57DF;&#x3002;</p>
+<p>&#x4ECE;&#x8FD9;&#x4E00;&#x8BB2;&#x7684;&#x793A;&#x4F8B;&#x4E2D;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x5728;&#x652F;&#x6301;&#x5F88;&#x65B9;&#x4FBF;&#x5730;&#x4F7F;&#x7528; C/C++ &#x793E;&#x533A;&#x91CC;&#x7684;&#x6210;&#x679C;&#x5916;&#xFF0C;Rust &#x4E5F;&#x53EF;&#x4EE5;&#x975E;&#x5E38;&#x65B9;&#x4FBF;&#x5730;&#x5728;&#x5F88;&#x591A;&#x5730;&#x65B9;&#x53D6;&#x4EE3; C/C++&#xFF0C;&#x6210;&#x4E3A;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x4F7F;&#x7528;&#x5E95;&#x5C42;&#x5E93;&#x7684;&#x9996;&#x9009;&#x3002;<strong>&#x9664;&#x4E86;&#x65B9;&#x4FBF;&#x7684; FFI &#x63A5;&#x53E3;&#x548C;&#x5DE5;&#x5177;&#x94FE;&#xFF0C;&#x4F7F;&#x7528; Rust &#x4E3A;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x63D0;&#x4F9B;&#x5E95;&#x5C42;&#x652F;&#x6301;&#xFF0C;&#x5176;&#x5B9E;&#x8FD8;&#x6709;&#x5B89;&#x5168;&#x6027;&#x8FD9;&#x4E2A;&#x6740;&#x624B;&#x950F;</strong>&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x5728; Erlang/Elixir &#x793E;&#x533A;&#xFF0C;&#x9AD8;&#x6027;&#x80FD;&#x7684;&#x5E95;&#x5C42; NIF &#x4EE3;&#x7801;&#xFF0C;&#x5982;&#x679C;&#x7528; C/C++ &#x64B0;&#x5199;&#x7684;&#x8BDD;&#xFF0C;&#x4E00;&#x4E2A;&#x4E0D;&#x5C0F;&#x5FC3;&#x5C31;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x6574;&#x4E2A; VM &#x7684;&#x5D29;&#x6E83;&#xFF1B;&#x4F46;&#x662F;&#x7528; Rust &#x64B0;&#x5199;&#xFF0C;&#x56E0;&#x4E3A;&#x5176;&#x4E25;&#x683C;&#x7684;&#x5185;&#x5B58;&#x5B89;&#x5168;&#x4FDD;&#x8BC1;&#xFF08;&#x53EA;&#x8981;&#x4FDD;&#x8BC1; unsafe &#x4EE3;&#x7801;&#x7684;&#x6B63;&#x786E;&#x6027;&#xFF09;&#xFF0C;NIF &#x4E0D;&#x4F1A;&#x5BFC;&#x81F4; VM &#x7684;&#x5D29;&#x6E83;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x73B0;&#x5728; Rust &#x8D8A;&#x6765;&#x8D8A;&#x53D7;&#x5230;&#x5404;&#x4E2A;&#x9AD8;&#x7EA7;&#x8BED;&#x8A00;&#x7684;&#x9752;&#x7750;&#xFF0C;&#x7528;&#x6765;&#x5F00;&#x53D1;&#x9AD8;&#x6027;&#x80FD;&#x7684;&#x5E95;&#x5C42;&#x5E93;&#x3002;</p>
+<p>&#x4E0E;&#x6B64;&#x540C;&#x65F6;&#xFF0C;&#x5F53;&#x9700;&#x8981;&#x5F00;&#x53D1;&#x8DE8;&#x8D8A;&#x591A;&#x4E2A;&#x7AEF;&#x7684;&#x516C;&#x5171;&#x5E93;&#x65F6;&#xFF0C;&#x4F7F;&#x7528; Rust &#x4E5F;&#x4F1A;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x597D;&#x7684;&#x9009;&#x62E9;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x524D;&#x9762;&#x7684;&#x5185;&#x5BB9;&#x4E2D;&#x4E5F;&#x770B;&#x5230;&#x4E86;&#x7528; uniffi &#x4E3A; Android &#x548C; iOS &#x6784;&#x5EFA;&#x516C;&#x5171;&#x4EE3;&#x7801;&#x662F;&#x591A;&#x4E48;&#x7B80;&#x5355;&#x7684;&#x4E00;&#x4EF6;&#x4E8B;&#x3002;</p>
+<h3 id="&#x601D;&#x8003;&#x9898;">&#x601D;&#x8003;&#x9898;</h3>
+<ol>
+<li>&#x9605;&#x8BFB; <a href="https://doc.rust-lang.org/std/ffi/index.html" target="_blank">std::ffi</a> &#x7684;&#x6587;&#x6863;&#xFF0C;&#x60F3;&#x60F3; Vec<t> &#x5982;&#x4F55;&#x4F20;&#x9012;&#x7ED9; C&#xFF1F;&#x518D;&#x60F3;&#x60F3; HashMap<k,v> &#x8BE5;&#x5982;&#x4F55;&#x4F20;&#x9012;&#xFF1F;&#x6709;&#x5FC5;&#x8981;&#x4F20;&#x9012;&#x4E00;&#x4E2A; HashMap &#x5230; C &#x90A3;&#x4E00;&#x4FA7;&#x4E48;&#xFF1F;</k,v></t></li>
+<li>&#x9605;&#x8BFB; <a href="https://github.com/rust-rocksdb/rust-rocksdb" target="_blank">rocksdb</a> &#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x770B;&#x770B; Rust &#x5982;&#x4F55;&#x63D0;&#x4F9B; rocksDB &#x7684;&#x7ED1;&#x5B9A;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x4F60;&#x662F;&#x4E2A; iOS/Android &#x5F00;&#x53D1;&#x8005;&#xFF0C;&#x5C1D;&#x8BD5;&#x4F7F;&#x7528; Rust &#x7684; reqwest &#x6784;&#x5EFA; REST API &#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x5F97;&#x5230;&#x7684;&#x6570;&#x636E;&#x901A;&#x8FC7; FFI &#x4F20;&#x9012;&#x7ED9; Swift/Kotlin &#x4FA7;&#x3002;</li>
+</ol>
+<p>&#x611F;&#x8C22;&#x4F60;&#x7684;&#x6536;&#x542C;&#xFF0C;&#x4ECA;&#x5929;&#x5B8C;&#x6210;&#x4E86;&#x7B2C;31&#x6B21;Rust&#x5B66;&#x4E60;&#x6253;&#x5361;&#x5566;&#x3002;&#x5982;&#x679C;&#x4F60;&#x89C9;&#x5F97;&#x6709;&#x6536;&#x83B7;&#xFF0C;&#x4E5F;&#x6B22;&#x8FCE;&#x4F60;&#x5206;&#x4EAB;&#x7ED9;&#x8EAB;&#x8FB9;&#x7684;&#x670B;&#x53CB;&#xFF0C;&#x9080;&#x4ED6;&#x4E00;&#x8D77;&#x8BA8;&#x8BBA;&#x3002;&#x6211;&#x4EEC;&#x4E0B;&#x8282;&#x8BFE;&#x89C1;&#xFF5E;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="435484.html" class="navigation navigation-prev " aria-label="Previous page: 30｜Unsafe Rust：如何用C++的方式打开Rust？">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="437569.html" class="navigation navigation-next " aria-label="Next page: 32｜实操项目：使用PyO3开发Python3模块">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"31｜FFI：Rust如何和你的语言架起沟通桥梁？","level":"1.38","depth":1,"next":{"title":"32｜实操项目：使用PyO3开发Python3模块","level":"1.39","depth":1,"path":"docs/437569.md","ref":"./docs/437569.md","articles":[]},"previous":{"title":"30｜Unsafe Rust：如何用C++的方式打开Rust？","level":"1.37","depth":1,"path":"docs/435484.md","ref":"./docs/435484.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"陈天 · Rust 编程第一课","language":"zh","gitbook":"*"},"file":{"path":"docs/437566.md","mtime":"2024-08-25T05:24:55.883Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-08-25T05:46:11.445Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

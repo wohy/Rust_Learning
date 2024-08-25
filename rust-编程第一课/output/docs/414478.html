@@ -1,0 +1,1742 @@
+
+<!DOCTYPE HTML>
+<html lang="zh" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>06｜get hands dirty：SQL查询工具怎么一鱼多吃？ · 陈天 · Rust 编程第一课</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="415098.html" />
+    
+    
+    <link rel="prev" href="413634.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="輸入並搜尋" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="408400.html">
+            
+                <a href="408400.html">
+            
+                    
+                    开篇词｜让Rust成为你的下一门主力语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="408409.html">
+            
+                <a href="408409.html">
+            
+                    
+                    01｜内存：值放堆上还是放栈上，这是一个问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="410038.html">
+            
+                <a href="410038.html">
+            
+                    
+                    02｜串讲：编程开发中，那些你需要掌握的基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="411089.html">
+            
+                <a href="411089.html">
+            
+                    
+                    加餐｜这个专栏你可以怎么学，以及Rust是否值得学？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="411632.html">
+            
+                <a href="411632.html">
+            
+                    
+                    03｜初窥门径：从你的第一个Rust程序开始！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="412883.html">
+            
+                <a href="412883.html">
+            
+                    
+                    04｜get hands dirty：来写个实用的CLI小工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="413634.html">
+            
+                <a href="413634.html">
+            
+                    
+                    05｜get hands dirty：做一个图片服务器有多难？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.9" data-path="414478.html">
+            
+                <a href="414478.html">
+            
+                    
+                    06｜get hands dirty：SQL查询工具怎么一鱼多吃？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="415098.html">
+            
+                <a href="415098.html">
+            
+                    
+                    07｜所有权：值的生杀大权到底在谁手上？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="415988.html">
+            
+                <a href="415988.html">
+            
+                    
+                    08｜所有权：值的借用是如何工作的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="416722.html">
+            
+                <a href="416722.html">
+            
+                    
+                    09｜所有权：一个值可以有多个所有者么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="417384.html">
+            
+                <a href="417384.html">
+            
+                    
+                    10｜生命周期：你创建的值究竟能活多久？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="418235.html">
+            
+                <a href="418235.html">
+            
+                    
+                    11｜内存管理：从创建到消亡，值都经历了什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="418778.html">
+            
+                <a href="418778.html">
+            
+                    
+                    加餐｜愚昧之巅：你的Rust学习常见问题汇总
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="420021.html">
+            
+                <a href="420021.html">
+            
+                    
+                    12｜类型系统：Rust的类型系统有什么特点？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="420028.html">
+            
+                <a href="420028.html">
+            
+                    
+                    13｜类型系统：如何使用trait来定义接口？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="421324.html">
+            
+                <a href="421324.html">
+            
+                    
+                    14｜类型系统：有哪些必须掌握的trait？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="422182.html">
+            
+                <a href="422182.html">
+            
+                    
+                    15｜数据结构：这些浓眉大眼的结构竟然都是智能指针？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="422975.html">
+            
+                <a href="422975.html">
+            
+                    
+                    16｜数据结构：Vec、&[T]、Box<[T]> ，你真的了解集合容器么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="423923.html">
+            
+                <a href="423923.html">
+            
+                    
+                    17｜数据结构：软件系统核心部件哈希表，内存如何布局？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="424002.html">
+            
+                <a href="424002.html">
+            
+                    
+                    18｜错误处理：为什么Rust的错误处理与众不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="424009.html">
+            
+                <a href="424009.html">
+            
+                    
+                    19｜闭包：FnOnce、FnMut和Fn，为什么有这么多类型？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="424017.html">
+            
+                <a href="424017.html">
+            
+                    
+                    20｜4 Steps ：如何更好地阅读Rust源码？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="425001.html">
+            
+                <a href="425001.html">
+            
+                    
+                    21｜阶段实操（1）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="425005.html">
+            
+                <a href="425005.html">
+            
+                    
+                    22｜阶段实操（2）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.27" data-path="425013.html">
+            
+                <a href="425013.html">
+            
+                    
+                    加餐｜期中测试：来写一个简单的grep命令行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.28" data-path="425015.html">
+            
+                <a href="425015.html">
+            
+                    
+                    加餐｜期中测试：参考实现讲解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.29" data-path="427082.html">
+            
+                <a href="427082.html">
+            
+                    
+                    23｜类型系统：如何在实战中使用泛型编程？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.30" data-path="428018.html">
+            
+                <a href="428018.html">
+            
+                    
+                    24｜类型系统：如何在实战中使用trait object？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.31" data-path="429063.html">
+            
+                <a href="429063.html">
+            
+                    
+                    25｜类型系统：如何围绕trait来设计和架构系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.32" data-path="429665.html">
+            
+                <a href="429665.html">
+            
+                    
+                    加餐｜Rust2021版次问世了！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.33" data-path="429666.html">
+            
+                <a href="429666.html">
+            
+                    
+                    26｜阶段实操（3）：构建一个简单的KV server-高级trait技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.34" data-path="429673.html">
+            
+                <a href="429673.html">
+            
+                    
+                    27｜生态系统：有哪些常有的Rust库可以为我所用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.35" data-path="432162.html">
+            
+                <a href="432162.html">
+            
+                    
+                    28｜网络开发（上）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.36" data-path="432168.html">
+            
+                <a href="432168.html">
+            
+                    
+                    29｜网络开发（下）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.37" data-path="435484.html">
+            
+                <a href="435484.html">
+            
+                    
+                    30｜Unsafe Rust：如何用C++的方式打开Rust？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.38" data-path="437566.html">
+            
+                <a href="437566.html">
+            
+                    
+                    31｜FFI：Rust如何和你的语言架起沟通桥梁？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.39" data-path="437569.html">
+            
+                <a href="437569.html">
+            
+                    
+                    32｜实操项目：使用PyO3开发Python3模块
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.40" data-path="442216.html">
+            
+                <a href="442216.html">
+            
+                    
+                    33｜并发处理（上）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.41" data-path="442217.html">
+            
+                <a href="442217.html">
+            
+                    
+                    34｜并发处理（下）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.42" data-path="445814.html">
+            
+                <a href="445814.html">
+            
+                    
+                    35｜实操项目：如何实现一个基本的MPSC channel？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.43" data-path="445818.html">
+            
+                <a href="445818.html">
+            
+                    
+                    用户故事｜绝望之谷：改变从学习开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.44" data-path="446948.html">
+            
+                <a href="446948.html">
+            
+                    
+                    36｜阶段实操（4）：构建一个简单的KV server-网络处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.45" data-path="446949.html">
+            
+                <a href="446949.html">
+            
+                    
+                    37｜阶段实操（5）：构建一个简单的KV server-网络安全
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.46" data-path="455413.html">
+            
+                <a href="455413.html">
+            
+                    
+                    38｜异步处理：Future是什么？它和async/await是什么关系？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.47" data-path="455412.html">
+            
+                <a href="455412.html">
+            
+                    
+                    39｜异步处理：async/await内部是怎么实现的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.48" data-path="461695.html">
+            
+                <a href="461695.html">
+            
+                    
+                    40｜异步处理：如何处理异步IO？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.49" data-path="461997.html">
+            
+                <a href="461997.html">
+            
+                    
+                    41｜阶段实操（6）：构建一个简单的KV server-异步处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.50" data-path="461999.html">
+            
+                <a href="461999.html">
+            
+                    
+                    42｜阶段实操（7）：构建一个简单的KV server-如何做大的重构？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.51" data-path="464856.html">
+            
+                <a href="464856.html">
+            
+                    
+                    43｜生产环境：真实世界下的一个Rust项目包含哪些要素？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.52" data-path="464855.html">
+            
+                <a href="464855.html">
+            
+                    
+                    44｜数据处理：应用程序和数据如何打交道？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.53" data-path="466825.html">
+            
+                <a href="466825.html">
+            
+                    
+                    45｜阶段实操（8）：构建一个简单的KV server-配置/测试/监控/CI/CD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.54" data-path="468066.html">
+            
+                <a href="468066.html">
+            
+                    
+                    46｜软件架构：如何用Rust架构复杂系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.55" data-path="468940.html">
+            
+                <a href="468940.html">
+            
+                    
+                    大咖助场｜开悟之坡（上）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.56" data-path="468948.html">
+            
+                <a href="468948.html">
+            
+                    
+                    大咖助场｜开悟之坡（下）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.57" data-path="470490.html">
+            
+                <a href="470490.html">
+            
+                    
+                    用户故事｜语言不仅是工具，还是思维方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.58" data-path="481355.html">
+            
+                <a href="481355.html">
+            
+                    
+                    加餐｜代码即数据：为什么我们需要宏编程能力？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.59" data-path="481359.html">
+            
+                <a href="481359.html">
+            
+                    
+                    加餐｜宏编程（上）：用最“笨”的方式撰写宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.60" data-path="481369.html">
+            
+                <a href="481369.html">
+            
+                    
+                    加餐｜宏编程（下）：用 syn/quote 优雅地构建宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.61" data-path="470420.html">
+            
+                <a href="470420.html">
+            
+                    
+                    结束语｜永续之原：Rust学习，如何持续精进？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.62" data-path="470440.html">
+            
+                <a href="470440.html">
+            
+                    
+                    期末测试｜来赴一场满分之约！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.63" data-path="482856.html">
+            
+                <a href="482856.html">
+            
+                    
+                    特别策划｜学习锦囊（一）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.64" data-path="483045.html">
+            
+                <a href="483045.html">
+            
+                    
+                    特别策划｜学习锦囊（二）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.65" data-path="483050.html">
+            
+                <a href="483050.html">
+            
+                    
+                    特别策划｜学习锦囊（三）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.66" data-path="653131.html">
+            
+                <a href="653131.html">
+            
+                    
+                    特别策划｜生成式AI：哪些开发环节可能被颠覆？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本書使用 GitBook 釋出
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >06｜get hands dirty：SQL查询工具怎么一鱼多吃？</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="06&#xFF5C;get-hands-dirty&#xFF1A;sql&#x67E5;&#x8BE2;&#x5DE5;&#x5177;&#x600E;&#x4E48;&#x4E00;&#x9C7C;&#x591A;&#x5403;&#xFF1F;">06&#xFF5C;get hands dirty&#xFF1A;SQL&#x67E5;&#x8BE2;&#x5DE5;&#x5177;&#x600E;&#x4E48;&#x4E00;&#x9C7C;&#x591A;&#x5403;&#xFF1F;</h1>
+<pre><code>&#x4F60;&#x597D;&#xFF0C;&#x6211;&#x662F;&#x9648;&#x5929;&#x3002;
+</code></pre><p>&#x901A;&#x8FC7; HTTPie &#x548C; Thumbor &#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x76F8;&#x4FE1;&#x4F60;&#x5BF9; Rust &#x7684;&#x80FD;&#x529B;&#x548C;&#x4EE3;&#x7801;&#x98CE;&#x683C;&#x6709;&#x4E86;&#x6BD4;&#x8F83;&#x76F4;&#x89C2;&#x7684;&#x4E86;&#x89E3;&#x3002;&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x8BF4;&#x8FC7;Rust&#x7684;&#x5E94;&#x7528;&#x8303;&#x56F4;&#x975E;&#x5E38;&#x5E7F;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E24;&#x4E2A;&#x4F8B;&#x5B50;&#x4F53;&#x73B0;&#x5F97;&#x8FD8;&#x4E0D;&#x662F;&#x592A;&#x660E;&#x663E;&#x3002;</p>
+<p>&#x6709;&#x540C;&#x5B66;&#x60F3;&#x770B;&#x770B;&#xFF0C;&#x5728;&#x5B9E;&#x9645;&#x5DE5;&#x4F5C;&#x4E2D;&#x6709;&#x5927;&#x91CF;&#x751F;&#x547D;&#x5468;&#x671F;&#x6807;&#x6CE8;&#x7684;&#x4EE3;&#x7801;&#x7684;&#x6837;&#x5B50;&#xFF1B;&#x6709;&#x540C;&#x5B66;&#x5BF9; Rust &#x7684;&#x5B8F;&#x597D;&#x5947;&#xFF1B;&#x6709;&#x540C;&#x5B66;&#x5BF9; Rust &#x548C;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x7684;&#x4E92;&#x64CD;&#x4F5C;&#x611F;&#x5174;&#x8DA3;&#xFF1B;&#x8FD8;&#x6709;&#x540C;&#x5B66;&#x60F3;&#x77E5;&#x9053; Rust &#x505A;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x611F;&#x89C9;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x4ECA;&#x5929;&#x5C31;&#x6765;<strong>&#x7528;&#x4E00;&#x4E2A;&#x5F88;&#x786C;&#x6838;&#x7684;&#x4F8B;&#x5B50;&#x628A;&#x8FD9;&#x4E9B;&#x5185;&#x5BB9;&#x90FD;&#x6DB5;&#x76D6;&#x8FDB;&#x6765;</strong>&#x3002;</p>
+<p>&#x8BDD;&#x4E0D;&#x591A;&#x8BF4;&#xFF0C;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x5F00;&#x59CB;&#x3002;</p>
+<h2 id="sql">SQL</h2>
+<p>&#x6211;&#x4EEC;&#x5DE5;&#x4F5C;&#x7684;&#x65F6;&#x5019;&#x7ECF;&#x5E38;&#x4F1A;&#x8DDF;&#x5404;&#x79CD;&#x6570;&#x636E;&#x6E90;&#x6253;&#x4EA4;&#x9053;&#xFF0C;&#x6570;&#x636E;&#x6E90;&#x5305;&#x62EC;&#x6570;&#x636E;&#x5E93;&#x3001;Parquet&#x3001;CSV&#x3001;JSON &#x7B49;&#xFF0C;&#x800C;&#x6253;&#x4EA4;&#x9053;&#x7684;&#x8FC7;&#x7A0B;&#x65E0;&#x975E;&#x662F;&#xFF1A;&#x6570;&#x636E;&#x7684;&#x83B7;&#x53D6;&#xFF08;fetch&#xFF09;&#x3001;&#x8FC7;&#x6EE4;&#xFF08;filter&#xFF09;&#x3001;&#x6295;&#x5F71;&#xFF08;projection&#xFF09;&#x548C;&#x6392;&#x5E8F;&#xFF08;sort&#xFF09;&#x3002;</p>
+<p>&#x505A;&#x5927;&#x6570;&#x636E;&#x7684;&#x540C;&#x5B66;&#x53EF;&#x4EE5;&#x7528;&#x7C7B;&#x4F3C; Spark SQL &#x7684;&#x5DE5;&#x5177;&#x6765;&#x5B8C;&#x6210;&#x5404;&#x79CD;&#x5F02;&#x8D28;&#x6570;&#x636E;&#x7684;&#x67E5;&#x8BE2;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x5E73;&#x65F6;&#x7528; SQL &#x5E76;&#x6CA1;&#x6709;&#x8FD9;&#x4E48;&#x5F3A;&#x5927;&#x3002;&#x56E0;&#x4E3A;&#x867D;&#x7136;&#x7528; SQL &#x5BF9;&#x6570;&#x636E;&#x5E93;&#x505A;&#x67E5;&#x8BE2;&#xFF0C;&#x4EFB;&#x4F55; DBMS &#x90FD;&#x652F;&#x6301;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x7528; SQL &#x67E5;&#x8BE2; CSV &#x6216;&#x8005; JSON&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x5F88;&#x591A;&#x989D;&#x5916;&#x7684;&#x5904;&#x7406;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x5982;&#x679C;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x5DE5;&#x5177;&#xFF0C;<strong>&#x4E0D;&#x9700;&#x8981;&#x5F15;&#x5165; Spark&#xFF0C;&#x5C31;&#x80FD;&#x652F;&#x6301;&#x5BF9;&#x4EFB;&#x4F55;&#x6570;&#x636E;&#x6E90;&#x4F7F;&#x7528; SQL &#x67E5;&#x8BE2;</strong>&#xFF0C;&#x662F;&#x4E0D;&#x662F;&#x5F88;&#x6709;&#x610F;&#x4E49;&#xFF1F;</p>
+<p>&#x6BD4;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x7684; shell &#x652F;&#x6301;&#x8FD9;&#x6837;&#x4F7F;&#x7528;&#x662F;&#x4E0D;&#x662F;&#x723D;&#x7206;&#x4E86;&#xFF1F;<img src="https://static001.geekbang.org/resource/image/3e/7c/3e8e6586d8599e39a6704cf82352cd7c.jpg?wh=1920x703" alt=""><br>&#x518D;&#x6BD4;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x4F1A;&#x4ECE;&#x670D;&#x52A1;&#x5668; API &#x83B7;&#x53D6;&#x6570;&#x636E;&#x7684;&#x5B50;&#x96C6;&#xFF0C;&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x5B50;&#x96C6;&#x53EF;&#x4EE5;&#x5728;&#x524D;&#x7AEF;&#x901A;&#x8FC7; SQL &#x76F4;&#x63A5;&#x505A;&#x4E00;&#x4E9B;&#x989D;&#x5916;&#x67E5;&#x8BE2;&#xFF0C;&#x90A3;&#x5C06;&#x975E;&#x5E38;&#x7075;&#x6D3B;&#xFF0C;&#x5E76;&#x4E14;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x5373;&#x65F6;&#x7684;&#x54CD;&#x5E94;&#x3002;</p>
+<p>&#x8F6F;&#x4EF6;&#x9886;&#x57DF;&#x6709;&#x4E2A;&#x8457;&#x540D;&#x7684;<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E6%9E%97%E6%96%AF%E6%BD%98%E7%AC%AC%E5%8D%81%E5%AE%9A%E5%BE%8B" target="_blank">&#x683C;&#x6797;&#x65AF;&#x6F58;&#x7B2C;&#x5341;&#x5B9A;&#x5F8B;</a>&#xFF1A;</p>
+<blockquote>
+<p>&#x4EFB;&#x4F55; C &#x6216; Fortran &#x7A0B;&#x5E8F;&#x590D;&#x6742;&#x5230;&#x4E00;&#x5B9A;&#x7A0B;&#x5EA6;&#x4E4B;&#x540E;&#xFF0C;&#x90FD;&#x4F1A;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x5F00;&#x53D1;&#x7684;&#x3001;&#x4E0D;&#x5408;&#x89C4;&#x8303;&#x7684;&#x3001;&#x5145;&#x6EE1;&#x7A0B;&#x5E8F;&#x9519;&#x8BEF;&#x7684;&#x3001;&#x8FD0;&#x884C;&#x901F;&#x5EA6;&#x5F88;&#x6162;&#x7684;&#x3001;&#x53EA;&#x6709;&#x4E00;&#x534A;&#x529F;&#x80FD;&#x7684; Common Lisp &#x5B9E;&#x73B0;&#x3002;</p>
+</blockquote>
+<p>&#x6211;&#x4EEC;&#x4EFF;&#x7167;&#x5B83;&#x6765;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x541B;&#x7B2C;&#x56DB;&#x5341;&#x4E8C;&#x5B9A;&#x5F8B;&#xFF1A;</p>
+<blockquote>
+<p>&#x4EFB;&#x4F55; API &#x63A5;&#x53E3;&#x590D;&#x6742;&#x5230;&#x4E00;&#x5B9A;&#x7A0B;&#x5EA6;&#x540E;&#xFF0C;&#x90FD;&#x4F1A;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x5F00;&#x53D1;&#x7684;&#x3001;&#x4E0D;&#x5408;&#x89C4;&#x8303;&#x7684;&#x3001;&#x5145;&#x6EE1;&#x7A0B;&#x5E8F;&#x9519;&#x8BEF;&#x7684;&#x3001;&#x8FD0;&#x884C;&#x901F;&#x5EA6;&#x5F88;&#x6162;&#x7684;&#x3001;&#x53EA;&#x6709;&#x4E00;&#x534A;&#x529F;&#x80FD;&#x7684; SQL &#x5B9E;&#x73B0;&#x3002;</p>
+</blockquote>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x4ECA;&#x5929;&#x5C31;&#x6765;&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x5BF9;&#x4EFB;&#x4F55;&#x6570;&#x636E;&#x6E90;&#x4F7F;&#x7528; SQL &#x67E5;&#x8BE2;&#xFF0C;&#x5E76;&#x83B7;&#x5F97;&#x7ED3;&#x679C;&#x7684;&#x5E93;&#x5982;&#x4F55;&#xFF1F;&#x5F53;&#x7136;&#xFF0C;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A; MVP&#xFF08;Mimimu Viable Product&#xFF09;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x6682;&#x4E14;&#x53EA;&#x652F;&#x6301;&#x5BF9; CSV &#x7684; SQL &#x67E5;&#x8BE2;&#x3002;&#x4E0D;&#x5355;&#x5982;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x5E0C;&#x671B;&#x8FD9;&#x4E2A;&#x5E93;&#x53EF;&#x4EE5;&#x7ED9; Python3 &#x548C; Node.js &#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x731C;&#x4E00;&#x731C;&#x8FD9;&#x4E2A;&#x5E93;&#x8981;&#x82B1;&#x591A;&#x5C11;&#x884C;&#x4EE3;&#x7801;&#xFF1F;&#x4ECA;&#x5929;&#x96BE;&#x5EA6;&#x6BD4;&#x8F83;&#x5927;&#xFF0C;&#x600E;&#x4E48;&#x7740;&#x8981; 500 &#x884C;&#x5427;&#xFF1F;&#x6211;&#x4EEC;&#x6682;&#x4E14;&#x4EE5; 500 &#x884C;&#x4EE3;&#x7801;&#x4E3A;&#x57FA;&#x51C6;&#x6765;&#x6311;&#x6218;&#x3002;</p>
+<h2 id="&#x8BBE;&#x8BA1;&#x5206;&#x6790;">&#x8BBE;&#x8BA1;&#x5206;&#x6790;</h2>
+<p>&#x6211;&#x4EEC;&#x9996;&#x5148;&#x9700;&#x8981;&#x4E00;&#x4E2A; SQL &#x89E3;&#x6790;&#x5668;&#x3002;&#x5728; Rust &#x4E0B;&#xFF0C;&#x5199;&#x4E00;&#x4E2A;&#x89E3;&#x6790;&#x5668;&#x5E76;&#x4E0D;&#x56F0;&#x96BE;&#xFF0C;&#x53EF;&#x4EE5;&#x7528; <a href="https://github.com/serde-rs/serde" target="_blank">serde</a>&#x3001;&#x7528;&#x4EFB;&#x4F55; <a href="https://en.wikipedia.org/wiki/Parser_combinator" target="_blank">parser combinator</a> &#x6216;&#x8005; <a href="https://en.wikipedia.org/wiki/Parsing_expression_grammar" target="_blank">PEG parser</a> &#x6765;&#x5B9E;&#x73B0;&#xFF0C;&#x6BD4;&#x5982; <a href="https://github.com/Geal/nom" target="_blank">nom</a> &#x6216;&#x8005; <a href="https://github.com/pest-parser/pest" target="_blank">pest</a>&#x3002;&#x4E0D;&#x8FC7; SQL &#x89E3;&#x6790;&#xFF0C;&#x8FD9;&#x79CD;&#x8DB3;&#x591F;&#x5E38;&#x89C1;&#x7684;&#x9700;&#x6C42;&#xFF0C;Rust &#x793E;&#x533A;&#x5DF2;&#x7ECF;&#x6709;&#x65B9;&#x6848;&#xFF0C;&#x6211;&#x4EEC;&#x7528; <a href="https://github.com/sqlparser-rs/sqlparser-rs" target="_blank">sqlparser-rs</a>&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x662F;&#x5982;&#x4F55;&#x628A; CSV &#x6216;&#x8005;&#x5176;&#x5B83;&#x6570;&#x636E;&#x6E90;&#x52A0;&#x8F7D;&#x4E3A; DataFrame&#x3002;</p>
+<p>&#x505A;&#x8FC7;&#x6570;&#x636E;&#x5904;&#x7406;&#x6216;&#x8005;&#x4F7F;&#x7528;&#x8FC7; <a href="https://pandas.pydata.org/pandas-docs/stable/index.html" target="_blank">pandas</a> &#x7684;&#x540C;&#x5B66;&#xFF0C;&#x5E94;&#x8BE5;&#x5BF9; DataFrame &#x5E76;&#x4E0D;&#x964C;&#x751F;&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x77E9;&#x9635;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x5176;&#x4E2D;&#x6BCF;&#x4E00;&#x5217;&#x53EF;&#x80FD;&#x5305;&#x542B;&#x4E0D;&#x540C;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x53EF;&#x4EE5;&#x5728; DataFrame &#x4E0A;&#x505A;&#x8FC7;&#x6EE4;&#x3001;&#x6295;&#x5F71;&#x548C;&#x6392;&#x5E8F;&#x7B49;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x5728; Rust &#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528; <a href="https://github.com/pola-rs/polars" target="_blank">polars</a> &#xFF0C;&#x6765;&#x5B8C;&#x6210;&#x6570;&#x636E;&#x4ECE; CSV &#x5230; DataFrame &#x7684;&#x52A0;&#x8F7D;&#x548C;&#x5404;&#x79CD;&#x540E;&#x7EED;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x786E;&#x5B9A;&#x4E86;&#x8FD9;&#x4E24;&#x4E2A;&#x5E93;&#x4E4B;&#x540E;&#xFF0C;&#x540E;&#x7EED;&#x7684;&#x5DE5;&#x4F5C;&#x5C31;&#x662F;&#xFF1A;&#x5982;&#x4F55;&#x628A; sqlparser &#x89E3;&#x6790;&#x51FA;&#x6765;&#x7684;&#x62BD;&#x8C61;&#x8BED;&#x6CD5;&#x6811; <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank">AST</a>&#xFF08;Abstract Syntax Tree&#xFF09;&#xFF0C;&#x6620;&#x5C04;&#x5230; polars &#x7684; DataFrame &#x7684;&#x64CD;&#x4F5C;&#x4E0A;&#x3002;</p>
+<p>&#x62BD;&#x8C61;&#x8BED;&#x6CD5;&#x6811;&#x662F;&#x7528;&#x6765;&#x63CF;&#x8FF0;&#x590D;&#x6742;&#x8BED;&#x6CD5;&#x89C4;&#x5219;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x5C0F;&#x5230; SQL &#x6216;&#x8005;&#x67D0;&#x4E2A; DSL&#xFF0C;&#x5927;&#x5230;&#x4E00;&#x95E8;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#xFF0C;&#x5176;&#x8BED;&#x8A00;&#x7ED3;&#x6784;&#x90FD;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; AST &#x6765;&#x63CF;&#x8FF0;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF08;&#x6765;&#x6E90;&#xFF1A;<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank">wikipedia</a>&#xFF09;&#xFF1A;</p>
+<p><img src="https://static001.geekbang.org/resource/image/2f/80/2f60e2d0a908e84ef33634d840ea6380.png?wh=800x903" alt="&#x56FE;&#x7247;"></p>
+<p>&#x5982;&#x4F55;&#x5728; SQL &#x8BED;&#x6CD5;&#x548C; DataFrame &#x7684;&#x64CD;&#x4F5C;&#x95F4;&#x8FDB;&#x884C;&#x6620;&#x5C04;&#x5462;&#xFF1F;&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x8981;&#x4ECE;&#x6570;&#x636E;&#x4E2D;&#x9009;&#x51FA;&#x4E09;&#x5217;&#x663E;&#x793A;&#xFF0C;&#x90A3;&#x8FD9;&#x4E2A; &#x201C;select a, b, c&#x201D; &#x5C31;&#x8981;&#x80FD;&#x6620;&#x5C04;&#x5230; DataFrame &#x9009;&#x53D6; a&#x3001;b&#x3001;c &#x4E09;&#x5217;&#x8F93;&#x51FA;&#x3002;</p>
+<p>polars &#x5185;&#x90E8;&#x6709;&#x81EA;&#x5DF1;&#x7684; AST &#x53EF;&#x4EE5;&#x628A;&#x5404;&#x79CD;&#x64CD;&#x4F5C;&#x805A;&#x5408;&#x8D77;&#x6765;&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x5E76;&#x6267;&#x884C;&#x3002;&#x6BD4;&#x5982;&#x5BF9;&#x4E8E; &#x201C;where a &gt; 10 and b &lt; 5&#x201D;&#xFF0C; Polars &#x7684;&#x8868;&#x8FBE;&#x5F0F;&#x662F;&#xFF1A;<code>col(&quot;a&quot;).gt(lit(10)).and(col(&quot;b&quot;).lt(lit(5)))</code>&#x3002;col &#x4EE3;&#x8868;&#x5217;&#xFF0C;gt/lt &#x662F;&#x5927;&#x4E8E;/&#x5C0F;&#x4E8E;&#xFF0C;lit &#x662F;&#x5B57;&#x9762;&#x91CF;&#x7684;&#x610F;&#x601D;&#x3002;</p>
+<p>&#x6709;&#x4E86;&#x8FD9;&#x4E2A;&#x8BA4;&#x77E5;&#xFF0C;&#x201C;&#x5BF9; CSV &#x7B49;&#x6E90;&#x8FDB;&#x884C; SQL &#x67E5;&#x8BE2;&#x201D;&#x6838;&#x5FC3;&#x8981;&#x89E3;&#x51B3;&#x7684;&#x95EE;&#x9898;&#x53D8;&#x6210;&#x4E86;&#xFF0C;<strong>&#x5982;&#x4F55;&#x628A;&#x4E00;&#x4E2A; AST&#xFF08; SQL AST &#xFF09;&#x8F6C;&#x6362;&#x6210;&#x53E6;&#x4E00;&#x4E2A; AST&#xFF08; DataFrame AST &#xFF09;</strong>&#x3002;</p>
+<p>&#x7B49;&#x7B49;&#xFF0C;&#x8FD9;&#x4E0D;&#x5C31;&#x662F;&#x5B8F;&#x7F16;&#x7A0B;&#xFF08;&#x5BF9;&#x4E8E; Rust &#x6765;&#x8BF4;&#xFF0C;&#x662F;&#x8FC7;&#x7A0B;&#x5B8F;&#xFF09;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x4E48;&#xFF1F;&#x56E0;&#x4E3A;&#x8FDB;&#x4E00;&#x6B65;&#x5206;&#x6790;&#x4E8C;&#x8005;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x8FD9;&#x6837;&#x7684;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#xFF1A;</p>
+<p><img src="https://static001.geekbang.org/resource/image/dd/72/ddd4995deecc4b7897bf73beb0e2cb72.jpg?wh=1920x1266" alt=""></p>
+<p>&#x4F60;&#x770B;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x505A;&#x7684;&#x4E3B;&#x8981;&#x4E8B;&#x60C5;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#xFF0C;&#x5728;&#x4E24;&#x4E2A;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E4B;&#x95F4;&#x8FDB;&#x884C;&#x8F6C;&#x6362;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5199;&#x5B8C;&#x4ECA;&#x5929;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x4F60;&#x80AF;&#x5B9A;&#x4F1A;&#x5BF9;&#x5B8F;&#x6709;&#x8DB3;&#x591F;&#x7684;&#x4FE1;&#x5FC3;&#x3002;</p>
+<p>&#x5B8F;&#x7F16;&#x7A0B;&#x5E76;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x5927;&#x4E0D;&#x4E86;&#x7684;&#xFF0C;&#x629B;&#x5F00; quote/unquote&#xFF0C;&#x5B83;&#x4E3B;&#x8981;&#x7684;&#x5DE5;&#x4F5C;&#x5C31;&#x662F;&#x628A;&#x4E00;&#x68F5;&#x8BED;&#x6CD5;&#x6811;&#x8F6C;&#x6362;&#x6210;&#x53E6;&#x4E00;&#x9897;&#x8BED;&#x6CD5;&#x6811;&#xFF0C;&#x800C;&#x8FD9;&#x4E2A;&#x8F6C;&#x6362;&#x7684;&#x8FC7;&#x7A0B;&#x6DF1;&#x5165;&#x4E0B;&#x53BB;&#xFF0C;&#x4E0D;&#x8FC7;&#x5C31;&#x662F;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5230;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x8F6C;&#x6362;&#x800C;&#x5DF2;&#x3002;&#x6240;&#x4EE5;&#x4E00;&#x53E5;&#x8BDD;&#x603B;&#x7ED3;&#xFF1A;<strong>&#x5B8F;&#x7F16;&#x7A0B;&#x7684;&#x4E3B;&#x8981;&#x6D41;&#x7A0B;&#x5C31;&#x662F;&#x5B9E;&#x73B0;&#x82E5;&#x5E72; From &#x548C; TryFrom</strong>&#xFF0C;&#x662F;&#x4E0D;&#x662F;&#x5F88;&#x7B80;&#x5355;&#x3002;</p>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x4E2A;&#x8F6C;&#x6362;&#x7684;&#x8FC7;&#x7A0B;&#x975E;&#x5E38;&#x7410;&#x788E;&#xFF0C;&#x5982;&#x679C;&#x8BED;&#x8A00;&#x672C;&#x8EAB;&#x6CA1;&#x6709;&#x5F88;&#x597D;&#x7684;&#x6A21;&#x5F0F;&#x5339;&#x914D;&#x80FD;&#x529B;&#xFF0C;&#x8FDB;&#x884C;&#x5B8F;&#x7F16;&#x7A0B;&#x7EDD;&#x5BF9;&#x662F;&#x5BF9;&#x81EA;&#x5DF1;&#x975E;&#x4EBA;&#x9053;&#x7684;&#x6298;&#x78E8;&#x3002;</p>
+<p>&#x597D;&#x5728; Rust &#x6709;&#x5F88;&#x68D2;&#x7684;&#x6A21;&#x5F0F;&#x5339;&#x914D;&#x652F;&#x6301;&#xFF0C;&#x5B83;&#x867D;&#x7136;&#x6CA1;&#x6709; Erlang/Elixir &#x7684;&#x6A21;&#x5F0F;&#x5339;&#x914D;&#x90A3;&#x4E48;&#x5F3A;&#x5927;&#xFF0C;&#x4F46;&#x8DB3;&#x4EE5;&#x79D2;&#x6740;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x3002;&#x5F85;&#x4F1A;&#x4F60;&#x5728;&#x5199;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x80FD;&#x76F4;&#x89C2;&#x611F;&#x53D7;&#x5230;&#x3002;</p>
+<h2 id="&#x521B;&#x5EFA;&#x4E00;&#x4E2A;-sql-&#x65B9;&#x8A00;">&#x521B;&#x5EFA;&#x4E00;&#x4E2A; SQL &#x65B9;&#x8A00;</h2>
+<p>&#x597D;&#xFF0C;&#x5206;&#x6790;&#x5B8C;&#x8981;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x662F;&#x6309;&#x90E8;&#x5C31;&#x73ED;&#x5199;&#x4EE3;&#x7801;&#x4E86;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x7528; <code>cargo new queryer --lib</code> &#x751F;&#x6210;&#x4E00;&#x4E2A;&#x5E93;&#x3002;&#x7528; VSCode &#x6253;&#x5F00;&#x751F;&#x6210;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x521B;&#x5EFA;&#x548C; src &#x5E73;&#x7EA7;&#x7684; examples&#xFF0C;&#x5E76;&#x5728; Cargo.toml &#x4E2D;&#x6DFB;&#x52A0;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-bash">[[example]]
+name = <span class="hljs-string">&quot;dialect&quot;</span>
+
+[dependencies]
+anyhow = <span class="hljs-string">&quot;1&quot;</span> <span class="hljs-comment"># &#x9519;&#x8BEF;&#x5904;&#x7406;&#xFF0C;&#x5176;&#x5B9E;&#x5BF9;&#x4E8E;&#x5E93;&#x6211;&#x4EEC;&#x5E94;&#x8BE5;&#x7528; thiserror&#xFF0C;&#x4F46;&#x8FD9;&#x91CC;&#x7B80;&#x5355;&#x8D77;&#x89C1;&#x5C31;&#x4E0D;&#x8282;&#x5916;&#x751F;&#x679D;&#x4E86;</span>
+async-trait = <span class="hljs-string">&quot;0.1&quot;</span> <span class="hljs-comment"># &#x5141;&#x8BB8; trait &#x91CC;&#x6709; async fn</span>
+sqlparser = <span class="hljs-string">&quot;0.10&quot;</span> <span class="hljs-comment"># SQL &#x89E3;&#x6790;&#x5668;</span>
+polars = { version = <span class="hljs-string">&quot;0.15&quot;</span>, features = [<span class="hljs-string">&quot;json&quot;</span>, <span class="hljs-string">&quot;lazy&quot;</span>] } <span class="hljs-comment"># DataFrame &#x5E93;</span>
+reqwest = { version = <span class="hljs-string">&quot;0.11&quot;</span>, default-features = <span class="hljs-literal">false</span>, features = [<span class="hljs-string">&quot;rustls-tls&quot;</span>] } <span class="hljs-comment"># &#x6211;&#x4EEC;&#x7684;&#x8001;&#x670B;&#x53CB; HTTP &#x5BA2;&#x6237;&#x7AEF;</span>
+tokio = { version = <span class="hljs-string">&quot;1&quot;</span>, features = [<span class="hljs-string">&quot;fs&quot;</span>]} <span class="hljs-comment"># &#x6211;&#x4EEC;&#x7684;&#x8001;&#x670B;&#x53CB;&#x5F02;&#x6B65;&#x5E93;&#xFF0C;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x9700;&#x8981;&#x5F02;&#x6B65;&#x6587;&#x4EF6;&#x5904;&#x7406;</span>
+tracing = <span class="hljs-string">&quot;0.1&quot;</span> <span class="hljs-comment"># &#x65E5;&#x5FD7;&#x5904;&#x7406;</span>
+
+[dev-dependencies]
+tracing-subscriber = <span class="hljs-string">&quot;0.2&quot;</span> <span class="hljs-comment"># &#x65E5;&#x5FD7;&#x5904;&#x7406;</span>
+tokio = { version = <span class="hljs-string">&quot;1&quot;</span>, features = [<span class="hljs-string">&quot;full&quot;</span>]} <span class="hljs-comment"># &#x5728; example &#x4E0B;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x66F4;&#x591A;&#x7684; tokio feature</span>
+</code></pre>
+<p>&#x4F9D;&#x8D56;&#x641E;&#x5B9A;&#x3002;&#x56E0;&#x4E3A;&#x5BF9; sqlparser &#x7684;&#x529F;&#x80FD;&#x4E0D;&#x592A;&#x719F;&#x6089;&#xFF0C;&#x8FD9;&#x91CC;&#x5199;&#x4E2A; example &#x5C1D;&#x8BD5;&#x4E00;&#x4E0B;&#xFF0C;&#x5B83;&#x4F1A;&#x5728; examples &#x76EE;&#x5F55;&#x4E0B;&#x5BFB;&#x627E; <a href="http://dialect.rs" target="_blank">dialect.rs</a> &#x6587;&#x4EF6;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x521B;&#x5EFA; examples/dialect.rs &#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x5199;&#x4E00;&#x4E9B;&#x6D4B;&#x8BD5; sqlparser &#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> sqlparser::{dialect::GenericDialect, parser::Parser};
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    tracing_subscriber::fmt::init();
+
+    <span class="hljs-keyword">let</span> sql = <span class="hljs-string">&quot;SELECT a a1, b, 123, myfunc(b), * \
+    FROM data_source \
+    WHERE a &gt; b AND b &lt; 100 AND c BETWEEN 10 AND 20 \
+    ORDER BY a DESC, b \
+    LIMIT 50 OFFSET 10&quot;</span>;
+
+    <span class="hljs-keyword">let</span> ast = Parser::parse_sql(&amp;GenericDialect::default(), sql);
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:#?}&quot;</span>, ast);
+}
+</code></pre>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x7528;&#x4E00;&#x4E2A; SQL &#x8BED;&#x53E5;&#x6765;&#x6D4B;&#x8BD5;<code>Parser::parse_sql</code>&#x4F1A;&#x8F93;&#x51FA;&#x4EC0;&#x4E48;&#x6837;&#x7684;&#x7ED3;&#x6784;&#x3002;&#x5F53;&#x4F60;&#x5199;&#x5E93;&#x4EE3;&#x7801;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x9047;&#x5230;&#x4E0D;&#x660E;&#x767D;&#x7684;&#x7B2C;&#x4E09;&#x65B9;&#x5E93;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x64B0;&#x5199; example &#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5148;&#x8BD5;&#x4E00;&#x4E0B;&#x3002;<br>&#x6211;&#x4EEC;&#x8FD0;&#x884C; <code>cargo run --example dialect</code>&#x67E5;&#x770B;&#x7ED3;&#x679C;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-literal">Ok</span>([Query(
+    Query {
+        with: <span class="hljs-literal">None</span>,
+        body: Select(
+            Select {
+                distinct: <span class="hljs-literal">false</span>,
+                top: <span class="hljs-literal">None</span>,
+                projection: [ ... ],
+                                from: [ TableWithJoins { ... } ],
+                                selection: <span class="hljs-literal">Some</span>(BinaryOp { ... }),
+                ...
+            }
+        ),
+        order_by: [ OrderByExpr { ... } ],
+        limit: <span class="hljs-literal">Some</span>(Value( ... )),
+        offset: <span class="hljs-literal">Some</span>(Offset { ... })
+    }
+])
+</code></pre>
+<p>&#x6211;&#x628A;&#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x7B80;&#x5316;&#x4E86;&#x4E00;&#x4E0B;&#xFF0C;&#x4F60;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x91CC;&#x770B;&#x5230;&#x7684;&#xFF0C;&#x4F1A;&#x8FDC;&#x6BD4;&#x8FD9;&#x4E2A;&#x590D;&#x6742;&#x3002;</p>
+<p>&#x5199;&#x5230;&#x7B2C;9&#x884C;&#x8FD9;&#x91CC;&#xFF0C;&#x4F60;&#x6709;&#x6CA1;&#x6709;&#x7A81;&#x53D1;&#x5947;&#x60F3;&#xFF0C;<strong>&#x5982;&#x679C; SQL &#x4E2D;&#x7684; FROM &#x5B50;&#x53E5;&#x540E;&#x9762;&#x53EF;&#x4EE5;&#x63A5;&#x4E00;&#x4E2A; URL &#x6216;&#x8005;&#x6587;&#x4EF6;&#x540D;&#x8BE5;&#x591A;&#x597D;</strong>&#xFF1F;&#x8FD9;&#x6837;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4ECE;&#x8FD9;&#x4E2A; URL &#x6216;&#x6587;&#x4EF6;&#x4E2D;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x3002;&#x5C31;&#x50CF;&#x5F00;&#x5934;&#x90A3;&#x4E2A; &#x201C;select * from ps&#x201D; &#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x628A; ps &#x547D;&#x4EE4;&#x4F5C;&#x4E3A;&#x6570;&#x636E;&#x6E90;&#xFF0C;&#x4ECE;&#x5B83;&#x7684;&#x8F93;&#x51FA;&#x4E2D;&#x5F88;&#x65B9;&#x4FBF;&#x5730;&#x53D6;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x4F46;&#x662F;&#x666E;&#x901A;&#x7684; SQL &#x8BED;&#x53E5;&#x662F;&#x4E0D;&#x652F;&#x6301;&#x8FD9;&#x79CD;&#x5199;&#x6CD5;&#x7684;&#xFF0C;&#x4E0D;&#x8FC7; sqlparser &#x5141;&#x8BB8;&#x4F60;&#x521B;&#x5EFA;&#x81EA;&#x5DF1;&#x7684; SQL &#x65B9;&#x8A00;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5C1D;&#x8BD5;&#x4E00;&#x4E0B;&#x3002;</p>
+<p>&#x521B;&#x5EFA; src/dialect.rs &#x6587;&#x4EF6;&#xFF0C;&#x6DFB;&#x5165;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> sqlparser::dialect::Dialect;
+
+<span class="hljs-meta">#[derive(Debug, Default)]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TyrDialect</span></span>;
+
+<span class="hljs-comment">// &#x521B;&#x5EFA;&#x81EA;&#x5DF1;&#x7684; sql &#x65B9;&#x8A00;&#x3002;TyrDialect &#x652F;&#x6301; identifier &#x53EF;&#x4EE5;&#x662F;&#x7B80;&#x5355;&#x7684; url</span>
+<span class="hljs-keyword">impl</span> Dialect <span class="hljs-keyword">for</span> TyrDialect {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">is_identifier_start</span></span>(&amp;<span class="hljs-keyword">self</span>, ch: <span class="hljs-keyword">char</span>) -&gt; <span class="hljs-keyword">bool</span> {
+        (<span class="hljs-string">&apos;a&apos;</span>..=<span class="hljs-string">&apos;z&apos;</span>).contains(&amp;ch) || (<span class="hljs-string">&apos;A&apos;</span>..=<span class="hljs-string">&apos;Z&apos;</span>).contains(&amp;ch) || ch == <span class="hljs-string">&apos;_&apos;</span>
+    }
+
+    <span class="hljs-comment">// identifier &#x53EF;&#x4EE5;&#x6709; &apos;:&apos;, &apos;/&apos;, &apos;?&apos;, &apos;&amp;&apos;, &apos;=&apos;</span>
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">is_identifier_part</span></span>(&amp;<span class="hljs-keyword">self</span>, ch: <span class="hljs-keyword">char</span>) -&gt; <span class="hljs-keyword">bool</span> {
+        (<span class="hljs-string">&apos;a&apos;</span>..=<span class="hljs-string">&apos;z&apos;</span>).contains(&amp;ch)
+            || (<span class="hljs-string">&apos;A&apos;</span>..=<span class="hljs-string">&apos;Z&apos;</span>).contains(&amp;ch)
+            || (<span class="hljs-string">&apos;0&apos;</span>..=<span class="hljs-string">&apos;9&apos;</span>).contains(&amp;ch)
+            || [<span class="hljs-string">&apos;:&apos;</span>, <span class="hljs-string">&apos;/&apos;</span>, <span class="hljs-string">&apos;?&apos;</span>, <span class="hljs-string">&apos;&amp;&apos;</span>, <span class="hljs-string">&apos;=&apos;</span>, <span class="hljs-string">&apos;-&apos;</span>, <span class="hljs-string">&apos;_&apos;</span>, <span class="hljs-string">&apos;.&apos;</span>].contains(&amp;ch)
+    }
+}
+
+<span class="hljs-comment">/// &#x6D4B;&#x8BD5;&#x8F85;&#x52A9;&#x51FD;&#x6570;</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">example_sql</span></span>() -&gt; <span class="hljs-built_in">String</span> {
+    <span class="hljs-keyword">let</span> url = <span class="hljs-string">&quot;https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv&quot;</span>;
+
+    <span class="hljs-keyword">let</span> sql = <span class="hljs-built_in">format!</span>(
+        <span class="hljs-string">&quot;SELECT location name, total_cases, new_cases, total_deaths, new_deaths \
+        FROM {} where new_deaths &gt;= 500 ORDER BY new_cases DESC LIMIT 6 OFFSET 5&quot;</span>,
+        url
+    );
+
+    sql
+}
+
+<span class="hljs-meta">#[cfg(test)]</span>
+<span class="hljs-keyword">mod</span> tests {
+    <span class="hljs-keyword">use</span> super::*;
+    <span class="hljs-keyword">use</span> sqlparser::parser::Parser;
+
+    <span class="hljs-meta">#[test]</span>
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">it_works</span></span>() {
+        <span class="hljs-built_in">assert!</span>(Parser::parse_sql(&amp;TyrDialect::default(), &amp;example_sql()).is_ok());
+    }
+}
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x4EE3;&#x7801;&#x4E3B;&#x8981;&#x5B9E;&#x73B0;&#x4E86; sqlparser &#x7684; Dialect trait&#xFF0C;&#x53EF;&#x4EE5;&#x91CD;&#x8F7D; SQL &#x89E3;&#x6790;&#x5668;&#x5224;&#x65AD;&#x6807;&#x8BC6;&#x7B26;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x4E4B;&#x540E;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5728; src/lib.rs &#x4E2D;&#x6DFB;&#x52A0;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">mod</span> dialect;
+</code></pre>
+<p>&#x5F15;&#x5165;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x6700;&#x540E;&#x4E5F;&#x5199;&#x4E86;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x8FD0;&#x884C; <code>cargo test</code> &#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;&#x770B;&#x770B;&#x3002;<br>&#x6D4B;&#x8BD5;&#x901A;&#x8FC7;&#xFF01;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x89E3;&#x6790;&#x51FA;&#x8FD9;&#x6837;&#x7684; SQL &#x4E86;&#xFF1A;</p>
+<pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">from</span> https://abc.xyz/covid-cases.csv <span class="hljs-keyword">where</span> new_deaths &gt;= <span class="hljs-number">500</span>
+</code></pre>
+<p>Cool&#xFF01;&#x4F60;&#x770B;&#xFF0C;&#x5927;&#x7EA6;&#x7528;&#x4E86; 10 &#x884C;&#x4EE3;&#x7801;&#xFF08;&#x7B2C; 7 &#x884C;&#x5230;&#x7B2C; 19 &#x884C;&#xFF09;&#xFF0C;&#x901A;&#x8FC7;&#x6DFB;&#x52A0;&#x53EF;&#x4EE5;&#x8BA9; URL &#x5408;&#x6CD5;&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x5C31;&#x5B9E;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x81EA;&#x5DF1;&#x7684;&#x652F;&#x6301; URL &#x7684; SQL &#x65B9;&#x8A00;&#x89E3;&#x6790;&#x3002;</p>
+<p>&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E48;&#x5389;&#x5BB3;&#xFF1F;&#x56E0;&#x4E3A;&#x901A;&#x8FC7; trait&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x5730;&#x505A;<a href="https://en.wikipedia.org/wiki/Inversion_of_control" target="_blank">&#x63A7;&#x5236;&#x53CD;&#x8F6C;&#xFF08;Inversion of Control&#xFF09;</a>&#xFF0C;&#x5728; Rust &#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x8FD9;&#x662F;&#x5F88;&#x5E38;&#x89C1;&#x7684;&#x4E00;&#x4EF6;&#x4E8B;&#x60C5;&#x3002;</p>
+<h2 id="&#x5B9E;&#x73B0;-ast-&#x7684;&#x8F6C;&#x6362;">&#x5B9E;&#x73B0; AST &#x7684;&#x8F6C;&#x6362;</h2>
+<p>&#x521A;&#x521A;&#x5B8C;&#x6210;&#x4E86;SQL&#x89E3;&#x6790;&#xFF0C;&#x63A5;&#x7740;&#x5C31;&#x662F;&#x7528;polars&#x505A;AST&#x8F6C;&#x6362;&#x4E86;&#x3002;</p>
+<p>&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x4E0D;&#x592A;&#x4E86;&#x89E3; polars &#x5E93;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x8FD8;&#x662F;&#x5148;&#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;&#x600E;&#x4E48;&#x7528;&#x3002;&#x521B;&#x5EFA; examples/covid.rs&#xFF08;&#x8BB0;&#x5F97;&#x5728; Cargo.toml &#x4E2D;&#x6DFB;&#x52A0;&#x5B83;&#x54E6;&#xFF09;&#xFF0C;&#x624B;&#x5DE5;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A; DataFrame &#x7684;&#x52A0;&#x8F7D;&#x548C;&#x67E5;&#x8BE2;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> anyhow::<span class="hljs-built_in">Result</span>;
+<span class="hljs-keyword">use</span> polars::prelude::*;
+<span class="hljs-keyword">use</span> std::io::Cursor;
+
+<span class="hljs-meta">#[tokio::main]</span>
+async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() -&gt; <span class="hljs-built_in">Result</span>&lt;()&gt; {
+    tracing_subscriber::fmt::init();
+
+    <span class="hljs-keyword">let</span> url = <span class="hljs-string">&quot;https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv&quot;</span>;
+    <span class="hljs-keyword">let</span> data = reqwest::get(url).await?.text().await?;
+
+    <span class="hljs-comment">// &#x4F7F;&#x7528; polars &#x76F4;&#x63A5;&#x8BF7;&#x6C42;</span>
+    <span class="hljs-keyword">let</span> df = CsvReader::new(Cursor::new(data))
+        .infer_schema(<span class="hljs-literal">Some</span>(<span class="hljs-number">16</span>))
+        .finish()?;
+
+    <span class="hljs-keyword">let</span> filtered = df.filter(&amp;df[<span class="hljs-string">&quot;new_deaths&quot;</span>].gt(<span class="hljs-number">500</span>))?;
+    <span class="hljs-built_in">println!</span>(
+        <span class="hljs-string">&quot;{:?}&quot;</span>,
+        filtered.select((
+            <span class="hljs-string">&quot;location&quot;</span>,
+            <span class="hljs-string">&quot;total_cases&quot;</span>,
+            <span class="hljs-string">&quot;new_cases&quot;</span>,
+            <span class="hljs-string">&quot;total_deaths&quot;</span>,
+            <span class="hljs-string">&quot;new_deaths&quot;</span>
+        ))
+    );
+
+    <span class="hljs-literal">Ok</span>(())
+}
+</code></pre>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x8FD0;&#x884C;&#x8FD9;&#x4E2A; example&#xFF0C;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x6253;&#x5370;&#x5F97;&#x975E;&#x5E38;&#x6F02;&#x4EAE;&#x7684;&#x8868;&#x683C;&#xFF0C;&#x5B83;&#x4ECE; GitHub &#x4E0A;&#x7684; <a href="https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv" target="_blank">owid-covid-latest.csv</a> &#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x8BFB;&#x53D6;&#x5E76;&#x67E5;&#x8BE2; new_deaths &#x5927;&#x4E8E; 500 &#x7684;&#x56FD;&#x5BB6;&#x548C;&#x533A;&#x57DF;&#xFF1A;<br><img src="https://static001.geekbang.org/resource/image/31/69/3117645de41cc1d0d6d320c5dd6d2c69.png?wh=1682x1254" alt=""></p>
+<p>&#x6211;&#x4EEC;&#x6700;&#x7EC8;&#x8981;&#x5B9E;&#x73B0;&#x7684;&#x5C31;&#x662F;&#x8FD9;&#x4E2A;&#x6548;&#x679C;&#xFF0C;&#x901A;&#x8FC7;&#x89E3;&#x6790;&#x4E00;&#x6761;&#x505A;&#x7C7B;&#x4F3C;&#x67E5;&#x8BE2;&#x7684; SQL&#xFF0C;&#x6765;&#x8FDB;&#x884C;&#x76F8;&#x540C;&#x7684;&#x6570;&#x636E;&#x67E5;&#x8BE2;&#x3002;&#x600E;&#x4E48;&#x505A;&#x5462;&#xFF1F;</p>
+<p>&#x4ECA;&#x5929;&#x4E00;&#x5F00;&#x59CB;&#x5DF2;&#x7ECF;&#x5206;&#x6790;&#x8FC7;&#x4E86;&#xFF0C;<strong>&#x4E3B;&#x8981;&#x7684;&#x5DE5;&#x4F5C;&#x5C31;&#x662F;&#x628A; sqlparser &#x89E3;&#x6790;&#x51FA;&#x6765;&#x7684; AST &#x8F6C;&#x6362;&#x6210; polars &#x5B9A;&#x4E49;&#x7684; AST</strong>&#x3002;&#x518D;&#x56DE;&#x987E;&#x4E00;&#x4E0B; SQL AST &#x7684;&#x8F93;&#x51FA;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-literal">Ok</span>([Query(
+    Query {
+        with: <span class="hljs-literal">None</span>,
+        body: Select(
+            Select {
+                distinct: <span class="hljs-literal">false</span>,
+                top: <span class="hljs-literal">None</span>,
+                projection: [ ... ],
+                                from: [ TableWithJoins { ... } ],
+                                selection: <span class="hljs-literal">Some</span>(BinaryOp { ... }),
+                ...
+            }
+        ),
+        order_by: [ OrderByExpr { ... } ],
+        limit: <span class="hljs-literal">Some</span>(Value( ... )),
+        offset: <span class="hljs-literal">Some</span>(Offset { ... })
+    }
+])
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#x7684; Query &#x662F; Statement enum &#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x3002;SQL &#x8BED;&#x53E5;&#x9664;&#x4E86;&#x67E5;&#x8BE2;&#x5916;&#xFF0C;&#x8FD8;&#x6709;&#x63D2;&#x5165;&#x6570;&#x636E;&#x3001;&#x5220;&#x9664;&#x6570;&#x636E;&#x3001;&#x521B;&#x5EFA;&#x8868;&#x7B49;&#x5176;&#x4ED6;&#x8BED;&#x53E5;&#xFF0C;&#x6211;&#x4EEC;&#x4ECA;&#x5929;&#x4E0D;&#x5173;&#x5FC3;&#x8FD9;&#x4E9B;&#xFF0C;&#x53EA;&#x5173;&#x5FC3; Query&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6587;&#x4EF6; src/convert.rs&#xFF0C;<strong>&#x5148;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x7ED3;&#x6784; Sql &#x6765;&#x63CF;&#x8FF0;&#x4E24;&#x8005;&#x7684;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x5B9E;&#x73B0; Sql &#x7684; TryFrom trait</strong>&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-comment">/// &#x89E3;&#x6790;&#x51FA;&#x6765;&#x7684; SQL</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Sql</span></span>&lt;<span class="hljs-symbol">&apos;a</span>&gt; {
+    <span class="hljs-keyword">pub</span>(<span class="hljs-keyword">crate</span>) selection: <span class="hljs-built_in">Vec</span>&lt;Expr&gt;,
+    <span class="hljs-keyword">pub</span>(<span class="hljs-keyword">crate</span>) condition: <span class="hljs-built_in">Option</span>&lt;Expr&gt;,
+    <span class="hljs-keyword">pub</span>(<span class="hljs-keyword">crate</span>) source: &amp;<span class="hljs-symbol">&apos;a</span> <span class="hljs-keyword">str</span>,
+    <span class="hljs-keyword">pub</span>(<span class="hljs-keyword">crate</span>) order_by: <span class="hljs-built_in">Vec</span>&lt;(<span class="hljs-built_in">String</span>, <span class="hljs-keyword">bool</span>)&gt;,
+    <span class="hljs-keyword">pub</span>(<span class="hljs-keyword">crate</span>) offset: <span class="hljs-built_in">Option</span>&lt;<span class="hljs-keyword">i64</span>&gt;,
+    <span class="hljs-keyword">pub</span>(<span class="hljs-keyword">crate</span>) limit: <span class="hljs-built_in">Option</span>&lt;usize&gt;,
+}
+
+<span class="hljs-keyword">impl</span>&lt;<span class="hljs-symbol">&apos;a</span>&gt; TryFrom&lt;&amp;<span class="hljs-symbol">&apos;a</span> Statement&gt; <span class="hljs-keyword">for</span> Sql&lt;<span class="hljs-symbol">&apos;a</span>&gt; {
+    <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Error</span></span> = anyhow::Error;
+        <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">try_from</span></span>(sql: &amp;<span class="hljs-symbol">&apos;a</span> Statement) -&gt; <span class="hljs-built_in">Result</span>&lt;<span class="hljs-keyword">Self</span>, Self::Error&gt; {
+        <span class="hljs-keyword">match</span> sql {
+            <span class="hljs-comment">// &#x76EE;&#x524D;&#x6211;&#x4EEC;&#x53EA;&#x5173;&#x5FC3; query (select ... from ... where ...)</span>
+            Statement::Query(q) =&gt; {
+                            ...
+                        }
+                }
+        }
+}
+</code></pre>
+<p>&#x6846;&#x6709;&#x4E86;&#xFF0C;&#x7EE7;&#x7EED;&#x5199;&#x8F6C;&#x6362;&#x3002;&#x6211;&#x4EEC;&#x770B; Query &#x7684;&#x7ED3;&#x6784;&#xFF1A;&#x5B83;&#x6709;&#x4E00;&#x4E2A; body&#xFF0C;&#x662F; Select &#x7C7B;&#x578B;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B; projection&#x3001;from&#x3001;select&#x3002;&#x5728; Rust &#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;&#x4E00;&#x4E2A;&#x8D4B;&#x503C;&#x8BED;&#x53E5;&#xFF0C;&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x6A21;&#x5F0F;&#x5339;&#x914D;&#x52A0;&#x4E0A;&#x6570;&#x636E;&#x7684;&#x89E3;&#x6784;&#xFF0C;&#x5C06;&#x5B83;&#x4EEC;&#x90FD;&#x53D6;&#x51FA;&#x6765;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">let</span> Select {
+    from: table_with_joins,
+    selection: where_clause,
+    projection,
+
+    group_by: _,
+    ..
+} = <span class="hljs-keyword">match</span> &amp;q.body {
+    SetExpr::Select(statement) =&gt; statement.as_ref(),
+    _ =&gt; <span class="hljs-keyword">return</span> <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;We only support Select Query at the moment&quot;</span>)),
+};
+</code></pre>
+<p>&#x4E00;&#x53E5;&#x8BDD;&#xFF0C;&#x4ECE;&#x5339;&#x914D;&#x5230;&#x53D6;&#x5F15;&#x7528;&#xFF0C;&#x518D;&#x5230;&#x5C06;&#x5F15;&#x7528;&#x5185;&#x90E8;&#x51E0;&#x4E2A;&#x5B57;&#x6BB5;&#x8D4B;&#x503C;&#x7ED9;&#x51E0;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x90FD;&#x5B8C;&#x6210;&#x4E86;&#xFF0C;&#x771F;&#x662F;&#x592A;&#x8212;&#x670D;&#x4E86;&#xFF01;&#x8FD9;&#x6837;&#x80FD;&#x591F;&#x6781;&#x5927;&#x63D0;&#x9AD8;&#x751F;&#x4EA7;&#x529B;&#x7684;&#x8BED;&#x8A00;&#xFF0C;&#x4F60;&#x600E;&#x80FD;&#x4E0D;&#x7231;&#x5B83;&#xFF1F;</p>
+<p>&#x6211;&#x4EEC;&#x518D;&#x770B;&#x4E00;&#x4E2A;&#x5904;&#x7406; Offset &#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x9700;&#x8981;&#x628A; sqlparser &#x7684; Offset &#x8F6C;&#x6362;&#x6210; i64&#xFF0C;&#x540C;&#x6837;&#xFF0C;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A; TryFrom trait&#x3002;&#x8FD9;&#x6B21;&#x662F;&#x5728; match &#x7684;&#x4E00;&#x4E2A;&#x5206;&#x652F;&#x4E0A;&#xFF0C;&#x505A;&#x4E86;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x89E3;&#x6784;&#x3002;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> sqlparser::ast::Offset <span class="hljs-keyword">as</span> SqlOffset;
+
+<span class="hljs-comment">// &#x56E0;&#x4E3A; Rust trait &#x7684;&#x5B64;&#x513F;&#x89C4;&#x5219;&#xFF0C;&#x6211;&#x4EEC;&#x5982;&#x679C;&#x8981;&#x60F3;&#x5BF9;&#x5DF2;&#x6709;&#x7684;&#x7C7B;&#x578B;&#x5B9E;&#x73B0;&#x5DF2;&#x6709;&#x7684; trait&#xFF0C;</span>
+<span class="hljs-comment">// &#x9700;&#x8981;&#x7B80;&#x5355;&#x5305;&#x88C5;&#x4E00;&#x4E0B;</span>
+
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Offset</span></span>&lt;<span class="hljs-symbol">&apos;a</span>&gt;(<span class="hljs-keyword">pub</span>(<span class="hljs-keyword">crate</span>) &amp;<span class="hljs-symbol">&apos;a</span> SqlOffset);
+
+<span class="hljs-comment">/// &#x628A; SqlParser &#x7684; offset expr &#x8F6C;&#x6362;&#x6210; i64</span>
+<span class="hljs-keyword">impl</span>&lt;<span class="hljs-symbol">&apos;a</span>&gt; <span class="hljs-built_in">From</span>&lt;Offset&lt;<span class="hljs-symbol">&apos;a</span>&gt;&gt; <span class="hljs-keyword">for</span> <span class="hljs-keyword">i64</span> {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">from</span></span>(offset: Offset) -&gt; <span class="hljs-keyword">Self</span> {
+        <span class="hljs-keyword">match</span> offset.<span class="hljs-number">0</span> {
+            SqlOffset {
+                value: SqlExpr::Value(SqlValue::Number(v, _b)),
+                ..
+            } =&gt; v.parse().unwrap_or(<span class="hljs-number">0</span>),
+            _ =&gt; <span class="hljs-number">0</span>,
+        }
+    }
+}
+</code></pre>
+<p>&#x662F;&#x7684;&#xFF0C;&#x6570;&#x636E;&#x7684;&#x89E3;&#x6784;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x5206;&#x652F;&#x4E0A;&#x8FDB;&#x884C;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x8FD8;&#x8BB0;&#x5F97;&#x7B2C;&#x4E09;&#x8BB2;&#x4E2D;&#x8C08;&#x5230;&#x7684; if let / while let&#xFF0C;&#x4E5F;&#x662F;&#x8FD9;&#x4E2A;&#x7528;&#x6CD5;&#x3002;&#x8FD9;&#x6837;&#x5BF9;&#x6A21;&#x5F0F;&#x5339;&#x914D;&#x7684;&#x5168;&#x65B9;&#x4F4D;&#x652F;&#x6301;&#xFF0C;&#x4F60;&#x7528;&#x5F97;&#x8D8A;&#x591A;&#xFF0C;&#x5C31;&#x4F1A;&#x8D8A;&#x611F;&#x6FC0; Rust &#x7684;&#x4F5C;&#x8005;&#xFF0C;&#x5C24;&#x5176;&#x5728;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x5B8F;&#x7684;&#x65F6;&#x5019;&#x3002;</p>
+<p>&#x4ECE;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x4E2D;&#x8FD8;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x5B9A;&#x4E49;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784; Offset &#x4F7F;&#x7528;&#x4E86;&#x751F;&#x547D;&#x5468;&#x671F;&#x6807;&#x6CE8; &lt;&apos;a&gt;&#xFF0C;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x5185;&#x90E8;&#x4F7F;&#x7528;&#x4E86; SqlOffset &#x7684;&#x5F15;&#x7528;&#x3002;&#x6709;&#x5173;&#x751F;&#x547D;&#x5468;&#x671F;&#x7684;&#x77E5;&#x8BC6;&#xFF0C;&#x6211;&#x4EEC;&#x5F88;&#x5FEB;&#x5C31;&#x4F1A;&#x8BB2;&#x5230;&#xFF0C;&#x8FD9;&#x91CC;&#x4F60;&#x6682;&#x4E14;&#x4E0D;&#x9700;&#x8981;&#x7406;&#x89E3;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x8FD9;&#x4E48;&#x505A;&#x3002;</p>
+<p>&#x6574;&#x4E2A; src/convert.rs &#x4E3B;&#x8981;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x6A21;&#x5F0F;&#x5339;&#x914D;&#xFF0C;&#x8FDB;&#x884C;&#x4E0D;&#x540C;&#x5B50;&#x7C7B;&#x578B;&#x4E4B;&#x95F4;&#x7684;&#x8F6C;&#x6362;&#xFF0C;&#x4EE3;&#x7801;&#x6BD4;&#x8F83;&#x65E0;&#x8DA3;&#xFF0C;&#x800C;&#x4E14;&#x548C;&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x7C7B;&#x4F3C;&#xFF0C;&#x6211;&#x5C31;&#x4E0D;&#x8D34;&#x4E86;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x95E8;&#x8BFE;&#x7A0B;&#x7684; <a href="https://github.com/tyrchen/geektime-rust/blob/master/06_queryer/queryer/src/convert.rs" target="_blank">GitHub repo</a> &#x4E0B;&#x7684; 06_queryer/queryer/src/convert.rs &#x4E2D;&#x83B7;&#x53D6;&#x3002;</p>
+<p>&#x672A;&#x6765;&#x4F60;&#x5728; Rust &#x4E0B;&#x5199;&#x8FC7;&#x7A0B;&#x5B8F;&#xFF08;procedure macro&#xFF09;&#xFF0C;&#x5E72;&#x7684;&#x57FA;&#x672C;&#x5C31;&#x662F;&#x8FD9;&#x4E2A;&#x5DE5;&#x4F5C;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#xFF0C;&#x6700;&#x540E;&#x4F60;&#x9700;&#x8981;&#x628A;&#x8F6C;&#x6362;&#x540E;&#x7684; AST &#x4F7F;&#x7528; quote &#x8F93;&#x51FA;&#x6210;&#x4EE3;&#x7801;&#x3002;&#x5728;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#x8FD9;&#x4E48;&#x505A;&#xFF0C;polars &#x7684; lazy &#x63A5;&#x53E3;&#x76F4;&#x63A5;&#x80FD;&#x5904;&#x7406; AST&#x3002;</p>
+<p>&#x8BF4;&#x53E5;&#x9898;&#x5916;&#x8BDD;&#xFF0C;&#x6211;&#x4E4B;&#x6240;&#x4EE5;&#x4E0D;&#x538C;&#x5176;&#x70E6;&#x5730;&#x8BB2;&#x8FF0;&#x6570;&#x636E;&#x8F6C;&#x6362;&#x7684;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x5B83;&#x662F;&#x6211;&#x4EEC;&#x7F16;&#x7A0B;&#x6D3B;&#x52A8;&#x4E2D;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x90E8;&#x5206;&#x3002;&#x4F60;&#x60F3;&#x60F3;&#xFF0C;&#x6211;&#x4EEC;&#x5199;&#x4EE3;&#x7801;&#xFF0C;&#x4E3B;&#x8981;&#x90FD;&#x5728;&#x5904;&#x7406;&#x4EC0;&#x4E48;&#xFF1F;<strong>&#x7EDD;&#x5927;&#x591A;&#x6570;&#x5904;&#x7406;&#x903B;&#x8F91;&#x90FD;&#x662F;&#x628A;&#x6570;&#x636E;&#x4ECE;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#x8F6C;&#x6362;&#x6210;&#x53E6;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;</strong>&#x3002;</p>
+<p>&#x4EE5;&#x6211;&#x4EEC;&#x719F;&#x6089;&#x7684;&#x7528;&#x6237;&#x6CE8;&#x518C;&#x6D41;&#x7A0B;&#x4E3A;&#x4F8B;&#xFF1A;</p>
+<ol>
+<li>&#x7528;&#x6237;&#x7684;&#x8F93;&#x5165;&#x88AB;&#x524D;&#x7AEF;&#x6821;&#x9A8C;&#x540E;&#xFF0C;&#x8F6C;&#x6362;&#x6210; CreateUser &#x5BF9;&#x8C61;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x8F6C;&#x6362;&#x6210;&#x4E00;&#x4E2A; HTTP POST &#x8BF7;&#x6C42;&#x3002;</li>
+<li>&#x5F53;&#x8FD9;&#x4E2A;&#x8BF7;&#x6C42;&#x5230;&#x8FBE;&#x670D;&#x52A1;&#x5668;&#x540E;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x5C06;&#x5176;&#x8BFB;&#x53D6;&#xFF0C;&#x518D;&#x8F6C;&#x6362;&#x6210;&#x670D;&#x52A1;&#x5668;&#x7684; CreateUser &#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x5728;&#x6821;&#x9A8C;&#x548C;&#x6B63;&#x89C4;&#x5316;&#xFF08;normalization&#xFF09;&#x540E;&#x88AB;&#x8F6C;&#x6210;&#x4E00;&#x4E2A; ORM &#x5BF9;&#x8C61;&#xFF08;&#x5982;&#x679C;&#x4F7F;&#x7528; ORM &#x7684;&#x8BDD;&#xFF09;&#xFF0C;&#x7136;&#x540E; ORM &#x5BF9;&#x8C61;&#x518D;&#x88AB;&#x8F6C;&#x6362;&#x6210; SQL&#xFF0C;&#x53D1;&#x9001;&#x7ED9;&#x6570;&#x636E;&#x5E93;&#x670D;&#x52A1;&#x5668;&#x3002;</li>
+<li>&#x6570;&#x636E;&#x5E93;&#x670D;&#x52A1;&#x5668;&#x5C06; SQL &#x8BF7;&#x6C42;&#x5305;&#x88C5;&#x6210;&#x4E00;&#x4E2A; <a href="https://en.wikipedia.org/wiki/Write-ahead_logging" target="_blank">WAL</a>&#xFF08;Write-Ahead Logging&#xFF09;&#xFF0C;&#x8FD9;&#x4E2A; WAL &#x518D;&#x88AB;&#x66F4;&#x65B0;&#x5230;&#x6570;&#x636E;&#x5E93;&#x6587;&#x4EF6;&#x4E2D;&#x3002;</li>
+</ol>
+<p>&#x6574;&#x4E2A;&#x6570;&#x636E;&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF1A;<img src="https://static001.geekbang.org/resource/image/f0/e9/f0c1ab58fbe1e97f8938f01ca97c3ae9.jpg?wh=1920x653" alt=""></p>
+<p>&#x8FD9;&#x6837;&#x7684;&#x5904;&#x7406;&#x6D41;&#x7A0B;&#xFF0C;&#x7531;&#x4E8E;&#x5B83;&#x548C;&#x4E1A;&#x52A1;&#x9AD8;&#x5EA6;&#x7ED1;&#x5B9A;&#xFF0C;&#x5F80;&#x5F80;&#x5BB9;&#x6613;&#x88AB;&#x5199;&#x5F97;&#x5F88;&#x8026;&#x5408;&#xFF0C;&#x4E45;&#x800C;&#x4E45;&#x4E4B;&#x5C31;&#x53D8;&#x6210;&#x4E86;&#x96BE;&#x4EE5;&#x7EF4;&#x62A4;&#x7684;&#x610F;&#x5927;&#x5229;&#x9762;&#x6761;&#x3002;<strong>&#x597D;&#x7684;&#x4EE3;&#x7801;&#xFF0C;**</strong>&#x5E94;&#x8BE5;<strong><strong>&#x662F;&#x6BCF;&#x4E2A;&#x4E3B;&#x6D41;&#x7A0B;&#x90FD;&#x6E05;&#x6670;&#x7B80;&#x7EA6;&#xFF0C;&#x4EE3;&#x7801;&#x6070;&#x5230;&#x597D;&#x5904;&#x5730;&#x51FA;&#x73B0;</strong></strong>&#x5728;<strong>**&#x90A3;&#x91CC;&#xFF0C;&#x8BA9;&#x4EBA;&#x4E0D;&#x9700;&#x8981;&#x6CE8;&#x91CA;&#x4E5F;&#x80FD;&#x660E;&#x767D;&#x4F5C;&#x8005;&#x5728;&#x5199;&#x4EC0;&#x4E48;&#x3002;</strong></p>
+<p>&#x8FD9;&#x5C31;&#x610F;&#x5473;&#x7740;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x628A;&#x90A3;&#x4E9B;&#x5E76;&#x4E0D;&#x91CD;&#x8981;&#x7684;&#x7EC6;&#x8282;&#x5C01;&#x88C5;&#x5728;&#x5355;&#x72EC;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x5C01;&#x88C5;&#x7684;&#x7C92;&#x5EA6;&#x4EE5;&#x4E00;&#x6B21;&#x5199;&#x5B8C;&#x3001;&#x57FA;&#x672C;&#x4E0D;&#x9700;&#x8981;&#x518D;&#x53D8;&#x52A8;&#x4E3A;&#x6700;&#x4F73;&#xFF0C;&#x6216;&#x8005;&#x5373;&#x4F7F;&#x53D8;&#x52A8;&#xFF0C;&#x5B83;&#x7684;&#x5F71;&#x54CD;&#x4E5F;&#x975E;&#x5E38;&#x5C40;&#x90E8;&#x3002;</p>
+<p>&#x8FD9;&#x6837;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x65B9;&#x4FBF;&#x9605;&#x8BFB;&#x3001;&#x5BB9;&#x6613;&#x6D4B;&#x8BD5;&#x3001;&#x7EF4;&#x62A4;&#x7B80;&#x5355;&#xFF0C;&#x5904;&#x7406;&#x8D77;&#x6765;&#x66F4;&#x662F;&#x4E00;&#x79CD;&#x4EAB;&#x53D7;&#x3002;Rust &#x6807;&#x51C6;&#x5E93;&#x7684; From / TryFrom trait &#xFF0C;&#x5C31;&#x662F;&#x51FA;&#x4E8E;&#x8FD9;&#x4E2A;&#x76EE;&#x7684;&#x8BBE;&#x8BA1;&#x7684;&#xFF0C;&#x975E;&#x5E38;&#x503C;&#x5F97;&#x6211;&#x4EEC;&#x597D;&#x597D;&#x4F7F;&#x7528;&#x3002;</p>
+<h2 id="&#x4ECE;&#x6E90;&#x4E2D;&#x53D6;&#x6570;&#x636E;">&#x4ECE;&#x6E90;&#x4E2D;&#x53D6;&#x6570;&#x636E;</h2>
+<p>&#x5B8C;&#x6210;&#x4E86; AST &#x7684;&#x8F6C;&#x6362;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x662F;&#x4ECE;&#x6E90;&#x4E2D;&#x83B7;&#x53D6;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x5BF9; Sql &#x7ED3;&#x6784;&#x7684;&#x5904;&#x7406;&#x548C;&#x586B;&#x5145;&#xFF0C;&#x53EF;&#x4EE5;&#x5F97;&#x5230; SQL FROM &#x5B50;&#x53E5;&#x91CC;&#x7684;&#x6570;&#x636E;&#x6E90;&#xFF0C;&#x8FD9;&#x4E2A;&#x6E90;&#xFF0C;&#x6211;&#x4EEC;&#x89C4;&#x5B9A;&#x5B83;&#x5FC5;&#x987B;&#x662F;&#x4EE5; http(s):// &#x6216;&#x8005; file:// &#x5F00;&#x5934;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x56E0;&#x4E3A;&#xFF0C;&#x4EE5; http &#x5F00;&#x5934;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; URL &#x83B7;&#x53D6;&#x5185;&#x5BB9;&#xFF0C;file &#x5F00;&#x5934;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x6253;&#x5F00;&#x672C;&#x5730;&#x6587;&#x4EF6;&#x83B7;&#x53D6;&#x5185;&#x5BB9;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x62FF;&#x5230;&#x4E86;&#x8FD9;&#x4E2A;&#x63CF;&#x8FF0;&#x4E86;&#x6570;&#x636E;&#x6E90;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x540E;&#xFF0C;&#x5F88;&#x5BB9;&#x6613;&#x80FD;&#x5199;&#x51FA;&#x8FD9;&#x6837;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-comment">/// &#x4ECE;&#x6587;&#x4EF6;&#x6E90;&#x6216;&#x8005; http &#x6E90;&#x4E2D;&#x83B7;&#x53D6;&#x6570;&#x636E;</span>
+async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">retrieve_data</span></span>(source: <span class="hljs-keyword">impl</span> <span class="hljs-built_in">AsRef</span>&lt;<span class="hljs-keyword">str</span>&gt;) -&gt; <span class="hljs-built_in">Result</span>&lt;<span class="hljs-built_in">String</span>&gt; {
+    <span class="hljs-keyword">let</span> name = source.as_ref();
+    <span class="hljs-keyword">match</span> &amp;name[..<span class="hljs-number">4</span>] {
+        <span class="hljs-comment">// &#x5305;&#x62EC; http / https</span>
+        <span class="hljs-string">&quot;http&quot;</span> =&gt; <span class="hljs-literal">Ok</span>(reqwest::get(name).await?.text().await?),
+        <span class="hljs-comment">// &#x5904;&#x7406; file://&lt;filename&gt;</span>
+        <span class="hljs-string">&quot;file&quot;</span> =&gt; <span class="hljs-literal">Ok</span>(fs::read_to_string(&amp;name[<span class="hljs-number">7</span>..]).await?),
+        _ =&gt; <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;We only support http/https/file at the moment&quot;</span>)),
+    }
+}
+</code></pre>
+<p>&#x4EE3;&#x7801;&#x770B;&#x8D77;&#x6765;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x4F46;&#x672A;&#x6765;&#x5E76;&#x4E0D;&#x5BB9;&#x6613;&#x7EF4;&#x62A4;&#x3002;&#x56E0;&#x4E3A;&#x4E00;&#x65E6;&#x4F60;&#x7684; HTTP &#x8BF7;&#x6C42;&#x83B7;&#x5F97;&#x7684;&#x7ED3;&#x679C;&#x9700;&#x8981;&#x505A;&#x4E00;&#x4E9B;&#x540E;&#x7EED;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x5F88;&#x5FEB;&#x5C31;&#x4F1A;&#x53D8;&#x5F97;&#x5F88;&#x590D;&#x6742;&#x3002;&#x90A3;&#x8BE5;&#x600E;&#x4E48;&#x529E;&#x5462;&#xFF1F;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x56DE;&#x987E;&#x524D;&#x4E24;&#x8BB2;&#x6211;&#x4EEC;&#x5199;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x76F8;&#x4FE1;&#x4F60;&#x5FC3;&#x91CC;&#x9A6C;&#x4E0A;&#x6709;&#x4E86;&#x7B54;&#x6848;&#xFF1A;<strong>&#x53EF;&#x4EE5;&#x7528; trait &#x62BD;&#x53D6; fetch &#x7684;&#x903B;&#x8F91;&#xFF0C;&#x5B9A;&#x4E49;&#x597D;&#x63A5;&#x53E3;&#xFF0C;&#x7136;&#x540E;&#x6539;&#x53D8; retrieve_data &#x7684;&#x5B9E;&#x73B0;</strong>&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x4E0B;&#x9762;&#x662F; src/fetcher.rs &#x7684;&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> anyhow::{anyhow, <span class="hljs-built_in">Result</span>};
+<span class="hljs-keyword">use</span> async_trait::async_trait;
+<span class="hljs-keyword">use</span> tokio::fs;
+
+<span class="hljs-comment">// Rust &#x7684; async trait &#x8FD8;&#x6CA1;&#x6709;&#x7A33;&#x5B9A;&#xFF0C;&#x53EF;&#x4EE5;&#x7528; async_trait &#x5B8F;</span>
+<span class="hljs-meta">#[async_trait]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Fetch</span></span> {
+    <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Error</span></span>;
+    async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">fetch</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Result</span>&lt;<span class="hljs-built_in">String</span>, Self::Error&gt;;
+}
+
+<span class="hljs-comment">/// &#x4ECE;&#x6587;&#x4EF6;&#x6E90;&#x6216;&#x8005; http &#x6E90;&#x4E2D;&#x83B7;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x7EC4;&#x6210; data frame</span>
+<span class="hljs-keyword">pub</span> async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">retrieve_data</span></span>(source: <span class="hljs-keyword">impl</span> <span class="hljs-built_in">AsRef</span>&lt;<span class="hljs-keyword">str</span>&gt;) -&gt; <span class="hljs-built_in">Result</span>&lt;<span class="hljs-built_in">String</span>&gt; {
+    <span class="hljs-keyword">let</span> name = source.as_ref();
+    <span class="hljs-keyword">match</span> &amp;name[..<span class="hljs-number">4</span>] {
+        <span class="hljs-comment">// &#x5305;&#x62EC; http / https</span>
+        <span class="hljs-string">&quot;http&quot;</span> =&gt; UrlFetcher(name).fetch().await,
+        <span class="hljs-comment">// &#x5904;&#x7406; file://&lt;filename&gt;</span>
+        <span class="hljs-string">&quot;file&quot;</span> =&gt; FileFetcher(name).fetch().await,
+        _ =&gt; <span class="hljs-keyword">return</span> <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;We only support http/https/file at the moment&quot;</span>)),
+    }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">UrlFetcher</span></span>&lt;<span class="hljs-symbol">&apos;a</span>&gt;(<span class="hljs-keyword">pub</span>(<span class="hljs-keyword">crate</span>) &amp;<span class="hljs-symbol">&apos;a</span> <span class="hljs-keyword">str</span>);
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FileFetcher</span></span>&lt;<span class="hljs-symbol">&apos;a</span>&gt;(<span class="hljs-keyword">pub</span>(<span class="hljs-keyword">crate</span>) &amp;<span class="hljs-symbol">&apos;a</span> <span class="hljs-keyword">str</span>);
+
+<span class="hljs-meta">#[async_trait]</span>
+<span class="hljs-keyword">impl</span>&lt;<span class="hljs-symbol">&apos;a</span>&gt; Fetch <span class="hljs-keyword">for</span> UrlFetcher&lt;<span class="hljs-symbol">&apos;a</span>&gt; {
+    <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Error</span></span> = anyhow::Error;
+
+    async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">fetch</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Result</span>&lt;<span class="hljs-built_in">String</span>, Self::Error&gt; {
+        <span class="hljs-literal">Ok</span>(reqwest::get(<span class="hljs-keyword">self</span>.<span class="hljs-number">0</span>).await?.text().await?)
+    }
+}
+
+<span class="hljs-meta">#[async_trait]</span>
+<span class="hljs-keyword">impl</span>&lt;<span class="hljs-symbol">&apos;a</span>&gt; Fetch <span class="hljs-keyword">for</span> FileFetcher&lt;<span class="hljs-symbol">&apos;a</span>&gt; {
+    <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Error</span></span> = anyhow::Error;
+
+    async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">fetch</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Result</span>&lt;<span class="hljs-built_in">String</span>, Self::Error&gt; {
+        <span class="hljs-literal">Ok</span>(fs::read_to_string(&amp;<span class="hljs-keyword">self</span>.<span class="hljs-number">0</span>[<span class="hljs-number">7</span>..]).await?)
+    }
+}
+</code></pre>
+<p>&#x8FD9;&#x770B;&#x4E0A;&#x53BB;&#x4F3C;&#x4E4E;&#x6CA1;&#x6709;&#x6536;&#x76CA;&#xFF0C;&#x8FD8;&#x8BA9;&#x4EE3;&#x7801;&#x53D8;&#x5F97;&#x66F4;&#x591A;&#x3002;&#x4F46;&#x5B83;&#x628A; retrieve_data &#x548C;&#x5177;&#x4F53;&#x6BCF;&#x4E00;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x5904;&#x7406;&#x5206;&#x79BB;&#x4E86;&#xFF0C;&#x8FD8;&#x662F;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x8BB2;&#x7684;&#x601D;&#x60F3;&#xFF0C;&#x901A;&#x8FC7;&#x5F00;&#x95ED;&#x539F;&#x5219;&#xFF0C;&#x6784;&#x5EFA;&#x4F4E;&#x8026;&#x5408;&#x3001;&#x9AD8;&#x5185;&#x805A;&#x7684;&#x4EE3;&#x7801;&#x3002;&#x8FD9;&#x6837;&#x672A;&#x6765;&#x6211;&#x4EEC;&#x4FEE;&#x6539; UrlFetcher &#x6216;&#x8005; FileFetcher&#xFF0C;&#x6216;&#x8005;&#x6DFB;&#x52A0;&#x65B0;&#x7684; Fetcher&#xFF0C;&#x5BF9; retrieve_data &#x7684;&#x53D8;&#x52A8;&#x90FD;&#x662F;&#x6700;&#x5C0F;&#x7684;&#x3002;</p>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5B8C;&#x6210;&#x4E86;SQL&#x7684;&#x89E3;&#x6790;&#x3001;&#x5B9E;&#x73B0;&#x4E86;&#x4ECE;SQL&#x5230;DataFrame&#x7684;AST&#x7684;&#x8F6C;&#x6362;&#xFF0C;&#x4EE5;&#x53CA;&#x6570;&#x636E;&#x6E90;&#x7684;&#x83B7;&#x53D6;&#x3002;&#x6311;&#x6218;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E00;&#x5927;&#x534A;&#x4E86;&#xFF0C;&#x5C31;&#x5269;&#x4E3B;&#x6D41;&#x7A0B;&#x903B;&#x8F91;&#x4E86;&#x3002;</p>
+<h2 id="&#x4E3B;&#x6D41;&#x7A0B;">&#x4E3B;&#x6D41;&#x7A0B;</h2>
+<p>&#x4E00;&#x822C;&#x6211;&#x4EEC;&#x5728;&#x505A;&#x4E00;&#x4E2A;&#x5E93;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0D;&#x4F1A;&#x628A;&#x5185;&#x90E8;&#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x66B4;&#x9732;&#x51FA;&#x53BB;&#xFF0C;&#x800C;&#x662F;&#x4F1A;&#x7528;&#x81EA;&#x5DF1;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5305;&#x88F9;&#x5B83;&#x3002;</p>
+<p>&#x4F46;&#x8FD9;&#x6837;&#x4EE3;&#x7801;&#x6709;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;<strong>&#x539F;&#x6709;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x60F3;&#x66B4;&#x9732;&#x51FA;&#x53BB;&#xFF0C;&#x6BCF;&#x4E2A;&#x63A5;&#x53E3;&#x90FD;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x4E00;&#x904D;</strong>&#xFF0C;&#x867D;&#x7136;&#x91CC;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x5C31;&#x662F;&#x4E00;&#x53E5;&#x7B80;&#x5355;&#x7684; proxy&#xFF0C;&#x4F46;&#x8FD8;&#x662F;&#x5F88;&#x9EBB;&#x70E6;&#x3002;&#x8FD9;&#x662F;&#x6211;&#x81EA;&#x5DF1;&#x5728;&#x4F7F;&#x7528;&#x5F88;&#x591A;&#x8BED;&#x8A00;&#x7684;&#x4E00;&#x4E2A;&#x75DB;&#x70B9;&#x3002;</p>
+<p>&#x6B63;&#x597D;&#x5728; queryer &#x5E93;&#x91CC;&#x4E5F;&#x4F1A;&#x6709;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;SQL &#x67E5;&#x8BE2;&#x540E;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x4F1A;&#x653E;&#x5728;&#x4E00;&#x4E2A; polars &#x7684; DataFrame &#x4E2D;&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x4E0D;&#x60F3;&#x76F4;&#x63A5;&#x66B4;&#x9732;&#x8FD9;&#x4E2A; DataFrame &#x51FA;&#x53BB;&#x3002;&#x56E0;&#x4E3A;&#x4E00;&#x65E6;&#x8FD9;&#x4E48;&#x505A;&#xFF0C;&#x672A;&#x6765;&#x6211;&#x4EEC;&#x60F3;&#x52A0;&#x989D;&#x5916;&#x7684; metadata&#xFF0C;&#x5C31;&#x65E0;&#x80FD;&#x4E3A;&#x529B;&#x4E86;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x6211;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A; DataSet&#xFF0C;&#x5305;&#x88F9;&#x4F4F; DataFrame&#x3002;&#x53EF;&#x662F;&#xFF0C;&#x6211;&#x8FD8;&#x60F3;&#x66B4;&#x9732; DataSet &#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x5B83;&#x6709;&#x597D;&#x591A;&#x51FD;&#x6570;&#xFF0C;&#x603B;&#x4E0D;&#x80FD;&#x6328;&#x4E2A; proxy &#x5427;&#xFF1F;</p>
+<p>&#x4E0D;&#x7528;&#x3002;Rust &#x63D0;&#x4F9B;&#x4E86; Deref &#x548C; DerefMut trait &#x505A;&#x8FD9;&#x4E2A;&#x4E8B;&#x60C5;&#xFF0C;&#x5B83;&#x5141;&#x8BB8;&#x7C7B;&#x578B;&#x5728;&#x89E3;&#x5F15;&#x7528;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x89E3;&#x5F15;&#x7528;&#x5230;&#x5176;&#x5B83;&#x7C7B;&#x578B;&#x3002;&#x6211;&#x4EEC;&#x540E;&#x9762;&#x5728;&#x4ECB;&#x7ECD; Rust &#x5E38;&#x7528; trait &#x65F6;&#xFF0C;&#x4F1A;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#x8FD9;&#x4E24;&#x4E2A; trait&#xFF0C;&#x73B0;&#x5728;&#x5148;&#x6765;&#x770B;&#x7684; DataSet &#x600E;&#x4E48;&#x5904;&#x7406;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[derive(Debug)]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DataSet</span></span>(DataFrame);
+
+<span class="hljs-comment">/// &#x8BA9; DataSet &#x7528;&#x8D77;&#x6765;&#x548C; DataFrame &#x4E00;&#x81F4;</span>
+<span class="hljs-keyword">impl</span> Deref <span class="hljs-keyword">for</span> DataSet {
+    <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Target</span></span> = DataFrame;
+
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">deref</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; &amp;Self::Target {
+        &amp;<span class="hljs-keyword">self</span>.<span class="hljs-number">0</span>
+    }
+}
+
+<span class="hljs-comment">/// &#x8BA9; DataSet &#x7528;&#x8D77;&#x6765;&#x548C; DataFrame &#x4E00;&#x81F4;</span>
+<span class="hljs-keyword">impl</span> DerefMut <span class="hljs-keyword">for</span> DataSet {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">deref_mut</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) -&gt; &amp;<span class="hljs-keyword">mut</span> Self::Target {
+        &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>.<span class="hljs-number">0</span>
+    }
+}
+
+<span class="hljs-comment">// DataSet &#x81EA;&#x5DF1;&#x7684;&#x65B9;&#x6CD5;</span>
+<span class="hljs-keyword">impl</span> DataSet {
+    <span class="hljs-comment">/// &#x4ECE; DataSet &#x8F6C;&#x6362;&#x6210; csv</span>
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">to_csv</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Result</span>&lt;<span class="hljs-built_in">String</span>&gt; {
+        ...
+    }
+}
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;DataSet &#x5728;&#x89E3;&#x5F15;&#x7528;&#x65F6;&#xFF0C;&#x5B83;&#x7684; Target &#x662F; DataFrame&#xFF0C;&#x8FD9;&#x6837; DataSet &#x5728;&#x7528;&#x6237;&#x4F7F;&#x7528;&#x65F6;&#xFF0C;&#x5C31;&#x548C; DataFrame &#x4E00;&#x81F4;&#x4E86;&#xFF1B;&#x6211;&#x4EEC;&#x8FD8;&#x4E3A; DataSet &#x5B9E;&#x73B0;&#x4E86; to_csv &#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x628A;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x751F;&#x6210;&#x51FA; CSV&#x3002;</p>
+<p>&#x597D;&#xFF0C;&#x5B9A;&#x4E49;&#x597D; DataSet&#xFF0C;&#x6838;&#x5FC3;&#x51FD;&#x6570; query &#x5B9E;&#x73B0;&#x8D77;&#x6765;&#x5176;&#x5B9E;&#x5F88;&#x7B80;&#x5355;&#xFF1A;&#x5148;&#x89E3;&#x6790;&#x51FA;&#x6211;&#x4EEC;&#x8981;&#x7684; Sql &#x7ED3;&#x6784;&#xFF0C;&#x7136;&#x540E;&#x4ECE; source &#x4E2D;&#x8BFB;&#x5165;&#x4E00;&#x4E2A; DataSet&#xFF0C;&#x505A; filter / order_by / offset / limit / select &#x7B49;&#x64CD;&#x4F5C;&#xFF0C;&#x6700;&#x540E;&#x8FD4;&#x56DE; DataSet&#x3002;</p>
+<p>DataSet &#x7684;&#x5B9A;&#x4E49;&#x548C; query &#x51FD;&#x6570;&#x90FD;&#x5728; src/lib.rs&#xFF0C;&#x5B83;&#x7684;&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> anyhow::{anyhow, <span class="hljs-built_in">Result</span>};
+<span class="hljs-keyword">use</span> polars::prelude::*;
+<span class="hljs-keyword">use</span> sqlparser::parser::Parser;
+<span class="hljs-keyword">use</span> std::convert::TryInto;
+<span class="hljs-keyword">use</span> std::ops::{Deref, DerefMut};
+<span class="hljs-keyword">use</span> tracing::info;
+
+<span class="hljs-keyword">mod</span> convert;
+<span class="hljs-keyword">mod</span> dialect;
+<span class="hljs-keyword">mod</span> loader;
+<span class="hljs-keyword">mod</span> fetcher;
+<span class="hljs-keyword">use</span> convert::Sql;
+<span class="hljs-keyword">use</span> loader::detect_content;
+<span class="hljs-keyword">use</span> fetcher::retrieve_data;
+
+<span class="hljs-keyword">pub</span> <span class="hljs-keyword">use</span> dialect::example_sql;
+<span class="hljs-keyword">pub</span> <span class="hljs-keyword">use</span> dialect::TyrDialect;
+
+<span class="hljs-meta">#[derive(Debug)]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DataSet</span></span>(DataFrame);
+
+<span class="hljs-comment">/// &#x8BA9; DataSet &#x7528;&#x8D77;&#x6765;&#x548C; DataFrame &#x4E00;&#x81F4;</span>
+<span class="hljs-keyword">impl</span> Deref <span class="hljs-keyword">for</span> DataSet {
+    <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Target</span></span> = DataFrame;
+
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">deref</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; &amp;Self::Target {
+        &amp;<span class="hljs-keyword">self</span>.<span class="hljs-number">0</span>
+    }
+}
+
+<span class="hljs-comment">/// &#x8BA9; DataSet &#x7528;&#x8D77;&#x6765;&#x548C; DataFrame &#x4E00;&#x81F4;</span>
+<span class="hljs-keyword">impl</span> DerefMut <span class="hljs-keyword">for</span> DataSet {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">deref_mut</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) -&gt; &amp;<span class="hljs-keyword">mut</span> Self::Target {
+        &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>.<span class="hljs-number">0</span>
+    }
+}
+
+<span class="hljs-keyword">impl</span> DataSet {
+    <span class="hljs-comment">/// &#x4ECE; DataSet &#x8F6C;&#x6362;&#x6210; csv</span>
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">to_csv</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Result</span>&lt;<span class="hljs-built_in">String</span>&gt; {
+        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> buf = <span class="hljs-built_in">Vec</span>::new();
+        <span class="hljs-keyword">let</span> writer = CsvWriter::new(&amp;<span class="hljs-keyword">mut</span> buf);
+        writer.finish(<span class="hljs-keyword">self</span>)?;
+        <span class="hljs-literal">Ok</span>(<span class="hljs-built_in">String</span>::from_utf8(buf)?)
+    }
+}
+
+<span class="hljs-comment">/// &#x4ECE; from &#x4E2D;&#x83B7;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x4ECE; where &#x4E2D;&#x8FC7;&#x6EE4;&#xFF0C;&#x6700;&#x540E;&#x9009;&#x53D6;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x7684;&#x5217;</span>
+<span class="hljs-keyword">pub</span> async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">query</span></span>&lt;T: <span class="hljs-built_in">AsRef</span>&lt;<span class="hljs-keyword">str</span>&gt;&gt;(sql: T) -&gt; <span class="hljs-built_in">Result</span>&lt;DataSet&gt; {
+    <span class="hljs-keyword">let</span> ast = Parser::parse_sql(&amp;TyrDialect::default(), sql.as_ref())?;
+
+    <span class="hljs-keyword">if</span> ast.len() != <span class="hljs-number">1</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;Only support single sql at the moment&quot;</span>));
+    }
+
+    <span class="hljs-keyword">let</span> sql = &amp;ast[<span class="hljs-number">0</span>];
+
+    <span class="hljs-comment">// &#x6574;&#x4E2A; SQL AST &#x8F6C;&#x6362;&#x6210;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x7684; Sql &#x7ED3;&#x6784;&#x7684;&#x7EC6;&#x8282;&#x90FD;&#x57CB;&#x85CF;&#x5728; try_into() &#x4E2D;</span>
+    <span class="hljs-comment">// &#x6211;&#x4EEC;&#x53EA;&#x9700;&#x5173;&#x6CE8;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x4F7F;&#x7528;&#xFF0C;&#x600E;&#x4E48;&#x8F6C;&#x6362;&#x53EF;&#x4EE5;&#x4E4B;&#x540E;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#x624D;&#x5173;&#x6CE8;&#xFF0C;&#x8FD9;&#x662F;</span>
+    <span class="hljs-comment">// &#x5173;&#x6CE8;&#x70B9;&#x5206;&#x79BB;&#xFF0C;&#x662F;&#x6211;&#x4EEC;&#x63A7;&#x5236;&#x8F6F;&#x4EF6;&#x590D;&#x6742;&#x5EA6;&#x7684;&#x6CD5;&#x5B9D;&#x3002;</span>
+    <span class="hljs-keyword">let</span> Sql {
+        source,
+        condition,
+        selection,
+        offset,
+        limit,
+        order_by,
+    } = sql.try_into()?;
+
+    info!(<span class="hljs-string">&quot;retrieving data from source: {}&quot;</span>, source);
+
+    <span class="hljs-comment">// &#x4ECE; source &#x8BFB;&#x5165;&#x4E00;&#x4E2A; DataSet</span>
+    <span class="hljs-comment">// detect_content&#xFF0C;&#x600E;&#x4E48; detect &#x4E0D;&#x91CD;&#x8981;&#xFF0C;&#x91CD;&#x8981;&#x7684;&#x662F;&#x5B83;&#x80FD;&#x6839;&#x636E;&#x5185;&#x5BB9;&#x8FD4;&#x56DE; DataSet</span>
+    <span class="hljs-keyword">let</span> ds = detect_content(retrieve_data(source).await?).load()?;
+
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> filtered = <span class="hljs-keyword">match</span> condition {
+        <span class="hljs-literal">Some</span>(expr) =&gt; ds.<span class="hljs-number">0</span>.lazy().filter(expr),
+        <span class="hljs-literal">None</span> =&gt; ds.<span class="hljs-number">0</span>.lazy(),
+    };
+
+    filtered = order_by
+        .into_iter()
+        .fold(filtered, |acc, (col, desc)| acc.sort(&amp;col, desc));
+
+    <span class="hljs-keyword">if</span> offset.is_some() || limit.is_some() {
+        filtered = filtered.slice(offset.unwrap_or(<span class="hljs-number">0</span>), limit.unwrap_or(usize::MAX));
+    }
+
+    <span class="hljs-literal">Ok</span>(DataSet(filtered.select(selection).collect()?))
+}
+</code></pre>
+<p>&#x5728; query &#x51FD;&#x6570;&#x7684;&#x4E3B;&#x6D41;&#x7A0B;&#x4E2D;&#xFF0C;&#x6574;&#x4E2A; SQL AST &#x8F6C;&#x6362;&#x6210;&#x4E86;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x7684; Sql &#x7ED3;&#x6784;&#xFF0C;&#x7EC6;&#x8282;&#x90FD;&#x57CB;&#x85CF;&#x5728; try_into() &#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x5173;&#x6CE8;&#x6570;&#x636E;&#x7ED3;&#x6784; Sql &#x7684;&#x4F7F;&#x7528;&#xFF0C;&#x600E;&#x4E48;&#x8F6C;&#x6362;&#x4E4B;&#x540E;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#x518D;&#x5173;&#x6CE8;&#x3002;</p>
+<p>&#x8FD9;&#x5C31;&#x662F;<a href="https://en.wikipedia.org/wiki/Separation_of_concerns" target="_blank">&#x5173;&#x6CE8;&#x70B9;&#x5206;&#x79BB;&#xFF08;Separation of Concerns&#xFF09;</a>&#xFF0C;&#x662F;&#x6211;&#x4EEC;&#x63A7;&#x5236;&#x8F6F;&#x4EF6;&#x590D;&#x6742;&#x5EA6;&#x7684;&#x6CD5;&#x5B9D;&#x3002;Rust &#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x90A3;&#x4E9B;&#x7ECF;&#x8FC7;&#x5343;&#x9524;&#x767E;&#x70BC;&#x7684; trait&#xFF0C;&#x5C31;&#x662F;&#x7528;&#x6765;&#x5E2E;&#x52A9;&#x6211;&#x4EEC;&#x5199;&#x51FA;&#x66F4;&#x597D;&#x7684;&#x3001;&#x590D;&#x6742;&#x5EA6;&#x66F4;&#x4F4E;&#x7684;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x4E3B;&#x6D41;&#x7A0B;&#x91CC;&#x6709;&#x4E2A; detect_content &#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x8BC6;&#x522B;&#x6587;&#x672C;&#x5185;&#x5BB9;&#xFF0C;&#x9009;&#x62E9;&#x76F8;&#x5E94;&#x7684;&#x52A0;&#x8F7D;&#x5668;&#x628A;&#x6587;&#x672C;&#x52A0;&#x8F7D;&#x4E3A; DataSet&#xFF0C;&#x56E0;&#x4E3A;&#x76EE;&#x524D;&#x53EA;&#x652F;&#x6301; CSV&#xFF0C;&#x4F46;&#x672A;&#x6765;&#x53EF;&#x4EE5;&#x652F;&#x6301; JSON &#x7B49;&#x5176;&#x4ED6;&#x683C;&#x5F0F;&#x3002;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x5B9A;&#x4E49;&#x5728; src/loader.rs &#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x6DFB;&#x5165;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> crate::DataSet;
+<span class="hljs-keyword">use</span> anyhow::<span class="hljs-built_in">Result</span>;
+<span class="hljs-keyword">use</span> polars::prelude::*;
+<span class="hljs-keyword">use</span> std::io::Cursor;
+
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Load</span></span> {
+    <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Error</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">load</span></span>(<span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Result</span>&lt;DataSet, Self::Error&gt;;
+}
+
+<span class="hljs-meta">#[derive(Debug)]</span>
+<span class="hljs-meta">#[non_exhaustive]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Loader</span></span> {
+    Csv(CsvLoader),
+}
+
+<span class="hljs-meta">#[derive(Default, Debug)]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">CsvLoader</span></span>(<span class="hljs-keyword">pub</span>(<span class="hljs-keyword">crate</span>) <span class="hljs-built_in">String</span>);
+
+<span class="hljs-keyword">impl</span> Loader {
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">load</span></span>(<span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Result</span>&lt;DataSet&gt; {
+        <span class="hljs-keyword">match</span> <span class="hljs-keyword">self</span> {
+            Loader::Csv(csv) =&gt; csv.load(),
+        }
+    }
+}
+
+<span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">detect_content</span></span>(data: <span class="hljs-built_in">String</span>) -&gt; Loader {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> &#x5185;&#x5BB9;&#x68C0;&#x6D4B;</span>
+    Loader::Csv(CsvLoader(data))
+}
+
+<span class="hljs-keyword">impl</span> Load <span class="hljs-keyword">for</span> CsvLoader {
+    <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Error</span></span> = anyhow::Error;
+
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">load</span></span>(<span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Result</span>&lt;DataSet, Self::Error&gt; {
+        <span class="hljs-keyword">let</span> df = CsvReader::new(Cursor::new(<span class="hljs-keyword">self</span>.<span class="hljs-number">0</span>))
+            .infer_schema(<span class="hljs-literal">Some</span>(<span class="hljs-number">16</span>))
+            .finish()?;
+        <span class="hljs-literal">Ok</span>(DataSet(df))
+    }
+}
+</code></pre>
+<p>&#x540C;&#x6837;&#xFF0C;&#x901A;&#x8FC7; trait&#xFF0C;&#x6211;&#x4EEC;&#x867D;&#x7136;&#x76EE;&#x524D;&#x53EA;&#x652F;&#x6301; CsvLoader&#xFF0C;&#x4F46;&#x4FDD;&#x7559;&#x4E86;&#x4E3A;&#x672A;&#x6765;&#x6DFB;&#x52A0;&#x66F4;&#x591A; Loader &#x7684;&#x63A5;&#x53E3;&#x3002;</p>
+<p>&#x597D;&#xFF0C;&#x73B0;&#x5728;&#x8FD9;&#x4E2A;&#x5E93;&#x5C31;&#x5168;&#x90E8;&#x5199;&#x5B8C;&#x4E86;&#xFF0C;&#x5C1D;&#x8BD5;&#x7F16;&#x8BD1;&#x4E00;&#x4E0B;&#x3002;&#x5982;&#x679C;&#x9047;&#x5230;&#x4E86;&#x95EE;&#x9898;&#xFF0C;&#x4E0D;&#x8981;&#x7740;&#x6025;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x95E8;&#x8BFE;&#x7684; <a href="https://github.com/tyrchen/geektime-rust/blob/master/06_queryer/queryer" target="_blank">GitHub repo</a> &#x91CC;&#x83B7;&#x53D6;&#x5B8C;&#x6574;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x7136;&#x540E;&#x5BF9;&#x5E94;&#x4FEE;&#x6539;&#x4F60;&#x672C;&#x5730;&#x7684;&#x9519;&#x8BEF;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4EE3;&#x7801;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#x4E86;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x4E4B;&#x524D;&#x7684; examples/covid.rs&#xFF0C;&#x4F7F;&#x7528; SQL &#x6765;&#x67E5;&#x8BE2;&#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> anyhow::<span class="hljs-built_in">Result</span>;
+<span class="hljs-keyword">use</span> queryer::query;
+
+<span class="hljs-meta">#[tokio::main]</span>
+async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() -&gt; <span class="hljs-built_in">Result</span>&lt;()&gt; {
+    tracing_subscriber::fmt::init();
+
+    <span class="hljs-keyword">let</span> url = <span class="hljs-string">&quot;https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv&quot;</span>;
+
+    <span class="hljs-comment">// &#x4F7F;&#x7528; sql &#x4ECE; URL &#x91CC;&#x83B7;&#x53D6;&#x6570;&#x636E;</span>
+    <span class="hljs-keyword">let</span> sql = <span class="hljs-built_in">format!</span>(
+        <span class="hljs-string">&quot;SELECT location name, total_cases, new_cases, total_deaths, new_deaths \
+        FROM {} where new_deaths &gt;= 500 ORDER BY new_cases DESC&quot;</span>,
+        url
+    );
+    <span class="hljs-keyword">let</span> df1 = query(sql).await?;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, df1);
+
+    <span class="hljs-literal">Ok</span>(())
+}
+</code></pre>
+<p>Bingo&#xFF01;&#x4E00;&#x5207;&#x6B63;&#x5E38;&#xFF0C;&#x6211;&#x4EEC;&#x5B8C;&#x6210;&#x4E86;&#xFF0C;&#x7528; SQL &#x8BED;&#x53E5;&#x8BF7;&#x6C42;&#x7F51;&#x7EDC;&#x4E0A;&#x7684;&#x67D0;&#x4E2A; CSV &#xFF0C;&#x5E76;&#x5BF9; CSV &#x505A;&#x67E5;&#x8BE2;&#x548C;&#x6392;&#x5E8F;&#xFF0C;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x7684;&#x6B63;&#x786E;&#x65E0;&#x8BEF;&#xFF01;<br><img src="https://static001.geekbang.org/resource/image/be/7f/be4577cd181ea6e9fc44f5b6e735867f.png?wh=1662x1256" alt=""></p>
+<p>&#x7528; tokei &#x67E5;&#x770B;&#x4EE3;&#x7801;&#x884C;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x7528;&#x4E86; 375 &#x884C;&#xFF0C;&#x8FDC;&#x4F4E;&#x4E8E; 500 &#x884C;&#x7684;&#x76EE;&#x6807;&#xFF01;</p>
+<pre><code class="lang-bash">&#x276F; tokei src/
+-------------------------------------------------------------------------------
+ Language            Files        Lines         Code     Comments       Blanks
+-------------------------------------------------------------------------------
+ Rust                    5          466          375           22           69
+-------------------------------------------------------------------------------
+ Total                   5          466          375           22           69
+-------------------------------------------------------------------------------
+</code></pre>
+<p>&#x5728;&#x8FD9;&#x4E48;&#x5C0F;&#x7684;&#x4EE3;&#x7801;&#x91CF;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x67B6;&#x6784;&#x4E0A;&#x505A;&#x4E86;&#x5F88;&#x591A;&#x4E3A;&#x89E3;&#x8026;&#x8003;&#x8651;&#x7684;&#x5DE5;&#x4F5C;&#xFF1A;&#x6574;&#x4E2A;&#x67B6;&#x6784;&#x88AB;&#x62C6;&#x6210;&#x4E86; Sql Parser&#x3001;Fetcher&#x3001;Loader &#x548C; query &#x56DB;&#x4E2A;&#x90E8;&#x5206;&#x3002;<br><img src="https://static001.geekbang.org/resource/image/35/1d/3580d96a85486849c9535cbdc6a6e51d.jpg?wh=1920x777" alt=""><br>&#x5176;&#x4E2D;&#x672A;&#x6765;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x53D8;&#x5316;&#x7684; Fetcher &#x548C; Loader &#x53EF;&#x4EE5;&#x8F7B;&#x677E;&#x6269;&#x5C55;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x4E00;&#x5F00;&#x59CB;&#x63D0;&#x5230;&#x7684;&#x90A3;&#x4E2A; &#x201C;select * from ps&#x201D;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x4E00;&#x4E2A; StdoutFetcher &#x548C; TsvLoader &#x6765;&#x5904;&#x7406;&#x3002;</p>
+<h2 id="&#x652F;&#x6301;&#x5176;&#x5B83;&#x8BED;&#x8A00;">&#x652F;&#x6301;&#x5176;&#x5B83;&#x8BED;&#x8A00;</h2>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x6838;&#x5FC3;&#x4EE3;&#x7801;&#x5199;&#x5B8C;&#x4E86;&#xFF0C;&#x6709;&#x6CA1;&#x6709;&#x611F;&#x89C9;&#x81EA;&#x5DF1;&#x6210;&#x5C31;&#x611F;&#x7206;&#x68DA;&#xFF0C;&#x5B9E;&#x73B0;&#x7684;queryer&#x5DE5;&#x5177;&#x53EF;&#x4EE5;&#x5728; Rust &#x4E0B;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x5E93;&#xFF0C;&#x63D0;&#x4F9B;&#x7ED9;&#x5176;&#x5B83; Rust &#x7A0B;&#x5E8F;&#x7528;&#xFF0C;&#x8FD9;&#x5F88;&#x7F8E;&#x5999;&#x3002;</p>
+<p>&#x4F46;&#x6211;&#x4EEC;&#x7684;&#x6545;&#x4E8B;&#x8FD8;&#x8FDC;&#x4E0D;&#x6B62;&#x5982;&#x6B64;&#x3002;&#x8FD9;&#x4E48;&#x725B;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x53EA;&#x80FD; Rust &#x7A0B;&#x5E8F;&#x5458;&#x4EAB;&#x7528;&#xFF0C;&#x592A;&#x66B4;&#x6B84;&#x5929;&#x7269;&#x4E86;&#x3002;&#x6BD5;&#x7ADF;&#x72EC;&#x4E50;&#x4E50;&#x4E0D;&#x5982;&#x4F17;&#x4E50;&#x4E50;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x8BD5;&#x7740;<strong>&#x5C06;&#x5B83;&#x96C6;&#x6210;&#x5230;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#xFF0C;&#x6BD4;&#x5982;&#x5E38;&#x7528;&#x7684; Node.js/Python</strong>&#x3002;</p>
+<p>Node.js/Python &#x4E2D;&#x6709;&#x5F88;&#x591A;&#x9AD8;&#x6027;&#x80FD;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x90FD;&#x662F; C/C++ &#x5199;&#x7684;&#xFF0C;&#x4F46;&#x8DE8;&#x8BED;&#x8A00;&#x8C03;&#x7528;&#x5F80;&#x5F80;&#x6D89;&#x53CA;&#x7E41;&#x6742;&#x7684;&#x63A5;&#x53E3;&#x8F6C;&#x6362;&#x4EE3;&#x7801;&#xFF0C;&#x6240;&#x4EE5;&#x7528; C/C++ &#xFF0C;&#x5199;&#x8FD9;&#x4E9B;&#x63A5;&#x53E3;&#x8F6C;&#x6362;&#x7684;&#x65F6;&#x5019;&#x975E;&#x5E38;&#x75DB;&#x82E6;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x770B;&#x770B;&#x5982;&#x679C;&#x7528; Rust &#x7684;&#x8BDD;&#xFF0C;&#x80FD;&#x5426;&#x907F;&#x514D;&#x8FD9;&#x4E9B;&#x7E41;&#x6587;&#x7F1B;&#x8282;&#xFF1F;&#x6BD5;&#x7ADF;&#xFF0C;&#x6211;&#x4EEC;&#x5BF9;&#x4F7F;&#x7528; Rust &#xFF0C;&#x4E3A;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x63D0;&#x4F9B;&#x9AD8;&#x6027;&#x80FD;&#x4EE3;&#x7801;&#xFF0C;&#x6709;&#x5F88;&#x9AD8;&#x7684;&#x671F;&#x671B;&#xFF0C;&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E5F;&#x5F88;&#x590D;&#x6742;&#xFF0C;&#x90A3;&#x600E;&#x4E48;&#x7528;&#x5F97;&#x8D77;&#x6765;&#xFF1F;</p>
+<p>&#x5BF9;&#x4E8E; queryer &#x5E93;&#xFF0C;&#x6211;&#x4EEC;&#x60F3;&#x66B4;&#x9732;&#x51FA;&#x6765;&#x7684;&#x4E3B;&#x8981;&#x63A5;&#x53E3;&#x662F;&#xFF1A;query&#xFF0C;&#x7528;&#x6237;&#x4F20;&#x5165;&#x4E00;&#x4E2A; SQL &#x5B57;&#x7B26;&#x4E32;&#x548C;&#x4E00;&#x4E2A;&#x8F93;&#x51FA;&#x7C7B;&#x578B;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6309;&#x7167; SQL &#x67E5;&#x8BE2;&#x5904;&#x7406;&#x8FC7;&#x7684;&#x3001;&#x7B26;&#x5408;&#x8F93;&#x51FA;&#x7C7B;&#x578B;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x6BD4;&#x5982;&#x5BF9; Python &#x6765;&#x8BF4;&#xFF0C;&#x5C31;&#x662F;&#x4E0B;&#x9762;&#x7684;&#x63A5;&#x53E3;&#xFF1A;</p>
+<pre><code class="lang-python">def query(sql, output = &apos;csv&apos;)
+</code></pre>
+<p>&#x597D;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x8BD5;&#x8BD5;&#x770B;&#x3002;</p>
+<p>&#x5148;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x76EE;&#x5F55; queryer &#x4F5C;&#x4E3A; workspace&#xFF0C;&#x628A;&#x73B0;&#x6709;&#x7684; queryer &#x79FB;&#x8FDB;&#x53BB;&#xFF0C;&#x6210;&#x4E3A;&#x5B83;&#x7684;&#x5B50;&#x76EE;&#x5F55;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; Cargo.toml&#xFF0C;&#x5305;&#x542B;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-bash">[workspace]
+
+members = [
+  <span class="hljs-string">&quot;queryer&quot;</span>,
+  <span class="hljs-string">&quot;queryer-py&quot;</span>
+]
+</code></pre>
+<h3 id="python">Python</h3>
+<p>&#x6211;&#x4EEC;&#x5728; workspace &#x7684;&#x6839;&#x76EE;&#x5F55;&#x4E0B;&#xFF0C; <code>cargo new queryer-py --lib</code> &#xFF0C;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x65B0;&#x7684; crate&#x3002;&#x5728; queryer-py &#x4E0B;&#xFF0C;&#x7F16;&#x8F91; Cargo.toml&#xFF1A;</p>
+<pre><code class="lang-bash">[package]
+name = <span class="hljs-string">&quot;queryer_py&quot;</span> <span class="hljs-comment"># Python &#x6A21;&#x5757;&#x9700;&#x8981;&#x7528;&#x4E0B;&#x5212;&#x7EBF;</span>
+version = <span class="hljs-string">&quot;0.1.0&quot;</span>
+edition = <span class="hljs-string">&quot;2018&quot;</span>
+
+[lib]
+crate-type = [<span class="hljs-string">&quot;cdylib&quot;</span>] <span class="hljs-comment"># &#x4F7F;&#x7528; cdylib &#x7C7B;&#x578B;</span>
+
+[dependencies]
+queryer = { path = <span class="hljs-string">&quot;../queryer&quot;</span> } <span class="hljs-comment"># &#x5F15;&#x5165; queryer</span>
+tokio = { version = <span class="hljs-string">&quot;1&quot;</span>, features = [<span class="hljs-string">&quot;full&quot;</span>] }
+
+[dependencies.pyo3] <span class="hljs-comment"># &#x5F15;&#x5165; pyo3</span>
+version = <span class="hljs-string">&quot;0.14&quot;</span>
+features = [<span class="hljs-string">&quot;extension-module&quot;</span>]
+
+[build-dependencies]
+pyo3-build-config = <span class="hljs-string">&quot;0.14&quot;</span>
+</code></pre>
+<p>Rust &#x548C; Python &#x4EA4;&#x4E92;&#x7684;&#x5E93;&#x662F; <a href="https://github.com/PyO3/pyo3" target="_blank">pyo3</a>&#xFF0C;&#x611F;&#x5174;&#x8DA3;&#x4F60;&#x53EF;&#x4EE5;&#x8BFE;&#x540E;&#x770B;&#x5B83;&#x7684;&#x6587;&#x6863;&#x3002;&#x5728; src/lib.rs &#x4E0B;&#xFF0C;&#x6DFB;&#x5165;&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> pyo3::{exceptions, prelude::*};
+
+<span class="hljs-meta">#[pyfunction]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">example_sql</span></span>() -&gt; PyResult&lt;<span class="hljs-built_in">String</span>&gt; {
+    <span class="hljs-literal">Ok</span>(queryer::example_sql())
+}
+
+<span class="hljs-meta">#[pyfunction]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">query</span></span>(sql: &amp;<span class="hljs-keyword">str</span>, output: <span class="hljs-built_in">Option</span>&lt;&amp;<span class="hljs-keyword">str</span>&gt;) -&gt; PyResult&lt;<span class="hljs-built_in">String</span>&gt; {
+    <span class="hljs-keyword">let</span> rt = tokio::runtime::Runtime::new().unwrap();
+    <span class="hljs-keyword">let</span> data = rt.block_on(async { queryer::query(sql).await.unwrap() });
+    <span class="hljs-keyword">match</span> output {
+        <span class="hljs-literal">Some</span>(<span class="hljs-string">&quot;csv&quot;</span>) | <span class="hljs-literal">None</span> =&gt; <span class="hljs-literal">Ok</span>(data.to_csv().unwrap()),
+        <span class="hljs-literal">Some</span>(v) =&gt; <span class="hljs-literal">Err</span>(exceptions::PyTypeError::new_err(<span class="hljs-built_in">format!</span>(
+            <span class="hljs-string">&quot;Output type {} not supported&quot;</span>,
+            v
+        ))),
+    }
+}
+
+<span class="hljs-meta">#[pymodule]</span>
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">queryer_py</span></span>(_py: Python, m: &amp;PyModule) -&gt; PyResult&lt;()&gt; {
+    m.add_function(wrap_pyfunction!(query, m)?)?;
+    m.add_function(wrap_pyfunction!(example_sql, m)?)?;
+    <span class="hljs-literal">Ok</span>(())
+}
+</code></pre>
+<p>&#x5373;&#x4F7F;&#x6211;&#x4E0D;&#x89E3;&#x91CA;&#x8FD9;&#x4E9B;&#x4EE3;&#x7801;&#xFF0C;&#x4F60;&#x4E5F;&#x57FA;&#x672C;&#x80FD;&#x660E;&#x767D;&#x5B83;&#x5728;&#x5E72;&#x561B;&#x3002;&#x6211;&#x4EEC;&#x4E3A; Python &#x6A21;&#x5757;&#x63D0;&#x4F9B;&#x4E86;&#x4E24;&#x4E2A;&#x63A5;&#x53E3; example_sql &#x548C; query&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x5728; queryer-py &#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x521B;&#x5EFA; virtual env&#xFF0C;&#x7136;&#x540E;&#x7528; <code>maturin develop</code> &#x6784;&#x5EFA; python &#x6A21;&#x5757;&#xFF1A;</p>
+<pre><code class="lang-bash">python3 -m venv .env
+<span class="hljs-built_in">source</span> .env/bin/activate
+pip install maturin ipython
+maturin develop
+</code></pre>
+<p>&#x6784;&#x5EFA;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x7528; ipython &#x6D4B;&#x8BD5;&#xFF1A;</p>
+<pre><code class="lang-bash">In [1]: import queryer_py
+
+In [2]: sql = queryer_py.example_sql()
+
+In [3]: <span class="hljs-built_in">print</span>(queryer_py.query(sql, <span class="hljs-string">&apos;csv&apos;</span>))
+name,total_cases,new_cases,total_deaths,new_deaths
+India,32649947.0,46759.0,437370.0,509.0
+Iran,4869414.0,36279.0,105287.0,571.0
+Africa,7695475.0,33957.0,193394.0,764.0
+South America,36768062.0,33853.0,1126593.0,1019.0
+Brazil,20703906.0,27345.0,578326.0,761.0
+Mexico,3311317.0,19556.0,257150.0,863.0
+
+In [4]: <span class="hljs-built_in">print</span>(queryer_py.query(sql, <span class="hljs-string">&apos;json&apos;</span>))
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-4-7082f1ffe46a&gt; <span class="hljs-keyword">in</span> &lt;module&gt;
+----&gt; 1 <span class="hljs-built_in">print</span>(queryer_py.query(sql, <span class="hljs-string">&apos;json&apos;</span>))
+
+TypeError: Output <span class="hljs-built_in">type</span> json not supported
+</code></pre>
+<p>Cool&#xFF01;&#x4EC5;&#x4EC5;&#x5199;&#x4E86; 20 &#x884C;&#x4EE3;&#x7801;&#xFF0C;&#x5C31;&#x8BA9;&#x6211;&#x4EEC;&#x7684;&#x6A21;&#x5757;&#x53EF;&#x4EE5;&#x88AB; Python &#x8C03;&#x7528;&#xFF0C;&#x9519;&#x8BEF;&#x5904;&#x7406;&#x4E5F;&#x5F88;&#x6B63;&#x5E38;&#x3002;&#x4F60;&#x770B;&#xFF0C;&#x5728;&#x7528; Rust &#x5E93;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x6211;&#x4EEC;&#x7A0D;&#x5FAE;&#x5199;&#x4E00;&#x4E9B;&#x8F85;&#x52A9;&#x4EE3;&#x7801;&#xFF0C;&#x5C31;&#x80FD;&#x591F;&#x8BA9;&#x5B83;&#x548C;&#x4E0D;&#x540C;&#x7684;&#x8BED;&#x8A00;&#x96C6;&#x6210;&#x8D77;&#x6765;&#x3002;&#x6211;&#x89C9;&#x5F97;&#x8FD9;&#x662F; Rust &#x975E;&#x5E38;&#x6709;&#x6F5C;&#x529B;&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x5411;&#x3002;</p>
+<p>&#x6BD5;&#x7ADF;&#xFF0C;&#x5BF9;&#x5F88;&#x591A;&#x516C;&#x53F8;&#x6765;&#x8BF4;&#xFF0C;&#x539F;&#x6709;&#x7684;&#x4EE3;&#x7801;&#x5E93;&#x60F3;&#x8981;&#x5B8C;&#x6574;&#x8FC1;&#x79FB;&#x5230; Rust &#x6210;&#x672C;&#x5F88;&#x5927;&#xFF0C;&#x4F46;&#x662F;&#x901A;&#x8FC7; Rust &#x548C;&#x5404;&#x4E2A;&#x8BED;&#x8A00;&#x8F7B;&#x4FBF;&#x5730;&#x96C6;&#x6210;&#xFF0C;&#x53EF;&#x4EE5;&#x628A;&#x90E8;&#x5206;&#x9700;&#x8981;&#x9AD8;&#x6027;&#x80FD;&#x7684;&#x4EE3;&#x7801;&#x8FC1;&#x79FB;&#x5230; Rust&#xFF0C;&#x5C1D;&#x5230;&#x751C;&#x5934;&#xFF0C;&#x518D;&#x4E00;&#x70B9;&#x70B9;&#x63A8;&#x5E7F;&#x3002;&#x8FD9;&#x6837;&#xFF0C;Rust &#x5C31;&#x80FD;&#x5E94;&#x7528;&#x8D77;&#x6765;&#x4E86;&#x3002;</p>
+<h2 id="&#x5C0F;&#x7ED3;">&#x5C0F;&#x7ED3;</h2>
+<p>&#x56DE;&#x987E;&#x8FD9;&#x5468;&#x7684; Rust &#x4EE3;&#x7801;&#x4E4B;&#x65C5;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x505A;&#x4E86;&#x4E2A; HTTPie&#xFF0C;&#x6D41;&#x7A0B;&#x7B80;&#x5355;&#xFF0C;&#x9752;&#x94DC;&#x7EA7;&#x96BE;&#x5EA6;&#xFF0C;&#x4F60;&#x5B66;&#x5B8C;&#x6240;&#x6709;&#x6743;&#xFF0C;&#x7406;&#x89E3;&#x4E86;&#x57FA;&#x672C;&#x7684; trait &#x540E;&#x5C31;&#x80FD;&#x5199;&#x3002;</p>
+<p>&#x4E4B;&#x540E;&#x7684; Thumbor&#xFF0C;&#x5F15;&#x5165;&#x4E86;&#x5F02;&#x6B65;&#x3001;&#x6CDB;&#x578B;&#x548C;&#x66F4;&#x591A;&#x7684; trait&#xFF0C;&#x767D;&#x94F6;&#x7EA7;&#x96BE;&#x5EA6;&#xFF0C;&#x5728;&#x4F60;&#x5B66;&#x5B8C;&#x7C7B;&#x578B;&#x7CFB;&#x7EDF;&#xFF0C;&#x5BF9;&#x5F02;&#x6B65;&#x7A0D;&#x6709;&#x4E86;&#x89E3;&#x540E;&#xFF0C;&#x5E94;&#x8BE5;&#x53EF;&#x4EE5;&#x641E;&#x5B9A;&#x3002;</p>
+<p>&#x4ECA;&#x5929;&#x7684; Queryer&#xFF0C;&#x4F7F;&#x7528;&#x4E86;&#x5927;&#x91CF;&#x7684; trait &#xFF0C;&#x6765;&#x8BA9;&#x4EE3;&#x7801;&#x7ED3;&#x6784;&#x8DB3;&#x591F;&#x7B26;&#x5408;&#x5F00;&#x95ED;&#x539F;&#x5219;&#x548C;&#x5173;&#x6CE8;&#x70B9;&#x5206;&#x79BB;&#xFF0C;&#x7528;&#x4E86;&#x4E0D;&#x5C11;&#x751F;&#x547D;&#x5468;&#x671F;&#x6807;&#x6CE8;&#xFF0C;&#x6765;&#x51CF;&#x5C11;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x5185;&#x5B58;&#x62F7;&#x8D1D;&#xFF0C;&#x8FD8;&#x505A;&#x4E86;&#x4E0D;&#x5C11;&#x590D;&#x6742;&#x7684;&#x6A21;&#x5F0F;&#x5339;&#x914D;&#x6765;&#x83B7;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x662F;&#x9EC4;&#x91D1;&#x7EA7;&#x96BE;&#x5EA6;&#xFF0C;&#x5728;&#x5B66;&#x5B8C;&#x672C;&#x8BFE;&#x7A0B;&#x7684;&#x8FDB;&#x9636;&#x7BC7;&#x540E;&#xFF0C;&#x4F60;&#x5E94;&#x8BE5;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x8FD9;&#x4E9B;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x5F88;&#x591A;&#x4EBA;&#x89C9;&#x5F97; Rust &#x4EE3;&#x7801;&#x5F88;&#x96BE;&#x5199;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x6CDB;&#x578B;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x751F;&#x547D;&#x5468;&#x671F;&#x6405;&#x5728;&#x4E00;&#x8D77;&#x7684;&#x65F6;&#x5019;&#x3002;&#x4F46;&#x5728;&#x524D;&#x4E24;&#x4E2A;&#x4F8B;&#x5B50;&#x91CC;&#xFF0C;&#x751F;&#x547D;&#x5468;&#x671F;&#x7684;&#x6807;&#x6CE8;&#x53EA;&#x51FA;&#x73B0;&#x8FC7;&#x4E86;&#x4E00;&#x6B21;&#x3002;&#x6240;&#x4EE5;&#xFF0C;<strong>&#x5176;&#x5B9E;&#x5927;&#x90E8;&#x5206;&#x65F6;&#x5019;&#xFF0C;&#x4F60;&#x7684;&#x4EE3;&#x7801;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x590D;&#x6742;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x6807;&#x6CE8;</strong>&#x3002;</p>
+<p>&#x53EA;&#x8981;&#x5BF9;&#x6240;&#x6709;&#x6743;&#x548C;&#x751F;&#x547D;&#x5468;&#x671F;&#x7684;&#x7406;&#x89E3;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x9677;&#x5165;&#x4E86;&#x65E0;&#x4F11;&#x6B62;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x6807;&#x6CE8;&#xFF0C;&#x548C;&#x7F16;&#x8BD1;&#x5668;&#x75DB;&#x82E6;&#x5730;&#x640F;&#x6597;&#xFF0C;&#x90A3;&#x4F60;&#x4E5F;&#x8BB8;&#x8981;&#x505C;&#x4E0B;&#x6765;&#x5148;&#x60F3;&#x4E00;&#x60F3;&#xFF1A;</p>
+<p>&#x7F16;&#x8BD1;&#x5668;&#x5982;&#x6B64;&#x4E0D;&#x559C;&#x6B22;&#x6211;&#x7684;&#x5199;&#x6CD5;&#xFF0C;&#x4F1A;&#x4E0D;&#x4F1A;&#x6211;&#x7684;&#x8BBE;&#x8BA1;&#x672C;&#x8EAB;&#x5C31;&#x6709;&#x95EE;&#x9898;&#x5462;&#xFF1F;&#x6211;&#x662F;&#x4E0D;&#x662F;&#x8BE5;&#x4F7F;&#x7528;&#x66F4;&#x597D;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF1F;&#x6211;&#x662F;&#x4E0D;&#x662F;&#x8BE5;&#x91CD;&#x65B0;&#x8BBE;&#x8BA1;&#x4E00;&#x4E0B;&#xFF1F;&#x6211;&#x7684;&#x4EE3;&#x7801;&#x662F;&#x4E0D;&#x662F;&#x8FC7;&#x5EA6;&#x8026;&#x5408;&#x4E86;&#xFF1F;</p>
+<p>&#x5C31;&#x50CF;&#x8334;&#x9999;&#x8C46;&#x7684;&#x8334;&#x5B57;&#x6709;&#x56DB;&#x79CD;&#x5199;&#x6CD5;&#x4E00;&#x6837;&#xFF0C;&#x540C;&#x4E00;&#x4E2A;&#x9700;&#x6C42;&#xFF0C;&#x7528;&#x76F8;&#x540C;&#x7684;&#x8BED;&#x8A00;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x4EBA;&#x4E5F;&#x4F1A;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x5199;&#x6CD5;&#x3002;&#x4F46;&#x662F;&#xFF0C;<strong>&#x4F18;&#x79C0;&#x7684;&#x8BBE;&#x8BA1;&#x4E00;&#x5B9A;&#x662F;&#x4EA7;&#x751F;&#x7B80;&#x5355;&#x6613;&#x8BFB;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x76F8;&#x53CD;</strong>&#x3002;</p>
+<p>&#x597D;&#xFF0C;&#x8FD9;&#x5468;&#x7684;&#x4EE3;&#x7801;&#x4E4B;&#x65C5;&#x5C31;&#x544A;&#x4E00;&#x6BB5;&#x843D;&#x4E86;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5C31;&#x8981;&#x5C55;&#x5F00;&#x4E00;&#x6BB5;&#x58EE;&#x4E3D;&#x7684;&#x63A2;&#x9669;&#xFF0C;&#x4F60;&#x5C06;&#x4F1A;&#x50CF;&#x6BD4;&#x5C14;&#x535A;&#xB7;&#x5DF4;&#x91D1;&#x65AF;&#x90A3;&#x6837;&#xFF0C;&#x5728;&#x901A;&#x5F80;&#x5B64;&#x5C71;&#x7684;&#x5192;&#x9669;&#x4E4B;&#x65C5;&#x4E2D;&#xFF0C;&#x4E00;&#x70B9;&#x70B9;&#x63A2;&#x7D22;&#x8FF7;&#x4EBA;&#x7684;&#x4E2D;&#x571F;&#x4E16;&#x754C;&#x3002;&#x7B49;&#x5230;&#x6211;&#x4EEC;&#x5B66;&#x5B8C;&#x4E86;&#x6240;&#x6709;&#x6743;&#x3001;&#x7C7B;&#x578B;&#x7CFB;&#x7EDF;&#x3001;trait&#x3001;&#x667A;&#x80FD;&#x6307;&#x9488;&#x7B49;&#x5185;&#x5BB9;&#x4E4B;&#x540E;&#xFF0C;&#x518D;&#x6765;&#x770B;&#x8FD9;&#x4E09;&#x4E2A;&#x5B9E;&#x4F8B;&#xFF0C;&#x76F8;&#x4FE1;&#x4F60;&#x4F1A;&#x6709;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x611F;&#x609F;&#x3002;&#x6211;&#x4E5F;&#x4F1A;&#x5728;&#x540E;&#x7EED;&#x7684;&#x8BFE;&#x7A0B;&#x4E2D;&#xFF0C;&#x6839;&#x636E;&#x5DF2;&#x5B66;&#x5185;&#x5BB9;&#xFF0C;&#x56DE;&#x987E;&#x4ECA;&#x5929;&#x5199;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x7EE7;&#x7EED;&#x4F18;&#x5316;&#x548C;&#x5B8C;&#x5584;&#x5B83;&#x4EEC;&#x3002;</p>
+<h2 id="&#x601D;&#x8003;&#x9898;">&#x601D;&#x8003;&#x9898;</h2>
+<p>Node.js &#x7684;&#x5904;&#x7406;&#x548C; Python &#x975E;&#x5E38;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x63A5;&#x53E3;&#x4E0D;&#x592A;&#x4E00;&#x6837;&#xFF0C;&#x5C31;&#x4F5C;&#x4E3A;&#x4ECA;&#x5929;&#x7684;&#x601D;&#x8003;&#x9898;&#x8BA9;&#x4F60;&#x5C1D;&#x8BD5;&#x4E00;&#x4E0B;&#x3002;&#x5C0F;&#x63D0;&#x793A;&#xFF1A;Rust &#x548C; nodejs &#x95F4;&#x4EA4;&#x4E92;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <a href="https://github.com/neon-bindings/neon" target="_blank">neon</a>&#x3002;</p>
+<p>&#x6B22;&#x8FCE;&#x5728;&#x7559;&#x8A00;&#x533A;&#x5206;&#x4EAB;&#x4F60;&#x7684;&#x601D;&#x8003;&#x3002;&#x4F60;&#x7684; Rust &#x5B66;&#x4E60;&#x7B2C;&#x516D;&#x6B21;&#x6253;&#x5361;&#x6210;&#x529F;&#xFF0C;&#x6211;&#x4EEC;&#x4E0B;&#x4E00;&#x8BB2;&#x89C1;&#xFF01;</p>
+<h2 id="&#x53C2;&#x8003;&#x8D44;&#x6599;">&#x53C2;&#x8003;&#x8D44;&#x6599;</h2>
+<p>&#x6211;&#x4EEC;&#x7684; queryer &#x5E93;&#x76EE;&#x524D;&#x4F7F;&#x7528;&#x5230;&#x4E86;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x6BD4;&#x5982;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x65E0;&#x6CD5;&#x88AB;&#x7F16;&#x8BD1;&#x6210; WebAssembly&#x3002;&#x672A;&#x6765;&#x5982;&#x679C;&#x80FD;&#x79FB;&#x9664;&#x5BF9;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684;&#x4F9D;&#x8D56;&#xFF0C;&#x8FD9;&#x4E2A;&#x4EE3;&#x7801;&#x8FD8;&#x80FD;&#x88AB;&#x7F16;&#x8BD1;&#x6210; WASM&#xFF0C;&#x4F9B; Web &#x524D;&#x7AEF;&#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x60F3;&#x5728; iOS/Android &#x4E0B;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5E93;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x7C7B;&#x4F3C; Python/Node.js &#x7684;&#x65B9;&#x6CD5;&#x505A;&#x63A5;&#x53E3;&#x5C01;&#x88C5;&#xFF0C;Mozilla &#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A; <a href="https://github.com/mozilla/uniffi-rs" target="_blank">uniffi</a> &#x7684;&#x5E93;&#xFF0C;&#x5B83;&#x81EA;&#x5DF1;&#x7684; Firefox &#x5404;&#x4E2A;&#x7AEF;&#x4E5F;&#x662F;&#x8FD9;&#x4E48;&#x5904;&#x7406;&#x7684;&#xFF1A;</p>
+<p><img src="https://static001.geekbang.org/resource/image/ab/f2/ab423b37a2c4b6bc3f5c17ca2c2e1af2.png?wh=3641x2386" alt=""></p>
+<p>&#x5BF9;&#x4E8E;&#x684C;&#x9762;&#x5F00;&#x53D1;&#xFF0C;Rust &#x4E0B;&#x6709;&#x4E00;&#x4E2A;&#x5F88;&#x6709;&#x6F5C;&#x529B;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x5F00;&#x53D1;&#x5DE5;&#x5177; <a href="https://github.com/tauri-apps/tauri" target="_blank">tauri</a>&#xFF0C;&#x5B83;&#x5F88;&#x6709;&#x673A;&#x4F1A;&#x53D6;&#x4EE3;&#x5F88;&#x591A;&#x4F7F;&#x7528; Electron &#x7684;&#x573A;&#x5408;&#x3002;</p>
+<p>&#x6211;&#x5199;&#x4E86;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684; tuari App &#x53EB; data-viewer&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x611F;&#x5174;&#x8DA3;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x5728; <a href="https://github.com/tyrchen/geektime-rust/blob/master/06_queryer/data-viewer" target="_blank">github repo</a> &#x4E0B;&#x7684; data-viewer &#x76EE;&#x5F55;&#x4E0B;&#x770B; tauri &#x4F7F;&#x7528; queryer &#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x4E0B;&#x9762;&#x662F;&#x8FD0;&#x884C;&#x540E;&#x7684;&#x6548;&#x679C;&#x3002;&#x4E3A;&#x4E86;&#x8BA9;&#x4EE3;&#x7801;&#x6700;&#x7B80;&#x5355;&#xFF0C;&#x524D;&#x7AEF;&#x6CA1;&#x6709;&#x7528;&#x4EFB;&#x4F55;&#x6846;&#x67B6;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x662F;&#x4E00;&#x540D;&#x524D;&#x7AEF;&#x5F00;&#x53D1;&#x8005;&#xFF0C;&#x53EF;&#x4EE5;&#x7528; Vue &#x6216;&#x8005; React &#x52A0;&#x4E0A;&#x4E00;&#x4E2A;&#x5408;&#x9002;&#x7684; CSS &#x5E93;&#x8BA9;&#x6574;&#x4E2A;&#x754C;&#x9762;&#x53D8;&#x5F97;&#x66F4;&#x52A0;&#x53CB;&#x597D;&#x3002;<br><img src="https://static001.geekbang.org/resource/image/82/e7/826ef4913c54c81f8a5fa25ca92481e7.png?wh=2000x1433" alt=""></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="413634.html" class="navigation navigation-prev " aria-label="Previous page: 05｜get hands dirty：做一个图片服务器有多难？">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="415098.html" class="navigation navigation-next " aria-label="Next page: 07｜所有权：值的生杀大权到底在谁手上？">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"06｜get hands dirty：SQL查询工具怎么一鱼多吃？","level":"1.9","depth":1,"next":{"title":"07｜所有权：值的生杀大权到底在谁手上？","level":"1.10","depth":1,"path":"docs/415098.md","ref":"./docs/415098.md","articles":[]},"previous":{"title":"05｜get hands dirty：做一个图片服务器有多难？","level":"1.8","depth":1,"path":"docs/413634.md","ref":"./docs/413634.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"陈天 · Rust 编程第一课","language":"zh","gitbook":"*"},"file":{"path":"docs/414478.md","mtime":"2024-08-25T05:24:23.248Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-08-25T05:46:11.445Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

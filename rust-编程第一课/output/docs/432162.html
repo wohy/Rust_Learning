@@ -1,0 +1,1312 @@
+
+<!DOCTYPE HTML>
+<html lang="zh" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>28｜网络开发（上）：如何使用Rust处理网络请求？ · 陈天 · Rust 编程第一课</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="432168.html" />
+    
+    
+    <link rel="prev" href="429673.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="輸入並搜尋" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="408400.html">
+            
+                <a href="408400.html">
+            
+                    
+                    开篇词｜让Rust成为你的下一门主力语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="408409.html">
+            
+                <a href="408409.html">
+            
+                    
+                    01｜内存：值放堆上还是放栈上，这是一个问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="410038.html">
+            
+                <a href="410038.html">
+            
+                    
+                    02｜串讲：编程开发中，那些你需要掌握的基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="411089.html">
+            
+                <a href="411089.html">
+            
+                    
+                    加餐｜这个专栏你可以怎么学，以及Rust是否值得学？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="411632.html">
+            
+                <a href="411632.html">
+            
+                    
+                    03｜初窥门径：从你的第一个Rust程序开始！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="412883.html">
+            
+                <a href="412883.html">
+            
+                    
+                    04｜get hands dirty：来写个实用的CLI小工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="413634.html">
+            
+                <a href="413634.html">
+            
+                    
+                    05｜get hands dirty：做一个图片服务器有多难？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="414478.html">
+            
+                <a href="414478.html">
+            
+                    
+                    06｜get hands dirty：SQL查询工具怎么一鱼多吃？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="415098.html">
+            
+                <a href="415098.html">
+            
+                    
+                    07｜所有权：值的生杀大权到底在谁手上？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="415988.html">
+            
+                <a href="415988.html">
+            
+                    
+                    08｜所有权：值的借用是如何工作的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="416722.html">
+            
+                <a href="416722.html">
+            
+                    
+                    09｜所有权：一个值可以有多个所有者么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="417384.html">
+            
+                <a href="417384.html">
+            
+                    
+                    10｜生命周期：你创建的值究竟能活多久？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="418235.html">
+            
+                <a href="418235.html">
+            
+                    
+                    11｜内存管理：从创建到消亡，值都经历了什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="418778.html">
+            
+                <a href="418778.html">
+            
+                    
+                    加餐｜愚昧之巅：你的Rust学习常见问题汇总
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="420021.html">
+            
+                <a href="420021.html">
+            
+                    
+                    12｜类型系统：Rust的类型系统有什么特点？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="420028.html">
+            
+                <a href="420028.html">
+            
+                    
+                    13｜类型系统：如何使用trait来定义接口？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="421324.html">
+            
+                <a href="421324.html">
+            
+                    
+                    14｜类型系统：有哪些必须掌握的trait？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="422182.html">
+            
+                <a href="422182.html">
+            
+                    
+                    15｜数据结构：这些浓眉大眼的结构竟然都是智能指针？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="422975.html">
+            
+                <a href="422975.html">
+            
+                    
+                    16｜数据结构：Vec、&[T]、Box<[T]> ，你真的了解集合容器么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="423923.html">
+            
+                <a href="423923.html">
+            
+                    
+                    17｜数据结构：软件系统核心部件哈希表，内存如何布局？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="424002.html">
+            
+                <a href="424002.html">
+            
+                    
+                    18｜错误处理：为什么Rust的错误处理与众不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="424009.html">
+            
+                <a href="424009.html">
+            
+                    
+                    19｜闭包：FnOnce、FnMut和Fn，为什么有这么多类型？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="424017.html">
+            
+                <a href="424017.html">
+            
+                    
+                    20｜4 Steps ：如何更好地阅读Rust源码？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="425001.html">
+            
+                <a href="425001.html">
+            
+                    
+                    21｜阶段实操（1）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="425005.html">
+            
+                <a href="425005.html">
+            
+                    
+                    22｜阶段实操（2）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.27" data-path="425013.html">
+            
+                <a href="425013.html">
+            
+                    
+                    加餐｜期中测试：来写一个简单的grep命令行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.28" data-path="425015.html">
+            
+                <a href="425015.html">
+            
+                    
+                    加餐｜期中测试：参考实现讲解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.29" data-path="427082.html">
+            
+                <a href="427082.html">
+            
+                    
+                    23｜类型系统：如何在实战中使用泛型编程？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.30" data-path="428018.html">
+            
+                <a href="428018.html">
+            
+                    
+                    24｜类型系统：如何在实战中使用trait object？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.31" data-path="429063.html">
+            
+                <a href="429063.html">
+            
+                    
+                    25｜类型系统：如何围绕trait来设计和架构系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.32" data-path="429665.html">
+            
+                <a href="429665.html">
+            
+                    
+                    加餐｜Rust2021版次问世了！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.33" data-path="429666.html">
+            
+                <a href="429666.html">
+            
+                    
+                    26｜阶段实操（3）：构建一个简单的KV server-高级trait技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.34" data-path="429673.html">
+            
+                <a href="429673.html">
+            
+                    
+                    27｜生态系统：有哪些常有的Rust库可以为我所用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.35" data-path="432162.html">
+            
+                <a href="432162.html">
+            
+                    
+                    28｜网络开发（上）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.36" data-path="432168.html">
+            
+                <a href="432168.html">
+            
+                    
+                    29｜网络开发（下）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.37" data-path="435484.html">
+            
+                <a href="435484.html">
+            
+                    
+                    30｜Unsafe Rust：如何用C++的方式打开Rust？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.38" data-path="437566.html">
+            
+                <a href="437566.html">
+            
+                    
+                    31｜FFI：Rust如何和你的语言架起沟通桥梁？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.39" data-path="437569.html">
+            
+                <a href="437569.html">
+            
+                    
+                    32｜实操项目：使用PyO3开发Python3模块
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.40" data-path="442216.html">
+            
+                <a href="442216.html">
+            
+                    
+                    33｜并发处理（上）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.41" data-path="442217.html">
+            
+                <a href="442217.html">
+            
+                    
+                    34｜并发处理（下）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.42" data-path="445814.html">
+            
+                <a href="445814.html">
+            
+                    
+                    35｜实操项目：如何实现一个基本的MPSC channel？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.43" data-path="445818.html">
+            
+                <a href="445818.html">
+            
+                    
+                    用户故事｜绝望之谷：改变从学习开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.44" data-path="446948.html">
+            
+                <a href="446948.html">
+            
+                    
+                    36｜阶段实操（4）：构建一个简单的KV server-网络处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.45" data-path="446949.html">
+            
+                <a href="446949.html">
+            
+                    
+                    37｜阶段实操（5）：构建一个简单的KV server-网络安全
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.46" data-path="455413.html">
+            
+                <a href="455413.html">
+            
+                    
+                    38｜异步处理：Future是什么？它和async/await是什么关系？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.47" data-path="455412.html">
+            
+                <a href="455412.html">
+            
+                    
+                    39｜异步处理：async/await内部是怎么实现的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.48" data-path="461695.html">
+            
+                <a href="461695.html">
+            
+                    
+                    40｜异步处理：如何处理异步IO？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.49" data-path="461997.html">
+            
+                <a href="461997.html">
+            
+                    
+                    41｜阶段实操（6）：构建一个简单的KV server-异步处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.50" data-path="461999.html">
+            
+                <a href="461999.html">
+            
+                    
+                    42｜阶段实操（7）：构建一个简单的KV server-如何做大的重构？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.51" data-path="464856.html">
+            
+                <a href="464856.html">
+            
+                    
+                    43｜生产环境：真实世界下的一个Rust项目包含哪些要素？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.52" data-path="464855.html">
+            
+                <a href="464855.html">
+            
+                    
+                    44｜数据处理：应用程序和数据如何打交道？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.53" data-path="466825.html">
+            
+                <a href="466825.html">
+            
+                    
+                    45｜阶段实操（8）：构建一个简单的KV server-配置/测试/监控/CI/CD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.54" data-path="468066.html">
+            
+                <a href="468066.html">
+            
+                    
+                    46｜软件架构：如何用Rust架构复杂系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.55" data-path="468940.html">
+            
+                <a href="468940.html">
+            
+                    
+                    大咖助场｜开悟之坡（上）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.56" data-path="468948.html">
+            
+                <a href="468948.html">
+            
+                    
+                    大咖助场｜开悟之坡（下）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.57" data-path="470490.html">
+            
+                <a href="470490.html">
+            
+                    
+                    用户故事｜语言不仅是工具，还是思维方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.58" data-path="481355.html">
+            
+                <a href="481355.html">
+            
+                    
+                    加餐｜代码即数据：为什么我们需要宏编程能力？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.59" data-path="481359.html">
+            
+                <a href="481359.html">
+            
+                    
+                    加餐｜宏编程（上）：用最“笨”的方式撰写宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.60" data-path="481369.html">
+            
+                <a href="481369.html">
+            
+                    
+                    加餐｜宏编程（下）：用 syn/quote 优雅地构建宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.61" data-path="470420.html">
+            
+                <a href="470420.html">
+            
+                    
+                    结束语｜永续之原：Rust学习，如何持续精进？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.62" data-path="470440.html">
+            
+                <a href="470440.html">
+            
+                    
+                    期末测试｜来赴一场满分之约！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.63" data-path="482856.html">
+            
+                <a href="482856.html">
+            
+                    
+                    特别策划｜学习锦囊（一）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.64" data-path="483045.html">
+            
+                <a href="483045.html">
+            
+                    
+                    特别策划｜学习锦囊（二）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.65" data-path="483050.html">
+            
+                <a href="483050.html">
+            
+                    
+                    特别策划｜学习锦囊（三）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.66" data-path="653131.html">
+            
+                <a href="653131.html">
+            
+                    
+                    特别策划｜生成式AI：哪些开发环节可能被颠覆？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本書使用 GitBook 釋出
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >28｜网络开发（上）：如何使用Rust处理网络请求？</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="28&#xFF5C;&#x7F51;&#x7EDC;&#x5F00;&#x53D1;&#xFF08;&#x4E0A;&#xFF09;&#xFF1A;&#x5982;&#x4F55;&#x4F7F;&#x7528;rust&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x8BF7;&#x6C42;&#xFF1F;">28&#xFF5C;&#x7F51;&#x7EDC;&#x5F00;&#x53D1;&#xFF08;&#x4E0A;&#xFF09;&#xFF1A;&#x5982;&#x4F55;&#x4F7F;&#x7528;Rust&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x8BF7;&#x6C42;&#xFF1F;</h1>
+<pre><code>&#x4F60;&#x597D;&#xFF0C;&#x6211;&#x662F;&#x9648;&#x5929;&#x3002;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5B66;&#x4E60;&#x5982;&#x4F55;&#x4F7F;&#x7528; Rust &#x505A;&#x7F51;&#x7EDC;&#x5F00;&#x53D1;&#x3002;
+</code></pre><p>&#x5728;&#x4E92;&#x8054;&#x7F51;&#x65F6;&#x4EE3;&#xFF0C;&#x8C08;&#x5230;&#x7F51;&#x7EDC;&#x5F00;&#x53D1;&#xFF0C;&#x6211;&#x4EEC;&#x60F3;&#x5230;&#x7684;&#x9996;&#x5148;&#x662F; Web &#x5F00;&#x53D1;&#x4EE5;&#x53CA;&#x6D89;&#x53CA;&#x7684;&#x90E8;&#x5206; HTTP &#x534F;&#x8BAE;&#x548C; WebSocket &#x534F;&#x8BAE;&#x3002;</p>
+<p>&#x4E4B;&#x6240;&#x4EE5;&#x8BF4;&#x90E8;&#x5206;&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x5F88;&#x591A;&#x534F;&#x8BAE;&#x8003;&#x8651;&#x5230;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x6BD4;&#x5982;&#x66F4;&#x65B0;&#x65F6;&#x7684;<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Match" target="_blank">&#x5E76;&#x53D1;&#x63A7;&#x5236;</a>&#xFF0C;&#x5927;&#x591A;&#x6570; Web &#x5F00;&#x53D1;&#x8005;&#x5E76;&#x4E0D;&#x77E5;&#x9053;&#x3002;&#x5F53;&#x8C08;&#x8BBA;&#x5230; <a href="https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md" target="_blank">gRPC</a> &#x65F6;&#xFF0C;&#x5F88;&#x591A;&#x4EBA;&#x5C31;&#x4F1A;&#x8BA4;&#x4E3A;&#x8FD9;&#x662F;&#x6BD4;&#x8F83;&#x795E;&#x79D8;&#x7684;&#x201C;&#x5E95;&#x5C42;&#x201D;&#x534F;&#x8BAE;&#x4E86;&#xFF0C;&#x5176;&#x5B9E;&#x53EA;&#x4E0D;&#x8FC7;&#x662F; HTTP/2 &#x4E0B;&#x7684;&#x4E00;&#x79CD;&#x5BF9;&#x4E8C;&#x8FDB;&#x5236;&#x6D88;&#x606F;&#x683C;&#x5F0F;&#x7684;&#x5C01;&#x88C5;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x5BF9;&#x4E8E;&#x7F51;&#x7EDC;&#x5F00;&#x53D1;&#xFF0C;&#x8FD9;&#x4E2A;&#x975E;&#x5E38;&#x5B8F;&#x5927;&#x7684;&#x8BAE;&#x9898;&#xFF0C;&#x6211;&#x4EEC;&#x5F53;&#x7136;&#x662F;&#x4E0D;&#x53EF;&#x80FD;&#x3001;&#x4E5F;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x8986;&#x76D6;&#x5168;&#x90E8;&#x5185;&#x5BB9;&#x7684;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x4F1A;&#x5148;&#x7B80;&#x5355;&#x804A;&#x804A;&#x7F51;&#x7EDC;&#x5F00;&#x53D1;&#x7684;&#x5927;&#x5168;&#x666F;&#x56FE;&#xFF0C;&#x7136;&#x540E;&#x91CD;&#x70B9;&#x5B66;&#x4E60;&#x5982;&#x4F55;&#x4F7F;&#x7528;Rust&#x6807;&#x51C6;&#x5E93;&#x4EE5;&#x53CA;&#x751F;&#x6001;&#x7CFB;&#x7EDF;&#x4E2D;&#x7684;&#x5E93;&#x6765;&#x505A;&#x7F51;&#x7EDC;&#x5904;&#x7406;&#xFF0C;&#x5305;&#x62EC;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x3001;&#x7F51;&#x7EDC;&#x6570;&#x636E;&#x5904;&#x7406;&#x7684;&#x4E00;&#x4E9B;&#x65B9;&#x6CD5;&#xFF0C;&#x6700;&#x540E;&#x4E5F;&#x4F1A;&#x4ECB;&#x7ECD;&#x51E0;&#x79CD;&#x5178;&#x578B;&#x7684;&#x7F51;&#x7EDC;&#x901A;&#x8BAF;&#x6A21;&#x578B;&#x7684;&#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x4F46;&#x5373;&#x4F7F;&#x8FD9;&#x6837;&#xFF0C;&#x5185;&#x5BB9;&#x4E5F;&#x6BD4;&#x8F83;&#x591A;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x5206;&#x6210;&#x4E0A;&#x4E0B;&#x4E24;&#x8BB2;&#x6765;&#x5B66;&#x4E60;&#x3002;&#x5982;&#x679C;&#x4F60;&#x4E4B;&#x524D;&#x53EA;&#x5173;&#x6CE8; Web &#x5F00;&#x53D1;&#xFF0C;&#x6587;&#x4E2D;&#x5F88;&#x591A;&#x5185;&#x5BB9;&#x8BFB;&#x8D77;&#x6765;&#x53EF;&#x80FD;&#x4F1A;&#x6709;&#x70B9;&#x5403;&#x529B;&#xFF0C;&#x5EFA;&#x8BAE;&#x5148;&#x53BB;&#x5F25;&#x8865;&#x76F8;&#x5173;&#x7684;&#x77E5;&#x8BC6;&#x548C;&#x6982;&#x5FF5;&#xFF0C;&#x518D;&#x5B66;&#x4E60;&#x4F1A;&#x6BD4;&#x8F83;&#x5BB9;&#x6613;&#x7406;&#x89E3;&#x3002;</p>
+<p>&#x597D;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x7B80;&#x5355;&#x56DE;&#x987E;&#x4E00;&#x4E0B; ISO/OSI &#x4E03;&#x5C42;&#x6A21;&#x578B;&#x4EE5;&#x53CA;&#x5BF9;&#x5E94;&#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x7269;&#x7406;&#x5C42;&#x4E3B;&#x8981;&#x8DDF; <a href="https://en.wikipedia.org/wiki/Physical_layer" target="_blank">PHY &#x82AF;&#x7247;</a>&#x6709;&#x5173;&#xFF0C;&#x5C31;&#x4E0D;&#x591A;&#x63D0;&#x4E86;&#xFF1A;<br><img src="https://static001.geekbang.org/resource/image/90/ef/909ec0f611352fyy5b99f27bb2f557ef.jpg?wh=2315x1468" alt=""></p>
+<p>&#x4E03;&#x5C42;&#x6A21;&#x578B;&#x4E2D;&#xFF0C;&#x94FE;&#x8DEF;&#x5C42;&#x548C;&#x7F51;&#x7EDC;&#x5C42;&#x4E00;&#x822C;&#x6784;&#x5EFA;&#x5728;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E4B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x76F4;&#x63A5;&#x89E6;&#x53CA;&#xFF0C;&#x800C;&#x8868;&#x73B0;&#x5C42;&#x548C;&#x5E94;&#x7528;&#x5C42;&#x5173;&#x7CFB;&#x7D27;&#x5BC6;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x5B9E;&#x73B0;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;<strong>&#x5927;&#x90E8;&#x5206;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x53EA;&#x5173;&#x5FC3;&#x7F51;&#x7EDC;&#x5C42;&#x3001;&#x4F20;&#x8F93;&#x5C42;&#x548C;&#x5E94;&#x7528;&#x5C42;</strong>&#x3002;</p>
+<p>&#x7F51;&#x7EDC;&#x5C42;&#x76EE;&#x524D; IPv4 &#x548C; IPv6 &#x5206;&#x5EAD;&#x6297;&#x793C;&#xFF0C;IPv6 &#x8FD8;&#x672A;&#x5B8C;&#x5168;&#x5BF9; IPv4 &#x53D6;&#x800C;&#x4EE3;&#x4E4B;&#xFF1B;&#x4F20;&#x8F93;&#x5C42;&#x9664;&#x4E86;&#x5BF9;&#x5EF6;&#x8FDF;&#x975E;&#x5E38;&#x654F;&#x611F;&#x7684;&#x5E94;&#x7528;&#xFF08;&#x6BD4;&#x5982;&#x6E38;&#x620F;&#xFF09;&#xFF0C;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x5E94;&#x7528;&#x90FD;&#x4F7F;&#x7528; TCP&#xFF1B;&#x800C;&#x5728;&#x5E94;&#x7528;&#x5C42;&#xFF0C;&#x5BF9;&#x7528;&#x6237;&#x53CB;&#x597D;&#xFF0C;&#x4E14;&#x5BF9;&#x9632;&#x706B;&#x5899;&#x53CB;&#x597D;&#x7684; HTTP &#x534F;&#x8BAE;&#x5BB6;&#x65CF;&#xFF1A;HTTP&#x3001;WebSocket&#x3001;HTTP/2&#xFF0C;&#x4EE5;&#x53CA;&#x5C1A;&#x5904;&#x5728;&#x8349;&#x6848;&#x4E4B;&#x4E2D;&#x7684; HTTP/3&#xFF0C;&#x5728;&#x6F2B;&#x957F;&#x7684;&#x8FDB;&#x5316;&#x4E2D;&#xFF0C;&#x8131;&#x9896;&#x800C;&#x51FA;&#xFF0C;&#x6210;&#x4E3A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E3B;&#x6D41;&#x7684;&#x9009;&#x62E9;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x6765;&#x770B;&#x770B; Rust &#x751F;&#x6001;&#x5BF9;&#x7F51;&#x7EDC;&#x534F;&#x8BAE;&#x7684;&#x652F;&#x6301;&#xFF1A;<br><img src="https://static001.geekbang.org/resource/image/8f/78/8ff212b28a88d697303a5fcd35174d78.jpg?wh=2463x1504" alt=""></p>
+<p>Rust &#x6807;&#x51C6;&#x5E93;&#x63D0;&#x4F9B;&#x4E86; std::net&#xFF0C;&#x4E3A;&#x6574;&#x4E2A; TCP/IP &#x534F;&#x8BAE;&#x6808;&#x7684;&#x4F7F;&#x7528;&#x63D0;&#x4F9B;&#x4E86;&#x5C01;&#x88C5;&#x3002;&#x7136;&#x800C; std::net &#x662F;&#x540C;&#x6B65;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x8981;&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x9AD8;&#x6027;&#x80FD;&#x7684;&#x5F02;&#x6B65;&#x7F51;&#x7EDC;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; tokio&#x3002;tokio::net &#x63D0;&#x4F9B;&#x4E86;&#x548C; std::net &#x51E0;&#x4E4E;&#x4E00;&#x81F4;&#x7684;&#x5C01;&#x88C5;&#xFF0C;&#x4E00;&#x65E6;&#x4F60;&#x719F;&#x6089;&#x4E86; std::net&#xFF0C;tokio::net &#x91CC;&#x7684;&#x529F;&#x80FD;&#x5BF9;&#x4F60;&#x6765;&#x8BF4;&#x90FD;&#x5E76;&#x4E0D;&#x964C;&#x751F;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x4ECE;std::net&#x5F00;&#x59CB;&#x4E86;&#x89E3;&#x3002;</p>
+<h2 id="stdnet">std::net</h2>
+<p>std::net &#x4E0B;&#x63D0;&#x4F9B;&#x4E86;&#x5904;&#x7406; TCP / UDP &#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E9B;&#x8F85;&#x52A9;&#x7ED3;&#x6784;&#xFF1A;</p>
+<ul>
+<li>TCP&#xFF1A;TcpListener / TcpStream&#xFF0C;&#x5904;&#x7406;&#x670D;&#x52A1;&#x5668;&#x7684;&#x76D1;&#x542C;&#x4EE5;&#x53CA;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x8FDE;&#x63A5;</li>
+<li>UDP&#xFF1A;UdpSocket&#xFF0C;&#x5904;&#x7406; UDP socket</li>
+<li>&#x5176;&#x5B83;&#xFF1A;IpAddr &#x662F; IPv4 &#x548C; IPv6 &#x5730;&#x5740;&#x7684;&#x5C01;&#x88C5;&#xFF1B;SocketAddr&#xFF0C;&#x8868;&#x793A; IP &#x5730;&#x5740; + &#x7AEF;&#x53E3;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;</li>
+</ul>
+<p>&#x8FD9;&#x91CC;&#x5C31;&#x4E3B;&#x8981;&#x4ECB;&#x7ECD;&#x4E00;&#x4E0B; TCP &#x7684;&#x5904;&#x7406;&#xFF0C;&#x987A;&#x5E26;&#x4F1A;&#x4F7F;&#x7528;&#x5230; IpAddr / SocketAddr&#x3002;</p>
+<h3 id="tcplistenertcpstream">TcpListener/TcpStream</h3>
+<p>&#x5982;&#x679C;&#x8981;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; TCP server&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; TcpListener &#x7ED1;&#x5B9A;&#x67D0;&#x4E2A;&#x7AEF;&#x53E3;&#xFF0C;&#x7136;&#x540E;&#x7528; loop &#x5FAA;&#x73AF;&#x5904;&#x7406;&#x63A5;&#x6536;&#x5230;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x3002;&#x63A5;&#x6536;&#x5230;&#x8BF7;&#x6C42;&#x540E;&#xFF0C;&#x4F1A;&#x5F97;&#x5230;&#x4E00;&#x4E2A; TcpStream&#xFF0C;&#x5B83;&#x5B9E;&#x73B0;&#x4E86; Read / Write trait&#xFF0C;&#x53EF;&#x4EE5;&#x50CF;&#x8BFB;&#x5199;&#x6587;&#x4EF6;&#x4E00;&#x6837;&#xFF0C;&#x8FDB;&#x884C; socket &#x7684;&#x8BFB;&#x5199;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> std::{
+    io::{Read, Write},
+    net::TcpListener,
+    thread,
+};
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> listener = TcpListener::bind(<span class="hljs-string">&quot;0.0.0.0:9527&quot;</span>).unwrap();
+    <span class="hljs-keyword">loop</span> {
+        <span class="hljs-keyword">let</span> (<span class="hljs-keyword">mut</span> stream, addr) = listener.accept().unwrap();
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Accepted a new connection: {}&quot;</span>, addr);
+        thread::spawn(move || {
+            <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> buf = [<span class="hljs-number">0u8</span>; <span class="hljs-number">12</span>];
+            stream.read_exact(&amp;<span class="hljs-keyword">mut</span> buf).unwrap();
+            <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;data: {:?}&quot;</span>, <span class="hljs-built_in">String</span>::from_utf8_lossy(&amp;buf));
+            <span class="hljs-comment">// &#x4E00;&#x5171;&#x5199;&#x4E86; 17 &#x4E2A;&#x5B57;&#x8282;</span>
+            stream.write_all(<span class="hljs-string">b&quot;glad to meet you!&quot;</span>).unwrap();
+        });
+    }
+}
+</code></pre>
+<p>&#x5BF9;&#x4E8E;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528; TcpStream::connect() &#x5F97;&#x5230;&#x4E00;&#x4E2A; TcpStream&#x3002;&#x4E00;&#x65E6;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;&#x88AB;&#x670D;&#x52A1;&#x5668;&#x63A5;&#x53D7;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x53D1;&#x9001;&#x6216;&#x8005;&#x63A5;&#x6536;&#x6570;&#x636E;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> std::{
+    io::{Read, Write},
+    net::TcpStream,
+};
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> stream = TcpStream::connect(<span class="hljs-string">&quot;127.0.0.1:9527&quot;</span>).unwrap();
+    <span class="hljs-comment">// &#x4E00;&#x5171;&#x5199;&#x4E86; 12 &#x4E2A;&#x5B57;&#x8282;</span>
+    stream.write_all(<span class="hljs-string">b&quot;hello world!&quot;</span>).unwrap();
+
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> buf = [<span class="hljs-number">0u8</span>; <span class="hljs-number">17</span>];
+    stream.read_exact(&amp;<span class="hljs-keyword">mut</span> buf).unwrap();
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;data: {:?}&quot;</span>, <span class="hljs-built_in">String</span>::from_utf8_lossy(&amp;buf));
+}
+</code></pre>
+<p>&#x5728;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x5728;&#x8FDE;&#x63A5;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x4F1A;&#x53D1;&#x9001; 12 &#x4E2A;&#x5B57;&#x8282;&#x7684; &quot;hello world!&quot;&#x7ED9;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x8BFB;&#x53D6;&#x5E76;&#x56DE;&#x590D;&#x540E;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x4F1A;&#x5C1D;&#x8BD5;&#x63A5;&#x6536;&#x5B8C;&#x6574;&#x7684;&#x3001;&#x6765;&#x81EA;&#x670D;&#x52A1;&#x5668;&#x7684; 17&#x4E2A;&#x5B57;&#x8282;&#x7684; &#x201C;glad to meet you!&#x201D;&#x3002;</p>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x76EE;&#x524D;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x5668;&#x90FD;&#x9700;&#x8981;&#x786C;&#x7F16;&#x7801;&#x8981;&#x63A5;&#x6536;&#x6570;&#x636E;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x8FD9;&#x6837;&#x4E0D;&#x591F;&#x7075;&#x6D3B;&#xFF0C;&#x540E;&#x7EED;&#x6211;&#x4EEC;&#x4F1A;&#x770B;&#x5230;&#x5982;&#x4F55;&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x6D88;&#x606F;&#x5E27;&#xFF08;frame&#xFF09;&#x66F4;&#x597D;&#x5730;&#x5904;&#x7406;&#x3002;</p>
+<p>&#x4ECE;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x6211;&#x4EEC;&#x65E0;&#x9700;&#x663E;&#x5F0F;&#x5730;&#x5173;&#x95ED; TcpStream&#xFF0C;&#x56E0;&#x4E3A; <strong>TcpStream &#x7684;&#x5185;&#x90E8;&#x5B9E;&#x73B0;&#x4E5F;&#x5904;&#x7406;&#x4E86; Drop trait</strong>&#xFF0C;&#x4F7F;&#x5F97;&#x5176;&#x79BB;&#x5F00;&#x4F5C;&#x7528;&#x57DF;&#x65F6;&#x4F1A;&#x88AB;&#x5173;&#x95ED;&#x3002;</p>
+<p>&#x4F46;&#x5982;&#x679C;&#x4F60;&#x53BB;&#x770B; <a href="https://doc.rust-lang.org/std/net/struct.TcpStream.html" target="_blank">TcpStream</a> &#x7684;&#x6587;&#x6863;&#xFF0C;&#x4F1A;&#x53D1;&#x73B0;&#x5B83;&#x5E76;&#x6CA1;&#x6709;&#x5B9E;&#x73B0; Drop&#x3002;&#x8FD9;&#x662F;&#x56E0;&#x4E3A; TcpStream &#x5185;&#x90E8;&#x5305;&#x88C5;&#x4E86; <code>sys_common::net::TcpStream</code> &#xFF0C;&#x7136;&#x540E;&#x5B83;&#x53C8;&#x5305;&#x88C5;&#x4E86; Socket&#x3002;&#x800C;Socket &#x662F;&#x4E00;&#x4E2A;&#x5E73;&#x53F0;&#x76F8;&#x5173;&#x7684;&#x7ED3;&#x6784;&#xFF0C;&#x6BD4;&#x5982;&#xFF0C;&#x5728; Unix &#x4E0B;&#x7684;&#x5B9E;&#x73B0;&#x662F; FileDesc&#xFF0C;&#x7136;&#x540E;&#x5B83;&#x5185;&#x90E8;&#x662F;&#x4E00;&#x4E2A; OwnedFd&#xFF0C;&#x6700;&#x7EC8;&#x4F1A;&#x8C03;&#x7528; <code>libc::close(self.fd)</code> &#x6765;&#x5173;&#x95ED; fd&#xFF0C;&#x4E5F;&#x5C31;&#x5173;&#x95ED;&#x4E86; TcpStream&#x3002;</p>
+<h2 id="&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x7684;&#x4E00;&#x822C;&#x65B9;&#x6CD5;">&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x7684;&#x4E00;&#x822C;&#x65B9;&#x6CD5;</h2>
+<p>&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528;&#x67D0;&#x4E2A; Web Framework &#x5904;&#x7406; Web &#x6D41;&#x91CF;&#xFF0C;&#x90A3;&#x4E48;&#x65E0;&#x9700;&#x5173;&#x5FC3;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#xFF0C;&#x6846;&#x67B6;&#x4F1A;&#x5E2E;&#x4F60;&#x6253;&#x70B9;&#x597D;&#x4E00;&#x5207;&#xFF0C;&#x4F60;&#x53EA;&#x9700;&#x8981;&#x5173;&#x5FC3;&#x67D0;&#x4E2A;&#x8DEF;&#x7531;&#x6216;&#x8005;&#x67D0;&#x4E2A; RPC &#x7684;&#x5904;&#x7406;&#x903B;&#x8F91;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;&#x4F46;&#x5982;&#x679C;&#x4F60;&#x8981;&#x5728; TCP &#x4E4B;&#x4E0A;&#x6784;&#x5EFA;&#x81EA;&#x5DF1;&#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x9700;&#x8981;&#x8BA4;&#x771F;&#x8003;&#x8651;&#x5982;&#x4F55;&#x59A5;&#x5584;&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5728;&#x4E4B;&#x524D;&#x7684; listener &#x4EE3;&#x7801;&#x4E2D;&#x4E5F;&#x770B;&#x5230;&#x4E86;&#xFF0C;&#x5728;&#x7F51;&#x7EDC;&#x5904;&#x7406;&#x7684;&#x4E3B;&#x5FAA;&#x73AF;&#x4E2D;&#xFF0C;&#x4F1A;&#x4E0D;&#x65AD; accept() &#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x8FDE;&#x63A5;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    ...
+    <span class="hljs-keyword">loop</span> {
+        <span class="hljs-keyword">let</span> (<span class="hljs-keyword">mut</span> stream, addr) = listener.accept().unwrap();
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Accepted a new connection: {}&quot;</span>, addr);
+        thread::spawn(move || {
+            ...
+        });
+    }
+}
+</code></pre>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x5904;&#x7406;&#x8FDE;&#x63A5;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x9700;&#x8981;&#x653E;&#x5728;&#x53E6;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6216;&#x8005;&#x53E6;&#x4E00;&#x4E2A;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x4E2D;&#x8FDB;&#x884C;&#xFF0C;&#x800C;&#x4E0D;&#x8981;&#x5728;&#x4E3B;&#x5FAA;&#x73AF;&#x4E2D;&#x76F4;&#x63A5;&#x5904;&#x7406;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x6837;&#x4F1A;&#x963B;&#x585E;&#x4E3B;&#x5FAA;&#x73AF;&#xFF0C;&#x4F7F;&#x5176;&#x5728;&#x5904;&#x7406;&#x5B8C;&#x5F53;&#x524D;&#x7684;&#x8FDE;&#x63A5;&#x524D;&#xFF0C;&#x65E0;&#x6CD5; accept() &#x65B0;&#x7684;&#x8FDE;&#x63A5;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;loop + spawn &#x662F;&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x7684;&#x57FA;&#x672C;&#x65B9;&#x5F0F;&#xFF1A;<br><img src="https://static001.geekbang.org/resource/image/1f/93/1f6c58c3944ec6f0f5a01a3235740693.jpg?wh=2463x1325" alt=""></p>
+<p>&#x4F46;&#x662F;&#x4F7F;&#x7528;&#x7EBF;&#x7A0B;&#x5904;&#x7406;&#x9891;&#x7E41;&#x8FDE;&#x63A5;&#x548C;&#x9000;&#x51FA;&#x7684;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#xFF0C;&#x4E00;&#x6765;&#x4F1A;&#x6709;&#x6548;&#x7387;&#x4E0A;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x4E8C;&#x6765;&#x7EBF;&#x7A0B;&#x95F4;&#x5982;&#x4F55;&#x5171;&#x4EAB;&#x516C;&#x5171;&#x7684;&#x6570;&#x636E;&#x4E5F;&#x8BA9;&#x4EBA;&#x5934;&#x75BC;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x8BE6;&#x7EC6;&#x770B;&#x770B;&#x3002;</p>
+<h3 id="&#x5982;&#x4F55;&#x5904;&#x7406;&#x5927;&#x91CF;&#x8FDE;&#x63A5;&#xFF1F;">&#x5982;&#x4F55;&#x5904;&#x7406;&#x5927;&#x91CF;&#x8FDE;&#x63A5;&#xFF1F;</h3>
+<p>&#x5982;&#x679C;&#x4E0D;&#x65AD;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#xFF0C;&#x90A3;&#x4E48;&#x5F53;&#x8FDE;&#x63A5;&#x6570;&#x4E00;&#x9AD8;&#xFF0C;&#x5C31;&#x5BB9;&#x6613;&#x628A;&#x7CFB;&#x7EDF;&#x4E2D;&#x53EF;&#x7528;&#x7684;&#x7EBF;&#x7A0B;&#x8D44;&#x6E90;&#x5403;&#x5149;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x56E0;&#x4E3A;&#x7EBF;&#x7A0B;&#x7684;&#x8C03;&#x5EA6;&#x662F;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5B8C;&#x6210;&#x7684;&#xFF0C;&#x6BCF;&#x6B21;&#x8C03;&#x5EA6;&#x90FD;&#x8981;&#x7ECF;&#x5386;&#x4E00;&#x4E2A;&#x590D;&#x6742;&#x7684;&#x3001;&#x4E0D;&#x90A3;&#x4E48;&#x9AD8;&#x6548;&#x7684; save and load &#x7684;<a href="https://en.wikipedia.org/wiki/Context_switch" target="_blank">&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;</a>&#x8FC7;&#x7A0B;&#xFF0C;&#x6240;&#x4EE5;<strong>&#x5982;&#x679C;&#x4F7F;&#x7528;&#x7EBF;&#x7A0B;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;&#x5728;&#x906D;&#x9047;&#x5230; C10K &#x7684;&#x74F6;&#x9888;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8FDE;&#x63A5;&#x6570;&#x5230;&#x4E07;&#x8FD9;&#x4E2A;&#x7EA7;&#x522B;&#xFF0C;&#x7CFB;&#x7EDF;&#x5C31;&#x4F1A;&#x906D;&#x9047;&#x5230;&#x8D44;&#x6E90;&#x548C;&#x7B97;&#x529B;&#x7684;&#x53CC;&#x91CD;&#x74F6;&#x9888;</strong>&#x3002;</p>
+<p>&#x4ECE;&#x8D44;&#x6E90;&#x7684;&#x89D2;&#x5EA6;&#xFF0C;&#x8FC7;&#x591A;&#x7684;&#x7EBF;&#x7A0B;&#x5360;&#x7528;&#x8FC7;&#x591A;&#x7684;&#x5185;&#x5B58;&#xFF0C;Rust &#x7F3A;&#x7701;&#x7684;&#x6808;&#x5927;&#x5C0F;&#x662F; 2M&#xFF0C;10k &#x8FDE;&#x63A5;&#x5C31;&#x4F1A;&#x5360;&#x7528; 20G &#x5185;&#x5B58;&#xFF08;&#x5F53;&#x7136;&#x7F3A;&#x7701;&#x6808;&#x5927;&#x5C0F;&#x4E5F;&#x53EF;&#x4EE5;<a href="https://doc.rust-lang.org/std/thread/struct.Builder.html#method.stack_size" target="_blank">&#x6839;&#x636E;&#x9700;&#x8981;&#x4FEE;&#x6539;</a>&#xFF09;&#xFF1B;&#x4ECE;&#x7B97;&#x529B;&#x7684;&#x89D2;&#x5EA6;&#xFF0C;&#x592A;&#x591A;&#x7EBF;&#x7A0B;&#x5728;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5230;&#x8FBE;&#x65F6;&#xFF0C;&#x4F1A;&#x6765;&#x6765;&#x56DE;&#x56DE;&#x5207;&#x6362;&#x7EBF;&#x7A0B;&#xFF0C;&#x5BFC;&#x81F4; CPU &#x8FC7;&#x5206;&#x5FD9;&#x788C;&#xFF0C;&#x65E0;&#x6CD5;&#x5904;&#x7406;&#x66F4;&#x591A;&#x7684;&#x8FDE;&#x63A5;&#x8BF7;&#x6C42;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x5BF9;&#x4E8E;&#x6F5C;&#x5728;&#x7684;&#x6709;&#x5927;&#x91CF;&#x8FDE;&#x63A5;&#x7684;&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#xFF0C;&#x4F7F;&#x7528;&#x7EBF;&#x7A0B;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x597D;&#x7684;&#x65B9;&#x5F0F;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x8981;&#x7A81;&#x7834; C10K &#x7684;&#x74F6;&#x9888;&#xFF0C;&#x8FBE;&#x5230; C10M&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x53EA;&#x80FD;&#x4F7F;&#x7528;&#x5728;&#x7528;&#x6237;&#x6001;&#x7684;&#x534F;&#x7A0B;&#x6765;&#x5904;&#x7406;&#xFF0C;&#x8981;&#x4E48;&#x662F;&#x7C7B;&#x4F3C; Erlang/Golang &#x90A3;&#x6837;&#x7684;&#x6709;&#x6808;&#x534F;&#x7A0B;&#xFF08;stackful coroutine&#xFF09;&#xFF0C;&#x8981;&#x4E48;&#x662F;&#x7C7B;&#x4F3C; Rust &#x5F02;&#x6B65;&#x5904;&#x7406;&#x8FD9;&#x6837;&#x7684;&#x65E0;&#x6808;&#x534F;&#x7A0B;&#xFF08;stackless coroutine&#xFF09;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x5728; Rust &#x4E0B;&#x5927;&#x90E8;&#x5206;&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x76F8;&#x5173;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#xFF0C;&#x5F88;&#x5C11;&#x76F4;&#x63A5;&#x6709;&#x7528; std::net &#x8FDB;&#x884C;&#x5904;&#x7406;&#x7684;&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x90FD;&#x662F;&#x7528;&#x67D0;&#x4E2A;&#x5F02;&#x6B65;&#x7F51;&#x7EDC;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x6BD4;&#x5982; tokio&#x3002;</p>
+<h3 id="&#x5982;&#x4F55;&#x5904;&#x7406;&#x5171;&#x4EAB;&#x4FE1;&#x606F;&#xFF1F;">&#x5982;&#x4F55;&#x5904;&#x7406;&#x5171;&#x4EAB;&#x4FE1;&#x606F;&#xFF1F;</h3>
+<p>&#x7B2C;&#x4E8C;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x5728;&#x6784;&#x5EFA;&#x670D;&#x52A1;&#x5668;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x603B;&#x4F1A;&#x6709;&#x4E00;&#x4E9B;&#x5171;&#x4EAB;&#x7684;&#x72B6;&#x6001;&#x4F9B;&#x6240;&#x6709;&#x7684;&#x8FDE;&#x63A5;&#x4F7F;&#x7528;&#xFF0C;&#x6BD4;&#x5982;&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x3002;&#x5BF9;&#x4E8E;&#x8FD9;&#x6837;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x5982;&#x679C;&#x5171;&#x4EAB;&#x6570;&#x636E;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x4F7F;&#x7528; Arc<t>&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x4FEE;&#x6539;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; Arc<rwlock<t>&gt;&#x3002;<br><img src="https://static001.geekbang.org/resource/image/9d/2d/9dae3be8e76512611d54eb8875fb962d.jpg?wh=2463x1325" alt=""></rwlock<t></t></p>
+<p>&#x4F46;&#x4F7F;&#x7528;&#x9501;&#xFF0C;&#x5C31;&#x610F;&#x5473;&#x7740;&#x4E00;&#x65E6;&#x5728;&#x5173;&#x952E;&#x8DEF;&#x5F84;&#x4E0A;&#x9700;&#x8981;&#x8BBF;&#x95EE;&#x88AB;&#x9501;&#x4F4F;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x6574;&#x4E2A;&#x7CFB;&#x7EDF;&#x7684;&#x541E;&#x5410;&#x91CF;&#x90FD;&#x4F1A;&#x53D7;&#x5230;&#x5F88;&#x5927;&#x7684;&#x5F71;&#x54CD;&#x3002;</p>
+<p>&#x4E00;&#x79CD;&#x601D;&#x8DEF;&#x662F;&#xFF0C;&#x6211;&#x4EEC;<strong>&#x628A;&#x9501;&#x7684;&#x7C92;&#x5EA6;&#x964D;&#x4F4E;</strong>&#xFF0C;&#x8FD9;&#x6837;&#x51B2;&#x7A81;&#x5C31;&#x4F1A;&#x51CF;&#x5C11;&#x3002;&#x6BD4;&#x5982;&#x5728; kv server &#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x628A; key &#x54C8;&#x5E0C;&#x4E00;&#x4E0B;&#x6A21; N&#xFF0C;&#x5C06;&#x4E0D;&#x540C;&#x7684; key &#x5206;&#x644A;&#x5230; N &#x4E2A; memory store &#x4E2D;&#xFF0C;&#x8FD9;&#x6837;&#xFF0C;&#x9501;&#x7684;&#x7C92;&#x5EA6;&#x5C31;&#x964D;&#x4F4E;&#x5230;&#x4E4B;&#x524D;&#x7684; 1/N &#x4E86;&#xFF1A;<br><img src="https://static001.geekbang.org/resource/image/fb/0d/fb40a748abfdbb731ea2f15a4aea590d.jpg?wh=2463x1325" alt=""></p>
+<p>&#x53E6;&#x4E00;&#x79CD;&#x601D;&#x8DEF;&#x662F;&#x6211;&#x4EEC;<strong>&#x6539;&#x53D8;&#x5171;&#x4EAB;&#x8D44;&#x6E90;&#x7684;&#x8BBF;&#x95EE;&#x65B9;&#x5F0F;</strong>&#xFF0C;&#x4F7F;&#x5176;&#x53EA;&#x88AB;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;&#xFF1B;&#x5176;&#x5B83;&#x7EBF;&#x7A0B;&#x6216;&#x8005;&#x534F;&#x7A0B;&#x53EA;&#x80FD;&#x901A;&#x8FC7;&#x7ED9;&#x5176;&#x53D1;&#x6D88;&#x606F;&#x7684;&#x65B9;&#x5F0F;&#x4E0E;&#x4E4B;&#x4EA4;&#x4E92;&#x3002;&#x5982;&#x679C;&#x4F60;&#x7528; Erlang / Golang&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x4F60;&#x5E94;&#x8BE5;&#x4E0D;&#x964C;&#x751F;&#xFF0C;&#x5728; Rust &#x4E0B;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; channel &#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;<br><img src="https://static001.geekbang.org/resource/image/b4/44/b4171bafa947d925c11087c83yyb7b44.jpg?wh=2463x1325" alt=""></p>
+<p>Rust &#x4E0B; channel&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x6807;&#x51C6;&#x5E93;&#xFF0C;&#x8FD8;&#x662F;&#x7B2C;&#x4E09;&#x65B9;&#x5E93;&#xFF0C;&#x90FD;&#x6709;&#x975E;&#x5E38;&#x68D2;&#x7684;&#x7684;&#x5B9E;&#x73B0;&#x3002;&#x540C;&#x6B65; channel &#x7684;&#x6709;&#x6807;&#x51C6;&#x5E93;&#x7684; <a href="https://doc.rust-lang.org/std/sync/mpsc/fn.channel.html" target="_blank">mpsc:channel</a> &#x548C;&#x7B2C;&#x4E09;&#x65B9;&#x7684; <a href="https://docs.rs/crossbeam-channel" target="_blank">crossbeam_channel</a>&#xFF0C;&#x5F02;&#x6B65; channel &#x6709;tokio &#x4E0B;&#x7684; <a href="https://docs.rs/tokio/1.12.0/tokio/sync/mpsc/fn.channel.html" target="_blank">mpsc:channel</a>&#xFF0C;&#x4EE5;&#x53CA; <a href="https://docs.rs/flume" target="_blank">flume</a>&#x3002;</p>
+<h2 id="&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x6570;&#x636E;&#x7684;&#x4E00;&#x822C;&#x65B9;&#x6CD5;">&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x6570;&#x636E;&#x7684;&#x4E00;&#x822C;&#x65B9;&#x6CD5;</h2>
+<p>&#x6211;&#x4EEC;&#x518D;&#x6765;&#x770B;&#x770B;&#x5982;&#x4F55;&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x6570;&#x636E;&#x3002;&#x5927;&#x90E8;&#x5206;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5DF2;&#x6709;&#x7684;&#x5E94;&#x7528;&#x5C42;&#x534F;&#x8BAE;&#x6765;&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x6570;&#x636E;&#xFF0C;&#x6BD4;&#x5982; HTTP&#x3002;</p>
+<p>&#x5728; HTTP &#x534F;&#x8BAE;&#x4E0B;&#xFF0C;&#x57FA;&#x672C;&#x4E0A;&#x4F7F;&#x7528; JSON &#x6784;&#x5EFA; REST API / JSON API &#x662F;&#x4E1A;&#x754C;&#x7684;&#x5171;&#x8BC6;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x5668;&#x4E5F;&#x6709;&#x8DB3;&#x591F;&#x597D;&#x7684;&#x751F;&#x6001;&#x7CFB;&#x7EDF;&#x6765;&#x652F;&#x6301;&#x8FD9;&#x6837;&#x7684;&#x5904;&#x7406;&#x3002;&#x4F60;&#x53EA;&#x9700;&#x8981;&#x4F7F;&#x7528; serde &#x8BA9;&#x4F60;&#x5B9A;&#x4E49;&#x7684; Rust &#x6570;&#x636E;&#x7ED3;&#x6784;&#x5177;&#x5907; Serialize/Deserialize &#x7684;&#x80FD;&#x529B;&#xFF0C;&#x7136;&#x540E;&#x7528; serde_json &#x751F;&#x6210;&#x5E8F;&#x5217;&#x5316;&#x540E;&#x7684; JSON &#x6570;&#x636E;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E2A;&#x4F7F;&#x7528; rocket &#x6765;&#x5904;&#x7406; JSON &#x6570;&#x636E;&#x7684;&#x4F8B;&#x5B50;&#x3002;&#x9996;&#x5148;&#x5728; Cargo.toml &#x4E2D;&#x5F15;&#x5165;&#xFF1A;</p>
+<pre><code class="lang-plain">rocket = { version = &quot;0.5.0-rc.1&quot;, features = [&quot;json&quot;] }
+</code></pre>
+<p>&#x7136;&#x540E;&#x5728; main.rs &#x91CC;&#x6DFB;&#x52A0;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[macro_use]</span>
+<span class="hljs-keyword">extern</span> <span class="hljs-keyword">crate</span> rocket;
+
+<span class="hljs-keyword">use</span> rocket::serde::json::Json;
+<span class="hljs-keyword">use</span> rocket::serde::{Deserialize, Serialize};
+
+<span class="hljs-meta">#[derive(Serialize, Deserialize)]</span>
+<span class="hljs-meta">#[serde(crate = <span class="hljs-meta-string">&quot;rocket::serde&quot;</span>)]</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Hello</span></span> {
+    name: <span class="hljs-built_in">String</span>,
+}
+
+<span class="hljs-meta">#[get(<span class="hljs-meta-string">&quot;/&quot;</span>, format = <span class="hljs-meta-string">&quot;json&quot;</span>)]</span>
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">hello</span></span>() -&gt; Json&lt;Hello&gt; {
+    Json(Hello { name: <span class="hljs-string">&quot;Tyr&quot;</span>.into() })
+}
+
+<span class="hljs-meta">#[launch]</span>
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">rocket</span></span>() -&gt; _ {
+    rocket::build().mount(<span class="hljs-string">&quot;/&quot;</span>, routes![hello])
+}
+</code></pre>
+<p>Rocket &#x662F; Rust &#x7684;&#x4E00;&#x4E2A;&#x5168;&#x529F;&#x80FD;&#x7684; Web &#x6846;&#x67B6;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E; Python &#x7684; Django&#x3002;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x4F7F;&#x7528; rocket&#xFF0C;10 &#x591A;&#x884C;&#x4EE3;&#x7801;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x8D77;&#x4E00;&#x4E2A; Web Server&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x51FA;&#x4E8E;&#x6027;&#x80FD;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x539F;&#x56E0;&#xFF0C;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x5B9A;&#x4E49;&#x81EA;&#x5DF1;&#x7684;&#x5BA2;&#x6237;&#x7AEF;/&#x670D;&#x52A1;&#x5668;&#x95F4;&#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4F20;&#x7EDF;&#x7684; TLV&#xFF08;Type-Length-Value&#xFF09;&#x6765;&#x63CF;&#x8FF0;&#x534F;&#x8BAE;&#x6570;&#x636E;&#xFF0C;&#x6216;&#x8005;&#x4F7F;&#x7528;&#x66F4;&#x52A0;&#x9AD8;&#x6548;&#x7B80;&#x6D01;&#x7684; protobuf&#x3002;</p>
+<h3 id="&#x4F7F;&#x7528;-protobuf-&#x81EA;&#x5B9A;&#x4E49;&#x534F;&#x8BAE;">&#x4F7F;&#x7528; protobuf &#x81EA;&#x5B9A;&#x4E49;&#x534F;&#x8BAE;</h3>
+<p>protobuf &#x662F;&#x4E00;&#x79CD;&#x975E;&#x5E38;&#x65B9;&#x4FBF;&#x7684;&#x5B9A;&#x4E49;&#x5411;&#x540E;&#x517C;&#x5BB9;&#x534F;&#x8BAE;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x5B83;&#x4E0D;&#x4EC5;&#x80FD;&#x4F7F;&#x7528;&#x5728;&#x6784;&#x5EFA; gRPC &#x670D;&#x52A1;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x8FD8;&#x80FD;&#x7528;&#x5728;&#x5176;&#x5B83;&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x4E2D;&#x3002;</p>
+<p>&#x5728;&#x4E4B;&#x524D;&#x7684;&#x5B9E;&#x6218;&#x4E2D;&#xFF0C;&#x65E0;&#x8BBA;&#x662F; thumbor &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x8FD8;&#x662F; kv server &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x90FD;&#x7528;&#x5230;&#x4E86; protobuf&#x3002;&#x5728; kv server &#x7684;&#x5B9E;&#x6218;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5728; TCP &#x4E4B;&#x4E0A;&#x6784;&#x5EFA;&#x4E86;&#x57FA;&#x4E8E; protobuf &#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x652F;&#x6301;&#x4E00;&#x7CFB;&#x5217; HXXX &#x547D;&#x4EE4;&#x3002;&#x5982;&#x4F55;&#x4F7F;&#x7528; protobuf &#x4E4B;&#x524D;&#x8BB2;&#x8FC7;&#xFF0C;&#x8FD9;&#x91CC;&#x4E5F;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;&#x3002;</p>
+<p>&#x4E0D;&#x8FC7;&#xFF0C;&#x4F7F;&#x7528; protobuf &#x6784;&#x5EFA;&#x534F;&#x8BAE;&#x6D88;&#x606F;&#x7684;&#x65F6;&#x5019;&#x9700;&#x8981;&#x6CE8;&#x610F;&#xFF0C;&#x56E0;&#x4E3A; protobuf &#x751F;&#x6210;&#x7684;&#x662F;&#x4E0D;&#x5B9A;&#x957F;&#x6D88;&#x606F;&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x9700;&#x8981;&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x95F4;&#x7EA6;&#x5B9A;&#x597D;&#xFF0C;<strong>&#x5982;&#x4F55;&#x754C;&#x5B9A;&#x4E00;&#x4E2A;&#x6D88;&#x606F;&#x5E27;&#xFF08;frame&#xFF09;</strong>&#x3002;</p>
+<p>&#x5E38;&#x7528;&#x7684;&#x754C;&#x5B9A;&#x6D88;&#x606F;&#x5E27;&#x7684;&#x65B9;&#x6CD5;&#x6709;&#x5728;&#x6D88;&#x606F;&#x5C3E;&#x6DFB;&#x52A0; &#x201C;\r\n&#x201D;&#xFF0C;&#x4EE5;&#x53CA;&#x5728;&#x6D88;&#x606F;&#x5934;&#x6DFB;&#x52A0;&#x957F;&#x5EA6;&#x3002;</p>
+<p>&#x6D88;&#x606F;&#x5C3E;&#x6DFB;&#x52A0; &#x201C;\r\n&#x201D; &#x4E00;&#x822C;&#x7528;&#x4E8E;&#x57FA;&#x4E8E;&#x6587;&#x672C;&#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x6BD4;&#x5982; HTTP &#x5934; / POP3 / Redis &#x7684; RESP &#x534F;&#x8BAE;&#x7B49;&#x3002;&#x4F46;&#x5BF9;&#x4E8E;<strong>&#x4E8C;&#x8FDB;&#x5236;&#x534F;&#x8BAE;&#xFF0C;&#x66F4;&#x597D;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x5728;&#x6D88;&#x606F;&#x524D;&#x9762;&#x6DFB;&#x52A0;&#x56FA;&#x5B9A;&#x7684;&#x957F;&#x5EA6;</strong>&#xFF0C;&#x6BD4;&#x5982;&#x5BF9;&#x4E8E; protobuf &#x8FD9;&#x6837;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x800C;&#x8A00;&#xFF0C;&#x6D88;&#x606F;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x53EF;&#x80FD;&#x6B63;&#x597D;&#x51FA;&#x73B0;&#x8FDE;&#x7EED;&#x7684;&quot;\r\n&quot;&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528; &#x201C;\r\n&#x201D; &#x4F5C;&#x4E3A;&#x6D88;&#x606F;&#x7684;&#x8FB9;&#x754C;&#xFF0C;&#x5C31;&#x4F1A;&#x53D1;&#x751F;&#x7D0A;&#x4E71;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x53EF;&#x53D6;&#x3002;</p>
+<p>&#x4E0D;&#x8FC7;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x4E5F;&#x53EF;&#x4EE5;&#x6DF7;&#x7528;&#xFF0C;&#x6BD4;&#x5982; HTTP &#x534F;&#x8BAE;&#xFF0C;&#x672C;&#x8EAB;&#x4F7F;&#x7528; &#x201C;\r\n&#x201D; &#x754C;&#x5B9A;&#x5934;&#x90E8;&#xFF0C;&#x4F46;&#x5B83;&#x7684; body &#x4F1A;&#x4F7F;&#x7528;&#x957F;&#x5EA6;&#x754C;&#x5B9A;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x8FD9;&#x4E2A;&#x957F;&#x5EA6;&#x5728; HTTP &#x5934;&#x4E2D;&#x7684; Content-Length &#x6765;&#x58F0;&#x660E;&#x3002;</p>
+<p>&#x524D;&#x9762;&#x8BF4;&#x5230; gRPC &#x4F7F;&#x7528; protobuf&#xFF0C;&#x90A3;&#x4E48; gRPC &#x662F;&#x600E;&#x4E48;&#x754C;&#x5B9A;&#x6D88;&#x606F;&#x5E27;&#x5462;&#xFF1F;</p>
+<p>gRPC &#x4F7F;&#x7528;&#x4E86;&#x4E94;&#x4E2A;&#x5B57;&#x8282;&#x7684; <a href="https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md" target="_blank">Length-Prefixed-Message</a>&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x7684;&#x538B;&#x7F29;&#x6807;&#x5FD7;&#x548C;&#x56DB;&#x4E2A;&#x5B57;&#x8282;&#x7684;&#x6D88;&#x606F;&#x957F;&#x5EA6;&#x3002;<strong>&#x8FD9;&#x6837;&#xFF0C;&#x5728;&#x5904;&#x7406; gRPC &#x6D88;&#x606F;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x8BFB;&#x53D6; 5 &#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x53D6;&#x51FA;&#x5176;&#x4E2D;&#x7684;&#x957F;&#x5EA6; N&#xFF0C;&#x518D;&#x8BFB;&#x53D6; N &#x4E2A;&#x5B57;&#x8282;&#x5C31;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x6D88;&#x606F;&#x4E86;</strong>&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#x8FD9;&#x6837;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x5904;&#x7406;&#x4F7F;&#x7528; protobuf &#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x534F;&#x8BAE;&#x3002;</p>
+<p>&#x56E0;&#x4E3A;&#x8FD9;&#x79CD;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#x5F88;&#x5E38;&#x89C1;&#xFF0C;&#x6240;&#x4EE5; tokio &#x63D0;&#x4F9B;&#x4E86; <a href="https://docs.rs/tokio-util/0.6.8/tokio_util/codec/length_delimited/index.html" target="_blank">length_delimited codec</a>&#xFF0C;&#x6765;&#x5904;&#x7406;&#x7528;&#x957F;&#x5EA6;&#x9694;&#x79BB;&#x7684;&#x6D88;&#x606F;&#x5E27;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x548C; <a href="https://docs.rs/tokio-util/0.6.8/tokio_util/codec/struct.Framed.html" target="_blank">Framed</a> &#x7ED3;&#x6784;&#x914D;&#x5408;&#x4F7F;&#x7528;&#x3002;&#x5982;&#x679C;&#x4F60;&#x770B;&#x5B83;&#x7684;&#x6587;&#x6863;&#xFF0C;&#x4F1A;&#x53D1;&#x73B0;&#x5B83;&#x9664;&#x4E86;&#x7B80;&#x5355;&#x652F;&#x6301;&#x5728;&#x6D88;&#x606F;&#x524D;&#x52A0;&#x957F;&#x5EA6;&#x5916;&#xFF0C;&#x8FD8;&#x652F;&#x6301;&#x5404;&#x79CD;&#x5404;&#x6837;&#x590D;&#x6742;&#x7684;&#x573A;&#x666F;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x6D88;&#x606F;&#x6709;&#x4E00;&#x4E2A;&#x56FA;&#x5B9A;&#x7684;&#x6D88;&#x606F;&#x5934;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B; 3 &#x5B57;&#x8282;&#x957F;&#x5EA6;&#xFF0C;5 &#x5B57;&#x8282;&#x5176;&#x5B83;&#x5185;&#x5BB9;&#xFF0C;LengthDelimitedCodec &#x5904;&#x7406;&#x5B8C;&#x540E;&#xFF0C;&#x4F1A;&#x628A;&#x5B8C;&#x6574;&#x7684;&#x6570;&#x636E;&#x7ED9;&#x4F60;&#x3002;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; num_skip(3) &#x628A;&#x957F;&#x5EA6;&#x4E22;&#x5F03;&#xFF0C;&#x603B;&#x4E4B;&#x975E;&#x5E38;&#x7075;&#x6D3B;&#xFF1A;<br><img src="https://static001.geekbang.org/resource/image/91/ed/9186d8aef9aea6fb760d0c2537d3e6ed.png?wh=1920x1252" alt=""></p>
+<p>&#x4E0B;&#x9762;&#x662F;&#x6211;&#x4F7F;&#x7528; tokio / tokio_util &#x64B0;&#x5199;&#x7684;&#x670D;&#x52A1;&#x5668;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x90FD;&#x4F7F;&#x7528;&#x4E86; LengthDelimitedCodec &#x6765;&#x5904;&#x7406;&#x6D88;&#x606F;&#x5E27;&#x3002;</p>
+<p>&#x670D;&#x52A1;&#x5668;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> anyhow::<span class="hljs-built_in">Result</span>;
+<span class="hljs-keyword">use</span> bytes::Bytes;
+<span class="hljs-keyword">use</span> futures::{SinkExt, StreamExt};
+<span class="hljs-keyword">use</span> tokio::net::TcpListener;
+<span class="hljs-keyword">use</span> tokio_util::codec::{Framed, LengthDelimitedCodec};
+
+<span class="hljs-meta">#[tokio::main]</span>
+async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() -&gt; <span class="hljs-built_in">Result</span>&lt;()&gt; {
+    <span class="hljs-keyword">let</span> listener = TcpListener::bind(<span class="hljs-string">&quot;127.0.0.1:9527&quot;</span>).await?;
+    <span class="hljs-keyword">loop</span> {
+        <span class="hljs-keyword">let</span> (stream, addr) = listener.accept().await?;
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;accepted: {:?}&quot;</span>, addr);
+        <span class="hljs-comment">// LengthDelimitedCodec &#x9ED8;&#x8BA4; 4 &#x5B57;&#x8282;&#x957F;&#x5EA6;</span>
+        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> stream = Framed::new(stream, LengthDelimitedCodec::new());
+
+        tokio::spawn(async move {
+            <span class="hljs-comment">// &#x63A5;&#x6536;&#x5230;&#x7684;&#x6D88;&#x606F;&#x4F1A;&#x53EA;&#x5305;&#x542B;&#x6D88;&#x606F;&#x4E3B;&#x4F53;&#xFF08;&#x4E0D;&#x5305;&#x542B;&#x957F;&#x5EA6;&#xFF09;</span>
+            <span class="hljs-keyword">while</span> <span class="hljs-keyword">let</span> <span class="hljs-literal">Some</span>(<span class="hljs-literal">Ok</span>(data)) = stream.next().await {
+                <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Got: {:?}&quot;</span>, <span class="hljs-built_in">String</span>::from_utf8_lossy(&amp;data));
+                <span class="hljs-comment">// &#x53D1;&#x9001;&#x7684;&#x6D88;&#x606F;&#x4E5F;&#x9700;&#x8981;&#x53D1;&#x9001;&#x6D88;&#x606F;&#x4E3B;&#x4F53;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x63D0;&#x4F9B;&#x957F;&#x5EA6;</span>
+                <span class="hljs-comment">// Framed/LengthDelimitedCodec &#x4F1A;&#x81EA;&#x52A8;&#x8BA1;&#x7B97;&#x5E76;&#x6DFB;&#x52A0;</span>
+                stream.send(Bytes::from(<span class="hljs-string">&quot;goodbye world!&quot;</span>)).await.unwrap();
+            }
+        });
+    }
+}
+</code></pre>
+<p>&#x4EE5;&#x53CA;&#x5BA2;&#x6237;&#x7AEF;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> anyhow::<span class="hljs-built_in">Result</span>;
+<span class="hljs-keyword">use</span> bytes::Bytes;
+<span class="hljs-keyword">use</span> futures::{SinkExt, StreamExt};
+<span class="hljs-keyword">use</span> tokio::net::TcpStream;
+<span class="hljs-keyword">use</span> tokio_util::codec::{Framed, LengthDelimitedCodec};
+
+<span class="hljs-meta">#[tokio::main]</span>
+async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() -&gt; <span class="hljs-built_in">Result</span>&lt;()&gt; {
+    <span class="hljs-keyword">let</span> stream = TcpStream::connect(<span class="hljs-string">&quot;127.0.0.1:9527&quot;</span>).await?;
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> stream = Framed::new(stream, LengthDelimitedCodec::new());
+    stream.send(Bytes::from(<span class="hljs-string">&quot;hello world&quot;</span>)).await?;
+
+    <span class="hljs-comment">// &#x63A5;&#x6536;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x7684;&#x6570;&#x636E;</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-literal">Some</span>(<span class="hljs-literal">Ok</span>(data)) = stream.next().await {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Got: {:?}&quot;</span>, <span class="hljs-built_in">String</span>::from_utf8_lossy(&amp;data));
+    }
+
+    <span class="hljs-literal">Ok</span>(())
+}
+</code></pre>
+<p>&#x548C;&#x521A;&#x624D;&#x7684;TcpListener / TcpStream&#x4EE3;&#x7801;&#x76F8;&#x6BD4;&#xFF0C;&#x53CC;&#x65B9;&#x90FD;&#x4E0D;&#x9700;&#x8981;&#x77E5;&#x9053;&#x5BF9;&#x65B9;&#x53D1;&#x9001;&#x7684;&#x6570;&#x636E;&#x7684;&#x957F;&#x5EA6;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <a href="https://docs.rs/futures/0.3.17/futures/stream/trait.StreamExt.html" target="_blank">StreamExt</a> trait &#x7684; next() &#x63A5;&#x53E3;&#x5F97;&#x5230;&#x4E0B;&#x4E00;&#x4E2A;&#x6D88;&#x606F;&#xFF1B;&#x5728;&#x53D1;&#x9001;&#x65F6;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x8C03;&#x7528; <a href="https://docs.rs/futures/0.3.17/futures/sink/trait.SinkExt.html" target="_blank">SinkExt</a> trait &#x7684; send() &#x63A5;&#x53E3;&#x53D1;&#x9001;&#xFF0C;&#x76F8;&#x5E94;&#x7684;&#x957F;&#x5EA6;&#x5C31;&#x4F1A;&#x88AB;&#x81EA;&#x52A8;&#x8BA1;&#x7B97;&#x5E76;&#x6DFB;&#x52A0;&#x5230;&#x8981;&#x53D1;&#x9001;&#x7684;&#x6D88;&#x606F;&#x5E27;&#x7684;&#x5F00;&#x5934;&#x3002;</p>
+<p>&#x5F53;&#x7136;&#x5566;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x81EA;&#x5DF1;&#x8FD0;&#x884C;&#x8FD9;&#x4E24;&#x6BB5;&#x4EE3;&#x7801;&#xFF0C;&#x8BB0;&#x5F97;&#x5728; Cargo.toml &#x91CC;&#x6DFB;&#x52A0;&#xFF1A;</p>
+<pre><code class="lang-rust">[dependencies]
+anyhow = <span class="hljs-string">&quot;1&quot;</span>
+bytes = <span class="hljs-string">&quot;1&quot;</span>
+futures = <span class="hljs-string">&quot;0.3&quot;</span>
+tokio = { version = <span class="hljs-string">&quot;1&quot;</span>, features = [<span class="hljs-string">&quot;full&quot;</span>] }
+tokio-util = { version = <span class="hljs-string">&quot;0.6&quot;</span>, features = [<span class="hljs-string">&quot;codec&quot;</span>] }
+</code></pre>
+<p>&#x5B8C;&#x6574;&#x7684;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x95E8;&#x8BFE;&#x7A0B; <a href="https://github.com/tyrchen/geektime-rust" target="_blank">GitHub repo</a> &#x8FD9;&#x4E00;&#x8BB2;&#x7684;&#x76EE;&#x5F55;&#x4E2D;&#x627E;&#x5230;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x4E3A;&#x4E86;&#x4EE3;&#x7801;&#x7684;&#x7B80;&#x4FBF;&#xFF0C;&#x6211;&#x5E76;&#x6CA1;&#x6709;&#x76F4;&#x63A5;&#x4F7F;&#x7528; protobuf&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x628A;&#x53D1;&#x9001;&#x548C;&#x63A5;&#x6536;&#x5230;&#x7684; Bytes &#x91CC;&#x7684;&#x5185;&#x5BB9;&#x89C6;&#x4F5C; protobuf &#x5E8F;&#x5217;&#x5316;&#x6210;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#xFF08;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x770B; protobuf &#x7684;&#x5904;&#x7406;&#xFF0C;&#x53EF;&#x4EE5;&#x56DE;&#x987E; <a href="https://time.geekbang.org/column/article/413634" target="_blank">thumbor</a> &#x548C; <a href="https://time.geekbang.org/column/article/425001" target="_blank">kv server</a> &#x7684;&#x6E90;&#x4EE3;&#x7801;&#xFF09;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x4F7F;&#x7528; LengthDelimitedCodec&#xFF0C;&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x81EA;&#x5B9A;&#x4E49;&#x534F;&#x8BAE;&#xFF0C;&#x53D8;&#x5F97;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x3002;&#x77ED;&#x77ED;&#x4E8C;&#x5341;&#x884C;&#x4EE3;&#x7801;&#x5C31;&#x5B8C;&#x6210;&#x4E86;&#x975E;&#x5E38;&#x7E41;&#x6742;&#x7684;&#x5DE5;&#x4F5C;&#x3002;</p>
+<h2 id="&#x5C0F;&#x7ED3;">&#x5C0F;&#x7ED3;</h2>
+<p>&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x804A;&#x4E86;&#x7528;Rust&#x505A;&#x7F51;&#x7EDC;&#x5F00;&#x53D1;&#x7684;&#x751F;&#x6001;&#x7CFB;&#x7EDF;&#xFF0C;&#x7B80;&#x5355;&#x5B66;&#x4E60;&#x4E86;Rust &#x6807;&#x51C6;&#x5E93;&#x63D0;&#x4F9B;&#x7684; std::net &#x548C;&#x5BF9;&#x5F02;&#x6B65;&#x6709;&#x4F18;&#x79C0;&#x652F;&#x6301;&#x7684; tokio &#x5E93;&#xFF0C;&#x4EE5;&#x53CA;&#x5982;&#x4F55;&#x7528;&#x5B83;&#x4EEC;&#x6765;&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x548C;&#x7F51;&#x7EDC;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x7EDD;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;&#x652F;&#x6301;&#x5F02;&#x6B65;&#x7684;&#x7F51;&#x7EDC;&#x5F00;&#x53D1;&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x4F1A;&#x5728;&#x5404;&#x79CD;&#x7F51;&#x7EDC;&#x76F8;&#x5173;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x770B;&#x5230; tokio &#x7684;&#x8EAB;&#x5F71;&#x3002;&#x4F5C;&#x4E3A; Rust &#x4E0B;&#x4E3B;&#x8981;&#x7684;&#x5F02;&#x6B65;&#x7F51;&#x7EDC;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x591A;&#x82B1;&#x70B9;&#x65F6;&#x95F4;&#x4E86;&#x89E3;&#x5B83;&#x7684;&#x529F;&#x80FD;&#x3002;</p>
+<p>&#x5728;&#x63A5;&#x4E0B;&#x6765;&#x7684; KV server &#x7684;&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x770B;&#x5230;&#x66F4;&#x591A;&#x6709;&#x5173;&#x7F51;&#x7EDC;&#x65B9;&#x9762;&#x7684;&#x8BE6;&#x7EC6;&#x5904;&#x7406;&#x3002;&#x4F60;&#x4E5F;&#x4F1A;&#x770B;&#x5230;&#xFF0C;&#x6211;&#x4EEC;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x81EA;&#x5DF1;&#x7684; Stream &#x6765;&#x5904;&#x7406;&#x6D88;&#x606F;&#x5E27;&#x3002;</p>
+<h3 id="&#x601D;&#x8003;&#x9898;">&#x601D;&#x8003;&#x9898;</h3>
+<p>&#x5728;&#x4E4B;&#x524D;&#x505A;&#x7684; kv server &#x7684; examples &#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528; <a href="https://github.com/tyrchen/async-prost" target="_blank">async_prost</a>&#x3002;&#x6839;&#x636E;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x6240;&#x5B66;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4F60;&#x80FD;&#x4E0D;&#x80FD;&#x5C1D;&#x8BD5;&#x4F7F;&#x7528;&#x4F7F;&#x7528; tokio_util &#x4E0B;&#x7684; <a href="https://docs.rs/tokio-util/0.6.8/tokio_util/codec/length_delimited/index.html" target="_blank">LengthDelimitedCodec</a> &#x6765;&#x6539;&#x5199;&#x8FD9;&#x4E2A; example &#x5462;&#xFF1F;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> anyhow::<span class="hljs-built_in">Result</span>;
+<span class="hljs-keyword">use</span> async_prost::AsyncProstStream;
+<span class="hljs-keyword">use</span> futures::prelude::*;
+<span class="hljs-keyword">use</span> kv1::{CommandRequest, CommandResponse, Service, ServiceInner, SledDb};
+<span class="hljs-keyword">use</span> tokio::net::TcpListener;
+<span class="hljs-keyword">use</span> tracing::info;
+
+<span class="hljs-meta">#[tokio::main]</span>
+async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() -&gt; <span class="hljs-built_in">Result</span>&lt;()&gt; {
+    tracing_subscriber::fmt::init();
+    <span class="hljs-keyword">let</span> service: Service&lt;SledDb&gt; = ServiceInner::new(SledDb::new(<span class="hljs-string">&quot;/tmp/kvserver&quot;</span>))
+        .fn_before_send(|res| <span class="hljs-keyword">match</span> res.message.as_ref() {
+            <span class="hljs-string">&quot;&quot;</span> =&gt; res.message = <span class="hljs-string">&quot;altered. Original message is empty.&quot;</span>.into(),
+            s =&gt; res.message = <span class="hljs-built_in">format!</span>(<span class="hljs-string">&quot;altered: {}&quot;</span>, s),
+        })
+        .into();
+    <span class="hljs-keyword">let</span> addr = <span class="hljs-string">&quot;127.0.0.1:9527&quot;</span>;
+    <span class="hljs-keyword">let</span> listener = TcpListener::bind(addr).await?;
+    info!(<span class="hljs-string">&quot;Start listening on {}&quot;</span>, addr);
+    <span class="hljs-keyword">loop</span> {
+        <span class="hljs-keyword">let</span> (stream, addr) = listener.accept().await?;
+        info!(<span class="hljs-string">&quot;Client {:?} connected&quot;</span>, addr);
+        <span class="hljs-keyword">let</span> svc = service.clone();
+        tokio::spawn(async move {
+            <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> stream =
+                AsyncProstStream::&lt;_, CommandRequest, CommandResponse, _&gt;::from(stream).for_async();
+            <span class="hljs-keyword">while</span> <span class="hljs-keyword">let</span> <span class="hljs-literal">Some</span>(<span class="hljs-literal">Ok</span>(cmd)) = stream.next().await {
+                info!(<span class="hljs-string">&quot;Got a new command: {:?}&quot;</span>, cmd);
+                <span class="hljs-keyword">let</span> res = svc.execute(cmd);
+                stream.send(res).await.unwrap();
+            }
+            info!(<span class="hljs-string">&quot;Client {:?} disconnected&quot;</span>, addr);
+        });
+    }
+}
+</code></pre>
+<p>&#x611F;&#x8C22;&#x4F60;&#x7684;&#x9605;&#x8BFB;&#xFF0C;&#x4E0B;&#x4E00;&#x8BB2;&#x6211;&#x4EEC;&#x7EE7;&#x7EED;&#x5B66;&#x4E60;&#x7F51;&#x7EDC;&#x5F00;&#x53D1;&#x7684;&#x901A;&#x8BAF;&#x6A21;&#x578B;&#xFF0C;&#x6211;&#x4EEC;&#x4E0B;&#x4E00;&#x8BB2;&#x89C1;&#xFF5E;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="429673.html" class="navigation navigation-prev " aria-label="Previous page: 27｜生态系统：有哪些常有的Rust库可以为我所用？">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="432168.html" class="navigation navigation-next " aria-label="Next page: 29｜网络开发（下）：如何使用Rust处理网络请求？">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"28｜网络开发（上）：如何使用Rust处理网络请求？","level":"1.35","depth":1,"next":{"title":"29｜网络开发（下）：如何使用Rust处理网络请求？","level":"1.36","depth":1,"path":"docs/432168.md","ref":"./docs/432168.md","articles":[]},"previous":{"title":"27｜生态系统：有哪些常有的Rust库可以为我所用？","level":"1.34","depth":1,"path":"docs/429673.md","ref":"./docs/429673.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"陈天 · Rust 编程第一课","language":"zh","gitbook":"*"},"file":{"path":"docs/432162.md","mtime":"2024-08-25T05:24:52.581Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-08-25T05:46:11.445Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

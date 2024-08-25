@@ -1,0 +1,1199 @@
+
+<!DOCTYPE HTML>
+<html lang="zh" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>02｜串讲：编程开发中，那些你需要掌握的基本概念 · 陈天 · Rust 编程第一课</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="411089.html" />
+    
+    
+    <link rel="prev" href="408409.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="輸入並搜尋" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="408400.html">
+            
+                <a href="408400.html">
+            
+                    
+                    开篇词｜让Rust成为你的下一门主力语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="408409.html">
+            
+                <a href="408409.html">
+            
+                    
+                    01｜内存：值放堆上还是放栈上，这是一个问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="410038.html">
+            
+                <a href="410038.html">
+            
+                    
+                    02｜串讲：编程开发中，那些你需要掌握的基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="411089.html">
+            
+                <a href="411089.html">
+            
+                    
+                    加餐｜这个专栏你可以怎么学，以及Rust是否值得学？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="411632.html">
+            
+                <a href="411632.html">
+            
+                    
+                    03｜初窥门径：从你的第一个Rust程序开始！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="412883.html">
+            
+                <a href="412883.html">
+            
+                    
+                    04｜get hands dirty：来写个实用的CLI小工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="413634.html">
+            
+                <a href="413634.html">
+            
+                    
+                    05｜get hands dirty：做一个图片服务器有多难？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="414478.html">
+            
+                <a href="414478.html">
+            
+                    
+                    06｜get hands dirty：SQL查询工具怎么一鱼多吃？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="415098.html">
+            
+                <a href="415098.html">
+            
+                    
+                    07｜所有权：值的生杀大权到底在谁手上？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="415988.html">
+            
+                <a href="415988.html">
+            
+                    
+                    08｜所有权：值的借用是如何工作的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="416722.html">
+            
+                <a href="416722.html">
+            
+                    
+                    09｜所有权：一个值可以有多个所有者么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="417384.html">
+            
+                <a href="417384.html">
+            
+                    
+                    10｜生命周期：你创建的值究竟能活多久？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="418235.html">
+            
+                <a href="418235.html">
+            
+                    
+                    11｜内存管理：从创建到消亡，值都经历了什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="418778.html">
+            
+                <a href="418778.html">
+            
+                    
+                    加餐｜愚昧之巅：你的Rust学习常见问题汇总
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="420021.html">
+            
+                <a href="420021.html">
+            
+                    
+                    12｜类型系统：Rust的类型系统有什么特点？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="420028.html">
+            
+                <a href="420028.html">
+            
+                    
+                    13｜类型系统：如何使用trait来定义接口？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="421324.html">
+            
+                <a href="421324.html">
+            
+                    
+                    14｜类型系统：有哪些必须掌握的trait？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="422182.html">
+            
+                <a href="422182.html">
+            
+                    
+                    15｜数据结构：这些浓眉大眼的结构竟然都是智能指针？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="422975.html">
+            
+                <a href="422975.html">
+            
+                    
+                    16｜数据结构：Vec、&[T]、Box<[T]> ，你真的了解集合容器么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="423923.html">
+            
+                <a href="423923.html">
+            
+                    
+                    17｜数据结构：软件系统核心部件哈希表，内存如何布局？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="424002.html">
+            
+                <a href="424002.html">
+            
+                    
+                    18｜错误处理：为什么Rust的错误处理与众不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="424009.html">
+            
+                <a href="424009.html">
+            
+                    
+                    19｜闭包：FnOnce、FnMut和Fn，为什么有这么多类型？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="424017.html">
+            
+                <a href="424017.html">
+            
+                    
+                    20｜4 Steps ：如何更好地阅读Rust源码？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="425001.html">
+            
+                <a href="425001.html">
+            
+                    
+                    21｜阶段实操（1）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="425005.html">
+            
+                <a href="425005.html">
+            
+                    
+                    22｜阶段实操（2）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.27" data-path="425013.html">
+            
+                <a href="425013.html">
+            
+                    
+                    加餐｜期中测试：来写一个简单的grep命令行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.28" data-path="425015.html">
+            
+                <a href="425015.html">
+            
+                    
+                    加餐｜期中测试：参考实现讲解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.29" data-path="427082.html">
+            
+                <a href="427082.html">
+            
+                    
+                    23｜类型系统：如何在实战中使用泛型编程？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.30" data-path="428018.html">
+            
+                <a href="428018.html">
+            
+                    
+                    24｜类型系统：如何在实战中使用trait object？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.31" data-path="429063.html">
+            
+                <a href="429063.html">
+            
+                    
+                    25｜类型系统：如何围绕trait来设计和架构系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.32" data-path="429665.html">
+            
+                <a href="429665.html">
+            
+                    
+                    加餐｜Rust2021版次问世了！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.33" data-path="429666.html">
+            
+                <a href="429666.html">
+            
+                    
+                    26｜阶段实操（3）：构建一个简单的KV server-高级trait技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.34" data-path="429673.html">
+            
+                <a href="429673.html">
+            
+                    
+                    27｜生态系统：有哪些常有的Rust库可以为我所用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.35" data-path="432162.html">
+            
+                <a href="432162.html">
+            
+                    
+                    28｜网络开发（上）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.36" data-path="432168.html">
+            
+                <a href="432168.html">
+            
+                    
+                    29｜网络开发（下）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.37" data-path="435484.html">
+            
+                <a href="435484.html">
+            
+                    
+                    30｜Unsafe Rust：如何用C++的方式打开Rust？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.38" data-path="437566.html">
+            
+                <a href="437566.html">
+            
+                    
+                    31｜FFI：Rust如何和你的语言架起沟通桥梁？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.39" data-path="437569.html">
+            
+                <a href="437569.html">
+            
+                    
+                    32｜实操项目：使用PyO3开发Python3模块
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.40" data-path="442216.html">
+            
+                <a href="442216.html">
+            
+                    
+                    33｜并发处理（上）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.41" data-path="442217.html">
+            
+                <a href="442217.html">
+            
+                    
+                    34｜并发处理（下）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.42" data-path="445814.html">
+            
+                <a href="445814.html">
+            
+                    
+                    35｜实操项目：如何实现一个基本的MPSC channel？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.43" data-path="445818.html">
+            
+                <a href="445818.html">
+            
+                    
+                    用户故事｜绝望之谷：改变从学习开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.44" data-path="446948.html">
+            
+                <a href="446948.html">
+            
+                    
+                    36｜阶段实操（4）：构建一个简单的KV server-网络处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.45" data-path="446949.html">
+            
+                <a href="446949.html">
+            
+                    
+                    37｜阶段实操（5）：构建一个简单的KV server-网络安全
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.46" data-path="455413.html">
+            
+                <a href="455413.html">
+            
+                    
+                    38｜异步处理：Future是什么？它和async/await是什么关系？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.47" data-path="455412.html">
+            
+                <a href="455412.html">
+            
+                    
+                    39｜异步处理：async/await内部是怎么实现的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.48" data-path="461695.html">
+            
+                <a href="461695.html">
+            
+                    
+                    40｜异步处理：如何处理异步IO？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.49" data-path="461997.html">
+            
+                <a href="461997.html">
+            
+                    
+                    41｜阶段实操（6）：构建一个简单的KV server-异步处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.50" data-path="461999.html">
+            
+                <a href="461999.html">
+            
+                    
+                    42｜阶段实操（7）：构建一个简单的KV server-如何做大的重构？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.51" data-path="464856.html">
+            
+                <a href="464856.html">
+            
+                    
+                    43｜生产环境：真实世界下的一个Rust项目包含哪些要素？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.52" data-path="464855.html">
+            
+                <a href="464855.html">
+            
+                    
+                    44｜数据处理：应用程序和数据如何打交道？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.53" data-path="466825.html">
+            
+                <a href="466825.html">
+            
+                    
+                    45｜阶段实操（8）：构建一个简单的KV server-配置/测试/监控/CI/CD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.54" data-path="468066.html">
+            
+                <a href="468066.html">
+            
+                    
+                    46｜软件架构：如何用Rust架构复杂系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.55" data-path="468940.html">
+            
+                <a href="468940.html">
+            
+                    
+                    大咖助场｜开悟之坡（上）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.56" data-path="468948.html">
+            
+                <a href="468948.html">
+            
+                    
+                    大咖助场｜开悟之坡（下）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.57" data-path="470490.html">
+            
+                <a href="470490.html">
+            
+                    
+                    用户故事｜语言不仅是工具，还是思维方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.58" data-path="481355.html">
+            
+                <a href="481355.html">
+            
+                    
+                    加餐｜代码即数据：为什么我们需要宏编程能力？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.59" data-path="481359.html">
+            
+                <a href="481359.html">
+            
+                    
+                    加餐｜宏编程（上）：用最“笨”的方式撰写宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.60" data-path="481369.html">
+            
+                <a href="481369.html">
+            
+                    
+                    加餐｜宏编程（下）：用 syn/quote 优雅地构建宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.61" data-path="470420.html">
+            
+                <a href="470420.html">
+            
+                    
+                    结束语｜永续之原：Rust学习，如何持续精进？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.62" data-path="470440.html">
+            
+                <a href="470440.html">
+            
+                    
+                    期末测试｜来赴一场满分之约！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.63" data-path="482856.html">
+            
+                <a href="482856.html">
+            
+                    
+                    特别策划｜学习锦囊（一）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.64" data-path="483045.html">
+            
+                <a href="483045.html">
+            
+                    
+                    特别策划｜学习锦囊（二）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.65" data-path="483050.html">
+            
+                <a href="483050.html">
+            
+                    
+                    特别策划｜学习锦囊（三）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.66" data-path="653131.html">
+            
+                <a href="653131.html">
+            
+                    
+                    特别策划｜生成式AI：哪些开发环节可能被颠覆？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本書使用 GitBook 釋出
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >02｜串讲：编程开发中，那些你需要掌握的基本概念</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="02&#xFF5C;&#x4E32;&#x8BB2;&#xFF1A;&#x7F16;&#x7A0B;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x90A3;&#x4E9B;&#x4F60;&#x9700;&#x8981;&#x638C;&#x63E1;&#x7684;&#x57FA;&#x672C;&#x6982;&#x5FF5;">02&#xFF5C;&#x4E32;&#x8BB2;&#xFF1A;&#x7F16;&#x7A0B;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x90A3;&#x4E9B;&#x4F60;&#x9700;&#x8981;&#x638C;&#x63E1;&#x7684;&#x57FA;&#x672C;&#x6982;&#x5FF5;</h1>
+<pre><code>&#x4F60;&#x597D;&#xFF0C;&#x6211;&#x662F;&#x9648;&#x5929;&#x3002;
+</code></pre><p>&#x4E0A;&#x4E00;&#x8BB2;&#x6211;&#x4EEC;&#x4E86;&#x89E3;&#x4E86;&#x5185;&#x5B58;&#x7684;&#x57FA;&#x672C;&#x8FD0;&#x4F5C;&#x65B9;&#x5F0F;&#xFF0C;&#x7B80;&#x5355;&#x56DE;&#x987E;&#x4E00;&#x4E0B;&#xFF1A;&#x6808;&#x4E0A;&#x5B58;&#x653E;&#x7684;&#x6570;&#x636E;&#x662F;&#x9759;&#x6001;&#x7684;&#xFF0C;&#x56FA;&#x5B9A;&#x5927;&#x5C0F;&#xFF0C;&#x56FA;&#x5B9A;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF1B;&#x5806;&#x4E0A;&#x5B58;&#x653E;&#x7684;&#x6570;&#x636E;&#x662F;&#x52A8;&#x6001;&#x7684;&#xFF0C;&#x4E0D;&#x56FA;&#x5B9A;&#x5927;&#x5C0F;&#xFF0C;&#x4E0D;&#x56FA;&#x5B9A;&#x751F;&#x547D;&#x5468;&#x671F;&#x3002;</p>
+<p>&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x6765;&#x7EE7;&#x7EED;&#x68B3;&#x7406;&#xFF0C;&#x7F16;&#x7A0B;&#x5F00;&#x53D1;&#x4E2D;&#x7ECF;&#x5E38;&#x63A5;&#x89E6;&#x5230;&#x7684;&#x5176;&#x5B83;&#x57FA;&#x672C;&#x6982;&#x5FF5;&#x3002;&#x9700;&#x8981;&#x638C;&#x63E1;&#x7684;&#x5C0F;&#x6982;&#x5FF5;&#x70B9;&#x6BD4;&#x8F83;&#x591A;&#xFF0C;&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x4F60;&#x5B66;&#x4E60;&#xFF0C;&#x6211;&#x628A;&#x5B83;&#x4EEC;&#x5206;&#x4E3A;&#x56DB;&#x5927;&#x7C7B;&#x6765;&#x8BB2;&#x89E3;&#xFF1A;<strong>&#x6570;&#x636E;</strong>&#xFF08;&#x503C;&#x548C;&#x7C7B;&#x578B;&#x3001;&#x6307;&#x9488;&#x548C;&#x5F15;&#x7528;&#xFF09;&#x3001;<strong>&#x4EE3;&#x7801;</strong>&#xFF08;&#x51FD;&#x6570;&#x3001;&#x65B9;&#x6CD5;&#x3001;&#x95ED;&#x5305;&#x3001;&#x63A5;&#x53E3;&#x548C;&#x865A;&#x8868;&#xFF09;&#x3001;<strong>&#x8FD0;&#x884C;&#x65B9;&#x5F0F;</strong>&#xFF08;&#x5E76;&#x53D1;&#x5E76;&#x884C;&#x3001;&#x540C;&#x6B65;&#x5F02;&#x6B65;&#x548C; Promise / async / await &#xFF09;&#xFF0C;&#x4EE5;&#x53CA;<strong>&#x7F16;&#x7A0B;&#x8303;&#x5F0F;</strong>&#xFF08;&#x6CDB;&#x578B;&#x7F16;&#x7A0B;&#xFF09;&#x3002;</p>
+<p><img src="https://static001.geekbang.org/resource/image/41/ee/41bd5a23d4a7ba61c4477bb8699320ee.jpg?wh=1920x1068" alt="&#x56FE;&#x7247;"></p>
+<p>&#x5E0C;&#x671B;&#x901A;&#x8FC7;&#x91CD;&#x6E29;&#x8FD9;&#x4E9B;&#x6982;&#x5FF5;&#xFF0C;&#x4F60;&#x80FD;&#x591F;&#x592F;&#x5B9E;&#x8F6F;&#x4EF6;&#x5F00;&#x53D1;&#x9886;&#x57DF;&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF0C;&#x8FD9;&#x5BF9;&#x4F60;&#x540E;&#x7EED;&#x7406;&#x89E3; Rust &#x91CC;&#x9762;&#x7684;&#x5F88;&#x591A;&#x96BE;&#x70B9;&#x81F3;&#x5173;&#x91CD;&#x8981;&#xFF0C;&#x6BD4;&#x5982;&#x6240;&#x6709;&#x6743;&#x3001;&#x52A8;&#x6001;&#x5206;&#x6D3E;&#x3001;&#x5E76;&#x53D1;&#x5904;&#x7406;&#x7B49;&#x3002;</p>
+<p>&#x597D;&#x4E86;&#xFF0C;&#x5E9F;&#x8BDD;&#x4E0D;&#x591A;&#x8BF4;&#xFF0C;&#x6211;&#x4EEC;&#x9A6C;&#x4E0A;&#x5F00;&#x59CB;&#x3002;</p>
+<h2 id="&#x6570;&#x636E;">&#x6570;&#x636E;</h2>
+<p>&#x6570;&#x636E;&#x662F;&#x7A0B;&#x5E8F;&#x64CD;&#x4F5C;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4E0D;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x5904;&#x7406;&#x7684;&#x7A0B;&#x5E8F;&#x662F;&#x6CA1;&#x6709;&#x610F;&#x4E49;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x91CD;&#x6E29;&#x548C;&#x6570;&#x636E;&#x6709;&#x5173;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x5305;&#x62EC;&#x503C;&#x548C;&#x7C7B;&#x578B;&#x3001;&#x6307;&#x9488;&#x548C;&#x5F15;&#x7528;&#x3002;</p>
+<h3 id="&#x503C;&#x548C;&#x7C7B;&#x578B;">&#x503C;&#x548C;&#x7C7B;&#x578B;</h3>
+<p>&#x4E25;&#x8C28;&#x5730;&#x8BF4;&#xFF0C;&#x7C7B;&#x578B;&#x662F;&#x5BF9;&#x503C;&#x7684;&#x533A;&#x5206;&#xFF0C;&#x5B83;&#x5305;&#x542B;&#x4E86;&#x503C;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7684;<strong>&#x957F;&#x5EA6;</strong>&#x3001;<strong>&#x5BF9;&#x9F50;&#x4EE5;&#x53CA;&#x503C;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x7684;&#x64CD;&#x4F5C;&#x7B49;&#x4FE1;&#x606F;</strong>&#x3002;&#x4E00;&#x4E2A;&#x503C;&#x662F;&#x7B26;&#x5408;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#x7684;&#x67D0;&#x4E2A;&#x5B9E;&#x4F53;&#x3002;&#x6BD4;&#x5982; 64u8&#xFF0C;&#x5B83;&#x662F; u8 &#x7C7B;&#x578B;&#xFF0C;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x5927;&#x5C0F;&#x3001;&#x53D6;&#x503C;&#x8303;&#x56F4;&#x5728; 0&#xFF5E;255 &#x7684;&#x67D0;&#x4E2A;&#x6574;&#x6570;&#x5B9E;&#x4F53;&#xFF0C;&#x8FD9;&#x4E2A;&#x5B9E;&#x4F53;&#x662F; 64&#x3002;</p>
+<p>&#x503C;&#x4EE5;&#x7C7B;&#x578B;&#x89C4;&#x5B9A;&#x7684;&#x8868;&#x8FBE;&#x65B9;&#x5F0F;&#xFF08;representation&#xFF09;&#x88AB;&#x5B58;&#x50A8;&#x6210;&#x4E00;&#x7EC4;&#x5B57;&#x8282;&#x6D41;&#x8FDB;&#x884C;&#x8BBF;&#x95EE;&#x3002;&#x6BD4;&#x5982; 64&#xFF0C;&#x5B58;&#x50A8;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x8868;&#x73B0;&#x5F62;&#x5F0F;&#x662F; 0x40&#xFF0C;&#x6216;&#x8005; 0b 0100 0000&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x4F60;&#x8981;&#x6CE8;&#x610F;&#xFF0C;<strong>&#x503C;&#x662F;&#x65E0;&#x6CD5;&#x8131;&#x79BB;&#x5177;&#x4F53;&#x7684;&#x7C7B;&#x578B;&#x8BA8;&#x8BBA;&#x7684;</strong>&#x3002;&#x540C;&#x6837;&#x662F;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x5B57;&#x8282; 0x40&#xFF0C;&#x5982;&#x679C;&#x5176;&#x7C7B;&#x578B;&#x662F; ASCII char&#xFF0C;&#x90A3;&#x4E48;&#x5176;&#x542B;&#x4E49;&#x5C31;&#x4E0D;&#x662F; 64&#xFF0C;&#x800C;&#x662F; @ &#x7B26;&#x53F7;&#x3002;</p>
+<p>&#x4E0D;&#x7BA1;&#x662F;&#x5F3A;&#x7C7B;&#x578B;&#x7684;&#x8BED;&#x8A00;&#x8FD8;&#x662F;&#x5F31;&#x7C7B;&#x578B;&#x7684;&#x8BED;&#x8A00;&#xFF0C;&#x8BED;&#x8A00;&#x5185;&#x90E8;&#x90FD;&#x6709;&#x5176;&#x7C7B;&#x578B;&#x7684;&#x5177;&#x4F53;&#x8868;&#x8FF0;&#x3002;&#x4E00;&#x822C;&#x800C;&#x8A00;&#xFF0C;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x7684;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x539F;&#x751F;&#x7C7B;&#x578B;&#x548C;&#x7EC4;&#x5408;&#x7C7B;&#x578B;&#x4E24;&#x5927;&#x7C7B;&#x3002;</p>
+<p>&#x539F;&#x751F;&#x7C7B;&#x578B;&#xFF08;primitive type&#xFF09;&#x662F;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x63D0;&#x4F9B;&#x7684;&#x6700;&#x57FA;&#x7840;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x3002;&#x6BD4;&#x5982;&#x5B57;&#x7B26;&#x3001;&#x6574;&#x6570;&#x3001;&#x6D6E;&#x70B9;&#x6570;&#x3001;&#x5E03;&#x5C14;&#x503C;&#x3001;&#x6570;&#x7EC4;&#xFF08;array&#xFF09;&#x3001;&#x5143;&#x7EC4;&#xFF08;tuple&#xFF09;&#x3001;&#x6307;&#x9488;&#x3001;&#x5F15;&#x7528;&#x3001;&#x51FD;&#x6570;&#x3001;&#x95ED;&#x5305;&#x7B49;&#x3002;<strong>&#x6240;&#x6709;&#x539F;&#x751F;&#x7C7B;&#x578B;&#x7684;&#x5927;&#x5C0F;&#x90FD;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x5B83;&#x4EEC;&#x53EF;&#x4EE5;&#x88AB;&#x5206;&#x914D;&#x5230;&#x6808;&#x4E0A;</strong>&#x3002;</p>
+<p>&#x7EC4;&#x5408;&#x7C7B;&#x578B;&#xFF08;composite type&#xFF09;&#x6216;&#x8005;&#x8BF4;&#x590D;&#x5408;&#x7C7B;&#x578B;&#xFF0C;&#x662F;&#x6307;&#x7531;&#x4E00;&#x7EC4;&#x539F;&#x751F;&#x7C7B;&#x578B;&#x548C;&#x5176;&#x5B83;&#x7C7B;&#x578B;&#x7EC4;&#x5408;&#x800C;&#x6210;&#x7684;&#x7C7B;&#x578B;&#x3002;&#x7EC4;&#x5408;&#x7C7B;&#x578B;&#x4E5F;&#x53EF;&#x4EE5;&#x7EC6;&#x5206;&#x4E3A;&#x4E24;&#x7C7B;&#xFF1A;</p>
+<ul>
+<li>&#x7ED3;&#x6784;&#x4F53;&#xFF08;structure type&#xFF09;&#xFF1A;<strong>&#x591A;&#x4E2A;&#x7C7B;&#x578B;&#x7EC4;&#x5408;&#x5728;&#x4E00;&#x8D77;&#x5171;&#x540C;&#x8868;&#x8FBE;&#x4E00;&#x4E2A;&#x503C;&#x7684;&#x590D;&#x6742;&#x6570;&#x636E;&#x7ED3;&#x6784;</strong>&#x3002;&#x6BD4;&#x5982; Person &#x7ED3;&#x6784;&#x4F53;&#xFF0C;&#x5185;&#x90E8;&#x5305;&#x542B; name&#x3001;age&#x3001;email &#x7B49;&#x4FE1;&#x606F;&#x3002;&#x7528;&#x4EE3;&#x6570;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF08;algebraic data type&#xFF09;&#x7684;&#x8BF4;&#x6CD5;&#xFF0C;&#x7ED3;&#x6784;&#x4F53;&#x662F; product type&#x3002;</li>
+<li>&#x6807;&#x7B7E;&#x8054;&#x5408;&#xFF08;tagged union&#xFF09;&#xFF1A;&#x4E5F;&#x53EB;&#x4E0D;&#x76F8;&#x4EA4;&#x5E76;&#x96C6;&#xFF08;disjoint union&#xFF09;&#xFF0C;<strong>&#x53EF;&#x4EE5;&#x5B58;&#x50A8;&#x4E00;&#x7EC4;&#x4E0D;&#x540C;&#x4F46;&#x56FA;&#x5B9A;&#x7684;&#x7C7B;&#x578B;&#x4E2D;&#x7684;&#x67D0;&#x4E2A;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5177;&#x4F53;&#x662F;&#x54EA;&#x4E2A;&#x7C7B;&#x578B;&#x7531;&#x5176;&#x6807;&#x7B7E;&#x51B3;&#x5B9A;</strong>&#x3002;&#x6BD4;&#x5982; Haskell &#x91CC;&#x7684; Maybe &#x7C7B;&#x578B;&#xFF0C;&#x6216;&#x8005; Swift &#x4E2D;&#x7684; Optional &#x5C31;&#x662F;&#x6807;&#x7B7E;&#x8054;&#x5408;&#x3002;&#x7528;&#x4EE3;&#x6570;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x7684;&#x8BF4;&#x6CD5;&#xFF0C;&#x6807;&#x7B7E;&#x8054;&#x5408;&#x662F; sum type&#x3002;</li>
+</ul>
+<p>&#x53E6;&#x5916;&#x4E0D;&#x5C11;&#x8BED;&#x8A00;&#x4E0D;&#x652F;&#x6301;&#x6807;&#x7B7E;&#x8054;&#x5408;&#xFF0C;&#x53EA;&#x53D6;&#x5176;&#x6807;&#x7B7E;&#x90E8;&#x5206;&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;&#x679A;&#x4E3E;&#x7C7B;&#x578B;&#xFF08;enumerate&#xFF09;&#x3002;&#x679A;&#x4E3E;&#x662F;&#x6807;&#x7B7E;&#x8054;&#x5408;&#x7684;&#x5B50;&#x7C7B;&#x578B;&#xFF0C;&#x4F46;&#x529F;&#x80FD;&#x6BD4;&#x8F83;&#x5F31;&#xFF0C;&#x65E0;&#x6CD5;&#x8868;&#x8FBE;&#x590D;&#x6742;&#x7684;&#x7ED3;&#x6784;&#x3002;</p>
+<p>&#x770B;&#x5B9A;&#x4E49;&#x53EF;&#x80FD;&#x4E0D;&#x662F;&#x592A;&#x597D;&#x7406;&#x89E3;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x8FD9;&#x5F20;&#x56FE;&#xFF1A;</p>
+<p><img src="https://static001.geekbang.org/resource/image/b2/11/b291acc8e6a1f890668334cea2919211.jpg?wh=1920x1108" alt="&#x56FE;&#x7247;"></p>
+<h3 id="&#x6307;&#x9488;&#x548C;&#x5F15;&#x7528;">&#x6307;&#x9488;&#x548C;&#x5F15;&#x7528;</h3>
+<p>&#x5728;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x4E00;&#x4E2A;&#x503C;&#x88AB;&#x5B58;&#x50A8;&#x5230;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x67D0;&#x4E2A;&#x4F4D;&#x7F6E;&#xFF0C;&#x8FD9;&#x4E2A;&#x4F4D;&#x7F6E;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x5185;&#x5B58;&#x5730;&#x5740;&#x3002;&#x800C;&#x6307;&#x9488;&#x662F;&#x4E00;&#x4E2A;&#x6301;&#x6709;&#x5185;&#x5B58;&#x5730;&#x5740;&#x7684;&#x503C;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x89E3;&#x5F15;&#x7528;&#xFF08;dereference&#xFF09;&#x6765;&#x8BBF;&#x95EE;&#x5B83;&#x6307;&#x5411;&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#xFF0C;&#x7406;&#x8BBA;&#x4E0A;&#x53EF;&#x4EE5;&#x89E3;&#x5F15;&#x7528;&#x5230;&#x4EFB;&#x610F;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x3002;</p>
+<p>&#x5F15;&#x7528;&#xFF08;reference&#xFF09;&#x548C;&#x6307;&#x9488;&#x975E;&#x5E38;&#x7C7B;&#x4F3C;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;<strong>&#x5F15;&#x7528;&#x7684;&#x89E3;&#x5F15;&#x7528;&#x8BBF;&#x95EE;&#x662F;&#x53D7;&#x9650;&#x7684;&#xFF0C;&#x5B83;&#x53EA;&#x80FD;&#x89E3;&#x5F15;&#x7528;&#x5230;&#x5B83;&#x5F15;&#x7528;&#x6570;&#x636E;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4E0D;&#x80FD;&#x7528;&#x4F5C;&#x5B83;&#x7528;</strong>&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x6307;&#x5411; 42u8 &#x8FD9;&#x4E2A;&#x503C;&#x7684;&#x4E00;&#x4E2A;&#x5F15;&#x7528;&#xFF0C;&#x5B83;&#x89E3;&#x5F15;&#x7528;&#x7684;&#x65F6;&#x5019;&#x53EA;&#x80FD;&#x4F7F;&#x7528; u8 &#x6570;&#x636E;&#x7C7B;&#x578B;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x6307;&#x9488;&#x7684;&#x4F7F;&#x7528;&#x9650;&#x5236;&#x66F4;&#x5C11;&#xFF0C;&#x4F46;&#x4E5F;&#x4F1A;&#x5E26;&#x6765;&#x66F4;&#x591A;&#x7684;&#x5371;&#x5BB3;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x7528;&#x6B63;&#x786E;&#x7684;&#x7C7B;&#x578B;&#x89E3;&#x5F15;&#x7528;&#x4E00;&#x4E2A;&#x6307;&#x9488;&#xFF0C;&#x90A3;&#x4E48;&#x4F1A;&#x5F15;&#x53D1;&#x5404;&#x79CD;&#x5404;&#x6837;&#x7684;&#x5185;&#x5B58;&#x95EE;&#x9898;&#xFF0C;&#x9020;&#x6210;&#x7CFB;&#x7EDF;&#x5D29;&#x6E83;&#x6216;&#x8005;&#x6F5C;&#x5728;&#x7684;&#x5B89;&#x5168;&#x6F0F;&#x6D1E;&#x3002;</p>
+<p>&#x521A;&#x521A;&#x8BB2;&#x8FC7;&#xFF0C;<strong>&#x6307;&#x9488;&#x548C;&#x5F15;&#x7528;&#x662F;&#x539F;&#x751F;&#x7C7B;&#x578B;&#xFF0C;&#x5B83;&#x4EEC;&#x53EF;&#x4EE5;&#x5206;&#x914D;&#x5728;&#x6808;&#x4E0A;</strong>&#x3002;</p>
+<p>&#x6839;&#x636E;&#x6307;&#x5411;&#x6570;&#x636E;&#x7684;&#x4E0D;&#x540C;&#xFF0C;&#x67D0;&#x4E9B;&#x5F15;&#x7528;&#x9664;&#x4E86;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x6307;&#x9488;&#x6307;&#x5411;&#x5185;&#x5B58;&#x5730;&#x5740;&#x4E4B;&#x5916;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x5185;&#x5B58;&#x5730;&#x5740;&#x7684;&#x957F;&#x5EA6;&#x548C;&#x5176;&#x5B83;&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x5982;&#x4E0A;&#x4E00;&#x8BB2;&#x63D0;&#x5230;&#x7684;&#x6307;&#x5411; &#x201C;hello world&#x201D; &#x5B57;&#x7B26;&#x4E32;&#x7684;&#x6307;&#x9488;&#xFF0C;&#x8FD8;&#x5305;&#x542B;&#x5B57;&#x7B26;&#x4E32;&#x957F;&#x5EA6;&#x548C;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5BB9;&#x91CF;&#xFF0C;&#x4E00;&#x5171;&#x4F7F;&#x7528;&#x4E86; 3 &#x4E2A; word&#xFF0C;&#x5728; 64 &#x4F4D; CPU &#x4E0B;&#x5360;&#x7528; 24 &#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x8FD9;&#x6837;<strong>&#x6BD4;&#x6B63;&#x5E38;&#x6307;&#x9488;&#x643A;&#x5E26;&#x66F4;&#x591A;&#x4FE1;&#x606F;&#x7684;&#x6307;&#x9488;&#xFF0C;&#x6211;&#x4EEC;&#x79F0;&#x4E4B;&#x4E3A;&#x80D6;&#x6307;&#x9488;&#xFF08;fat pointer&#xFF09;</strong>&#x3002;&#x5F88;&#x591A;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x5F15;&#x7528;&#xFF0C;&#x5185;&#x90E8;&#x90FD;&#x662F;&#x7531;&#x80D6;&#x6307;&#x9488;&#x5B9E;&#x73B0;&#x7684;&#x3002;</p>
+<h2 id="&#x4EE3;&#x7801;">&#x4EE3;&#x7801;</h2>
+<p>&#x6570;&#x636E;&#x662F;&#x7A0B;&#x5E8F;&#x64CD;&#x4F5C;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x800C;&#x4EE3;&#x7801;&#x662F;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x7684;&#x4E3B;&#x4F53;&#xFF0C;&#x4E5F;&#x662F;&#x6211;&#x4EEC;&#x5F00;&#x53D1;&#x8005;&#x628A;&#x7269;&#x7406;&#x4E16;&#x754C;&#x4E2D;&#x7684;&#x9700;&#x6C42;&#x8F6C;&#x6362;&#x6210;&#x6570;&#x5B57;&#x4E16;&#x754C;&#x4E2D;&#x903B;&#x8F91;&#x7684;&#x8F7D;&#x4F53;&#x3002;&#x6211;&#x4EEC;&#x4F1A;&#x8BA8;&#x8BBA;&#x51FD;&#x6570;&#x548C;&#x95ED;&#x5305;&#x3001;&#x63A5;&#x53E3;&#x548C;&#x865A;&#x8868;&#x3002;</p>
+<h3 id="&#x51FD;&#x6570;&#x3001;&#x65B9;&#x6CD5;&#x548C;&#x95ED;&#x5305;">&#x51FD;&#x6570;&#x3001;&#x65B9;&#x6CD5;&#x548C;&#x95ED;&#x5305;</h3>
+<p>&#x51FD;&#x6570;&#x662F;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x7684;&#x57FA;&#x672C;&#x8981;&#x7D20;&#xFF0C;&#x5B83;&#x662F;&#x5BF9;&#x5B8C;&#x6210;&#x67D0;&#x4E2A;&#x529F;&#x80FD;&#x7684;&#x4E00;&#x7EC4;&#x76F8;&#x5173;&#x8BED;&#x53E5;&#x548C;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x5C01;&#x88C5;&#x3002;<strong>&#x51FD;&#x6570;&#x4E5F;&#x662F;&#x5BF9;&#x4EE3;&#x7801;&#x4E2D;&#x91CD;&#x590D;&#x884C;&#x4E3A;&#x7684;&#x62BD;&#x8C61;</strong>&#x3002;&#x5728;&#x73B0;&#x4EE3;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x4E2D;&#xFF0C;&#x51FD;&#x6570;&#x5F80;&#x5F80;&#x662F;&#x4E00;&#x7B49;&#x516C;&#x6C11;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x9012;&#xFF0C;&#x6216;&#x8005;&#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x503C;&#x8FD4;&#x56DE;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x590D;&#x5408;&#x7C7B;&#x578B;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x7EC4;&#x6210;&#x90E8;&#x5206;&#x3002;</p>
+<p>&#x5728;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x4E2D;&#xFF0C;&#x5728;&#x7C7B;&#x6216;&#x8005;&#x5BF9;&#x8C61;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x88AB;&#x79F0;&#x4E3A;&#x65B9;&#x6CD5;&#xFF08;method&#xFF09;&#x3002;&#x65B9;&#x6CD5;&#x5F80;&#x5F80;&#x548C;&#x5BF9;&#x8C61;&#x7684;&#x6307;&#x9488;&#x53D1;&#x751F;&#x5173;&#x7CFB;&#xFF0C;&#x6BD4;&#x5982; Python &#x5BF9;&#x8C61;&#x7684; self &#x5F15;&#x7528;&#xFF0C;&#x6216;&#x8005; Java &#x5BF9;&#x8C61;&#x7684; this &#x5F15;&#x7528;&#x3002;</p>
+<p>&#x800C;&#x95ED;&#x5305;&#x662F;&#x5C06;&#x51FD;&#x6570;&#xFF0C;&#x6216;&#x8005;&#x8BF4;&#x4EE3;&#x7801;&#x548C;&#x5176;&#x73AF;&#x5883;&#x4E00;&#x8D77;&#x5B58;&#x50A8;&#x7684;&#x4E00;&#x79CD;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;<strong>&#x95ED;&#x5305;&#x5F15;&#x7528;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x7684;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#xFF0C;&#x4F1A;&#x88AB;&#x6355;&#x83B7;&#x5230;&#x95ED;&#x5305;&#x7684;&#x7ED3;&#x6784;&#x4E2D;&#xFF0C;&#x6210;&#x4E3A;&#x95ED;&#x5305;&#x7C7B;&#x578B;&#x7684;&#x4E00;&#x90E8;&#x5206;</strong>&#x3002;</p>
+<p>&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x4E00;&#x95E8;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#xFF0C;&#x5176;&#x51FD;&#x6570;&#x662F;&#x4E00;&#x7B49;&#x516C;&#x6C11;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x5FC5;&#x7136;&#x4F1A;&#x652F;&#x6301;&#x95ED;&#x5305;&#xFF08;closure&#xFF09;&#xFF0C;&#x56E0;&#x4E3A;&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x503C;&#x5F80;&#x5F80;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x95ED;&#x5305;&#x3002;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x8FD9;&#x5F20;&#x56FE;&#x8F85;&#x52A9;&#x7406;&#x89E3;&#xFF0C;&#x56FE;&#x4E2D;&#x5C55;&#x793A;&#x4E86;&#x4E00;&#x4E2A;&#x95ED;&#x5305;&#x5BF9;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x7684;&#x6355;&#x83B7;&#x3002;&#x53EF;&#x4EE5; <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=34b218b50497b266a42411c4b1aada1a" target="_blank">&#x5728;&#x8FD9;&#x91CC;</a> &#x8FD0;&#x884C;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#xFF1A;</p>
+<p><img src="https://static001.geekbang.org/resource/image/5d/ee/5de48717de85670yy7fac479c7a7aeee.jpg?wh=1920x1010" alt="&#x56FE;&#x7247;"></p>
+<h3 id="&#x63A5;&#x53E3;&#x548C;&#x865A;&#x8868;">&#x63A5;&#x53E3;&#x548C;&#x865A;&#x8868;</h3>
+<p>&#x63A5;&#x53E3;&#x662F;&#x4E00;&#x4E2A;&#x8F6F;&#x4EF6;&#x7CFB;&#x7EDF;&#x5F00;&#x53D1;&#x7684;&#x6838;&#x5FC3;&#x90E8;&#x5206;&#xFF0C;&#x5B83;&#x53CD;&#x6620;&#x4E86;&#x7CFB;&#x7EDF;&#x7684;&#x8BBE;&#x8BA1;&#x8005;&#x5BF9;&#x7CFB;&#x7EDF;&#x7684;&#x62BD;&#x8C61;&#x7406;&#x89E3;&#x3002;<strong>&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x5C42;&#xFF0C;&#x63A5;&#x53E3;&#x5C06;&#x4F7F;&#x7528;&#x65B9;&#x548C;&#x5B9E;&#x73B0;&#x65B9;&#x9694;&#x79BB;&#x5F00;&#x6765;&#xFF0C;&#x4F7F;&#x4E24;&#x8005;&#x4E0D;&#x76F4;&#x63A5;&#x6709;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x5927;&#x5927;&#x63D0;&#x9AD8;&#x4E86;&#x590D;&#x7528;&#x6027;&#x548C;&#x6269;&#x5C55;&#x6027;</strong>&#x3002;</p>
+<p>&#x5F88;&#x591A;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x90FD;&#x6709;&#x63A5;&#x53E3;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x5141;&#x8BB8;&#x5F00;&#x53D1;&#x8005;&#x9762;&#x5411;&#x63A5;&#x53E3;&#x8BBE;&#x8BA1;&#xFF0C;&#x6BD4;&#x5982; Java &#x7684; interface&#x3001;Elixir &#x7684; behaviour&#x3001;Swift &#x7684; protocol &#x548C; Rust &#x7684; trait&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x8BF4;&#xFF0C;&#x5728; HTTP &#x4E2D;&#xFF0C;Request/Response &#x7684;&#x670D;&#x52A1;&#x5904;&#x7406;&#x6A21;&#x578B;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5178;&#x578B;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x6309;&#x7167;&#x670D;&#x52A1;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x51FA;&#x4E0D;&#x540C;&#x8F93;&#x5165;&#x4E0B;&#xFF0C;&#x4ECE; Request &#x5230; Response &#x5177;&#x4F53;&#x8BE5;&#x5982;&#x4F55;&#x6620;&#x5C04;&#xFF0C;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;&#x7CFB;&#x7EDF;&#x5C31;&#x53EF;&#x4EE5;&#x5728;&#x5408;&#x9002;&#x7684;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x628A;&#x7B26;&#x5408;&#x8981;&#x6C42;&#x7684; Request &#x5206;&#x6D3E;&#x7ED9;&#x6211;&#x4EEC;&#x7684;&#x670D;&#x52A1;&#x3002;</p>
+<p>&#x9762;&#x5411;&#x63A5;&#x53E3;&#x7684;&#x8BBE;&#x8BA1;&#x662F;&#x8F6F;&#x4EF6;&#x5F00;&#x53D1;&#x4E2D;&#x7684;&#x91CD;&#x8981;&#x80FD;&#x529B;&#xFF0C;&#x800C; Rust &#x5C24;&#x5176;&#x91CD;&#x89C6;&#x63A5;&#x53E3;&#x7684;&#x80FD;&#x529B;&#x3002;&#x5728;&#x540E;&#x7EED;&#x8BB2;&#x5230; Trait &#x7684;&#x7AE0;&#x8282;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#x5982;&#x4F55;&#x7528; Trait &#x6765;&#x8FDB;&#x884C;&#x63A5;&#x53E3;&#x8BBE;&#x8BA1;&#x3002;</p>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x5728;&#x8FD0;&#x884C;&#x671F;&#x4F7F;&#x7528;&#x63A5;&#x53E3;&#x6765;&#x5F15;&#x7528;&#x5177;&#x4F53;&#x7C7B;&#x578B;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4EE3;&#x7801;&#x5C31;&#x5177;&#x5907;&#x4E86;&#x8FD0;&#x884C;&#x65F6;&#x591A;&#x6001;&#x7684;&#x80FD;&#x529B;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x4E00;&#x65E6;&#x4F7F;&#x7528;&#x4E86;&#x5173;&#x4E8E;&#x63A5;&#x53E3;&#x7684;&#x5F15;&#x7528;&#xFF0C;&#x53D8;&#x91CF;&#x539F;&#x672C;&#x7684;&#x7C7B;&#x578B;&#x88AB;&#x62B9;&#x53BB;&#xFF0C;&#x6211;&#x4EEC;&#x65E0;&#x6CD5;&#x5355;&#x7EAF;&#x4ECE;&#x4E00;&#x4E2A;&#x6307;&#x9488;&#x5206;&#x6790;&#x51FA;&#x8FD9;&#x4E2A;&#x5F15;&#x7528;&#x5177;&#x5907;&#x4EC0;&#x4E48;&#x6837;&#x7684;&#x80FD;&#x529B;&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#xFF0C;<strong>&#x5728;&#x751F;&#x6210;&#x8FD9;&#x4E2A;&#x5F15;&#x7528;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x6784;&#x5EFA;&#x80D6;&#x6307;&#x9488;&#xFF0C;&#x9664;&#x4E86;&#x6307;&#x5411;&#x6570;&#x636E;&#x672C;&#x8EAB;&#x5916;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x6307;&#x5411;&#x4E00;&#x5F20;&#x6DB5;&#x76D6;&#x4E86;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x6240;&#x652F;&#x6301;&#x65B9;&#x6CD5;&#x7684;&#x5217;&#x8868;</strong>&#x3002;&#x8FD9;&#x4E2A;&#x5217;&#x8868;&#xFF0C;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x719F;&#x77E5;&#x7684;&#x865A;&#x8868;&#xFF08;virtual table&#xFF09;&#x3002;</p>
+<p>&#x4E0B;&#x56FE;&#x5C55;&#x793A;&#x4E86;&#x4E00;&#x4E2A; Vec &#x6570;&#x636E;&#x5728;&#x8FD0;&#x884C;&#x671F;&#x88AB;&#x62B9;&#x53BB;&#x7C7B;&#x578B;&#xFF0C;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x6307;&#x5411; Write &#x63A5;&#x53E3;&#x5F15;&#x7528;&#x7684;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<p><img src="https://static001.geekbang.org/resource/image/27/f9/27f671936d44d08d837fbf68baee21f9.jpg?wh=1920x1409" alt="&#x56FE;&#x7247;"></p>
+<p>&#x7531;&#x4E8E;&#x865A;&#x8868;&#x8BB0;&#x5F55;&#x4E86;&#x6570;&#x636E;&#x80FD;&#x591F;&#x6267;&#x884C;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x8FD0;&#x884C;&#x671F;&#xFF0C;&#x6211;&#x4EEC;&#x60F3;&#x5BF9;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#x6709;&#x4E0D;&#x540C;&#x5B9E;&#x73B0;&#xFF0C;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x4E0A;&#x4E0B;&#x6587;&#x52A8;&#x6001;&#x5206;&#x6D3E;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x6211;&#x60F3;&#x4E3A;&#x4E00;&#x4E2A;&#x7F16;&#x8F91;&#x5668;&#x7684; Formatter &#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#x4E0D;&#x540C;&#x8BED;&#x8A00;&#x7684;&#x683C;&#x5F0F;&#x5316;&#x5DE5;&#x5177;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x7F16;&#x8F91;&#x5668;&#x52A0;&#x8F7D;&#x65F6;&#xFF0C;&#x628A;&#x6240;&#x6709;&#x652F;&#x6301;&#x7684;&#x8BED;&#x8A00;&#x548C;&#x5176;&#x683C;&#x5F0F;&#x5316;&#x5DE5;&#x5177;&#x653E;&#x5165;&#x4E00;&#x4E2A;&#x54C8;&#x5E0C;&#x8868;&#x4E2D;&#xFF0C;&#x54C8;&#x5E0C;&#x8868;&#x7684; key &#x4E3A;&#x8BED;&#x8A00;&#x7C7B;&#x578B;&#xFF0C;value &#x4E3A;&#x6BCF;&#x79CD;&#x683C;&#x5F0F;&#x5316;&#x5DE5;&#x5177; Formatter &#x63A5;&#x53E3;&#x7684;&#x5F15;&#x7528;&#x3002;&#x8FD9;&#x6837;&#xFF0C;&#x5F53;&#x7528;&#x6237;&#x5728;&#x7F16;&#x8F91;&#x5668;&#x6253;&#x5F00;&#x67D0;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#xFF0C;&#x627E;&#x5230;&#x5BF9;&#x5E94; Formatter &#x7684;&#x5F15;&#x7528;&#xFF0C;&#x6765;&#x8FDB;&#x884C;&#x683C;&#x5F0F;&#x5316;&#x64CD;&#x4F5C;&#x3002;</p>
+<h2 id="&#x8FD0;&#x884C;&#x65B9;&#x5F0F;">&#x8FD0;&#x884C;&#x65B9;&#x5F0F;</h2>
+<p>&#x7A0B;&#x5E8F;&#x5728;&#x52A0;&#x8F7D;&#x540E;&#xFF0C;<strong>&#x4EE3;&#x7801;&#x4EE5;&#x4F55;&#x79CD;&#x65B9;&#x5F0F;&#x8FD0;&#x884C;&#xFF0C;&#x5F80;&#x5F80;&#x51B3;&#x5B9A;&#x7740;&#x7A0B;&#x5E8F;&#x7684;&#x6267;&#x884C;&#x6548;&#x7387;</strong>&#x3002;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x63A5;&#x4E0B;&#x6765;&#x8BA8;&#x8BBA;&#x5E76;&#x53D1;&#x3001;&#x5E76;&#x884C;&#x3001;&#x540C;&#x6B65;&#x3001;&#x5F02;&#x6B65;&#x4EE5;&#x53CA;&#x5F02;&#x6B65;&#x4E2D;&#x7684;&#x51E0;&#x4E2A;&#x91CD;&#x8981;&#x6982;&#x5FF5; Promise/async/await&#x3002;</p>
+<h3 id="&#x5E76;&#x53D1;&#xFF08;concurrency&#xFF09;&#x4E0E;&#x5E76;&#x884C;&#xFF08;parallel&#xFF09;">&#x5E76;&#x53D1;&#xFF08;concurrency&#xFF09;&#x4E0E;&#x5E76;&#x884C;&#xFF08;parallel&#xFF09;</h3>
+<p>&#x5E76;&#x53D1;&#x548C;&#x5E76;&#x884C;&#x662F;&#x8F6F;&#x4EF6;&#x5F00;&#x53D1;&#x4E2D;&#x7ECF;&#x5E38;&#x9047;&#x5230;&#x7684;&#x6982;&#x5FF5;&#x3002;</p>
+<p>&#x5E76;&#x53D1;&#x662F;&#x540C;&#x65F6;&#x4E0E;&#x591A;&#x4EF6;&#x4E8B;&#x60C5;&#x6253;&#x4EA4;&#x9053;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x6BD4;&#x5982;&#x7CFB;&#x7EDF;&#x53EF;&#x4EE5;&#x5728;&#x4EFB;&#x52A1; 1 &#x505A;&#x5230;&#x4E00;&#x5B9A;&#x7A0B;&#x5EA6;&#x540E;&#xFF0C;&#x4FDD;&#x5B58;&#x8BE5;&#x4EFB;&#x52A1;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#xFF0C;&#x6302;&#x8D77;&#x5E76;&#x5207;&#x6362;&#x5230;&#x4EFB;&#x52A1; 2&#xFF0C;&#x7136;&#x540E;&#x8FC7;&#x6BB5;&#x65F6;&#x95F4;&#x518D;&#x5207;&#x6362;&#x56DE;&#x4EFB;&#x52A1; 1&#x3002;</p>
+<p>&#x5E76;&#x884C;&#x662F;&#x540C;&#x65F6;&#x5904;&#x7406;&#x591A;&#x4EF6;&#x4E8B;&#x60C5;&#x7684;&#x624B;&#x6BB5;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x4EFB;&#x52A1; 1 &#x548C;&#x4EFB;&#x52A1; 2 &#x53EF;&#x4EE5;&#x5728;&#x540C;&#x4E00;&#x4E2A;&#x65F6;&#x95F4;&#x7247;&#x4E0B;&#x5DE5;&#x4F5C;&#xFF0C;&#x65E0;&#x9700;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;&#x3002;&#x4E0B;&#x56FE;&#x5F88;&#x597D;&#x5730;&#x9610;&#x91CA;&#x4E86;&#x4E8C;&#x8005;&#x7684;&#x533A;&#x522B;&#xFF1A;</p>
+<p><img src="https://static001.geekbang.org/resource/image/9d/8c/9d93f6445fb47a58bfb8149752dfe78c.jpg?wh=1920x1510" alt="&#x56FE;&#x7247;"></p>
+<p><strong>&#x5E76;&#x53D1;&#x662F;&#x4E00;&#x79CD;&#x80FD;&#x529B;&#xFF0C;&#x800C;&#x5E76;&#x884C;&#x662F;&#x4E00;&#x79CD;&#x624B;&#x6BB5;</strong>&#x3002;&#x5F53;&#x6211;&#x4EEC;&#x7684;&#x7CFB;&#x7EDF;&#x62E5;&#x6709;&#x4E86;&#x5E76;&#x53D1;&#x7684;&#x80FD;&#x529B;&#x540E;&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x679C;&#x8DD1;&#x5728;&#x591A;&#x4E2A; CPU core &#x4E0A;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5E76;&#x884C;&#x8FD0;&#x884C;&#x3002;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5E73;&#x65F6;&#x90FD;&#x8C08;&#x8BBA;&#x9AD8;&#x5E76;&#x53D1;&#x5904;&#x7406;&#xFF0C;&#x800C;&#x4E0D;&#x4F1A;&#x8BF4;&#x9AD8;&#x5E76;&#x884C;&#x5904;&#x7406;&#x3002;</p>
+<p>&#x5F88;&#x591A;&#x62E5;&#x6709;&#x9AD8;&#x5E76;&#x53D1;&#x5904;&#x7406;&#x80FD;&#x529B;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#xFF0C;&#x4F1A;&#x5728;&#x7528;&#x6237;&#x7A0B;&#x5E8F;&#x4E2D;&#x5D4C;&#x5165;&#x4E00;&#x4E2A; M:N &#x7684;&#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x628A; M &#x4E2A;&#x5E76;&#x53D1;&#x4EFB;&#x52A1;&#xFF0C;&#x5408;&#x7406;&#x5730;&#x5206;&#x914D;&#x5728; N &#x4E2A; CPU core &#x4E0A;&#x5E76;&#x884C;&#x8FD0;&#x884C;&#xFF0C;&#x8BA9;&#x7A0B;&#x5E8F;&#x7684;&#x541E;&#x5410;&#x91CF;&#x8FBE;&#x5230;&#x6700;&#x5927;&#x3002;</p>
+<h3 id="&#x540C;&#x6B65;&#x548C;&#x5F02;&#x6B65;">&#x540C;&#x6B65;&#x548C;&#x5F02;&#x6B65;</h3>
+<p>&#x540C;&#x6B65;&#x662F;&#x6307;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x540E;&#xFF0C;&#x540E;&#x7EED;&#x7684;&#x64CD;&#x4F5C;&#x4F1A;&#x963B;&#x585E;&#xFF0C;&#x76F4;&#x5230;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x7ED3;&#x675F;&#x3002;&#x5728;&#x8F6F;&#x4EF6;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5927;&#x90E8;&#x5206;&#x7684;&#x4EE3;&#x7801;&#x90FD;&#x662F;&#x540C;&#x6B65;&#x64CD;&#x4F5C;&#xFF0C;&#x6BD4;&#x5982; CPU&#xFF0C;&#x53EA;&#x6709;&#x6D41;&#x6C34;&#x7EBF;&#x4E2D;&#x7684;&#x524D;&#x4E00;&#x6761;&#x6307;&#x4EE4;&#x6267;&#x884C;&#x5B8C;&#x6210;&#xFF0C;&#x624D;&#x4F1A;&#x6267;&#x884C;&#x4E0B;&#x4E00;&#x6761;&#x6307;&#x4EE4;&#x3002;&#x4E00;&#x4E2A;&#x51FD;&#x6570; A &#x5148;&#x540E;&#x8C03;&#x7528;&#x51FD;&#x6570; B &#x548C; C&#xFF0C;&#x4E5F;&#x4F1A;&#x6267;&#x884C;&#x5B8C; B &#x4E4B;&#x540E;&#x624D;&#x6267;&#x884C; C&#x3002;</p>
+<p>&#x540C;&#x6B65;&#x6267;&#x884C;&#x4FDD;&#x8BC1;&#x4E86;&#x4EE3;&#x7801;&#x7684;&#x56E0;&#x679C;&#x5173;&#x7CFB;&#xFF08;causality&#xFF09;&#xFF0C;&#x662F;&#x7A0B;&#x5E8F;&#x6B63;&#x786E;&#x6027;&#x7684;&#x4FDD;&#x8BC1;&#x3002;</p>
+<p>&#x7136;&#x800C;&#x5728;&#x906D;&#x9047; I/O &#x5904;&#x7406;&#x65F6;&#xFF0C;&#x9AD8;&#x6548; CPU &#x6307;&#x4EE4;&#x548C;&#x4F4E;&#x6548; I/O &#x4E4B;&#x95F4;&#x7684;&#x5DE8;&#x5927;&#x9E3F;&#x6C9F;&#xFF0C;&#x6210;&#x4E3A;&#x4E86;&#x8F6F;&#x4EF6;&#x7684;&#x6027;&#x80FD;&#x6740;&#x624B;&#x3002;&#x4E0B;&#x56FE;<a href="https://gist.github.com/hellerbarde/2843375" target="_blank">&#x5BF9;&#x6BD4;&#x4E86; CPU&#x3001;&#x5185;&#x5B58;&#x3001;I/O &#x8BBE;&#x5907;&#x3001;&#x548C;&#x7F51;&#x7EDC;&#x7684;&#x5EF6;&#x8FDF;</a>&#xFF1A;</p>
+<p><img src="https://static001.geekbang.org/resource/image/d4/27/d49a95ec12608ea4116a78723dd97a27.png?wh=1024x512" alt="&#x56FE;&#x7247;"></p>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x548C;&#x5185;&#x5B58;&#x8BBF;&#x95EE;&#x76F8;&#x6BD4;&#xFF0C;I/O &#x64CD;&#x4F5C;&#x7684;&#x8BBF;&#x95EE;&#x901F;&#x5EA6;&#x4F4E;&#x4E86;&#x4E24;&#x4E2A;&#x6570;&#x91CF;&#x7EA7;&#xFF0C;&#x4E00;&#x65E6;&#x9047;&#x5230; I/O &#x64CD;&#x4F5C;&#xFF0C;CPU &#x5C31;&#x53EA;&#x80FD;&#x95F2;&#x7F6E;&#x6765;&#x7B49;&#x5F85; I/O &#x8BBE;&#x5907;&#x8FD0;&#x884C;&#x5B8C;&#x6BD5;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E3A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x63D0;&#x4F9B;&#x4E86;&#x5F02;&#x6B65; I/O&#xFF0C;&#x8BA9;&#x5E94;&#x7528;&#x53EF;&#x4EE5;&#x5728;&#x5F53;&#x524D; I/O &#x5904;&#x7406;&#x5B8C;&#x6BD5;&#x4E4B;&#x524D;&#xFF0C;&#x5C06; CPU &#x65F6;&#x95F4;&#x7528;&#x4F5C;&#x5176;&#x5B83;&#x4EFB;&#x52A1;&#x7684;&#x5904;&#x7406;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;<strong>&#x5F02;&#x6B65;&#x662F;&#x6307;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x540E;&#xFF0C;&#x4E0E;&#x5B83;&#x6CA1;&#x6709;&#x56E0;&#x679C;&#x5173;&#x7CFB;&#x7684;&#x5176;&#x5B83;&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x6267;&#x884C;&#xFF0C;&#x4E0D;&#x5FC5;&#x7B49;&#x5F85;&#x524D;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x7ED3;&#x675F;</strong>&#x3002;</p>
+<p>&#x5728;&#x5F02;&#x6B65;&#x64CD;&#x4F5C;&#x91CC;&#xFF0C;&#x5F02;&#x6B65;&#x5904;&#x7406;&#x5B8C;&#x6210;&#x540E;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x4E00;&#x822C;&#x7528; Promise &#x6765;&#x4FDD;&#x5B58;&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x7528;&#x6765;&#x63CF;&#x8FF0;&#x5728;&#x672A;&#x6765;&#x7684;&#x67D0;&#x4E2A;&#x65F6;&#x523B;&#x624D;&#x80FD;&#x83B7;&#x5F97;&#x7684;&#x7ED3;&#x679C;&#x7684;&#x503C;&#xFF0C;&#x4E00;&#x822C;&#x5B58;&#x5728;&#x4E09;&#x4E2A;&#x72B6;&#x6001;&#xFF1B;</p>
+<ol>
+<li>&#x521D;&#x59CB;&#x72B6;&#x6001;&#xFF0C;Promise &#x8FD8;&#x672A;&#x8FD0;&#x884C;&#xFF1B;</li>
+<li>&#x7B49;&#x5F85;&#xFF08;pending&#xFF09;&#x72B6;&#x6001;&#xFF0C;Promise &#x5DF2;&#x8FD0;&#x884C;&#xFF0C;&#x4F46;&#x8FD8;&#x672A;&#x7ED3;&#x675F;&#xFF1B;</li>
+<li>&#x7ED3;&#x675F;&#x72B6;&#x6001;&#xFF0C; Promise &#x6210;&#x529F;&#x89E3;&#x6790;&#x51FA;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x6216;&#x8005;&#x6267;&#x884C;&#x5931;&#x8D25;&#x3002;</li>
+</ol>
+<p>&#x5982;&#x679C;&#x4F60;&#x5BF9; Promise &#x8FD9;&#x4E2A;&#x8BCD;&#x4E0D;&#x592A;&#x719F;&#x6089;&#xFF0C;&#x5728;&#x5F88;&#x591A;&#x652F;&#x6301;&#x5F02;&#x6B65;&#x7684;&#x8BED;&#x8A00;&#x4E2D;&#xFF0C;Promise &#x4E5F;&#x53EB; Future / Delay / Deferred &#x7B49;&#x3002;&#x9664;&#x4E86;&#x8FD9;&#x4E2A;&#x8BCD;&#x4EE5;&#x5916;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x7ECF;&#x5E38;&#x770B;&#x5230; async/await &#x8FD9;&#x5BF9;&#x5173;&#x952E;&#x5B57;&#x3002;</p>
+<p>&#x4E00;&#x822C;&#x800C;&#x8A00;&#xFF0C;<strong>async &#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x5E76;&#x53D1;&#x6267;&#x884C;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x800C; await &#x5219;&#x89E6;&#x53D1;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x5E76;&#x53D1;&#x6267;&#x884C;</strong>&#x3002;&#x5927;&#x591A;&#x6570;&#x8BED;&#x8A00;&#x4E2D;&#xFF0C;async/await &#x662F;&#x4E00;&#x4E2A;&#x8BED;&#x6CD5;&#x7CD6;&#xFF08;syntactic sugar&#xFF09;&#xFF0C;&#x5B83;&#x4F7F;&#x7528;&#x72B6;&#x6001;&#x673A;&#x5C06; Promise &#x5305;&#x88C5;&#x8D77;&#x6765;&#xFF0C;&#x8BA9;&#x5F02;&#x6B65;&#x8C03;&#x7528;&#x7684;&#x4F7F;&#x7528;&#x611F;&#x89C9;&#x548C;&#x540C;&#x6B65;&#x8C03;&#x7528;&#x975E;&#x5E38;&#x7C7B;&#x4F3C;&#xFF0C;&#x4E5F;&#x8BA9;&#x4EE3;&#x7801;&#x66F4;&#x5BB9;&#x6613;&#x9605;&#x8BFB;&#x3002;</p>
+<h2 id="&#x7F16;&#x7A0B;&#x8303;&#x5F0F;">&#x7F16;&#x7A0B;&#x8303;&#x5F0F;</h2>
+<p>&#x4E3A;&#x4E86;&#x5728;&#x4E0D;&#x65AD;&#x8FED;&#x4EE3;&#x65F6;&#xFF0C;&#x66F4;&#x597D;&#x5730;&#x7EF4;&#x62A4;&#x4EE3;&#x7801;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x4F1A;<strong>&#x5F15;&#x5165;&#x5404;&#x79CD;&#x5404;&#x6837;&#x7684;&#x7F16;&#x7A0B;&#x8303;&#x5F0F;&#xFF0C;&#x6765;&#x63D0;&#x5347;&#x4EE3;&#x7801;&#x7684;&#x8D28;&#x91CF;</strong>&#x3002;&#x6240;&#x4EE5;&#x6700;&#x540E;&#x6765;&#x8C08;&#x8C08;&#x6CDB;&#x578B;&#x7F16;&#x7A0B;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x6765;&#x81EA;&#x4E8E;&#x5F31;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#xFF0C;&#x5982; C / Python / JavaScript&#xFF0C;&#x90A3;&#x6CDB;&#x578B;&#x7F16;&#x7A0B;&#x662F;&#x4F60;&#x9700;&#x8981;&#x91CD;&#x70B9;&#x638C;&#x63E1;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x6280;&#x80FD;&#x3002;&#x6CDB;&#x578B;&#x7F16;&#x7A0B;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x5C42;&#x9762;&#xFF0C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x6CDB;&#x578B;&#x548C;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x7ED3;&#x6784;&#x4EE3;&#x7801;&#x7684;&#x6CDB;&#x578B;&#x5316;&#x3002;</p>
+<h3 id="&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x6CDB;&#x578B;">&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x6CDB;&#x578B;</h3>
+<p>&#x9996;&#x5148;&#x662F;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x6CDB;&#x578B;&#xFF0C;&#x5B83;&#x4E5F;&#x5F80;&#x5F80;&#x88AB;&#x79F0;&#x4E3A;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x6216;&#x8005;&#x53C2;&#x6570;&#x591A;&#x6001;&#xFF0C;&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Connection</span></span>&lt;S&gt; {
+  io: S,
+  state: State,
+}
+</code></pre>
+<p>&#x5B83;&#x6709;&#x4E00;&#x4E2A;&#x53C2;&#x6570; S&#xFF0C;&#x5176;&#x5185;&#x90E8;&#x7684;&#x57DF; io &#x7684;&#x7C7B;&#x578B;&#x662F; S&#xFF0C;S &#x5177;&#x4F53;&#x7684;&#x7C7B;&#x578B;&#x53EA;&#x6709;&#x5728;&#x4F7F;&#x7528; Connection &#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x624D;&#x5F97;&#x5230;&#x7ED1;&#x5B9A;&#x3002;<br>&#x4F60;&#x53EF;&#x4EE5;&#x628A;&#x53C2;&#x6570;&#x5316;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7406;&#x89E3;&#x6210;&#x4E00;&#x4E2A;&#x4EA7;&#x751F;&#x7C7B;&#x578B;&#x7684;&#x51FD;&#x6570;&#xFF0C;<strong>&#x5728;&#x201C;&#x8C03;&#x7528;&#x201D;&#x65F6;&#xFF0C;&#x5B83;&#x63A5;&#x53D7;&#x82E5;&#x5E72;&#x4E2A;&#x4F7F;&#x7528;&#x4E86;&#x5177;&#x4F53;&#x7C7B;&#x578B;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x8FD4;&#x56DE;&#x643A;&#x5E26;&#x8FD9;&#x4E9B;&#x7C7B;&#x578B;&#x7684;&#x7C7B;&#x578B;</strong>&#x3002;&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x4E3A; S &#x63D0;&#x4F9B; TcpStream &#x8FD9;&#x4E2A;&#x7C7B;&#x578B;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4EA7;&#x751F; Connection &#x8FD9;&#x4E2A;&#x7C7B;&#x578B;&#xFF0C;&#x5176;&#x4E2D; io &#x7684;&#x7C7B;&#x578B;&#x662F; TcpStream&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x7591;&#x60D1;&#xFF0C;&#x5982;&#x679C; S &#x53EF;&#x4EE5;&#x662F;&#x4EFB;&#x610F;&#x7C7B;&#x578B;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x600E;&#x4E48;&#x77E5;&#x9053; S &#x6709;&#x4EC0;&#x4E48;&#x884C;&#x4E3A;&#xFF1F;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x8981;&#x8C03;&#x7528; <code>io.send()</code> &#x53D1;&#x9001;&#x6570;&#x636E;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x600E;&#x4E48;&#x77E5;&#x9053; S &#x5305;&#x542B;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#xFF1F;</p>
+<p>&#x8FD9;&#x662F;&#x4E2A;&#x597D;&#x95EE;&#x9898;&#xFF0C;<strong>&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7528;&#x63A5;&#x53E3;&#x5BF9; S &#x8FDB;&#x884C;&#x7EA6;&#x675F;</strong>&#x3002;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x7ECF;&#x5E38;&#x770B;&#x5230;&#xFF0C;&#x652F;&#x6301;&#x6CDB;&#x578B;&#x7F16;&#x7A0B;&#x7684;&#x8BED;&#x8A00;&#xFF0C;&#x4F1A;&#x63D0;&#x4F9B;&#x5F3A;&#x5927;&#x7684;&#x63A5;&#x53E3;&#x7F16;&#x7A0B;&#x80FD;&#x529B;&#xFF0C;&#x5728;&#x540E;&#x7EED;&#x7684;&#x8BFE;&#x7A0B;&#x4E2D;&#x5728;&#x8BB2; Rust &#x7684; trait &#x65F6;&#xFF0C;&#x6211;&#x4F1A;&#x518D;&#x8BE6;&#x7EC6;&#x63A2;&#x8BA8;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x6CDB;&#x578B;&#x662F;&#x4E00;&#x79CD;&#x9AD8;&#x7EA7;&#x62BD;&#x8C61;&#xFF0C;&#x5C31;&#x50CF;&#x6211;&#x4EEC;&#x4EBA;&#x7C7B;&#x7528;&#x6570;&#x5B57;&#x62BD;&#x8C61;&#x5177;&#x4F53;&#x4E8B;&#x7269;&#x7684;&#x6570;&#x91CF;&#xFF0C;&#x53C8;&#x53D1;&#x660E;&#x4E86;&#x4EE3;&#x6570;&#x6765;&#x8FDB;&#x4E00;&#x6B65;&#x62BD;&#x8C61;&#x5177;&#x4F53;&#x7684;&#x6570;&#x5B57;&#x4E00;&#x6837;&#x3002;&#x5B83;&#x5E26;&#x6765;&#x7684;&#x597D;&#x5904;&#x662F;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5EF6;&#x8FDF;&#x7ED1;&#x5B9A;&#xFF0C;&#x8BA9;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x901A;&#x7528;&#x6027;&#x66F4;&#x5F3A;&#xFF0C;&#x9002;&#x7528;&#x573A;&#x5408;&#x66F4;&#x5E7F;&#x9614;&#xFF1B;&#x4E5F;&#x5927;&#x5927;&#x51CF;&#x5C11;&#x4E86;&#x4EE3;&#x7801;&#x7684;&#x91CD;&#x590D;&#xFF0C;&#x63D0;&#x9AD8;&#x4E86;&#x53EF;&#x7EF4;&#x62A4;&#x6027;&#x3002;</p>
+<h3 id="&#x4EE3;&#x7801;&#x7684;&#x6CDB;&#x578B;&#x5316;">&#x4EE3;&#x7801;&#x7684;&#x6CDB;&#x578B;&#x5316;</h3>
+<p>&#x6CDB;&#x578B;&#x7F16;&#x7A0B;&#x7684;&#x53E6;&#x4E00;&#x4E2A;&#x5C42;&#x9762;&#x662F;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x7ED3;&#x6784;&#x540E;&#x4EE3;&#x7801;&#x7684;&#x6CDB;&#x578B;&#x5316;&#x3002;&#x5F53;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x7ED3;&#x6784;&#x7F16;&#x5199;&#x4EE3;&#x7801;&#x65F6;&#xFF0C;&#x76F8;&#x5173;&#x7684;&#x4EE3;&#x7801;&#x4E5F;&#x9700;&#x8981;&#x989D;&#x5916;&#x7684;&#x62BD;&#x8C61;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x7528;&#x6211;&#x4EEC;&#x719F;&#x6089;&#x7684;&#x4E8C;&#x5206;&#x67E5;&#x627E;&#x7684;&#x4F8B;&#x5B50;&#x89E3;&#x91CA;&#x4F1A;&#x6BD4;&#x8F83;&#x6E05;&#x695A;&#xFF1A;<br><img src="https://static001.geekbang.org/resource/image/b4/7f/b49604fa5bf1d88fc05a22a1yy3b267f.jpg?wh=3569x1702" alt=""></p>
+<p>&#x5DE6;&#x8FB9;&#x7528; C &#x64B0;&#x5199;&#x7684;&#x4E8C;&#x5206;&#x67E5;&#x627E;&#xFF0C;&#x6807;&#x8BB0;&#x7684;&#x51E0;&#x5904;&#x64CD;&#x4F5C;&#x9690;&#x542B;&#x7740;&#x548C; int[] &#x6709;&#x5173;&#xFF0C;&#x6240;&#x4EE5;&#x5982;&#x679C;&#x5BF9;&#x4E0D;&#x540C;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x505A;&#x4E8C;&#x5206;&#x67E5;&#x627E;&#xFF0C;&#x5B9E;&#x73B0;&#x4E5F;&#x8981;&#x8DDF;&#x7740;&#x6539;&#x53D8;&#x3002;&#x53F3;&#x8FB9; C++ &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5BF9;&#x8FD9;&#x4E9B;&#x5730;&#x65B9;&#x505A;&#x4E86;&#x62BD;&#x8C61;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;&#x540C;&#x4E00;&#x5957;&#x4EE3;&#x7801;&#x4E8C;&#x5206;&#x67E5;&#x627E;&#x8FED;&#x4EE3;&#x5668;&#xFF08;iterator&#xFF09;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x3002;</p>
+<p>&#x540C;&#x6837;&#x7684;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x5728;&#x66F4;&#x5E7F;&#x9614;&#x7684;&#x573A;&#x5408;&#x4F7F;&#x7528;&#xFF0C;&#x66F4;&#x7B80;&#x6D01;&#x5BB9;&#x6613;&#x7EF4;&#x62A4;&#x3002;</p>
+<h2 id="&#x5C0F;&#x7ED3;">&#x5C0F;&#x7ED3;</h2>
+<p>&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x8BA8;&#x8BBA;&#x4E86;&#x56DB;&#x5927;&#x7C7B;&#x57FA;&#x7840;&#x6982;&#x5FF5;&#xFF1A;&#x6570;&#x636E;&#x3001;&#x4EE3;&#x7801;&#x3001;&#x8FD0;&#x884C;&#x65B9;&#x5F0F;&#x548C;&#x7F16;&#x7A0B;&#x8303;&#x5F0F;&#x3002;</p>
+<p><img src="https://static001.geekbang.org/resource/image/9a/c6/9abef11d349bbcefbb07e39191e7cec6.jpg?wh=1920x1298" alt="&#x56FE;&#x7247;"></p>
+<p><strong>&#x503C;</strong>&#x65E0;&#x6CD5;&#x79BB;&#x5F00;&#x7C7B;&#x578B;&#x5355;&#x72EC;&#x8BA8;&#x8BBA;&#xFF0C;<strong>&#x7C7B;&#x578B;</strong>&#x4E00;&#x822C;&#x5206;&#x4E3A;&#x539F;&#x751F;&#x7C7B;&#x578B;&#x548C;&#x7EC4;&#x5408;&#x7C7B;&#x578B;&#x3002;<strong>&#x6307;&#x9488;&#x548C;&#x5F15;&#x7528;</strong>&#x90FD;&#x6307;&#x5411;&#x503C;&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x4E8C;&#x8005;&#x5728;&#x89E3;&#x5F15;&#x7528;&#x65F6;&#x7684;&#x884C;&#x4E3A;&#x4E0D;&#x4E00;&#x6837;&#x3002;&#x5F15;&#x7528;&#x53EA;&#x80FD;&#x89E3;&#x5F15;&#x7528;&#x5230;&#x539F;&#x6765;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x800C;&#x6307;&#x9488;&#x6CA1;&#x6709;&#x8FD9;&#x4E2A;&#x9650;&#x5236;&#xFF0C;&#x7136;&#x800C;&#xFF0C;&#x4E0D;&#x53D7;&#x7EA6;&#x675F;&#x7684;&#x6307;&#x9488;&#x89E3;&#x5F15;&#x7528;&#xFF0C;&#x4F1A;&#x5E26;&#x6765;&#x5185;&#x5B58;&#x5B89;&#x5168;&#x65B9;&#x9762;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<p><strong>&#x51FD;&#x6570;</strong>&#x662F;&#x4EE3;&#x7801;&#x4E2D;&#x91CD;&#x590D;&#x884C;&#x4E3A;&#x7684;&#x62BD;&#x8C61;&#xFF0C;<strong>&#x65B9;&#x6CD5;</strong>&#x662F;&#x5BF9;&#x8C61;&#x5185;&#x90E8;&#x5B9A;&#x4E49;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x800C;<strong>&#x95ED;&#x5305;</strong>&#x662F;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x4F1A;&#x6355;&#x83B7;&#x51FD;&#x6570;&#x4F53;&#x5185;&#x4F7F;&#x7528;&#x5230;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x7684;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#xFF0C;&#x4F5C;&#x4E3A;&#x95ED;&#x5305;&#x6210;&#x5458;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x3002;</p>
+<p>&#x800C;<strong>&#x63A5;&#x53E3;</strong>&#x5C06;&#x8C03;&#x7528;&#x8005;&#x548C;&#x5B9E;&#x73B0;&#x8005;&#x9694;&#x79BB;&#x5F00;&#xFF0C;&#x5927;&#x5927;&#x4FC3;&#x8FDB;&#x4E86;&#x4EE3;&#x7801;&#x7684;&#x590D;&#x7528;&#x548C;&#x6269;&#x5C55;&#x3002;&#x9762;&#x5411;&#x63A5;&#x53E3;&#x7F16;&#x7A0B;&#x53EF;&#x4EE5;&#x8BA9;&#x7CFB;&#x7EDF;&#x53D8;&#x5F97;&#x7075;&#x6D3B;&#xFF0C;&#x5F53;&#x4F7F;&#x7528;&#x63A5;&#x53E3;&#x53BB;&#x5F15;&#x7528;&#x5177;&#x4F53;&#x7684;&#x7C7B;&#x578B;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x9700;&#x8981;<strong>&#x865A;&#x8868;</strong>&#x6765;&#x8F85;&#x52A9;&#x8FD0;&#x884C;&#x65F6;&#x4EE3;&#x7801;&#x7684;&#x6267;&#x884C;&#x3002;&#x6709;&#x4E86;&#x865A;&#x8868;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x5730;&#x8FDB;&#x884C;&#x52A8;&#x6001;&#x5206;&#x6D3E;&#xFF0C;&#x5B83;&#x662F;&#x8FD0;&#x884C;&#x65F6;&#x591A;&#x6001;&#x7684;&#x57FA;&#x7840;&#x3002;</p>
+<p>&#x5728;&#x4EE3;&#x7801;&#x7684;&#x8FD0;&#x884C;&#x65B9;&#x5F0F;&#x4E2D;&#xFF0C;<strong>&#x5E76;&#x53D1;</strong>&#x662F;<strong>&#x5E76;&#x884C;</strong>&#x7684;&#x57FA;&#x7840;&#xFF0C;&#x662F;&#x540C;&#x65F6;&#x4E0E;&#x591A;&#x4E2A;&#x4EFB;&#x52A1;&#x6253;&#x4EA4;&#x9053;&#x7684;&#x80FD;&#x529B;&#xFF1B;&#x5E76;&#x884C;&#x662F;&#x5E76;&#x53D1;&#x7684;&#x4F53;&#x73B0;&#xFF0C;&#x662F;&#x540C;&#x65F6;&#x5904;&#x7406;&#x591A;&#x4E2A;&#x4EFB;&#x52A1;&#x7684;&#x624B;&#x6BB5;&#x3002;<strong>&#x540C;&#x6B65;</strong>&#x963B;&#x585E;&#x540E;&#x7EED;&#x64CD;&#x4F5C;&#xFF0C;<strong>&#x5F02;&#x6B65;</strong>&#x5141;&#x8BB8;&#x540E;&#x7EED;&#x64CD;&#x4F5C;&#x3002;&#x88AB;&#x5E7F;&#x6CDB;&#x7528;&#x4E8E;&#x5F02;&#x6B65;&#x64CD;&#x4F5C;&#x7684; Promise &#x4EE3;&#x8868;&#x672A;&#x6765;&#x67D0;&#x4E2A;&#x65F6;&#x523B;&#x4F1A;&#x5F97;&#x5230;&#x7684;&#x7ED3;&#x679C;&#xFF0C;async/await &#x662F; Promise &#x7684;&#x5C01;&#x88C5;&#xFF0C;&#x4E00;&#x822C;&#x7528;&#x72B6;&#x6001;&#x673A;&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
+<p><strong>&#x6CDB;&#x578B;&#x7F16;&#x7A0B;</strong>&#x901A;&#x8FC7;&#x53C2;&#x6570;&#x5316;&#x8BA9;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x50CF;&#x51FD;&#x6570;&#x4E00;&#x6837;&#x5EF6;&#x8FDF;&#x7ED1;&#x5B9A;&#xFF0C;&#x63D0;&#x5347;&#x5176;&#x901A;&#x7528;&#x6027;&#xFF0C;&#x7C7B;&#x578B;&#x7684;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x7528;&#x63A5;&#x53E3;&#x7EA6;&#x675F;&#xFF0C;&#x4F7F;&#x7C7B;&#x578B;&#x6EE1;&#x8DB3;&#x4E00;&#x5B9A;&#x7684;&#x884C;&#x4E3A;&#xFF0C;&#x540C;&#x65F6;&#xFF0C;&#x5728;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x7ED3;&#x6784;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x4EE3;&#x7801;&#x4E5F;&#x9700;&#x8981;&#x66F4;&#x9AD8;&#x7684;&#x62BD;&#x8C61;&#x5EA6;&#x3002;</p>
+<p>&#x8FD9;&#x4E9B;&#x57FA;&#x7840;&#x6982;&#x5FF5;&#xFF0C;&#x8FD9;&#x5BF9;&#x4E8E;&#x540E;&#x7EED;&#x7406;&#x89E3; Rust &#x7684;&#x5F88;&#x591A;&#x6982;&#x5FF5;&#x81F3;&#x5173;&#x91CD;&#x8981;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5BF9;&#x67D0;&#x4E9B;&#x6982;&#x5FF5;&#x8FD8;&#x662F;&#x6709;&#x4E9B;&#x6A21;&#x7CCA;&#xFF0C;&#x52A1;&#x5FC5;&#x7559;&#x8A00;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8FDB;&#x4E00;&#x6B65;&#x8BA8;&#x8BBA;&#x3002;</p>
+<h3 id="&#x601D;&#x8003;&#x9898;">&#x601D;&#x8003;&#x9898;</h3>
+<p>&#xFF08;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x8FD8;&#x6CA1;&#x6709;&#x8BB2;&#x5230; Rust &#x7684;&#x5177;&#x4F53;&#x8BED;&#x6CD5;&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x53EF;&#x4EE5;&#x7528;&#x81EA;&#x5DF1;&#x5E73;&#x65F6;&#x5E38;&#x7528;&#x7684;&#x8BED;&#x8A00;&#x6765;&#x601D;&#x8003;&#x8FD9;&#x51E0;&#x9053;&#x9898;&#xFF0C;&#x5DE9;&#x56FA;&#x4F60;&#x5BF9;&#x57FA;&#x672C;&#x6982;&#x5FF5;&#x7684;&#x7406;&#x89E3;&#xFF09;</p>
+<p>1.&#x6709;&#x4E00;&#x4E2A;&#x6307;&#x5411;&#x67D0;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x6307;&#x9488;&#xFF0C;&#x5982;&#x679C;&#x5C06;&#x5176;&#x89E3;&#x5F15;&#x7528;&#x6210;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#xFF0C;&#x7136;&#x540E;&#x5F80;&#x5217;&#x8868;&#x4E2D;&#x63D2;&#x5165;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x8BF7;&#x95EE;&#x4F1A;&#x53D1;&#x751F;&#x4EC0;&#x4E48;&#xFF1F;&#xFF08;&#x5BF9;&#x6BD4;&#x4E0D;&#x540C;&#x8BED;&#x8A00;&#xFF0C;&#x770B;&#x770B;&#x8FD9;&#x79CD;&#x64CD;&#x4F5C;&#x662F;&#x5426;&#x5141;&#x8BB8;&#xFF0C;&#x5982;&#x679C;&#x5141;&#x8BB8;&#x4F1A;&#x53D1;&#x751F;&#x4EC0;&#x4E48;&#xFF09;</p>
+<p>2.&#x8981;&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x7ED3;&#x6784; Shape&#xFF0C;&#x53EF;&#x4EE5;&#x662F; Rectangle&#x3001; Circle &#x6216;&#x662F; Triangle&#xFF0C;&#x8FD9;&#x4E09;&#x79CD;&#x7ED3;&#x6784;&#x89C1;&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#x3002;&#x8BF7;&#x95EE; Shape &#x7C7B;&#x578B;&#x8BE5;&#x7528;&#x4EC0;&#x4E48;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5B9E;&#x73B0;&#xFF1F;&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#xFF1F;</p>
+<pre><code class="lang-rust"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Rectangle</span></span> {
+   a: <span class="hljs-keyword">f64</span>,
+   b: <span class="hljs-keyword">f64</span>,
+}
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Circle</span></span> {
+  r: <span class="hljs-keyword">f64</span>,
+}
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Triangle</span></span> {
+  a: <span class="hljs-keyword">f64</span>,
+  b: <span class="hljs-keyword">f64</span>,
+  c: <span class="hljs-keyword">f64</span>,
+}
+</code></pre>
+<p>3.&#x5BF9;&#x4E8E;&#x4E0A;&#x9762;&#x7684;&#x4E09;&#x79CD;&#x7ED3;&#x6784;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x8981;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;&#x53EF;&#x4EE5;&#x8BA1;&#x7B97;&#x5468;&#x957F;&#x548C;&#x9762;&#x79EF;&#xFF0C;&#x600E;&#x4E48;&#x8BA1;&#x7B97;&#xFF1F;</p>
+<p>&#x6B22;&#x8FCE;&#x5728;&#x7559;&#x8A00;&#x533A;&#x5206;&#x4EAB;&#x4F60;&#x7684;&#x601D;&#x8003;&#x3002;&#x4ECA;&#x5929;&#x662F;&#x6211;&#x4EEC;&#x6253;&#x5361;&#x5B66;&#x4E60;&#x7684;&#x7B2C;&#x4E8C;&#x8BB2;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x89C9;&#x5F97;&#x6709;&#x6536;&#x83B7;&#xFF0C;&#x4E5F;&#x6B22;&#x8FCE;&#x4F60;&#x5206;&#x4EAB;&#x7ED9;&#x4F60;&#x8EAB;&#x8FB9;&#x7684;&#x670B;&#x53CB;&#xFF0C;&#x9080;TA&#x4E00;&#x8D77;&#x8BA8;&#x8BBA;&#x3002;</p>
+<h3 id="&#x53C2;&#x8003;&#x8D44;&#x6599;">&#x53C2;&#x8003;&#x8D44;&#x6599;</h3>
+<p>Latency numbers every programmer should know&#xFF0C;<a href="https://gist.github.com/hellerbarde/2843375" target="_blank">&#x5BF9;&#x6BD4;&#x4E86; CPU&#x3001;&#x5185;&#x5B58;&#x3001;I/O &#x8BBE;&#x5907;&#x3001;&#x548C;&#x7F51;&#x7EDC;&#x7684;&#x5EF6;&#x8FDF;</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="408409.html" class="navigation navigation-prev " aria-label="Previous page: 01｜内存：值放堆上还是放栈上，这是一个问题">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="411089.html" class="navigation navigation-next " aria-label="Next page: 加餐｜这个专栏你可以怎么学，以及Rust是否值得学？">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"02｜串讲：编程开发中，那些你需要掌握的基本概念","level":"1.4","depth":1,"next":{"title":"加餐｜这个专栏你可以怎么学，以及Rust是否值得学？","level":"1.5","depth":1,"path":"docs/411089.md","ref":"./docs/411089.md","articles":[]},"previous":{"title":"01｜内存：值放堆上还是放栈上，这是一个问题","level":"1.3","depth":1,"path":"docs/408409.md","ref":"./docs/408409.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"陈天 · Rust 编程第一课","language":"zh","gitbook":"*"},"file":{"path":"docs/410038.md","mtime":"2024-08-25T05:24:17.646Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-08-25T05:46:11.445Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

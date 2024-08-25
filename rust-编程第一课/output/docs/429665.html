@@ -1,0 +1,1176 @@
+
+<!DOCTYPE HTML>
+<html lang="zh" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>加餐｜Rust2021版次问世了！ · 陈天 · Rust 编程第一课</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="429666.html" />
+    
+    
+    <link rel="prev" href="429063.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="輸入並搜尋" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="408400.html">
+            
+                <a href="408400.html">
+            
+                    
+                    开篇词｜让Rust成为你的下一门主力语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="408409.html">
+            
+                <a href="408409.html">
+            
+                    
+                    01｜内存：值放堆上还是放栈上，这是一个问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="410038.html">
+            
+                <a href="410038.html">
+            
+                    
+                    02｜串讲：编程开发中，那些你需要掌握的基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="411089.html">
+            
+                <a href="411089.html">
+            
+                    
+                    加餐｜这个专栏你可以怎么学，以及Rust是否值得学？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="411632.html">
+            
+                <a href="411632.html">
+            
+                    
+                    03｜初窥门径：从你的第一个Rust程序开始！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="412883.html">
+            
+                <a href="412883.html">
+            
+                    
+                    04｜get hands dirty：来写个实用的CLI小工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="413634.html">
+            
+                <a href="413634.html">
+            
+                    
+                    05｜get hands dirty：做一个图片服务器有多难？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="414478.html">
+            
+                <a href="414478.html">
+            
+                    
+                    06｜get hands dirty：SQL查询工具怎么一鱼多吃？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="415098.html">
+            
+                <a href="415098.html">
+            
+                    
+                    07｜所有权：值的生杀大权到底在谁手上？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="415988.html">
+            
+                <a href="415988.html">
+            
+                    
+                    08｜所有权：值的借用是如何工作的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="416722.html">
+            
+                <a href="416722.html">
+            
+                    
+                    09｜所有权：一个值可以有多个所有者么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="417384.html">
+            
+                <a href="417384.html">
+            
+                    
+                    10｜生命周期：你创建的值究竟能活多久？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="418235.html">
+            
+                <a href="418235.html">
+            
+                    
+                    11｜内存管理：从创建到消亡，值都经历了什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="418778.html">
+            
+                <a href="418778.html">
+            
+                    
+                    加餐｜愚昧之巅：你的Rust学习常见问题汇总
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="420021.html">
+            
+                <a href="420021.html">
+            
+                    
+                    12｜类型系统：Rust的类型系统有什么特点？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="420028.html">
+            
+                <a href="420028.html">
+            
+                    
+                    13｜类型系统：如何使用trait来定义接口？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="421324.html">
+            
+                <a href="421324.html">
+            
+                    
+                    14｜类型系统：有哪些必须掌握的trait？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="422182.html">
+            
+                <a href="422182.html">
+            
+                    
+                    15｜数据结构：这些浓眉大眼的结构竟然都是智能指针？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="422975.html">
+            
+                <a href="422975.html">
+            
+                    
+                    16｜数据结构：Vec、&[T]、Box<[T]> ，你真的了解集合容器么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="423923.html">
+            
+                <a href="423923.html">
+            
+                    
+                    17｜数据结构：软件系统核心部件哈希表，内存如何布局？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="424002.html">
+            
+                <a href="424002.html">
+            
+                    
+                    18｜错误处理：为什么Rust的错误处理与众不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="424009.html">
+            
+                <a href="424009.html">
+            
+                    
+                    19｜闭包：FnOnce、FnMut和Fn，为什么有这么多类型？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="424017.html">
+            
+                <a href="424017.html">
+            
+                    
+                    20｜4 Steps ：如何更好地阅读Rust源码？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="425001.html">
+            
+                <a href="425001.html">
+            
+                    
+                    21｜阶段实操（1）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="425005.html">
+            
+                <a href="425005.html">
+            
+                    
+                    22｜阶段实操（2）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.27" data-path="425013.html">
+            
+                <a href="425013.html">
+            
+                    
+                    加餐｜期中测试：来写一个简单的grep命令行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.28" data-path="425015.html">
+            
+                <a href="425015.html">
+            
+                    
+                    加餐｜期中测试：参考实现讲解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.29" data-path="427082.html">
+            
+                <a href="427082.html">
+            
+                    
+                    23｜类型系统：如何在实战中使用泛型编程？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.30" data-path="428018.html">
+            
+                <a href="428018.html">
+            
+                    
+                    24｜类型系统：如何在实战中使用trait object？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.31" data-path="429063.html">
+            
+                <a href="429063.html">
+            
+                    
+                    25｜类型系统：如何围绕trait来设计和架构系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.32" data-path="429665.html">
+            
+                <a href="429665.html">
+            
+                    
+                    加餐｜Rust2021版次问世了！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.33" data-path="429666.html">
+            
+                <a href="429666.html">
+            
+                    
+                    26｜阶段实操（3）：构建一个简单的KV server-高级trait技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.34" data-path="429673.html">
+            
+                <a href="429673.html">
+            
+                    
+                    27｜生态系统：有哪些常有的Rust库可以为我所用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.35" data-path="432162.html">
+            
+                <a href="432162.html">
+            
+                    
+                    28｜网络开发（上）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.36" data-path="432168.html">
+            
+                <a href="432168.html">
+            
+                    
+                    29｜网络开发（下）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.37" data-path="435484.html">
+            
+                <a href="435484.html">
+            
+                    
+                    30｜Unsafe Rust：如何用C++的方式打开Rust？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.38" data-path="437566.html">
+            
+                <a href="437566.html">
+            
+                    
+                    31｜FFI：Rust如何和你的语言架起沟通桥梁？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.39" data-path="437569.html">
+            
+                <a href="437569.html">
+            
+                    
+                    32｜实操项目：使用PyO3开发Python3模块
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.40" data-path="442216.html">
+            
+                <a href="442216.html">
+            
+                    
+                    33｜并发处理（上）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.41" data-path="442217.html">
+            
+                <a href="442217.html">
+            
+                    
+                    34｜并发处理（下）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.42" data-path="445814.html">
+            
+                <a href="445814.html">
+            
+                    
+                    35｜实操项目：如何实现一个基本的MPSC channel？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.43" data-path="445818.html">
+            
+                <a href="445818.html">
+            
+                    
+                    用户故事｜绝望之谷：改变从学习开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.44" data-path="446948.html">
+            
+                <a href="446948.html">
+            
+                    
+                    36｜阶段实操（4）：构建一个简单的KV server-网络处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.45" data-path="446949.html">
+            
+                <a href="446949.html">
+            
+                    
+                    37｜阶段实操（5）：构建一个简单的KV server-网络安全
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.46" data-path="455413.html">
+            
+                <a href="455413.html">
+            
+                    
+                    38｜异步处理：Future是什么？它和async/await是什么关系？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.47" data-path="455412.html">
+            
+                <a href="455412.html">
+            
+                    
+                    39｜异步处理：async/await内部是怎么实现的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.48" data-path="461695.html">
+            
+                <a href="461695.html">
+            
+                    
+                    40｜异步处理：如何处理异步IO？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.49" data-path="461997.html">
+            
+                <a href="461997.html">
+            
+                    
+                    41｜阶段实操（6）：构建一个简单的KV server-异步处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.50" data-path="461999.html">
+            
+                <a href="461999.html">
+            
+                    
+                    42｜阶段实操（7）：构建一个简单的KV server-如何做大的重构？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.51" data-path="464856.html">
+            
+                <a href="464856.html">
+            
+                    
+                    43｜生产环境：真实世界下的一个Rust项目包含哪些要素？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.52" data-path="464855.html">
+            
+                <a href="464855.html">
+            
+                    
+                    44｜数据处理：应用程序和数据如何打交道？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.53" data-path="466825.html">
+            
+                <a href="466825.html">
+            
+                    
+                    45｜阶段实操（8）：构建一个简单的KV server-配置/测试/监控/CI/CD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.54" data-path="468066.html">
+            
+                <a href="468066.html">
+            
+                    
+                    46｜软件架构：如何用Rust架构复杂系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.55" data-path="468940.html">
+            
+                <a href="468940.html">
+            
+                    
+                    大咖助场｜开悟之坡（上）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.56" data-path="468948.html">
+            
+                <a href="468948.html">
+            
+                    
+                    大咖助场｜开悟之坡（下）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.57" data-path="470490.html">
+            
+                <a href="470490.html">
+            
+                    
+                    用户故事｜语言不仅是工具，还是思维方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.58" data-path="481355.html">
+            
+                <a href="481355.html">
+            
+                    
+                    加餐｜代码即数据：为什么我们需要宏编程能力？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.59" data-path="481359.html">
+            
+                <a href="481359.html">
+            
+                    
+                    加餐｜宏编程（上）：用最“笨”的方式撰写宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.60" data-path="481369.html">
+            
+                <a href="481369.html">
+            
+                    
+                    加餐｜宏编程（下）：用 syn/quote 优雅地构建宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.61" data-path="470420.html">
+            
+                <a href="470420.html">
+            
+                    
+                    结束语｜永续之原：Rust学习，如何持续精进？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.62" data-path="470440.html">
+            
+                <a href="470440.html">
+            
+                    
+                    期末测试｜来赴一场满分之约！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.63" data-path="482856.html">
+            
+                <a href="482856.html">
+            
+                    
+                    特别策划｜学习锦囊（一）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.64" data-path="483045.html">
+            
+                <a href="483045.html">
+            
+                    
+                    特别策划｜学习锦囊（二）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.65" data-path="483050.html">
+            
+                <a href="483050.html">
+            
+                    
+                    特别策划｜学习锦囊（三）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.66" data-path="653131.html">
+            
+                <a href="653131.html">
+            
+                    
+                    特别策划｜生成式AI：哪些开发环节可能被颠覆？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本書使用 GitBook 釋出
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >加餐｜Rust2021版次问世了！</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x52A0;&#x9910;&#xFF5C;rust2021&#x7248;&#x6B21;&#x95EE;&#x4E16;&#x4E86;&#xFF01;">&#x52A0;&#x9910;&#xFF5C;Rust2021&#x7248;&#x6B21;&#x95EE;&#x4E16;&#x4E86;&#xFF01;</h1>
+<pre><code>&#x4F60;&#x597D;&#xFF0C;&#x6211;&#x662F;&#x9648;&#x5929;&#x3002;
+</code></pre><p>&#x5343;&#x547C;&#x4E07;&#x5524;&#x59CB;&#x51FA;&#x6765;&#x7684; Rust 2021 edition&#xFF08;&#x4E0B;&#x79F0;&#x7248;&#x6B21;&#xFF09;&#xFF0C;&#x7EC8;&#x4E8E;&#x4F34;&#x968F;&#x7740; 1.56 &#x7248;&#x672C;&#x51FA;&#x6765;&#x4E86;&#x3002;&#x5728;&#x4F7F;&#x7528; <code>rustup update stable</code> &#x5B8C;&#x6210;&#x5DE5;&#x5177;&#x94FE;&#x7684;&#x5347;&#x7EA7;&#x4E4B;&#x540E;&#xFF0C;&#x5C0F;&#x4F19;&#x4F34;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x5C1D;&#x8BD5;&#x7740;&#x628A;&#x81EA;&#x5DF1;&#x4E4B;&#x524D;&#x7684;&#x4EE3;&#x7801;&#x5347;&#x7EA7;&#x5230; 2021 &#x7248;&#x4E86;&#x3002;</p>
+<p>&#x5177;&#x4F53;&#x505A;&#x6CD5;&#x5F88;&#x7B80;&#x5355;&#xFF1A;</p>
+<ol>
+<li><code>cargo fix --edition</code></li>
+<li>&#x4FEE;&#x6539; Cargo.toml&#xFF0C;&#x66FF;&#x6362; edition = &#x201C;2021&#x201D;</li>
+<li><code>cargo build</code> / <code>cargo test</code> &#x786E;&#x4FDD;&#x4E00;&#x5207;&#x6B63;&#x5E38;</li>
+</ol>
+<p>&#x5728;&#x505A;&#x7B2C;&#x4E00;&#x6B65;&#x4E4B;&#x524D;&#xFF0C;&#x8BB0;&#x5F97;&#x5148;&#x628A;&#x672A;&#x63D0;&#x4EA4;&#x7684;&#x4EE3;&#x7801;&#x63D0;&#x4EA4;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x662F;&#x521D;&#x6B21;&#x6D89;&#x730E; Rust &#x7684;&#x540C;&#x5B66;&#xFF0C;&#x53EF;&#x80FD;&#x4E0D;&#x6E05;&#x695A; Rust &#x4E2D;&#x201C;&#x7248;&#x6B21;&#x201D;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x5DE7;&#x5999;&#x7684;&#x3001;&#x5411;&#x540E;&#x517C;&#x5BB9;&#x7684;&#x53D1;&#x5E03;&#x5DE5;&#x5177;&#x3002;</p>
+<p>&#x4E0D;&#x77E5;&#x9053;&#x5728;&#x5176;&#x5B83;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x4E2D;&#x6709;&#x6CA1;&#x6709;&#x7C7B;&#x4F3C;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x53CD;&#x6B63;&#x6211;&#x6240;&#x4E86;&#x89E3;&#x7684;&#x8BED;&#x8A00;&#xFF0C;&#x6CA1;&#x6709;&#x7C7B;&#x4F3C;&#x7684;&#x4E1C;&#x897F;&#x3002;C++ &#x867D;&#x7136;&#x5141;&#x8BB8;&#x4F60;&#x7F16;&#x8BD1; lib A &#x65F6;&#x7528; --std=C++17&#xFF0C;&#x7F16;&#x8BD1; lib B &#x65F6;&#x7528; --std=C++20&#xFF0C;&#x4F46;&#x8FD9;&#x79CD;&#x7528;&#x6CD5;&#x6709;&#x4E0D;&#x5C11;&#x5C40;&#x9650;&#xFF0C;&#x7528;&#x8D77;&#x6765;&#x4E5F;&#x6CA1;&#x6709;&#x7248;&#x6B21;&#x8FD9;&#x4E48;&#x6E05;&#x723D;&#x3002;&#x6211;&#x4EEC;&#x5148;&#x5BF9;&#x5B83;&#x7684;&#x7406;&#x89E3;&#x8FBE;&#x6210;&#x4E00;&#x81F4;&#xFF0C;&#x518D;&#x804A;&#x8FD9;&#x6B21;&#x201C;&#x7248;&#x6B21;&#x201D;&#x66F4;&#x65B0;&#x7684;&#x91CD;&#x70B9;&#x5185;&#x5BB9;&#x3002;</p>
+<p>&#x5728; Rust &#x4E2D;&#xFF0C;&#x7248;&#x6B21;&#x4E4B;&#x95F4;&#x53EF;&#x80FD;&#x4F1A;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x4FDD;&#x7559;&#x5B57;&#x548C;&#x7F3A;&#x7701;&#x884C;&#x4E3A;&#x3002;&#x6BD4;&#x5982; 2018&#x7684; async / await / dyn&#xFF0C;&#x5728; 2015 &#x4E2D;&#x5C31;&#x6CA1;&#x6709;&#x4E25;&#x683C;&#x4FDD;&#x7559;&#x6210;&#x5173;&#x952E;&#x5B57;&#x3002;</p>
+<p>&#x5047;&#x8BBE;&#x8BED;&#x8A00;&#x5728;&#x8FED;&#x4EE3;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x53D1;&#x73B0; actor &#x9700;&#x8981;&#x6210;&#x4E3A;&#x4FDD;&#x7559;&#x5B57;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x5C06;&#x5176;&#x8BBE;&#x7F6E;&#x4E3A;&#x4FDD;&#x7559;&#x5B57;&#x5C31;&#x4F1A;&#x7834;&#x574F;&#x517C;&#x5BB9;&#x6027;&#xFF0C;&#x4F1A;&#x8BA9;&#x4E4B;&#x524D;&#x628A; actor &#x5F53;&#x6210;&#x666E;&#x901A;&#x540D;&#x79F0;&#x4F7F;&#x7528;&#x7684;&#x4EE3;&#x7801;&#x65E0;&#x6CD5;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#x3002;&#x600E;&#x4E48;&#x529E;&#x5462;&#xFF1F;&#x5347;&#x7EA7;&#x5927;&#x7248;&#x672C;&#xFF0C;&#x8BA9;&#x4EE3;&#x7801;&#x5206;&#x88C2;&#x6210;&#x4E0D;&#x517C;&#x5BB9;&#x7684; v1 &#x548C; v2 &#x4E48;&#xFF1F;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x662F;&#x4EE4;&#x6240;&#x6709;&#x8BED;&#x8A00;&#x5F00;&#x53D1;&#x8005;&#x5934;&#x75BC;&#x7684;&#x4E8B;&#x60C5;&#x3002;</p>
+<p>&#x8BED;&#x8A00;&#x603B;&#x662F;&#x8981;&#x53D1;&#x5C55;&#x7684;&#xFF0C;&#x603B;&#x4F1A;&#x4ECE;&#x4E0D;&#x5B8C;&#x5584;&#x5230;&#x5B8C;&#x5584;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x4E00;&#x5F00;&#x59CB;&#x8003;&#x8651;&#x4E0D;&#x5468;&#xFF0C;&#x540E;&#x6765;&#x4E0D;&#x5F97;&#x4E0D;&#x901A;&#x8FC7;&#x7834;&#x574F;&#x6027;&#x66F4;&#x65B0;&#x6765;&#x5F25;&#x8865;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x5C61;&#x89C1;&#x4E0D;&#x9C9C;&#x3002;</p>
+<p>&#x5347;&#x7EA7;&#x5927;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x662F;&#x4E4B;&#x524D;&#x5904;&#x7406;&#x8FD9;&#x7C7B;&#x95EE;&#x9898;&#x7684;&#x60EF;&#x5E38;&#x624B;&#x6BB5;&#x3002;</p>
+<p>&#x7136;&#x800C;&#xFF0C;&#x5BF9;&#x4E8E;&#x5E93;&#x7684;&#x4F5C;&#x8005;&#x6765;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x4ED6;&#x4E0D;&#x60F3;&#x5347;&#x7EA7;&#x5927;&#x7248;&#x672C;&#x6216;&#x8005;&#x53D7;&#x9650;&#x4E8E;&#x67D0;&#x4E9B;&#x539F;&#x56E0;&#x65E0;&#x6CD5;&#x5F88;&#x5FEB;&#x5347;&#x7EA7;&#xFF0C;&#x6700;&#x7EC8;&#xFF0C;&#x8981;&#x4E48;&#x662F;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5E93;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x53EA;&#x597D;&#x575A;&#x5B88;&#x5728; v1&#xFF0C;&#x8981;&#x4E48;&#x662F;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5E93;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x4E0D;&#x5F97;&#x4E0D;&#x627E;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x548C; v2 &#x517C;&#x5BB9;&#x7684;&#x66FF;&#x4EE3;&#x54C1;&#x3002;&#x4F46;&#x65E0;&#x8BBA;&#x54EA;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x6574;&#x4E2A;&#x751F;&#x6001;&#x73AF;&#x5883;&#x90FD;&#x4F1A;&#x53D7;&#x5230;&#x6495;&#x88C2;&#x3002;</p>
+<p>Rust &#x901A;&#x8FC7;&#x201C;&#x7248;&#x6B21;&#x201D;&#x975E;&#x5E38;&#x806A;&#x660E;&#x5730;&#x89E3;&#x51B3;&#x4E86;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;&#x5E93;&#x7684;&#x4F5C;&#x8005;&#x8FD8;&#x662F;&#x4EE5;&#x65E7;&#x7684;&#x7248;&#x6B21;&#x53D1;&#x5E03;&#x4ED6;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x4F7F;&#x7528;&#x5E93;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x4ED6;&#x4EEC;&#x60F3;&#x4F7F;&#x7528;&#x6700;&#x65B0;&#x7684;&#x7248;&#x6B21;&#xFF0C;&#x4E8C;&#x8005;&#x53EF;&#x4EE5;&#x5B8C;&#x5168;&#x4E0D;&#x4E00;&#x81F4;&#xFF0C;<strong>&#x7F16;&#x8BD1;&#x65F6;&#xFF0C;Rust &#x7F16;&#x8BD1;&#x5668;&#x4EE5;&#x65E7;&#x7684;&#x7248;&#x6B21;&#x7684;&#x529F;&#x80FD;&#x7F16;&#x8BD1;&#x65E7;&#x7684;&#x5E93;&#xFF0C;&#x800C;&#x4EE5;&#x65B0;&#x7684;&#x7248;&#x6B21;&#x7F16;&#x8BD1;&#x4F7F;&#x7528;&#x8005;&#x7684;&#x4EE3;&#x7801;</strong>&#x3002;</p>
+<p>&#x770B;&#x4E00;&#x4E2A;&#x5B9E;&#x9645;&#x4F8B;&#x5B50;&#x5427;&#x3002;&#x5728; <a href="http://crates.io" target="_blank">crates.io</a> &#x91CC;&#x6211;&#x968F;&#x4FBF;&#x641C;&#x4E86;&#x4E00;&#x4E2A;&#x6700;&#x540E;&#x66F4;&#x65B0;&#x6B62;&#x6B65;&#x4E8E;&#x4E09;&#x5E74;&#x524D;&#x7684;&#x5E93; <a href="https://crates.io/crates/rbpf" target="_blank">rbpf</a>&#x3002;&#x770B;&#x5B83;&#x7684; <a href="https://github.com/qmonnet/rbpf/blob/master/Cargo.toml" target="_blank">Cargo.toml</a>&#xFF0C;&#x8FD9;&#x662F;&#x4E2A; 2015 &#x7248;&#x6B21;&#x7684;&#x5E93;&#xFF08;&#x4E0D;&#x58F0;&#x660E;&#x7248;&#x6B21;&#x5C31;&#x610F;&#x5473;&#x7740; 2015&#xFF09;&#xFF0C;&#x548C;&#x73B0;&#x5728;&#x7684;&#x4EE3;&#x7801;&#x65AD;&#x4E86;&#x4E24;&#x4EE3;&#x3002;&#x6211;&#x4EEC;&#x6765;&#x5C1D;&#x8BD5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; 2021 &#x7248;&#x6B21;&#x7684; crate&#xFF0C;&#x540C;&#x65F6;&#x5F15;&#x5165;&#x8FD9;&#x4E2A;&#x5E93;&#xFF0C;&#x4EE5;&#x53CA; 2018 &#x7248;&#x6B21;&#x7684; futures &#x5E93;&#xFF0C;&#x770B;&#x6709;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x786E;&#x4FDD;&#x4F60;&#x7684; Rust &#x5347;&#x7EA7;&#x5230;&#x4E86; 1.56&#x3002;&#x7136;&#x540E; <code>cargo new test-rust-edition</code>&#x3002;&#x5728;&#x751F;&#x6210;&#x7684;&#x9879;&#x76EE;&#x91CC;&#xFF0C;&#x4E3A; Cargo.toml &#x52A0;&#x5165;&#xFF1A;</p>
+<pre><code class="lang-rust">[package]
+name = <span class="hljs-string">&quot;test-rust-edition&quot;</span>
+version = <span class="hljs-string">&quot;0.1.0&quot;</span>
+edition = <span class="hljs-string">&quot;2021&quot;</span>
+
+[dependencies]
+rbpf = <span class="hljs-string">&quot;0.1.0&quot;</span>
+futures = <span class="hljs-string">&quot;0.3&quot;</span>
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#x6211;&#x6545;&#x610F;&#x8BA9;&#x4E24;&#x4E2A;&#x672C;&#x6765;&#x662F;&#x4E0D;&#x517C;&#x5BB9;&#x7684; crate &#x653E;&#x5728;&#x4E00;&#x8D77;&#x770B;&#x770B;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x534F;&#x540C;&#x5DE5;&#x4F5C;&#x3002;futures &#x4F7F;&#x7528;&#x4E86; async/await&#xFF0C;&#x8FD9;&#x662F; Rust 2018 &#x624D;&#x5F15;&#x5165;&#x7684;&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x4F46; rbpf &#x4F7F;&#x7528;&#x7684; 2015 &#x7248;&#x6B21;&#x3002;</p>
+<p>&#x4FEE;&#x6539;&#x597D; Cargo.toml &#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x5728; src/main.rs &#x4E2D;&#x62F7;&#x5165;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> futures::executor::block_on;
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-comment">// This is the eBPF program, in the form of bytecode instructions.</span>
+    <span class="hljs-keyword">let</span> prog = &amp;[
+        <span class="hljs-number">0xb4</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-comment">// mov32 r0, 0</span>
+        <span class="hljs-number">0xb4</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x02</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-comment">// mov32 r1, 2</span>
+        <span class="hljs-number">0x04</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-comment">// add32 r0, 1</span>
+        <span class="hljs-number">0x0c</span>, <span class="hljs-number">0x10</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-comment">// add32 r0, r1</span>
+        <span class="hljs-number">0x95</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-comment">// exit</span>
+    ];
+
+    <span class="hljs-comment">// Instantiate a struct EbpfVmNoData. This is an eBPF VM for programs that</span>
+    <span class="hljs-comment">// takes no packet data in argument.</span>
+    <span class="hljs-comment">// The eBPF program is passed to the constructor.</span>
+    <span class="hljs-keyword">let</span> vm = rbpf::EbpfVmNoData::new(<span class="hljs-literal">Some</span>(prog)).unwrap();
+
+    block_on(async move {
+        dummy(vm.execute_program().unwrap()).await;
+    });
+}
+
+async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">dummy</span></span>(result: <span class="hljs-keyword">u64</span>) {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;hello world! Result is {} (should be 0x3)&quot;</span>, result);
+}
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x4EE3;&#x7801;&#x5728;&#x505A;&#x4EC0;&#x4E48;&#x6211;&#x4EEC;&#x4E0D;&#x7528;&#x5173;&#x5FC3;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x5173;&#x5FC3;&#x5B83;&#x80FD;&#x4E0D;&#x80FD;&#x5728; 2021 &#x7248;&#x6B21;&#x7684; crate &#x91CC;&#x8DD1;&#x8D77;&#x6765;&#xFF0C;<code>cargo run</code> &#x540E;&#xFF0C;&#x53D1;&#x73B0; rbpf &#x548C; futures &#x878D;&#x6D3D;&#x5730;&#x5904;&#x5728;&#x4E86;&#x4E00;&#x8D77;&#x3002;</p>
+<p>&#x4E00;&#x4EFD;&#x4EE3;&#x7801;&#xFF0C;&#x4F7F;&#x7528;&#x4E86;&#x4E09;&#x4E2A;&#x7248;&#x6B21;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x5374;&#x80FD;&#x591F;&#x65E0;&#x7F1D;&#x5BF9;&#x63A5;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7684;&#x65F6;&#x5019;&#x751A;&#x81F3;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x5173;&#x5FC3;&#x8C01;&#x662F;&#x4EC0;&#x4E48;&#x7248;&#x6B21;&#xFF0C;&#x4F60;&#x8BF4;&#x5389;&#x5BB3;&#x4E0D;&#x5389;&#x5BB3;&#xFF1F;</p>
+<p>&#x6240;&#x4EE5;&#x4F60;&#x770B;&#xFF0C;&#x7248;&#x6B21;&#x8D77;&#x5230;&#x4E86;&#x9632;&#x706B;&#x5899;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x4F7F;&#x5F97;&#x6574;&#x4E2A;&#x751F;&#x6001;&#x7CFB;&#x7EDF;&#x4E0D;&#x7528;&#x5206;&#x88C2;&#xFF0C;&#x5927;&#x5BB6;&#x65E0;&#x9700;&#x6539;&#x52A8;&#xFF0C;&#x4F9D;&#x65E7;&#x80FD;&#x591F;&#x5404;&#x53F8;&#x5176;&#x804C;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x7248;&#x6B21;&#x5BF9; Rust &#x6700;&#x5927;&#x7684;&#x8D21;&#x732E;&#x3002;&#x5982;&#x679C;&#x4F60;&#x7ECF;&#x5386;&#x8FC7; Python2 &#x5230; Python3 &#x5347;&#x7EA7;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x5DE8;&#x5927;&#x9635;&#x75DB;&#xFF0C;&#x90A3;&#x5E94;&#x8BE5;&#x80FD;&#x591F;&#x975E;&#x5E38;&#x611F;&#x6FC0; Rust &#x5F15;&#x5165;&#x4E86;&#x8FD9;&#x4E48;&#x4E2A;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x6982;&#x5FF5;&#x3002;</p>
+<h2 id="rust-2021-&#x5305;&#x62EC;&#x4E86;&#x4EC0;&#x4E48;&#x65B0;&#x4E1C;&#x897F;&#xFF1F;">Rust 2021 &#x5305;&#x62EC;&#x4E86;&#x4EC0;&#x4E48;&#x65B0;&#x4E1C;&#x897F;&#xFF1F;</h2>
+<p>&#x5728;&#x4F60;&#x7406;&#x89E3; Rust 2021 &#x7248;&#x6B21;&#x7684;&#x610F;&#x4E49;&#x4E4B;&#x540E;&#xFF0C;&#x518D;&#x6765;&#x770B;&#x770B;&#x5BF9;&#x6211;&#x4EEC;&#x5F71;&#x54CD;&#x6700;&#x5927;&#x7684;&#x51E0;&#x4E2A;&#x66F4;&#x65B0;&#x3002;</p>
+<h3 id="&#x95ED;&#x5305;&#x7684;&#x4E0D;&#x76F8;&#x4EA4;&#x6355;&#x83B7;">&#x95ED;&#x5305;&#x7684;&#x4E0D;&#x76F8;&#x4EA4;&#x6355;&#x83B7;</h3>
+<p>&#x5728; 2021 &#x4E4B;&#x524D;&#xFF0C;&#x54EA;&#x6015;&#x4F60;&#x53EA;&#x7528;&#x5230;&#x4E86;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x57DF;&#xFF0C;&#x95ED;&#x5305;&#x4E5F;&#x9700;&#x8981;&#x6355;&#x83B7;&#x6574;&#x4E2A;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x5373;&#x4F7F;&#x662F;&#x5F15;&#x7528;&#x3002;&#x4F46;&#x662F; 2021 &#x4E4B;&#x540E;&#xFF0C;&#x95ED;&#x5305;&#x53EF;&#x4EE5;&#x53EA;&#x6355;&#x83B7;&#x9700;&#x8981;&#x7684;&#x57DF;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x7684;<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=f7428fb00bd8648808e82618e5e8916a" target="_blank">&#x4EE3;&#x7801;</a>&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Employee</span></span> {
+    name: <span class="hljs-built_in">String</span>,
+    title: <span class="hljs-built_in">String</span>,
+}
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> tom = Employee {
+        name: <span class="hljs-string">&quot;Tom&quot;</span>.into(),
+        title: <span class="hljs-string">&quot;Engineer&quot;</span>.into(),
+    };
+
+    <span class="hljs-built_in">drop</span>(tom.name);
+
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;title: {}&quot;</span>, tom.title);
+
+    <span class="hljs-comment">// &#x4E4B;&#x524D;&#x8FD9;&#x53E5;&#x4E0D;&#x80FD;&#x5DE5;&#x4F5C;&#xFF0C;2021 &#x53EF;&#x4EE5;&#x7F16;&#x8BD1;</span>
+    <span class="hljs-keyword">let</span> c = || <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{}&quot;</span>, tom.title);
+    c();
+}
+</code></pre>
+<p>&#x95ED;&#x5305;&#x7684;&#x4E0D;&#x76F8;&#x4EA4;&#x6355;&#x83B7;&#x5BF9;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7684;&#x597D;&#x5904;&#x662F;&#xFF0C;&#x90A3;&#x4E9B;&#x95ED;&#x5305;&#x4E2D;&#x6355;&#x83B7;&#x4E86;&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x5B57;&#x6BB5;&#xFF0C;&#x800C;&#x5176;&#x5B83;&#x5730;&#x65B9;&#x53C8;&#x7528;&#x4E86;&#x53E6;&#x4E00;&#x90E8;&#x5206;&#x4E0E;&#x4E4B;&#x4E0D;&#x76F8;&#x4EA4;&#x7684;&#x5B57;&#x6BB5;&#xFF0C;&#x539F;&#x672C;&#x5728; 2018 &#x4E2D;&#x662F;&#x7F16;&#x8BD1;&#x4E0D;&#x8FC7;&#x7684;&#xFF0C;&#x4F60;&#x53EA;&#x80FD; clone() &#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#x6EE1;&#x8DB3;&#x53CC;&#x65B9;&#x7684;&#x9700;&#x8981;&#xFF0C;&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#x3002;</p>
+<h3 id="feature-resolver">feature resolver</h3>
+<p>&#x4F9D;&#x8D56;&#x7BA1;&#x7406;&#x662F;&#x4E00;&#x4E2A;&#x96BE;&#x9898;&#xFF0C;&#x5176;&#x4E2D;&#x6700;&#x56F0;&#x96BE;&#x7684;&#x90E8;&#x5206;&#x4E4B;&#x4E00;&#x5C31;&#x662F;&#x5728;&#x4F9D;&#x8D56;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x5305;&#x65F6;&#xFF0C;&#x9009;&#x62E9;&#x8981;&#x4F7F;&#x7528;&#x7684;&#x4F9D;&#x8D56;&#x7248;&#x672C;&#x3002;&#x8FD9;&#x91CC;&#x6307;&#x7684;&#x4E0D;&#x4EC5;&#x5305;&#x62EC;&#x5176;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x8FD8;&#x5305;&#x62EC;&#x4E3A;&#x8BE5;&#x8F6F;&#x4EF6;&#x5305;&#x542F;&#x7528;&#x6216;&#x672A;&#x542F;&#x7528;&#x7684;&#x529F;&#x80FD;&#xFF08;feature&#xFF09;&#x3002;&#x56E0;&#x4E3A;Cargo &#x7684;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A;&#x662F;&#x5728;&#x4F9D;&#x8D56;&#x4E2D;&#x591A;&#x6B21;&#x5F15;&#x7528;&#x5355;&#x4E2A;&#x5305;&#x65F6;&#x5408;&#x5E76;&#x6240;&#x7528;&#x5230;&#x7684;&#x529F;&#x80FD;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF0C;&#x5047;&#x8BBE;&#x4F60;&#x6709;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; Foo &#x7684; crate&#xFF0C;&#x5176;&#x4E2D;&#x6709; A &#x548C; B &#x4E24;&#x4E2A;&#x529F;&#x80FD;&#xFF0C;&#x8BE5;&#x4F9D;&#x8D56;&#x9879;&#x88AB;&#x5305; bar &#x548C; baz &#x4F7F;&#x7528;&#xFF0C;&#x4F46; bar &#x4F9D;&#x8D56; Foo + A&#xFF0C;&#x800C; baz &#x4F9D;&#x8D56; Foo + B&#x3002;Cargo &#x4F1A;&#x5408;&#x5E76;&#x8FD9;&#x4E24;&#x4E2A;&#x529F;&#x80FD;&#x5E76;&#x7F16;&#x8BD1; Foo + A B&#x3002;<br><img src="https://static001.geekbang.org/resource/image/b8/53/b8601e7c005ff666d1597dd174346d53.jpg?wh=2044x1332" alt=""></p>
+<p>&#x8FD9;&#x786E;&#x5B9E;&#x6709;&#x4E00;&#x4E2A;&#x597D;&#x5904;&#xFF0C;&#x4F60;&#x53EA;&#x9700;&#x8981;&#x7F16;&#x8BD1;&#x4E00;&#x6B21; Foo&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x88AB; bar &#x548C; baz &#x4F7F;&#x7528;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x5982;&#x679C; A &#x548C; B &#x4E0D;&#x5E94;&#x8BE5;&#x4E00;&#x8D77;&#x7F16;&#x8BD1;&#x5462;&#xFF1F;&#x5982;&#x679C;&#x4F60;&#x5BF9;&#x8FD9;&#x6837;&#x7684;&#x573A;&#x666F;&#x611F;&#x5174;&#x8DA3;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x4E0B;&#x9762;&#x7684; Rust 1.51 &#x7F16;&#x8BD1;&#x7B56;&#x7565;&#x7684;&#x94FE;&#x63A5;&#x3002;&#x8FD9;&#x662F; Rust &#x4E00;&#x4E2A;&#x957F;&#x671F;&#x5B58;&#x5728;&#x5E76;&#x56F0;&#x6270;&#x793E;&#x533A;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x4E4B;&#x524D; Rust 1.51 &#x7EC8;&#x4E8E;&#x63D0;&#x4F9B;&#x4E86;&#x65B0;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x901A;&#x8FC7;&#x4E0D;&#x540C;&#x7684;<a href="https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html#cargos-new-feature-resolver" target="_blank">&#x7F16;&#x8BD1;&#x7B56;&#x7565;</a>&#x89E3;&#x51B3;&#x8FD9;&#x4E00;&#x95EE;&#x9898;&#x3002;&#x5982;&#x4ECA;&#xFF0C;&#x8FD9;&#x4E2A;&#x7B56;&#x7565;&#x5DF2;&#x7ECF;&#x6210;&#x4E3A; 2021 &#x7684;&#x7F3A;&#x7701;&#x884C;&#x4E3A;&#xFF0C;&#x5B83;&#x4F1A;&#x5E26;&#x6765;&#x4E00;&#x4E9B;&#x7F16;&#x8BD1;&#x901F;&#x5EA6;&#x7684;&#x635F;&#x5931;&#xFF0C;&#x4F46;&#x4F1A;&#x8BA9;&#x7F16;&#x8BD1;&#x7ED3;&#x679C;&#x66F4;&#x52A0;&#x7CBE;&#x786E;&#x3002;</p>
+<h3 id="&#x65B0;&#x7684;-prelude">&#x65B0;&#x7684; prelude</h3>
+<p>&#x4EFB;&#x4F55;&#x8BED;&#x8A00;&#x90FD;&#x4F1A;&#x7F3A;&#x7701;&#x5F15;&#x5165;&#x67D0;&#x4E9B;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E0B;&#x7684;&#x4E00;&#x4E9B;&#x975E;&#x5E38;&#x5E38;&#x89C1;&#x7684;&#x884C;&#x4E3A;&#xFF0C;&#x8FD9;&#x6837;&#x8BA9;&#x5F00;&#x53D1;&#x8005;&#x4F7F;&#x7528;&#x8D77;&#x6765;&#x5F88;&#x65B9;&#x4FBF;&#x3002;Rust &#x4E5F;&#x4E0D;&#x4F8B;&#x5916;&#xFF0C;&#x5B83;&#x4F1A;&#x7F3A;&#x7701;&#x5F15;&#x5165;&#x4E00;&#x4E9B; trait &#x3001;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x5B8F;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7684; From / Into &#x8FD9;&#x6837;&#x7684; trait&#x3001;Vec &#x8FD9;&#x6837;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x4EE5;&#x53CA; println! / vec! &#x8FD9;&#x6837;&#x7684;&#x5B8F;&#x3002;&#x8FD9;&#x6837;&#x5728;&#x5199;&#x4EE3;&#x7801;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x9891;&#x7E41;&#x5730;&#x4F7F;&#x7528; use&#x3002;</p>
+<p>&#x5728; 2021 &#x7248;&#x6B21;&#x4E2D;&#xFF0C;TryInto&#x3001;TryFrom &#x548C; FromIterator &#x9ED8;&#x8BA4;&#x88AB;&#x5F15;&#x5165;&#x5230; prelude &#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x518D;&#x9700;&#x8981;&#x4F7F;&#x7528; use &#x58F0;&#x660E;&#x4E86;&#x3002;&#x6BD4;&#x5982;&#x73B0;&#x5728;&#x4E0B;&#x9762;&#x7684;&#x8BED;&#x53E5;&#x5C31;&#x6CA1;&#x5FC5;&#x8981;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A; prelude &#x5DF2;&#x7ECF;&#x5305;&#x542B;&#x4E86;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> std::convert::TryFrom;
+</code></pre>
+<h2 id="&#x5C0F;&#x7ED3;">&#x5C0F;&#x7ED3;</h2>
+<p>&#x603B;&#x7684;&#x6765;&#x8BF4;&#xFF0C;Rust 2021 &#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x5927;&#x7684;&#x7248;&#x6B21;&#x66F4;&#x65B0;&#xFF0C;&#x91CC;&#x9762;&#x53EA;&#x5305;&#x542B;&#x4E86;&#x5C11;&#x91CF;&#x548C;&#x4E4B;&#x524D;&#x7248;&#x672C;&#x4E0D;&#x517C;&#x5BB9;&#x7684;&#x5730;&#x65B9;&#x3002;&#x672A;&#x6765; 3 &#x5E74;&#xFF0C;Rust &#x90FD;&#x5C06;&#x7A33;&#x5B9A;&#x5728;&#x8FD9;&#x4E2A;&#x7248;&#x6B21;&#x4E0A;&#x3002;</p>
+<p>&#x4E5F;&#x8BB8;&#x4F60;&#x4F1A;&#x4E0D;&#x7406;&#x89E3;&#xFF1A;&#x641E;&#x8FD9;&#x4E48;&#x5927;&#x52A8;&#x9759;&#xFF0C;&#x5C31;&#x8FD9;&#xFF1F;&#x4F46;&#x8FD9;&#x6B63;&#x662F; Rust &#x5F53;&#x521D;&#x8BBE;&#x8BA1;&#x7528;&#x5FC3;&#x826F;&#x82E6;&#x7684;&#x5730;&#x65B9;&#x3002;</p>
+<p>&#x4E09;&#x5E74;&#x5185;&#xFF0C;&#x4EE5; 6 &#x5468;&#x4E3A;&#x5355;&#x4F4D;&#xFF0C;&#x4E0D;&#x65AD;&#x8FED;&#x4EE3;&#x65B0;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x98CE;&#x96E8;&#x65E0;&#x963B;&#xFF0C;&#x4F46;&#x4E0D;&#x5F15;&#x5165;&#x7834;&#x574F;&#x6027;&#x66F4;&#x65B0;&#xFF0C;&#x6216;&#x8005;&#x7528;&#x67D0;&#x4E9B;&#x7F16;&#x8BD1;&#x9009;&#x9879;&#x5C06;&#x5176;&#x9694;&#x79BB;&#xFF0C;&#x4F7F;&#x7528;&#x8005;&#x5FC5;&#x987B;&#x624B;&#x5DE5;&#x6253;&#x5F00;&#xFF08;&#x6BD4;&#x5982; resolver = &#x201C;2&#x201D;&#xFF09;&#xFF1B;&#x4E09;&#x5E74;&#x671F;&#x6EE1;&#xFF0C;&#x5347;&#x7EA7;&#x7248;&#x6B21;&#xFF0C;&#x4E00;&#x6B21;&#x6027;&#x628A;&#x8FD9;&#x4E09;&#x5E74;&#x5185;&#x6F5C;&#x5728;&#x7684;&#x7834;&#x574F;&#x6027;&#x66F4;&#x65B0;&#xFF0C;&#x4EE5;&#x53CA;&#x53EF;&#x9884;&#x89C1;&#x7684;&#x672A;&#x6765;&#x4F1A;&#x5F15;&#x5165;&#x7684;&#x7834;&#x574F;&#x6027;&#x66F4;&#x65B0;&#xFF08;&#x6BD4;&#x5982;&#x4FDD;&#x7559;&#x65B0;&#x7684;&#x5173;&#x952E;&#x5B57;&#xFF09;&#xFF0C;&#x901A;&#x8FC7;&#x7248;&#x6B21;&#x6765;&#x533A;&#x9694;&#x3002;</p>
+<p>&#x7248;&#x6B21;&#x4E2D;&#x51FA;&#x73B0;&#x7684;&#x5927;&#x52A8;&#x4F5C;&#x8D8A;&#x5C11;&#xFF0C;&#x5C31;&#x8BF4;&#x660E;&#x8BED;&#x8A00;&#x8D8A;&#x8D8B;&#x5411;&#x6210;&#x719F;&#x3002;</p>
+<p>&#x597D;&#xFF0C;&#x5173;&#x4E8E; 2021 &#x7248;&#x6B21;&#x7684;&#x4ECB;&#x7ECD;&#x5C31;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x4E9B;&#x5176;&#x5B83;&#x7684;&#x4FEE;&#x6539;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x5C31;&#x4E0D;&#x8D58;&#x8FF0;&#x4E86;&#xFF0C;&#x611F;&#x5174;&#x8DA3;&#x7684;&#x53EF;&#x4EE5;&#x770B;<a href="https://blog.rust-lang.org/2021/10/21/Rust-1.56.0.html#rust-2021" target="_blank">&#x53D1;&#x5E03;&#x6587;&#x6863;</a>&#x3002;&#x8FD9;&#x95E8;&#x8BFE;&#x7684;&#x4EE3;&#x7801;&#x4ED3;&#x5E93; <a href="https://github.com/tyrchen/geektime-rust" target="_blank">tyrchen/geektime-rust</a> &#x4E5F;&#x968F;&#x4E4B;&#x5347;&#x7EA7;&#x5230;&#x4E86; 2021 &#x7248;&#x6B21;&#xFF0C;&#x5177;&#x4F53;&#x4FEE;&#x6539;&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x8FD9;&#x4E2A; <a href="https://github.com/tyrchen/geektime-rust/pull/3" target="_blank">pull request</a>&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="429063.html" class="navigation navigation-prev " aria-label="Previous page: 25｜类型系统：如何围绕trait来设计和架构系统？">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="429666.html" class="navigation navigation-next " aria-label="Next page: 26｜阶段实操（3）：构建一个简单的KV server-高级trait技巧">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"加餐｜Rust2021版次问世了！","level":"1.32","depth":1,"next":{"title":"26｜阶段实操（3）：构建一个简单的KV server-高级trait技巧","level":"1.33","depth":1,"path":"docs/429666.md","ref":"./docs/429666.md","articles":[]},"previous":{"title":"25｜类型系统：如何围绕trait来设计和架构系统？","level":"1.31","depth":1,"path":"docs/429063.md","ref":"./docs/429063.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"陈天 · Rust 编程第一课","language":"zh","gitbook":"*"},"file":{"path":"docs/429665.md","mtime":"2024-08-25T05:24:49.082Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-08-25T05:46:11.445Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

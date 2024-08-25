@@ -1,0 +1,1287 @@
+
+<!DOCTYPE HTML>
+<html lang="zh" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>34｜并发处理（下）：从atomics到Channel，Rust都提供了什么工具？ · 陈天 · Rust 编程第一课</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="445814.html" />
+    
+    
+    <link rel="prev" href="442216.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="輸入並搜尋" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="408400.html">
+            
+                <a href="408400.html">
+            
+                    
+                    开篇词｜让Rust成为你的下一门主力语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="408409.html">
+            
+                <a href="408409.html">
+            
+                    
+                    01｜内存：值放堆上还是放栈上，这是一个问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="410038.html">
+            
+                <a href="410038.html">
+            
+                    
+                    02｜串讲：编程开发中，那些你需要掌握的基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="411089.html">
+            
+                <a href="411089.html">
+            
+                    
+                    加餐｜这个专栏你可以怎么学，以及Rust是否值得学？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="411632.html">
+            
+                <a href="411632.html">
+            
+                    
+                    03｜初窥门径：从你的第一个Rust程序开始！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="412883.html">
+            
+                <a href="412883.html">
+            
+                    
+                    04｜get hands dirty：来写个实用的CLI小工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="413634.html">
+            
+                <a href="413634.html">
+            
+                    
+                    05｜get hands dirty：做一个图片服务器有多难？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="414478.html">
+            
+                <a href="414478.html">
+            
+                    
+                    06｜get hands dirty：SQL查询工具怎么一鱼多吃？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="415098.html">
+            
+                <a href="415098.html">
+            
+                    
+                    07｜所有权：值的生杀大权到底在谁手上？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="415988.html">
+            
+                <a href="415988.html">
+            
+                    
+                    08｜所有权：值的借用是如何工作的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="416722.html">
+            
+                <a href="416722.html">
+            
+                    
+                    09｜所有权：一个值可以有多个所有者么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="417384.html">
+            
+                <a href="417384.html">
+            
+                    
+                    10｜生命周期：你创建的值究竟能活多久？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="418235.html">
+            
+                <a href="418235.html">
+            
+                    
+                    11｜内存管理：从创建到消亡，值都经历了什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="418778.html">
+            
+                <a href="418778.html">
+            
+                    
+                    加餐｜愚昧之巅：你的Rust学习常见问题汇总
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="420021.html">
+            
+                <a href="420021.html">
+            
+                    
+                    12｜类型系统：Rust的类型系统有什么特点？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="420028.html">
+            
+                <a href="420028.html">
+            
+                    
+                    13｜类型系统：如何使用trait来定义接口？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="421324.html">
+            
+                <a href="421324.html">
+            
+                    
+                    14｜类型系统：有哪些必须掌握的trait？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="422182.html">
+            
+                <a href="422182.html">
+            
+                    
+                    15｜数据结构：这些浓眉大眼的结构竟然都是智能指针？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="422975.html">
+            
+                <a href="422975.html">
+            
+                    
+                    16｜数据结构：Vec、&[T]、Box<[T]> ，你真的了解集合容器么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="423923.html">
+            
+                <a href="423923.html">
+            
+                    
+                    17｜数据结构：软件系统核心部件哈希表，内存如何布局？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="424002.html">
+            
+                <a href="424002.html">
+            
+                    
+                    18｜错误处理：为什么Rust的错误处理与众不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="424009.html">
+            
+                <a href="424009.html">
+            
+                    
+                    19｜闭包：FnOnce、FnMut和Fn，为什么有这么多类型？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="424017.html">
+            
+                <a href="424017.html">
+            
+                    
+                    20｜4 Steps ：如何更好地阅读Rust源码？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="425001.html">
+            
+                <a href="425001.html">
+            
+                    
+                    21｜阶段实操（1）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="425005.html">
+            
+                <a href="425005.html">
+            
+                    
+                    22｜阶段实操（2）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.27" data-path="425013.html">
+            
+                <a href="425013.html">
+            
+                    
+                    加餐｜期中测试：来写一个简单的grep命令行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.28" data-path="425015.html">
+            
+                <a href="425015.html">
+            
+                    
+                    加餐｜期中测试：参考实现讲解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.29" data-path="427082.html">
+            
+                <a href="427082.html">
+            
+                    
+                    23｜类型系统：如何在实战中使用泛型编程？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.30" data-path="428018.html">
+            
+                <a href="428018.html">
+            
+                    
+                    24｜类型系统：如何在实战中使用trait object？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.31" data-path="429063.html">
+            
+                <a href="429063.html">
+            
+                    
+                    25｜类型系统：如何围绕trait来设计和架构系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.32" data-path="429665.html">
+            
+                <a href="429665.html">
+            
+                    
+                    加餐｜Rust2021版次问世了！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.33" data-path="429666.html">
+            
+                <a href="429666.html">
+            
+                    
+                    26｜阶段实操（3）：构建一个简单的KV server-高级trait技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.34" data-path="429673.html">
+            
+                <a href="429673.html">
+            
+                    
+                    27｜生态系统：有哪些常有的Rust库可以为我所用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.35" data-path="432162.html">
+            
+                <a href="432162.html">
+            
+                    
+                    28｜网络开发（上）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.36" data-path="432168.html">
+            
+                <a href="432168.html">
+            
+                    
+                    29｜网络开发（下）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.37" data-path="435484.html">
+            
+                <a href="435484.html">
+            
+                    
+                    30｜Unsafe Rust：如何用C++的方式打开Rust？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.38" data-path="437566.html">
+            
+                <a href="437566.html">
+            
+                    
+                    31｜FFI：Rust如何和你的语言架起沟通桥梁？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.39" data-path="437569.html">
+            
+                <a href="437569.html">
+            
+                    
+                    32｜实操项目：使用PyO3开发Python3模块
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.40" data-path="442216.html">
+            
+                <a href="442216.html">
+            
+                    
+                    33｜并发处理（上）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.41" data-path="442217.html">
+            
+                <a href="442217.html">
+            
+                    
+                    34｜并发处理（下）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.42" data-path="445814.html">
+            
+                <a href="445814.html">
+            
+                    
+                    35｜实操项目：如何实现一个基本的MPSC channel？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.43" data-path="445818.html">
+            
+                <a href="445818.html">
+            
+                    
+                    用户故事｜绝望之谷：改变从学习开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.44" data-path="446948.html">
+            
+                <a href="446948.html">
+            
+                    
+                    36｜阶段实操（4）：构建一个简单的KV server-网络处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.45" data-path="446949.html">
+            
+                <a href="446949.html">
+            
+                    
+                    37｜阶段实操（5）：构建一个简单的KV server-网络安全
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.46" data-path="455413.html">
+            
+                <a href="455413.html">
+            
+                    
+                    38｜异步处理：Future是什么？它和async/await是什么关系？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.47" data-path="455412.html">
+            
+                <a href="455412.html">
+            
+                    
+                    39｜异步处理：async/await内部是怎么实现的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.48" data-path="461695.html">
+            
+                <a href="461695.html">
+            
+                    
+                    40｜异步处理：如何处理异步IO？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.49" data-path="461997.html">
+            
+                <a href="461997.html">
+            
+                    
+                    41｜阶段实操（6）：构建一个简单的KV server-异步处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.50" data-path="461999.html">
+            
+                <a href="461999.html">
+            
+                    
+                    42｜阶段实操（7）：构建一个简单的KV server-如何做大的重构？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.51" data-path="464856.html">
+            
+                <a href="464856.html">
+            
+                    
+                    43｜生产环境：真实世界下的一个Rust项目包含哪些要素？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.52" data-path="464855.html">
+            
+                <a href="464855.html">
+            
+                    
+                    44｜数据处理：应用程序和数据如何打交道？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.53" data-path="466825.html">
+            
+                <a href="466825.html">
+            
+                    
+                    45｜阶段实操（8）：构建一个简单的KV server-配置/测试/监控/CI/CD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.54" data-path="468066.html">
+            
+                <a href="468066.html">
+            
+                    
+                    46｜软件架构：如何用Rust架构复杂系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.55" data-path="468940.html">
+            
+                <a href="468940.html">
+            
+                    
+                    大咖助场｜开悟之坡（上）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.56" data-path="468948.html">
+            
+                <a href="468948.html">
+            
+                    
+                    大咖助场｜开悟之坡（下）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.57" data-path="470490.html">
+            
+                <a href="470490.html">
+            
+                    
+                    用户故事｜语言不仅是工具，还是思维方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.58" data-path="481355.html">
+            
+                <a href="481355.html">
+            
+                    
+                    加餐｜代码即数据：为什么我们需要宏编程能力？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.59" data-path="481359.html">
+            
+                <a href="481359.html">
+            
+                    
+                    加餐｜宏编程（上）：用最“笨”的方式撰写宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.60" data-path="481369.html">
+            
+                <a href="481369.html">
+            
+                    
+                    加餐｜宏编程（下）：用 syn/quote 优雅地构建宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.61" data-path="470420.html">
+            
+                <a href="470420.html">
+            
+                    
+                    结束语｜永续之原：Rust学习，如何持续精进？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.62" data-path="470440.html">
+            
+                <a href="470440.html">
+            
+                    
+                    期末测试｜来赴一场满分之约！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.63" data-path="482856.html">
+            
+                <a href="482856.html">
+            
+                    
+                    特别策划｜学习锦囊（一）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.64" data-path="483045.html">
+            
+                <a href="483045.html">
+            
+                    
+                    特别策划｜学习锦囊（二）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.65" data-path="483050.html">
+            
+                <a href="483050.html">
+            
+                    
+                    特别策划｜学习锦囊（三）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.66" data-path="653131.html">
+            
+                <a href="653131.html">
+            
+                    
+                    特别策划｜生成式AI：哪些开发环节可能被颠覆？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本書使用 GitBook 釋出
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >34｜并发处理（下）：从atomics到Channel，Rust都提供了什么工具？</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="34&#xFF5C;&#x5E76;&#x53D1;&#x5904;&#x7406;&#xFF08;&#x4E0B;&#xFF09;&#xFF1A;&#x4ECE;atomics&#x5230;channel&#xFF0C;rust&#x90FD;&#x63D0;&#x4F9B;&#x4E86;&#x4EC0;&#x4E48;&#x5DE5;&#x5177;&#xFF1F;">34&#xFF5C;&#x5E76;&#x53D1;&#x5904;&#x7406;&#xFF08;&#x4E0B;&#xFF09;&#xFF1A;&#x4ECE;atomics&#x5230;Channel&#xFF0C;Rust&#x90FD;&#x63D0;&#x4F9B;&#x4E86;&#x4EC0;&#x4E48;&#x5DE5;&#x5177;&#xFF1F;</h1>
+<pre><code>&#x4F60;&#x597D;&#xFF0C;&#x6211;&#x662F;&#x9648;&#x5929;&#x3002;
+</code></pre><p>&#x5BF9;&#x4E8E;&#x5E76;&#x53D1;&#x72B6;&#x6001;&#x4E0B;&#x8FD9;&#x4E09;&#x79CD;&#x5E38;&#x89C1;&#x7684;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;&#xFF1A;&#x81EA;&#x7531;&#x7ADE;&#x4E89;&#x6A21;&#x5F0F;&#x3001;map/reduce &#x6A21;&#x5F0F;&#x3001;DAG &#x6A21;&#x5F0F;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x96BE;&#x70B9;&#x662F;&#x5982;&#x4F55;&#x5728;&#x8FD9;&#x4E9B;&#x5E76;&#x53D1;&#x7684;&#x4EFB;&#x52A1;&#x4E2D;&#x8FDB;&#x884C;&#x540C;&#x6B65;&#x3002;atomic / Mutex &#x89E3;&#x51B3;&#x4E86;&#x81EA;&#x7531;&#x7ADE;&#x4E89;&#x6A21;&#x5F0F;&#x4E0B;&#x5E76;&#x53D1;&#x4EFB;&#x52A1;&#x7684;&#x540C;&#x6B65;&#x95EE;&#x9898;&#xFF0C;&#x4E5F;&#x80FD;&#x591F;&#x5F88;&#x597D;&#x5730;&#x89E3;&#x51B3; map/reduce &#x6A21;&#x5F0F;&#x4E0B;&#x7684;&#x540C;&#x6B65;&#x95EE;&#x9898;&#xFF0C;&#x56E0;&#x4E3A;&#x6B64;&#x65F6;&#x540C;&#x6B65;&#x53EA;&#x53D1;&#x751F;&#x5728; map &#x548C; reduce &#x4E24;&#x4E2A;&#x9636;&#x6BB5;&#x3002;<br><img src="https://static001.geekbang.org/resource/image/00/58/003294c9ba4b291e47585fa1a599a358.jpg?wh=2364x1142" alt=""></p>
+<p>&#x7136;&#x800C;&#xFF0C;&#x5B83;&#x4EEC;&#x6CA1;&#x6709;&#x89E3;&#x51B3;&#x4E00;&#x4E2A;&#x66F4;&#x9AD8;&#x5C42;&#x6B21;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x4E5F;&#x5C31;&#x662F; DAG &#x6A21;&#x5F0F;&#xFF1A;&#x5982;&#x679C;&#x8FD9;&#x79CD;&#x8BBF;&#x95EE;&#x9700;&#x8981;&#x6309;&#x7167;&#x4E00;&#x5B9A;&#x987A;&#x5E8F;&#x8FDB;&#x884C;&#x6216;&#x8005;&#x524D;&#x540E;&#x6709;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x8BE5;&#x600E;&#x4E48;&#x505A;&#xFF1F;</p>
+<p>&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x7684;&#x5178;&#x578B;&#x573A;&#x666F;&#x662F;<strong>&#x751F;&#x4EA7;&#x8005;-&#x6D88;&#x8D39;&#x8005;&#x6A21;&#x5F0F;&#xFF1A;&#x751F;&#x4EA7;&#x8005;&#x751F;&#x4EA7;&#x51FA;&#x6765;&#x5185;&#x5BB9;&#x540E;&#xFF0C;&#x9700;&#x8981;&#x6709;&#x673A;&#x5236;&#x901A;&#x77E5;&#x6D88;&#x8D39;&#x8005;&#x53EF;&#x4EE5;&#x6D88;&#x8D39;</strong>&#x3002;&#x6BD4;&#x5982; socket &#x4E0A;&#x6709;&#x6570;&#x636E;&#x4E86;&#xFF0C;&#x901A;&#x77E5;&#x5904;&#x7406;&#x7EBF;&#x7A0B;&#x6765;&#x5904;&#x7406;&#x6570;&#x636E;&#xFF0C;&#x5904;&#x7406;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#xFF0C;&#x518D;&#x901A;&#x77E5; socket &#x6536;&#x53D1;&#x7684;&#x7EBF;&#x7A0B;&#x53D1;&#x9001;&#x6570;&#x636E;&#x3002;</p>
+<h2 id="condvar">Condvar</h2>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x8FD8;&#x63D0;&#x4F9B;&#x4E86; Condvar&#x3002;Condvar &#x6709;&#x4E24;&#x79CD;&#x72B6;&#x6001;&#xFF1A;</p>
+<ul>
+<li>&#x7B49;&#x5F85;&#xFF08;wait&#xFF09;&#xFF1A;&#x7EBF;&#x7A0B;&#x5728;&#x961F;&#x5217;&#x4E2D;&#x7B49;&#x5F85;&#xFF0C;&#x76F4;&#x5230;&#x6EE1;&#x8DB3;&#x67D0;&#x4E2A;&#x6761;&#x4EF6;&#x3002;</li>
+<li>&#x901A;&#x77E5;&#xFF08;notify&#xFF09;&#xFF1A;&#x5F53; condvar &#x7684;&#x6761;&#x4EF6;&#x6EE1;&#x8DB3;&#x65F6;&#xFF0C;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x901A;&#x77E5;&#x5176;&#x4ED6;&#x7B49;&#x5F85;&#x7684;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x88AB;&#x5524;&#x9192;&#x3002;&#x901A;&#x77E5;&#x53EF;&#x4EE5;&#x662F;&#x5355;&#x4E2A;&#x901A;&#x77E5;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x591A;&#x4E2A;&#x901A;&#x77E5;&#xFF0C;&#x751A;&#x81F3;&#x5E7F;&#x64AD;&#xFF08;&#x901A;&#x77E5;&#x6240;&#x6709;&#x4EBA;&#xFF09;&#x3002;</li>
+</ul>
+<p>&#x5728;&#x5B9E;&#x8DF5;&#x4E2D;&#xFF0C;Condvar &#x5F80;&#x5F80;&#x548C; Mutex &#x4E00;&#x8D77;&#x4F7F;&#x7528;&#xFF1A;<strong>Mutex &#x7528;&#x4E8E;&#x4FDD;&#x8BC1;&#x6761;&#x4EF6;&#x5728;&#x8BFB;&#x5199;&#x65F6;&#x4E92;&#x65A5;&#xFF0C;Condvar &#x7528;&#x4E8E;&#x63A7;&#x5236;&#x7EBF;&#x7A0B;&#x7684;&#x7B49;&#x5F85;&#x548C;&#x5524;&#x9192;</strong>&#x3002;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> std::sync::{Arc, Condvar, Mutex};
+<span class="hljs-keyword">use</span> std::thread;
+<span class="hljs-keyword">use</span> std::time::Duration;
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> pair = Arc::new((Mutex::new(<span class="hljs-literal">false</span>), Condvar::new()));
+    <span class="hljs-keyword">let</span> pair2 = Arc::clone(&amp;pair);
+
+    thread::spawn(move || {
+        <span class="hljs-keyword">let</span> (lock, cvar) = &amp;*pair2;
+        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> started = lock.lock().unwrap();
+        *started = <span class="hljs-literal">true</span>;
+        eprintln!(<span class="hljs-string">&quot;I&apos;m a happy worker!&quot;</span>);
+        <span class="hljs-comment">// &#x901A;&#x77E5;&#x4E3B;&#x7EBF;&#x7A0B;</span>
+        cvar.notify_one();
+        <span class="hljs-keyword">loop</span> {
+            thread::sleep(Duration::from_secs(<span class="hljs-number">1</span>));
+            <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;working...&quot;</span>);
+        }
+    });
+
+    <span class="hljs-comment">// &#x7B49;&#x5F85;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x7684;&#x901A;&#x77E5;</span>
+    <span class="hljs-keyword">let</span> (lock, cvar) = &amp;*pair;
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> started = lock.lock().unwrap();
+    <span class="hljs-keyword">while</span> !*started {
+        started = cvar.wait(started).unwrap();
+    }
+    eprintln!(<span class="hljs-string">&quot;Worker started!&quot;</span>);
+}
+</code></pre>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x901A;&#x8FC7; condvar&#xFF0C;&#x6211;&#x4EEC;&#x5B9E;&#x73B0;&#x4E86; worker &#x7EBF;&#x7A0B;&#x5728;&#x6267;&#x884C;&#x5230;&#x4E00;&#x5B9A;&#x9636;&#x6BB5;&#x540E;&#x901A;&#x77E5;&#x4E3B;&#x7EBF;&#x7A0B;&#xFF0C;&#x7136;&#x540E;&#x4E3B;&#x7EBF;&#x7A0B;&#x518D;&#x505A;&#x4E00;&#x4E9B;&#x4E8B;&#x60C5;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x4E86;&#x4E00;&#x4E2A; Mutex &#x4F5C;&#x4E3A;&#x4E92;&#x65A5;&#x6761;&#x4EF6;&#xFF0C;&#x7136;&#x540E;&#x5728; <a href="https://doc.rust-lang.org/src/std/sync/condvar.rs.html#184-191" target="_blank">cvar.wait()</a> &#x4E2D;&#x4F20;&#x5165;&#x8FD9;&#x4E2A; Mutex&#x3002;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x9700;&#x8981;&#x4E00;&#x4E2A; MutexGuard&#xFF0C;&#x4EE5;&#x4FBF;&#x4E8E;&#x77E5;&#x9053;&#x9700;&#x8981;&#x5524;&#x9192;&#x54EA;&#x4E2A; Mutex &#x4E0B;&#x7B49;&#x5F85;&#x7684;&#x7EBF;&#x7A0B;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">wait</span></span>&lt;<span class="hljs-symbol">&apos;a</span>, T&gt;(
+    &amp;<span class="hljs-keyword">self</span>,
+    guard: MutexGuard&lt;<span class="hljs-symbol">&apos;a</span>, T&gt;
+) -&gt; LockResult&lt;MutexGuard&lt;<span class="hljs-symbol">&apos;a</span>, T&gt;&gt;
+</code></pre>
+<h2 id="channel">Channel</h2>
+<p>&#x4F46;&#x662F;&#x7528; Mutex &#x548C; Condvar &#x6765;&#x5904;&#x7406;&#x590D;&#x6742;&#x7684; DAG &#x5E76;&#x53D1;&#x6A21;&#x5F0F;&#x4F1A;&#x6BD4;&#x8F83;&#x5403;&#x529B;&#x3002;&#x6240;&#x4EE5;&#xFF0C;Rust &#x8FD8;&#x63D0;&#x4F9B;&#x4E86;&#x5404;&#x79CD;&#x5404;&#x6837;&#x7684; Channel &#x7528;&#x4E8E;&#x5904;&#x7406;&#x5E76;&#x53D1;&#x4EFB;&#x52A1;&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x8BAF;&#x3002;</p>
+<p>&#x7531;&#x4E8E; Golang &#x4E0D;&#x9057;&#x4F59;&#x529B;&#x5730;&#x63A8;&#x5E7F;&#xFF0C;Channel &#x53EF;&#x80FD;&#x662F;&#x6700;&#x5E7F;&#x4E3A;&#x4EBA;&#x77E5;&#x7684;&#x5E76;&#x53D1;&#x624B;&#x6BB5;&#x3002;&#x76F8;&#x5BF9;&#x4E8E; Mutex&#xFF0C;Channel &#x7684;&#x62BD;&#x8C61;&#x7A0B;&#x5EA6;&#x6700;&#x9AD8;&#xFF0C;&#x63A5;&#x53E3;&#x6700;&#x4E3A;&#x76F4;&#x89C2;&#xFF0C;&#x4F7F;&#x7528;&#x8D77;&#x6765;&#x7684;&#x5FC3;&#x7406;&#x8D1F;&#x62C5;&#x4E5F;&#x6CA1;&#x90A3;&#x4E48;&#x5927;&#x3002;&#x4F7F;&#x7528; Mutex &#x65F6;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x5F88;&#x5C0F;&#x5FC3;&#x5730;&#x907F;&#x514D;&#x6B7B;&#x9501;&#xFF0C;&#x63A7;&#x5236;&#x4E34;&#x754C;&#x533A;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x9632;&#x6B62;&#x4E00;&#x5207;&#x53EF;&#x80FD;&#x53D1;&#x751F;&#x7684;&#x610F;&#x5916;&#x3002;</p>
+<p>&#x867D;&#x7136;&#x5728; Rust &#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x201C;&#x65E0;&#x754F;&#x5E76;&#x53D1;&#x201D;&#xFF08;Fearless concurrency&#xFF09;&#x2014;&#x2014; &#x5F53;&#x4EE3;&#x7801;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#xFF0C;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x5E76;&#x53D1;&#x95EE;&#x9898;&#x90FD;&#x53EF;&#x4EE5;&#x89C4;&#x907F;&#xFF0C;&#x4F46;&#x6027;&#x80FD;&#x4E0A;&#x7684;&#x95EE;&#x9898;&#x3001;&#x903B;&#x8F91;&#x4E0A;&#x7684;&#x6B7B;&#x9501;&#x8FD8;&#x9700;&#x8981;&#x5F00;&#x53D1;&#x8005;&#x7167;&#x6599;&#x3002;</p>
+<p><strong>Channel &#x628A;&#x9501;&#x5C01;&#x88C5;&#x5728;&#x4E86;&#x961F;&#x5217;&#x5199;&#x5165;&#x548C;&#x8BFB;&#x53D6;&#x7684;&#x5C0F;&#x5757;&#x533A;&#x57DF;&#x5185;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x8BFB;&#x8005;&#x548C;&#x5199;&#x8005;&#x5B8C;&#x5168;&#x5206;&#x79BB;</strong>&#xFF0C;&#x4F7F;&#x5F97;&#x8BFB;&#x8005;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x548C;&#x5199;&#x8005;&#x5199;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x5BF9;&#x5F00;&#x53D1;&#x8005;&#x800C;&#x8A00;&#xFF0C;&#x9664;&#x4E86;&#x6F5C;&#x5728;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;&#x5916;&#xFF0C;&#x5B8C;&#x5168;&#x548C;&#x9501;&#x65E0;&#x5173;&#xFF0C;&#x5C31;&#x50CF;&#x8BBF;&#x95EE;&#x4E00;&#x4E2A;&#x672C;&#x5730;&#x961F;&#x5217;&#x4E00;&#x6837;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5BF9;&#x4E8E;&#x5927;&#x90E8;&#x5206;&#x5E76;&#x53D1;&#x95EE;&#x9898;&#xFF0C;&#x6211;&#x4EEC;&#x90FD;&#x53EF;&#x4EE5;&#x7528; Channel &#x6216;&#x8005;&#x7C7B;&#x4F3C;&#x7684;&#x601D;&#x60F3;&#x6765;&#x5904;&#x7406;&#xFF08;&#x6BD4;&#x5982; actor model&#xFF09;&#x3002;</p>
+<p>Channel &#x5728;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6839;&#x636E;&#x4E0D;&#x540C;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x4F1A;&#x9009;&#x62E9;&#x4E0D;&#x540C;&#x7684;&#x5DE5;&#x5177;&#x3002;Rust &#x63D0;&#x4F9B;&#x4E86;&#x4EE5;&#x4E0B;&#x56DB;&#x79CD; Channel&#xFF1A;</p>
+<ul>
+<li>oneshot&#xFF1A;&#x8FD9;&#x53EF;&#x80FD;&#x662F;&#x6700;&#x7B80;&#x5355;&#x7684; Channel&#xFF0C;&#x5199;&#x8005;&#x5C31;&#x53EA;&#x53D1;&#x4E00;&#x6B21;&#x6570;&#x636E;&#xFF0C;&#x800C;&#x8BFB;&#x8005;&#x4E5F;&#x53EA;&#x8BFB;&#x4E00;&#x6B21;&#x3002;&#x8FD9;&#x79CD;&#x4E00;&#x6B21;&#x6027;&#x7684;&#x3001;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x95F4;&#x7684;&#x540C;&#x6B65;&#x53EF;&#x4EE5;&#x7528; oneshot channel &#x5B8C;&#x6210;&#x3002;&#x7531;&#x4E8E; oneshot &#x7279;&#x6B8A;&#x7684;&#x7528;&#x9014;&#xFF0C;&#x5B9E;&#x73B0;&#x7684;&#x65F6;&#x5019;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x7528; atomic swap &#x6765;&#x5B8C;&#x6210;&#x3002;</li>
+<li>rendezvous&#xFF1A;&#x5F88;&#x591A;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x901A;&#x8FC7; Channel &#x6765;&#x63A7;&#x5236;&#x7EBF;&#x7A0B;&#x95F4;&#x7684;&#x540C;&#x6B65;&#xFF0C;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x53D1;&#x9001;&#x6570;&#x636E;&#x3002;rendezvous channel &#x662F; channel size &#x4E3A; 0 &#x7684;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x60C5;&#x51B5;&#x3002;</li>
+</ul>
+<p>&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x7528; Mutex + Condvar &#x5B9E;&#x73B0;&#x5C31;&#x8DB3;&#x591F;&#x4E86;&#xFF0C;&#x5728;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;rendezvous channel &#x5176;&#x5B9E;&#x4E5F;&#x5C31;&#x662F; Mutex + Condvar &#x7684;&#x4E00;&#x4E2A;&#x5305;&#x88C5;&#x3002;</p>
+<ul>
+<li>bounded&#xFF1A;<strong>bounded channel &#x6709;&#x4E00;&#x4E2A;&#x961F;&#x5217;&#xFF0C;&#x4F46;&#x961F;&#x5217;&#x6709;&#x4E0A;&#x9650;&#x3002;&#x4E00;&#x65E6;&#x961F;&#x5217;&#x88AB;&#x5199;&#x6EE1;&#x4E86;&#xFF0C;&#x5199;&#x8005;&#x4E5F;&#x9700;&#x8981;&#x88AB;&#x6302;&#x8D77;&#x7B49;&#x5F85;</strong>&#x3002;&#x5F53;&#x963B;&#x585E;&#x53D1;&#x751F;&#x540E;&#xFF0C;&#x8BFB;&#x8005;&#x4E00;&#x65E6;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#xFF0C;channel &#x5185;&#x90E8;&#x5C31;&#x4F1A;&#x4F7F;&#x7528; Condvar &#x7684; <code>notify_one</code> &#x901A;&#x77E5;&#x5199;&#x8005;&#xFF0C;&#x5524;&#x9192;&#x67D0;&#x4E2A;&#x5199;&#x8005;&#x4F7F;&#x5176;&#x80FD;&#x591F;&#x7EE7;&#x7EED;&#x5199;&#x5165;&#x3002;</li>
+</ul>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;&#x4E00;&#x822C;&#x4F1A;&#x7528;&#x5230; Mutex + Condvar + VecDeque &#x6765;&#x5B9E;&#x73B0;&#xFF1B;&#x5982;&#x679C;&#x4E0D;&#x7528; Condvar&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528; thread::park + thread::notify &#x6765;&#x5B8C;&#x6210;&#xFF08;<a href="https://github.com/zesterer/flume" target="_blank">flume</a> &#x7684;&#x505A;&#x6CD5;&#xFF09;&#xFF1B;&#x5982;&#x679C;&#x4E0D;&#x7528; VecDeque&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x53CC;&#x5411;&#x94FE;&#x8868;&#x6216;&#x8005;&#x5176;&#x5B83;&#x7684; ring buffer &#x7684;&#x5B9E;&#x73B0;&#x3002;</p>
+<ul>
+<li>unbounded&#xFF1A;queue &#x6CA1;&#x6709;&#x4E0A;&#x9650;&#xFF0C;&#x5982;&#x679C;&#x5199;&#x6EE1;&#x4E86;&#xFF0C;&#x5C31;&#x81EA;&#x52A8;&#x6269;&#x5BB9;&#x3002;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;Rust &#x7684;&#x5F88;&#x591A;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5982; <code>Vec</code> &#x3001;<code>VecDeque</code> &#x90FD;&#x662F;&#x81EA;&#x52A8;&#x6269;&#x5BB9;&#x7684;&#x3002;unbounded &#x548C; bounded &#x76F8;&#x6BD4;&#xFF0C;&#x9664;&#x4E86;&#x4E0D;&#x963B;&#x585E;&#x5199;&#x8005;&#xFF0C;&#x5176;&#x5B83;&#x5B9E;&#x73B0;&#x90FD;&#x5F88;&#x7C7B;&#x4F3C;&#x3002;</li>
+</ul>
+<p>&#x6240;&#x6709;&#x8FD9;&#x4E9B; channel &#x7C7B;&#x578B;&#xFF0C;&#x540C;&#x6B65;&#x548C;&#x5F02;&#x6B65;&#x7684;&#x5B9E;&#x73B0;&#x601D;&#x8DEF;&#x5927;&#x540C;&#x5C0F;&#x5F02;&#xFF0C;&#x4E3B;&#x8981;&#x7684;&#x533A;&#x522B;&#x5728;&#x4E8E;&#x6302;&#x8D77;/&#x5524;&#x9192;&#x7684;&#x5BF9;&#x8C61;&#x3002;<strong>&#x5728;&#x540C;&#x6B65;&#x7684;&#x4E16;&#x754C;&#x91CC;&#xFF0C;&#x6302;&#x8D77;/&#x5524;&#x9192;&#x7684;&#x5BF9;&#x8C61;&#x662F;&#x7EBF;&#x7A0B;&#xFF1B;&#x800C;&#x5F02;&#x6B65;&#x7684;&#x4E16;&#x754C;&#x91CC;&#xFF0C;&#x662F;&#x7C92;&#x5EA6;&#x5F88;&#x5C0F;&#x7684; task</strong>&#x3002;<br><img src="https://static001.geekbang.org/resource/image/a4/61/a4372f4dd810ced7a99f54d50695cc61.jpg?wh=2364x1610" alt=""></p>
+<p>&#x6839;&#x636E; Channel &#x8BFB;&#x8005;&#x548C;&#x5199;&#x8005;&#x7684;&#x6570;&#x91CF;&#xFF0C;Channel &#x53C8;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#xFF1A;</p>
+<ul>
+<li>SPSC&#xFF1A;Single-Producer Single-Consumer&#xFF0C;&#x5355;&#x751F;&#x4EA7;&#x8005;&#xFF0C;&#x5355;&#x6D88;&#x8D39;&#x8005;&#x3002;&#x6700;&#x7B80;&#x5355;&#xFF0C;&#x53EF;&#x4EE5;&#x4E0D;&#x4F9D;&#x8D56;&#x4E8E; Mutex&#xFF0C;&#x53EA;&#x7528; atomics &#x5C31;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x3002;</li>
+<li>SPMC&#xFF1A;Single-Producer Multi-Consumer&#xFF0C;&#x5355;&#x751F;&#x4EA7;&#x8005;&#xFF0C;&#x591A;&#x6D88;&#x8D39;&#x8005;&#x3002;&#x9700;&#x8981;&#x5728;&#x6D88;&#x8D39;&#x8005;&#x8FD9;&#x4FA7;&#x8BFB;&#x53D6;&#x65F6;&#x52A0;&#x9501;&#x3002;</li>
+<li>MPSC&#xFF1A;Multi-Producer Single-Consumer&#xFF0C;&#x591A;&#x751F;&#x4EA7;&#x8005;&#xFF0C;&#x5355;&#x6D88;&#x8D39;&#x8005;&#x3002;&#x9700;&#x8981;&#x5728;&#x751F;&#x4EA7;&#x8005;&#x8FD9;&#x4FA7;&#x5199;&#x5165;&#x65F6;&#x52A0;&#x9501;&#x3002;</li>
+<li>MPMC&#xFF1A;Multi-Producer Multi-Consumer&#x3002;&#x591A;&#x751F;&#x4EA7;&#x8005;&#xFF0C;&#x591A;&#x6D88;&#x8D39;&#x8005;&#x3002;&#x9700;&#x8981;&#x5728;&#x751F;&#x4EA7;&#x8005;&#x5199;&#x5165;&#x6216;&#x8005;&#x6D88;&#x8D39;&#x8005;&#x8BFB;&#x53D6;&#x65F6;&#x52A0;&#x9501;&#x3002;</li>
+</ul>
+<p>&#x5728;&#x4F17;&#x591A; Channel &#x7C7B;&#x578B;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;&#x6700;&#x5E7F;&#x7684;&#x662F; MPSC channel&#xFF0C;&#x591A;&#x751F;&#x4EA7;&#x8005;&#xFF0C;&#x5355;&#x6D88;&#x8D39;&#x8005;&#xFF0C;<strong>&#x56E0;&#x4E3A;&#x5F80;&#x5F80;&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x901A;&#x8FC7;&#x5355;&#x6D88;&#x8D39;&#x8005;&#x6765;&#x4FDD;&#x8BC1;&#xFF0C;&#x7528;&#x4E8E;&#x5904;&#x7406;&#x6D88;&#x606F;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x6709;&#x72EC;&#x5360;&#x7684;&#x5199;&#x8BBF;&#x95EE;</strong>&#x3002;<br><img src="https://static001.geekbang.org/resource/image/4f/12/4fbacc0fecf5618d30b976d110838912.jpg?wh=2364x1433" alt=""></p>
+<p>&#x6BD4;&#x5982;&#xFF0C;&#x5728; <a href="https://github.com/tyrchen/xunmi/blob/master/src/indexer.rs#L50" target="_blank">xunmi</a> &#x7684;&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;index writer &#x5185;&#x90E8;&#x662F;&#x4E00;&#x4E2A;&#x591A;&#x7EBF;&#x7A0B;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x4F46;&#x5728;&#x4F7F;&#x7528;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7528;&#x5230;&#x5B83;&#x7684;&#x53EF;&#x5199;&#x5F15;&#x7528;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x8981;&#x80FD;&#x591F;&#x5728;&#x5404;&#x79CD;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x4F7F;&#x7528; index writer&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x4E0D;&#x5F97;&#x4E0D;&#x5C06;&#x5176;&#x7528; Arc<mutex<t>&gt; &#x5305;&#x88F9;&#x8D77;&#x6765;&#xFF0C;&#x4F46;&#x8FD9;&#x6837;&#x5728;&#x7D22;&#x5F15;&#x5927;&#x91CF;&#x6570;&#x636E;&#x65F6;&#x6548;&#x7387;&#x592A;&#x4F4E;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528; MPSC channel&#xFF0C;&#x8BA9;&#x5404;&#x79CD;&#x4E0A;&#x4E0B;&#x6587;&#x90FD;&#x628A;&#x6570;&#x636E;&#x53D1;&#x9001;&#x7ED9;&#x5355;&#x4E00;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x4F7F;&#x7528; index writer &#x7D22;&#x5F15;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x907F;&#x514D;&#x4E86;&#x9501;&#xFF1A;</mutex<t></p>
+<pre><code class="lang-rust"><span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">IndexInner</span></span> {
+    index: Index,
+    reader: IndexReader,
+    config: IndexConfig,
+    updater: Sender&lt;Input&gt;,
+}
+
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">IndexUpdater</span></span> {
+    sender: Sender&lt;Input&gt;,
+    t2s: <span class="hljs-keyword">bool</span>,
+    schema: Schema,
+}
+
+<span class="hljs-keyword">impl</span> Indexer {
+    <span class="hljs-comment">// &#x6253;&#x5F00;&#x6216;&#x8005;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; index</span>
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">open_or_create</span></span>(config: IndexConfig) -&gt; <span class="hljs-built_in">Result</span>&lt;<span class="hljs-keyword">Self</span>&gt; {
+        <span class="hljs-keyword">let</span> schema = config.schema.clone();
+        <span class="hljs-keyword">let</span> index = <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-literal">Some</span>(dir) = &amp;config.path {
+            fs::create_dir_all(dir)?;
+            <span class="hljs-keyword">let</span> dir = MmapDirectory::open(dir)?;
+            Index::open_or_create(dir, schema.clone())?
+        } <span class="hljs-keyword">else</span> {
+            Index::create_in_ram(schema.clone())
+        };
+
+        Self::set_tokenizer(&amp;index, &amp;config);
+
+        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> writer = index.writer(config.writer_memory)?;
+
+        <span class="hljs-comment">// &#x521B;&#x5EFA;&#x4E00;&#x4E2A; unbounded MPSC channel</span>
+        <span class="hljs-keyword">let</span> (s, r) = unbounded::&lt;Input&gt;();
+
+        <span class="hljs-comment">// &#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x4ECE; channel &#x7684; reader &#x4E2D;&#x8BFB;&#x53D6;&#x6570;&#x636E;</span>
+        thread::spawn(move || {
+            <span class="hljs-keyword">for</span> input <span class="hljs-keyword">in</span> r {
+                <span class="hljs-comment">// &#x7136;&#x540E;&#x7528; index writer &#x5904;&#x7406;&#x8FD9;&#x4E2A; input</span>
+                <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-literal">Err</span>(e) = input.process(&amp;<span class="hljs-keyword">mut</span> writer, &amp;schema) {
+                    warn!(<span class="hljs-string">&quot;Failed to process input. Error: {:?}&quot;</span>, e);
+                }
+            }
+        });
+
+        <span class="hljs-comment">// &#x628A; channel &#x7684; sender &#x90E8;&#x5206;&#x5B58;&#x5165; IndexInner &#x7ED3;&#x6784;</span>
+        Self::new(index, config, s)
+    }
+
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">get_updater</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; IndexUpdater {
+        <span class="hljs-keyword">let</span> t2s = TextLanguage::Chinese(<span class="hljs-literal">true</span>) == <span class="hljs-keyword">self</span>.config.text_lang;
+        <span class="hljs-comment">// IndexUpdater &#x5185;&#x90E8;&#x5305;&#x542B; channel &#x7684; sender &#x90E8;&#x5206;</span>
+        <span class="hljs-comment">// &#x7531;&#x4E8E;&#x662F; MPSC channel&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x7B80;&#x5355; clone &#x4E00;&#x4E0B; sender</span>
+        <span class="hljs-comment">// &#x8FD9;&#x4E5F;&#x610F;&#x5473;&#x7740;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x4EFB;&#x610F;&#x591A;&#x4E2A; IndexUpdater &#x5728;&#x4E0D;&#x540C;&#x4E0A;&#x4E0B;&#x6587;&#x53D1;&#x9001;&#x6570;&#x636E;</span>
+        <span class="hljs-comment">// &#x800C;&#x6570;&#x636E;&#x6700;&#x7EC8;&#x90FD;&#x4F1A;&#x901A;&#x8FC7; channel &#x7ED9;&#x5230;&#x4E0A;&#x9762;&#x521B;&#x5EFA;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x7531; index writer &#x5904;&#x7406;</span>
+        IndexUpdater::new(<span class="hljs-keyword">self</span>.updater.clone(), <span class="hljs-keyword">self</span>.index.schema(), t2s)
+    }
+}
+</code></pre>
+<h2 id="actor">Actor</h2>
+<p>&#x6700;&#x540E;&#x6211;&#x4EEC;&#x7B80;&#x5355;&#x4ECB;&#x7ECD;&#x4E00;&#x4E0B; <a href="https://en.wikipedia.org/wiki/Actor_model" target="_blank">actor model</a>&#xFF0C;&#x5B83;&#x5728;&#x4E1A;&#x754C;&#x4E3B;&#x8981;&#x7684;&#x4F7F;&#x7528;&#x8005;&#x662F; Erlang VM&#x4EE5;&#x53CA; <a href="https://akka.io/" target="_blank">akka</a>&#x3002;</p>
+<p>actor &#x662F;&#x4E00;&#x79CD;&#x6709;&#x6808;&#x534F;&#x7A0B;&#x3002;&#x6BCF;&#x4E2A; actor&#xFF0C;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x3001;&#x8F7B;&#x91CF;&#x7EA7;&#x7684;&#x8C03;&#x7528;&#x6808;&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x63A5;&#x53D7;&#x6D88;&#x606F;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#xFF08;mailbox &#x6216;&#x8005; message queue&#xFF09;&#xFF0C;&#x5916;&#x754C;&#x8DDF; actor &#x6253;&#x4EA4;&#x9053;&#x7684;&#x552F;&#x4E00;&#x624B;&#x6BB5;&#x5C31;&#x662F;&#xFF0C;&#x7ED9;&#x5B83;&#x53D1;&#x9001;&#x6D88;&#x606F;&#x3002;</p>
+<p>Rust &#x6807;&#x51C6;&#x5E93;&#x6CA1;&#x6709; actor &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x4F46;&#x662F;&#x793E;&#x533A;&#x91CC;&#x6709;&#x6BD4;&#x8F83;&#x6210;&#x719F;&#x7684; <a href="https://github.com/actix/actix" target="_blank">actix</a>&#xFF08;&#x5927;&#x540D;&#x9F0E;&#x9F0E;&#x7684; actix-web &#x5C31;&#x662F;&#x57FA;&#x4E8E; actix &#x5B9E;&#x73B0;&#x7684;&#xFF09;&#xFF0C;&#x4EE5;&#x53CA; <a href="https://github.com/bastion-rs/bastion" target="_blank">bastion</a>&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x7528; actix &#x5B9E;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684; DummyActor&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x4E00;&#x4E2A; InMsg&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; OutMsg&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> actix::prelude::*;
+<span class="hljs-keyword">use</span> anyhow::<span class="hljs-built_in">Result</span>;
+
+<span class="hljs-comment">// actor &#x53EF;&#x4EE5;&#x5904;&#x7406;&#x7684;&#x6D88;&#x606F;</span>
+<span class="hljs-meta">#[derive(Message, Debug, Clone, PartialEq)]</span>
+<span class="hljs-meta">#[rtype(result = <span class="hljs-meta-string">&quot;OutMsg&quot;</span>)]</span>
+<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">InMsg</span></span> {
+    Add((usize, usize)),
+    Concat((<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>)),
+}
+
+<span class="hljs-meta">#[derive(MessageResponse, Debug, Clone, PartialEq)]</span>
+<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">OutMsg</span></span> {
+    Num(usize),
+    Str(<span class="hljs-built_in">String</span>),
+}
+
+<span class="hljs-comment">// Actor</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DummyActor</span></span>;
+
+<span class="hljs-keyword">impl</span> Actor <span class="hljs-keyword">for</span> DummyActor {
+    <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Context</span></span> = Context&lt;<span class="hljs-keyword">Self</span>&gt;;
+}
+
+<span class="hljs-comment">// &#x5B9E;&#x73B0;&#x5904;&#x7406; InMsg &#x7684; Handler trait</span>
+<span class="hljs-keyword">impl</span> Handler&lt;InMsg&gt; <span class="hljs-keyword">for</span> DummyActor {
+    <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Result</span></span> = OutMsg; <span class="hljs-comment">// &lt;-  &#x8FD4;&#x56DE;&#x7684;&#x6D88;&#x606F;</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">handle</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, msg: InMsg, _ctx: &amp;<span class="hljs-keyword">mut</span> Self::Context) -&gt; Self::<span class="hljs-built_in">Result</span> {
+        <span class="hljs-keyword">match</span> msg {
+            InMsg::Add((a, b)) =&gt; OutMsg::Num(a + b),
+            InMsg::Concat((<span class="hljs-keyword">mut</span> s1, s2)) =&gt; {
+                s1.push_str(&amp;s2);
+                OutMsg::Str(s1)
+            }
+        }
+    }
+}
+
+<span class="hljs-meta">#[actix::main]</span>
+async <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() -&gt; <span class="hljs-built_in">Result</span>&lt;()&gt; {
+    <span class="hljs-keyword">let</span> addr = DummyActor.start();
+    <span class="hljs-keyword">let</span> res = addr.send(InMsg::Add((<span class="hljs-number">21</span>, <span class="hljs-number">21</span>))).await?;
+    <span class="hljs-keyword">let</span> res1 = addr
+        .send(InMsg::Concat((<span class="hljs-string">&quot;hello, &quot;</span>.into(), <span class="hljs-string">&quot;world&quot;</span>.into())))
+        .await?;
+
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;res: {:?}, res1: {:?}&quot;</span>, res, res1);
+
+    <span class="hljs-literal">Ok</span>(())
+}
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x5BF9; DummyActor&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x5B9E;&#x73B0; Actor trait&#x548C;Handler<inmsg> trait &#x3002;</inmsg></p>
+<h2 id="&#x4E00;&#x70B9;&#x5C0F;&#x7ED3;">&#x4E00;&#x70B9;&#x5C0F;&#x7ED3;</h2>
+<p>&#x5B66;&#x5B8C;&#x8FD9;&#x524D;&#x540E;&#x4E24;&#x8BB2;&#xFF0C;&#x6211;&#x4EEC;&#x5C0F;&#x7ED3;&#x4E00;&#x4E0B;&#x5404;&#x79CD;&#x5E76;&#x53D1;&#x539F;&#x8BED;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;Atomic&#x3001;Mutex&#x3001;RwLock&#x3001;Semaphore&#x3001;Condvar&#x3001;Channel&#x3001;Actor&#x3002;</p>
+<ul>
+<li>Atomic &#x5728;&#x5904;&#x7406;&#x7B80;&#x5355;&#x7684;&#x539F;&#x751F;&#x7C7B;&#x578B;&#x65F6;&#x975E;&#x5E38;&#x6709;&#x7528;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; AtomicXXX &#x7ED3;&#x6784;&#x8FDB;&#x884C;&#x540C;&#x6B65;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x4EEC;&#x662F;&#x6700;&#x597D;&#x7684;&#x9009;&#x62E9;&#x3002;</li>
+<li>&#x5F53;&#x4F60;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x65E0;&#x6CD5;&#x7B80;&#x5355;&#x901A;&#x8FC7; AtomicXXX &#x8FDB;&#x884C;&#x540C;&#x6B65;&#xFF0C;&#x4F46;&#x4F60;&#x53C8;&#x7684;&#x786E;&#x9700;&#x8981;&#x5728;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x4E2D;&#x5171;&#x4EAB;&#x6570;&#x636E;&#xFF0C;&#x90A3;&#x4E48; Mutex / RwLock &#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x79CD;&#x9009;&#x62E9;&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x8003;&#x8651;&#x9501;&#x7684;&#x7C92;&#x5EA6;&#xFF0C;&#x7C92;&#x5EA6;&#x592A;&#x5927;&#x7684; Mutex / RwLock &#x6548;&#x7387;&#x5F88;&#x4F4E;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x4F60;&#x6709; N &#x4EFD;&#x8D44;&#x6E90;&#x53EF;&#x4EE5;&#x4F9B;&#x591A;&#x4E2A;&#x5E76;&#x53D1;&#x4EFB;&#x52A1;&#x7ADE;&#x4E89;&#x4F7F;&#x7528;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;Semaphore &#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x597D;&#x7684;&#x9009;&#x62E9;&#x3002;&#x6BD4;&#x5982;&#x4F60;&#x8981;&#x505A;&#x4E00;&#x4E2A; DB &#x8FDE;&#x63A5;&#x6C60;&#x3002;</li>
+<li>&#x5F53;&#x4F60;&#x9700;&#x8981;&#x5728;&#x5E76;&#x53D1;&#x4EFB;&#x52A1;&#x4E2D;&#x901A;&#x77E5;&#x3001;&#x534F;&#x4F5C;&#x65F6;&#xFF0C;Condvar &#x63D0;&#x4F9B;&#x4E86;&#x6700;&#x57FA;&#x672C;&#x7684;&#x901A;&#x77E5;&#x673A;&#x5236;&#xFF0C;&#x800C;Channel &#x628A;&#x8FD9;&#x4E2A;&#x901A;&#x77E5;&#x673A;&#x5236;&#x8FDB;&#x4E00;&#x6B65;&#x5E7F;&#x6CDB;&#x6269;&#x5C55;&#x5F00;&#xFF0C;&#x4E8E;&#x662F;&#x4F60;&#x53EF;&#x4EE5;&#x7528; Condvar &#x8FDB;&#x884C;&#x70B9;&#x5BF9;&#x70B9;&#x7684;&#x540C;&#x6B65;&#xFF0C;&#x7528; Channel &#x505A;&#x4E00;&#x5BF9;&#x591A;&#x3001;&#x591A;&#x5BF9;&#x4E00;&#x3001;&#x591A;&#x5BF9;&#x591A;&#x7684;&#x540C;&#x6B65;&#x3002;</li>
+</ul>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x505A;&#x5927;&#x90E8;&#x5206;&#x590D;&#x6742;&#x7684;&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;&#x65F6;&#xFF0C;Channel &#x5F80;&#x5F80;&#x662F;&#x6700;&#x6709;&#x529B;&#x7684;&#x6B66;&#x5668;&#xFF0C;&#x9664;&#x4E86;&#x53EF;&#x4EE5;&#x8BA9;&#x6570;&#x636E;&#x7A7F;&#x68AD;&#x4E8E;&#x5404;&#x4E2A;&#x7EBF;&#x7A0B;&#x3001;&#x5404;&#x4E2A;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x95F4;&#xFF0C;&#x5B83;&#x7684;&#x63A5;&#x53E3;&#x8FD8;&#x53EF;&#x4EE5;&#x5F88;&#x4F18;&#x96C5;&#x5730;&#x8DDF; stream &#x9002;&#x914D;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x8BF4;&#x5728;&#x505A;&#x6574;&#x4E2A;&#x540E;&#x7AEF;&#x7684;&#x7CFB;&#x7EDF;&#x67B6;&#x6784;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x7740;&#x773C;&#x7684;&#x662F;&#xFF1A;&#x6709;&#x54EA;&#x4E9B;&#x670D;&#x52A1;&#x3001;&#x670D;&#x52A1;&#x548C;&#x670D;&#x52A1;&#x4E4B;&#x95F4;&#x5982;&#x4F55;&#x901A;&#x8BAF;&#x3001;&#x6570;&#x636E;&#x5982;&#x4F55;&#x6D41;&#x52A8;&#x3001;&#x670D;&#x52A1;&#x548C;&#x670D;&#x52A1;&#x95F4;&#x5982;&#x4F55;&#x540C;&#x6B65;&#xFF1B;&#x90A3;&#x4E48;<strong>&#x5728;&#x505A;&#x67D0;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#x7684;&#x67B6;&#x6784;&#x65F6;&#xFF0C;&#x7740;&#x773C;&#x7684;&#x662F;&#x6709;&#x54EA;&#x4E9B;&#x529F;&#x80FD;&#x6027;&#x7684;&#x7EBF;&#x7A0B;&#xFF08;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#xFF09;&#x3001;&#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x7684;&#x63A5;&#x53E3;&#x662F;&#x4EC0;&#x4E48;&#x6837;&#x5B50;&#x3001;&#x6570;&#x636E;&#x5982;&#x4F55;&#x6D41;&#x52A8;&#x3001;&#x5982;&#x4F55;&#x540C;&#x6B65;</strong>&#x3002;</p>
+<p>&#x5728;&#x8FD9;&#x91CC;&#xFF0C;Channel &#x517C;&#x5177;&#x63A5;&#x53E3;&#x3001;&#x540C;&#x6B65;&#x548C;&#x6570;&#x636E;&#x6D41;&#x4E09;&#x79CD;&#x529F;&#x80FD;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x8BF4;&#x662F;&#x6700;&#x6709;&#x529B;&#x7684;&#x6B66;&#x5668;&#x3002;</p>
+<p>&#x7136;&#x800C;&#x5B83;&#x4E0D;&#x8BE5;&#x662F;&#x552F;&#x4E00;&#x7684;&#x6B66;&#x5668;&#x3002;&#x6211;&#x4EEC;&#x9762;&#x4E34;&#x7684;&#x771F;&#x5B9E;&#x4E16;&#x754C;&#x7684;&#x5E76;&#x53D1;&#x95EE;&#x9898;&#x662F;&#x591A;&#x6837;&#x7684;&#xFF0C;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x4E5F;&#x5E94;&#x8BE5;&#x662F;&#x591A;&#x6837;&#x7684;&#xFF0C;&#x8BA1;&#x7B97;&#x673A;&#x79D1;&#x5B66;&#x5BB6;&#x4EEC;&#x5728;&#x8FC7;&#x53BB;&#x7684;&#x51E0;&#x5341;&#x5E74;&#x91CC;&#x4E0D;&#x65AD;&#x63A2;&#x7D22;&#xFF0C;&#x6784;&#x5EFA;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x5E76;&#x53D1;&#x539F;&#x8BED;&#xFF0C;&#x4E5F;&#x8BF4;&#x660E;&#x4E86;&#x5F88;&#x96BE;&#x6709;&#x4E00;&#x79CD;&#x94F6;&#x5F39;&#x89E3;&#x51B3;&#x6240;&#x6709;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x5C31;&#x8FDE; Mutex &#x672C;&#x8EAB;&#xFF0C;&#x5728;&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;&#x8FD8;&#x4F1A;&#x6839;&#x636E;&#x4E0D;&#x540C;&#x7684;&#x573A;&#x666F;&#x505A;&#x4E0D;&#x540C;&#x7684;&#x59A5;&#x534F;&#xFF08;&#x6BD4;&#x5982;&#x505A; faireness &#x7684;&#x59A5;&#x534F;&#xFF09;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E2A;&#x4E16;&#x754C;&#x5C31;&#x662F;&#x8FD9;&#x6837;&#xFF0C;&#x9C7C;&#x4E0E;&#x718A;&#x638C;&#x4E0D;&#x53EF;&#x517C;&#x5F97;&#xFF0C;&#x6CA1;&#x6709;&#x5B8C;&#x7F8E;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x53EA;&#x6709;&#x59A5;&#x534F;&#x51FA;&#x6765;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;&#x6240;&#x4EE5; Channel &#x4E0D;&#x662F;&#x94F6;&#x5F39;&#xFF0C;actor model &#x4E0D;&#x662F;&#x94F6;&#x5F39;&#xFF0C;lock &#x4E0D;&#x662F;&#x94F6;&#x5F39;&#x3002;</p>
+<p><strong>&#x4E00;&#x95E8;&#x597D;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#xFF0C;&#x53EF;&#x4EE5;&#x63D0;&#x4F9B;&#x5927;&#x90E8;&#x5206;&#x573A;&#x666F;&#x4E0B;&#x7684;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;&#xFF08;&#x5982; Erlang/Golang&#xFF09;&#xFF0C;&#x4F46;&#x4E0D;&#x8BE5;&#x8425;&#x9020;&#x4E00;&#x79CD;&#x6C14;&#x6C1B;&#xFF0C;&#x53EA;&#x6709;&#x67D0;&#x4E2A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;&#x624D;&#x662F;&#x552F;&#x4E00;&#x65B9;&#x6848;</strong>&#x3002;&#x6211;&#x5F88;&#x559C;&#x6B22; Erlang &#x7684; actor model &#x548C; Golang &#x7684; Channel&#xFF0C;&#x4F46;&#x5F88;&#x53EF;&#x60DC;&#xFF0C;&#x5B83;&#x4EEC;&#x8FC7;&#x5206;&#x4F9D;&#x8D56;&#x7279;&#x5B9A;&#x7684;&#x3001;&#x552F;&#x4E00;&#x7684;&#x5E76;&#x53D1;&#x65B9;&#x6848;&#xFF0C;&#x4F7F;&#x5F97;&#x5F00;&#x53D1;&#x8005;&#x62FF;&#x7740;&#x6994;&#x5934;&#xFF0C;&#x770B;&#x4EC0;&#x4E48;&#x90FD;&#x662F;&#x9489;&#x5B50;&#x3002;</p>
+<p>&#x76F8;&#x53CD;&#xFF0C;Rust &#x63D0;&#x4F9B;&#x51E0;&#x4E4E;&#x4F60;&#x9700;&#x8981;&#x7684;&#x6240;&#x6709;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x5E76;&#x4E14;&#x5E76;&#x4E0D;&#x9F13;&#x5439;&#x5B83;&#x4EEC;&#x7684;&#x4F18;&#x52A3;&#xFF0C;&#x5B8C;&#x5168;&#x4EA4;&#x7531;&#x4F60;&#x6309;&#x9700;&#x9009;&#x62E9;&#x3002;&#x6211;&#x5728;&#x7528; Rust &#x64B0;&#x5199;&#x591A;&#x7EBF;&#x7A0B;&#x5E94;&#x7528;&#x65F6;&#xFF0C;Channel &#x4ECD;&#x7136;&#x662F;&#x7B2C;&#x4E00;&#x9009;&#x62E9;&#xFF0C;&#x4F46;&#x6211;&#x8FD8;&#x662F;&#x4F1A;&#x5728;&#x5408;&#x9002;&#x7684;&#x65F6;&#x5019;&#x4F7F;&#x7528; Mutex&#x3001;RwLock&#x3001;Semaphore&#x3001;Condvar&#x3001;Atomic &#x7B49;&#x5DE5;&#x5177;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x8BD5;&#x56FE;&#x7B28;&#x62D9;&#x5730;&#x7528; Channel &#x53E0;&#x52A0; Channel &#x6765;&#x5E94;&#x5BF9;&#x6240;&#x6709;&#x7684;&#x573A;&#x666F;&#x3002;</p>
+<h3 id="&#x601D;&#x8003;&#x9898;">&#x601D;&#x8003;&#x9898;</h3>
+<ol>
+<li>&#x8BF7;&#x4ED4;&#x7EC6;&#x9605;&#x8BFB;&#x6807;&#x51C6;&#x5E93;&#x7684;&#x6587;&#x6863; <a href="https://doc.rust-lang.org/std/sync/index.html" target="_blank">std::sync</a>&#xFF0C;&#x4EE5;&#x53CA; <a href="https://doc.rust-lang.org/std/sync/atomic/index.html" target="_blank">std::sync::atomic</a> &#x548C; <a href="https://doc.rust-lang.org/std/sync/mpsc/index.html" target="_blank">std::sync::mpsc</a>&#x3002; &#x5C1D;&#x8BD5;&#x7740;&#x4F7F;&#x7528; mpsc::channel &#x5728;&#x4E24;&#x4E2A;&#x7EBF;&#x7A0B;&#x4E2D;<strong>&#x6765;&#x56DE;</strong>&#x53D1;&#x9001;&#x6D88;&#x606F;&#x3002;&#x6BD4;&#x5982;&#x7EBF;&#x7A0B; A &#x7ED9;&#x7EBF;&#x7A0B; B &#x53D1;&#x9001;&#xFF1A;hello world!&#xFF0C;&#x7EBF;&#x7A0B; B &#x6536;&#x5230;&#x4E4B;&#x540E;&#x56DE;&#x590D; goodbye!&#x3002;</li>
+<li>&#x60F3;&#x60F3;&#x770B;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x4F60;&#x5B9E;&#x73B0; actor model&#xFF0C;&#x5229;&#x7528;&#x73B0;&#x6709;&#x7684;&#x5E76;&#x53D1;&#x539F;&#x8BED;&#xFF0C;&#x4F60;&#x8BE5;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x5462;&#xFF1F;</li>
+</ol>
+<p>&#x6B22;&#x8FCE;&#x5728;&#x7559;&#x8A00;&#x533A;&#x5206;&#x4EAB;&#x4F60;&#x7684;&#x601D;&#x8003;&#xFF0C;&#x611F;&#x8C22;&#x4F60;&#x7684;&#x9605;&#x8BFB;&#x3002;&#x4F60;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;Rust&#x5B66;&#x4E60;&#x7684;&#x7B2C;34&#x6B21;&#x6253;&#x5361;&#x5566;&#xFF0C;&#x5982;&#x679C;&#x89C9;&#x5F97;&#x6709;&#x6536;&#x83B7;&#xFF0C;&#x4E5F;&#x6B22;&#x8FCE;&#x4F60;&#x5206;&#x4EAB;&#x7ED9;&#x8EAB;&#x8FB9;&#x7684;&#x670B;&#x53CB;&#xFF0C;&#x9080;&#x4ED6;&#x4E00;&#x8D77;&#x8BA8;&#x8BBA;&#x3002;&#x6211;&#x4EEC;&#x4E0B;&#x8282;&#x8BFE;&#x89C1;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="442216.html" class="navigation navigation-prev " aria-label="Previous page: 33｜并发处理（上）：从atomics到Channel，Rust都提供了什么工具？">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="445814.html" class="navigation navigation-next " aria-label="Next page: 35｜实操项目：如何实现一个基本的MPSC channel？">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"34｜并发处理（下）：从atomics到Channel，Rust都提供了什么工具？","level":"1.41","depth":1,"next":{"title":"35｜实操项目：如何实现一个基本的MPSC channel？","level":"1.42","depth":1,"path":"docs/445814.md","ref":"./docs/445814.md","articles":[]},"previous":{"title":"33｜并发处理（上）：从atomics到Channel，Rust都提供了什么工具？","level":"1.40","depth":1,"path":"docs/442216.md","ref":"./docs/442216.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"陈天 · Rust 编程第一课","language":"zh","gitbook":"*"},"file":{"path":"docs/442217.md","mtime":"2024-08-25T05:24:58.970Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-08-25T05:46:11.445Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

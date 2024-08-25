@@ -1,0 +1,1637 @@
+
+<!DOCTYPE HTML>
+<html lang="zh" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>35｜实操项目：如何实现一个基本的MPSC channel？ · 陈天 · Rust 编程第一课</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="445818.html" />
+    
+    
+    <link rel="prev" href="442217.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="輸入並搜尋" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="408400.html">
+            
+                <a href="408400.html">
+            
+                    
+                    开篇词｜让Rust成为你的下一门主力语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="408409.html">
+            
+                <a href="408409.html">
+            
+                    
+                    01｜内存：值放堆上还是放栈上，这是一个问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="410038.html">
+            
+                <a href="410038.html">
+            
+                    
+                    02｜串讲：编程开发中，那些你需要掌握的基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="411089.html">
+            
+                <a href="411089.html">
+            
+                    
+                    加餐｜这个专栏你可以怎么学，以及Rust是否值得学？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="411632.html">
+            
+                <a href="411632.html">
+            
+                    
+                    03｜初窥门径：从你的第一个Rust程序开始！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="412883.html">
+            
+                <a href="412883.html">
+            
+                    
+                    04｜get hands dirty：来写个实用的CLI小工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="413634.html">
+            
+                <a href="413634.html">
+            
+                    
+                    05｜get hands dirty：做一个图片服务器有多难？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="414478.html">
+            
+                <a href="414478.html">
+            
+                    
+                    06｜get hands dirty：SQL查询工具怎么一鱼多吃？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="415098.html">
+            
+                <a href="415098.html">
+            
+                    
+                    07｜所有权：值的生杀大权到底在谁手上？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="415988.html">
+            
+                <a href="415988.html">
+            
+                    
+                    08｜所有权：值的借用是如何工作的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="416722.html">
+            
+                <a href="416722.html">
+            
+                    
+                    09｜所有权：一个值可以有多个所有者么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="417384.html">
+            
+                <a href="417384.html">
+            
+                    
+                    10｜生命周期：你创建的值究竟能活多久？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="418235.html">
+            
+                <a href="418235.html">
+            
+                    
+                    11｜内存管理：从创建到消亡，值都经历了什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="418778.html">
+            
+                <a href="418778.html">
+            
+                    
+                    加餐｜愚昧之巅：你的Rust学习常见问题汇总
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="420021.html">
+            
+                <a href="420021.html">
+            
+                    
+                    12｜类型系统：Rust的类型系统有什么特点？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="420028.html">
+            
+                <a href="420028.html">
+            
+                    
+                    13｜类型系统：如何使用trait来定义接口？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="421324.html">
+            
+                <a href="421324.html">
+            
+                    
+                    14｜类型系统：有哪些必须掌握的trait？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="422182.html">
+            
+                <a href="422182.html">
+            
+                    
+                    15｜数据结构：这些浓眉大眼的结构竟然都是智能指针？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="422975.html">
+            
+                <a href="422975.html">
+            
+                    
+                    16｜数据结构：Vec、&[T]、Box<[T]> ，你真的了解集合容器么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="423923.html">
+            
+                <a href="423923.html">
+            
+                    
+                    17｜数据结构：软件系统核心部件哈希表，内存如何布局？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="424002.html">
+            
+                <a href="424002.html">
+            
+                    
+                    18｜错误处理：为什么Rust的错误处理与众不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="424009.html">
+            
+                <a href="424009.html">
+            
+                    
+                    19｜闭包：FnOnce、FnMut和Fn，为什么有这么多类型？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="424017.html">
+            
+                <a href="424017.html">
+            
+                    
+                    20｜4 Steps ：如何更好地阅读Rust源码？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="425001.html">
+            
+                <a href="425001.html">
+            
+                    
+                    21｜阶段实操（1）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="425005.html">
+            
+                <a href="425005.html">
+            
+                    
+                    22｜阶段实操（2）：构建一个简单的KV server-基本流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.27" data-path="425013.html">
+            
+                <a href="425013.html">
+            
+                    
+                    加餐｜期中测试：来写一个简单的grep命令行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.28" data-path="425015.html">
+            
+                <a href="425015.html">
+            
+                    
+                    加餐｜期中测试：参考实现讲解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.29" data-path="427082.html">
+            
+                <a href="427082.html">
+            
+                    
+                    23｜类型系统：如何在实战中使用泛型编程？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.30" data-path="428018.html">
+            
+                <a href="428018.html">
+            
+                    
+                    24｜类型系统：如何在实战中使用trait object？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.31" data-path="429063.html">
+            
+                <a href="429063.html">
+            
+                    
+                    25｜类型系统：如何围绕trait来设计和架构系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.32" data-path="429665.html">
+            
+                <a href="429665.html">
+            
+                    
+                    加餐｜Rust2021版次问世了！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.33" data-path="429666.html">
+            
+                <a href="429666.html">
+            
+                    
+                    26｜阶段实操（3）：构建一个简单的KV server-高级trait技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.34" data-path="429673.html">
+            
+                <a href="429673.html">
+            
+                    
+                    27｜生态系统：有哪些常有的Rust库可以为我所用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.35" data-path="432162.html">
+            
+                <a href="432162.html">
+            
+                    
+                    28｜网络开发（上）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.36" data-path="432168.html">
+            
+                <a href="432168.html">
+            
+                    
+                    29｜网络开发（下）：如何使用Rust处理网络请求？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.37" data-path="435484.html">
+            
+                <a href="435484.html">
+            
+                    
+                    30｜Unsafe Rust：如何用C++的方式打开Rust？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.38" data-path="437566.html">
+            
+                <a href="437566.html">
+            
+                    
+                    31｜FFI：Rust如何和你的语言架起沟通桥梁？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.39" data-path="437569.html">
+            
+                <a href="437569.html">
+            
+                    
+                    32｜实操项目：使用PyO3开发Python3模块
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.40" data-path="442216.html">
+            
+                <a href="442216.html">
+            
+                    
+                    33｜并发处理（上）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.41" data-path="442217.html">
+            
+                <a href="442217.html">
+            
+                    
+                    34｜并发处理（下）：从atomics到Channel，Rust都提供了什么工具？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.42" data-path="445814.html">
+            
+                <a href="445814.html">
+            
+                    
+                    35｜实操项目：如何实现一个基本的MPSC channel？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.43" data-path="445818.html">
+            
+                <a href="445818.html">
+            
+                    
+                    用户故事｜绝望之谷：改变从学习开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.44" data-path="446948.html">
+            
+                <a href="446948.html">
+            
+                    
+                    36｜阶段实操（4）：构建一个简单的KV server-网络处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.45" data-path="446949.html">
+            
+                <a href="446949.html">
+            
+                    
+                    37｜阶段实操（5）：构建一个简单的KV server-网络安全
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.46" data-path="455413.html">
+            
+                <a href="455413.html">
+            
+                    
+                    38｜异步处理：Future是什么？它和async/await是什么关系？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.47" data-path="455412.html">
+            
+                <a href="455412.html">
+            
+                    
+                    39｜异步处理：async/await内部是怎么实现的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.48" data-path="461695.html">
+            
+                <a href="461695.html">
+            
+                    
+                    40｜异步处理：如何处理异步IO？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.49" data-path="461997.html">
+            
+                <a href="461997.html">
+            
+                    
+                    41｜阶段实操（6）：构建一个简单的KV server-异步处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.50" data-path="461999.html">
+            
+                <a href="461999.html">
+            
+                    
+                    42｜阶段实操（7）：构建一个简单的KV server-如何做大的重构？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.51" data-path="464856.html">
+            
+                <a href="464856.html">
+            
+                    
+                    43｜生产环境：真实世界下的一个Rust项目包含哪些要素？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.52" data-path="464855.html">
+            
+                <a href="464855.html">
+            
+                    
+                    44｜数据处理：应用程序和数据如何打交道？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.53" data-path="466825.html">
+            
+                <a href="466825.html">
+            
+                    
+                    45｜阶段实操（8）：构建一个简单的KV server-配置/测试/监控/CI/CD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.54" data-path="468066.html">
+            
+                <a href="468066.html">
+            
+                    
+                    46｜软件架构：如何用Rust架构复杂系统？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.55" data-path="468940.html">
+            
+                <a href="468940.html">
+            
+                    
+                    大咖助场｜开悟之坡（上）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.56" data-path="468948.html">
+            
+                <a href="468948.html">
+            
+                    
+                    大咖助场｜开悟之坡（下）：Rust的现状、机遇与挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.57" data-path="470490.html">
+            
+                <a href="470490.html">
+            
+                    
+                    用户故事｜语言不仅是工具，还是思维方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.58" data-path="481355.html">
+            
+                <a href="481355.html">
+            
+                    
+                    加餐｜代码即数据：为什么我们需要宏编程能力？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.59" data-path="481359.html">
+            
+                <a href="481359.html">
+            
+                    
+                    加餐｜宏编程（上）：用最“笨”的方式撰写宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.60" data-path="481369.html">
+            
+                <a href="481369.html">
+            
+                    
+                    加餐｜宏编程（下）：用 syn/quote 优雅地构建宏
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.61" data-path="470420.html">
+            
+                <a href="470420.html">
+            
+                    
+                    结束语｜永续之原：Rust学习，如何持续精进？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.62" data-path="470440.html">
+            
+                <a href="470440.html">
+            
+                    
+                    期末测试｜来赴一场满分之约！
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.63" data-path="482856.html">
+            
+                <a href="482856.html">
+            
+                    
+                    特别策划｜学习锦囊（一）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.64" data-path="483045.html">
+            
+                <a href="483045.html">
+            
+                    
+                    特别策划｜学习锦囊（二）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.65" data-path="483050.html">
+            
+                <a href="483050.html">
+            
+                    
+                    特别策划｜学习锦囊（三）：听听课代表们怎么说
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.66" data-path="653131.html">
+            
+                <a href="653131.html">
+            
+                    
+                    特别策划｜生成式AI：哪些开发环节可能被颠覆？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本書使用 GitBook 釋出
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >35｜实操项目：如何实现一个基本的MPSC channel？</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="35&#xFF5C;&#x5B9E;&#x64CD;&#x9879;&#x76EE;&#xFF1A;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x57FA;&#x672C;&#x7684;mpsc-channel&#xFF1F;">35&#xFF5C;&#x5B9E;&#x64CD;&#x9879;&#x76EE;&#xFF1A;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x57FA;&#x672C;&#x7684;MPSC channel&#xFF1F;</h1>
+<pre><code>&#x4F60;&#x597D;&#xFF0C;&#x6211;&#x662F;&#x9648;&#x5929;&#x3002;
+</code></pre><p>&#x901A;&#x8FC7;&#x4E0A;&#x4E24;&#x8BB2;&#x7684;&#x5B66;&#x4E60;&#xFF0C;&#x76F8;&#x4FE1;&#x4F60;&#x5DF2;&#x7ECF;&#x610F;&#x8BC6;&#x5230;&#xFF0C;&#x867D;&#x7136;&#x5E76;&#x53D1;&#x539F;&#x8BED;&#x770B;&#x4E0A;&#x53BB;&#x662F;&#x5F88;&#x5E95;&#x5C42;&#x3001;&#x5F88;&#x795E;&#x79D8;&#x7684;&#x4E1C;&#x897F;&#xFF0C;&#x4F46;&#x5B9E;&#x73B0;&#x8D77;&#x6765;&#x4E5F;&#x5E76;&#x4E0D;&#x50CF;&#x60F3;&#x8C61;&#x4E2D;&#x7684;&#x90A3;&#x4E48;&#x56F0;&#x96BE;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x5728; Rust &#x4E0B;&#xFF0C;&#x5728;<a href="https://time.geekbang.org/column/article/442216" target="_blank">&#x7B2C; 33 &#x8BB2;</a>&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x7528;&#x4E86;&#x51E0;&#x5341;&#x884C;&#x4EE3;&#x7801;&#x5C31;&#x5B9E;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684; SpinLock&#x3002;</p>
+<p>&#x4F60;&#x4E5F;&#x8BB8;&#x4F1A;&#x89C9;&#x5F97;&#x4E0D;&#x592A;&#x8FC7;&#x763E;&#xFF0C;&#x800C;&#x4E14; SpinLock &#x4E5F;&#x4E0D;&#x662F;&#x7ECF;&#x5E38;&#x4F7F;&#x7528;&#x7684;&#x5E76;&#x53D1;&#x539F;&#x8BED;&#xFF0C;&#x90A3;&#x4E48;&#x4ECA;&#x5929;&#xFF0C;&#x6211;&#x4EEC;&#x8BD5;&#x7740;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x4F7F;&#x7528;&#x975E;&#x5E38;&#x5E7F;&#x6CDB;&#x7684; MPSC channel &#x5982;&#x4F55;&#xFF1F;</p>
+<p>&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x8C08;&#x8BBA;&#x4E86;&#x5982;&#x4F55;&#x5728;&#x641C;&#x7D22;&#x5F15;&#x64CE;&#x7684; Index writer &#x4E0A;&#x4F7F;&#x7528; MPSC channel&#xFF1A;&#x8981;&#x66F4;&#x65B0; index &#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x6709;&#x5F88;&#x591A;&#xFF08;&#x53EF;&#x4EE5;&#x662F;&#x7EBF;&#x7A0B;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#xFF09;&#xFF0C;&#x800C; IndexWriter &#x53EA;&#x80FD;&#x662F;&#x552F;&#x4E00;&#x7684;&#x3002;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x5728;&#x8BBF;&#x95EE; IndexWriter &#x65F6;&#x52A0;&#x9501;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; MPSC channel&#xFF0C;&#x5728;&#x591A;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x7ED9; channel &#x53D1;&#x6D88;&#x606F;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x552F;&#x4E00;&#x62E5;&#x6709; IndexWriter &#x7684;&#x7EBF;&#x7A0B;&#x4E2D;&#x8BFB;&#x53D6;&#x8FD9;&#x4E9B;&#x6D88;&#x606F;&#xFF0C;&#x975E;&#x5E38;&#x9AD8;&#x6548;&#x3002;</p>
+<p>&#x597D;&#xFF0C;&#x6765;&#x770B;&#x770B;&#x4ECA;&#x5929;&#x8981;&#x5B9E;&#x73B0;&#x7684; MPSC channel &#x7684;&#x57FA;&#x672C;&#x529F;&#x80FD;&#x3002;&#x4E3A;&#x4E86;&#x7B80;&#x4FBF;&#x8D77;&#x89C1;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x5173;&#x5FC3; unbounded MPSC channel&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x5F53;&#x961F;&#x5217;&#x5BB9;&#x91CF;&#x4E0D;&#x591F;&#x65F6;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x6269;&#x5BB9;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;<strong>&#x4EFB;&#x4F55;&#x65F6;&#x5019;&#x751F;&#x4EA7;&#x8005;&#x5199;&#x5165;&#x6570;&#x636E;&#x90FD;&#x4E0D;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#xFF0C;&#x4F46;&#x662F;&#x5F53;&#x961F;&#x5217;&#x4E2D;&#x6CA1;&#x6709;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x4F1A;&#x88AB;&#x963B;&#x585E;</strong>&#xFF1A;<br><img src="https://static001.geekbang.org/resource/image/cf/a2/cfb839fc9c21f9ec51930c063f0ffda2.jpg?wh=2364x1355" alt=""></p>
+<h2 id="&#x6D4B;&#x8BD5;&#x9A71;&#x52A8;&#x7684;&#x8BBE;&#x8BA1;">&#x6D4B;&#x8BD5;&#x9A71;&#x52A8;&#x7684;&#x8BBE;&#x8BA1;</h2>
+<p>&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x4F1A;&#x4ECE;&#x9700;&#x6C42;&#x7684;&#x89D2;&#x5EA6;&#x6765;&#x8BBE;&#x8BA1;&#x63A5;&#x53E3;&#x548C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6362;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x5B8C;&#x5168;&#x7AD9;&#x5728;&#x4F7F;&#x7528;&#x8005;&#x7684;&#x89D2;&#x5EA6;&#xFF0C;&#x7528;&#x4F7F;&#x7528;&#x5B9E;&#x4F8B;&#xFF08;&#x6D4B;&#x8BD5;&#xFF09;&#x6765;&#x9A71;&#x52A8;&#x63A5;&#x53E3;&#x548C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x8BBE;&#x8BA1;&#x3002;</p>
+<h3 id="&#x9700;&#x6C42;-1">&#x9700;&#x6C42; 1</h3>
+<p>&#x8981;&#x5B9E;&#x73B0;&#x521A;&#x624D;&#x8BF4;&#x7684; MPSC channel&#xFF0C;&#x90FD;&#x6709;&#x4EC0;&#x4E48;&#x9700;&#x6C42;&#x5462;&#xFF1F;&#x9996;&#x5148;&#xFF0C;&#x751F;&#x4EA7;&#x8005;&#x53EF;&#x4EE5;&#x4EA7;&#x751F;&#x6570;&#x636E;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x80FD;&#x591F;&#x6D88;&#x8D39;&#x4EA7;&#x751F;&#x51FA;&#x6765;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x57FA;&#x672C;&#x7684; send/recv&#xFF0C;&#x6211;&#x4EEC;&#x4EE5;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x5355;&#x5143;&#x6D4B;&#x8BD5; 1 &#x6765;&#x63CF;&#x8FF0;&#x8FD9;&#x4E2A;&#x9700;&#x6C42;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[test]</span>
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">channel_should_work</span></span>() {
+    <span class="hljs-keyword">let</span> (<span class="hljs-keyword">mut</span> s, <span class="hljs-keyword">mut</span> r) = unbounded();
+    s.send(<span class="hljs-string">&quot;hello world!&quot;</span>.to_string()).unwrap();
+    <span class="hljs-keyword">let</span> msg = r.recv().unwrap();
+    <span class="hljs-built_in">assert_eq!</span>(msg, <span class="hljs-string">&quot;hello world!&quot;</span>);
+}
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#xFF0C;&#x901A;&#x8FC7; unbounded() &#x65B9;&#x6CD5;&#xFF0C; &#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; sender&#x548C;&#x4E00;&#x4E2A; receiver&#xFF0C;sender &#x6709; send() &#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF0C;receiver &#x6709; recv() &#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x63A5;&#x53D7;&#x6570;&#x636E;&#x3002;&#x6574;&#x4F53;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x6211;&#x4EEC;&#x8BBE;&#x8BA1;&#x548C; <a href="https://doc.rust-lang.org/std/sync/mpsc/index.html" target="_blank">std::sync::mpsc</a> &#x4FDD;&#x6301;&#x4E00;&#x81F4;&#xFF0C;&#x907F;&#x514D;&#x4F7F;&#x7528;&#x8005;&#x4F7F;&#x7528;&#x4E0A;&#x7684;&#x5FC3;&#x667A;&#x8D1F;&#x62C5;&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x5B9E;&#x73B0;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;&#x9700;&#x8981;&#x4EC0;&#x4E48;&#x6837;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5462;&#xFF1F;&#x9996;&#x5148;&#xFF0C;&#x751F;&#x4EA7;&#x8005;&#x548C;&#x6D88;&#x8D39;&#x8005;&#x4E4B;&#x95F4;&#x4F1A;&#x5171;&#x4EAB;&#x4E00;&#x4E2A;&#x961F;&#x5217;&#xFF0C;&#x4E0A;&#x4E00;&#x8BB2;&#x6211;&#x4EEC;&#x8BF4;&#x5230;&#xFF0C;&#x53EF;&#x4EE5;&#x7528; VecDeque&#x3002;&#x663E;&#x7136;&#xFF0C;&#x8FD9;&#x4E2A;&#x961F;&#x5217;&#x5728;&#x63D2;&#x5165;&#x548C;&#x53D6;&#x51FA;&#x6570;&#x636E;&#x65F6;&#x9700;&#x8981;&#x4E92;&#x65A5;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x7528; Mutex &#x6765;&#x4FDD;&#x62A4;&#x5B83;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x5927;&#x6982;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Shared</span></span>&lt;T&gt; {
+    queue: Mutex&lt;VecDeque&lt;T&gt;&gt;,
+}
+
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Sender</span></span>&lt;T&gt; {
+    shared: Arc&lt;Shared&lt;T&gt;&gt;,
+}
+
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Receiver</span></span>&lt;T&gt; {
+    shared: Arc&lt;Shared&lt;T&gt;&gt;,
+}
+</code></pre>
+<p>&#x8FD9;&#x6837;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5E94;&#x8BE5;&#x53EF;&#x4EE5;&#x6EE1;&#x8DB3;&#x5355;&#x5143;&#x6D4B;&#x8BD5; 1&#x3002;</p>
+<h3 id="&#x9700;&#x6C42;-2">&#x9700;&#x6C42; 2</h3>
+<p>&#x7531;&#x4E8E;&#x9700;&#x8981;&#x7684;&#x662F; MPSC&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x5141;&#x8BB8;&#x591A;&#x4E2A; sender &#x5F80; channel &#x91CC;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF0C;&#x7528;&#x5355;&#x5143;&#x6D4B;&#x8BD5; 2 &#x6765;&#x63CF;&#x8FF0;&#x8FD9;&#x4E2A;&#x9700;&#x6C42;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[test]</span>
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">multiple_senders_should_work</span></span>() {
+    <span class="hljs-keyword">let</span> (<span class="hljs-keyword">mut</span> s, <span class="hljs-keyword">mut</span> r) = unbounded();
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> s1 = s.clone();
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> s2 = s.clone();
+    <span class="hljs-keyword">let</span> t = thread::spawn(move || {
+        s.send(<span class="hljs-number">1</span>).unwrap();
+    });
+    <span class="hljs-keyword">let</span> t1 = thread::spawn(move || {
+        s1.send(<span class="hljs-number">2</span>).unwrap();
+    });
+    <span class="hljs-keyword">let</span> t2 = thread::spawn(move || {
+        s2.send(<span class="hljs-number">3</span>).unwrap();
+    });
+    <span class="hljs-keyword">for</span> handle <span class="hljs-keyword">in</span> [t, t1, t2] {
+        handle.join().unwrap();
+    }
+
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> result = [r.recv().unwrap(), r.recv().unwrap(), r.recv().unwrap()];
+    <span class="hljs-comment">// &#x5728;&#x8FD9;&#x4E2A;&#x6D4B;&#x8BD5;&#x91CC;&#xFF0C;&#x6570;&#x636E;&#x5230;&#x8FBE;&#x7684;&#x987A;&#x5E8F;&#x662F;&#x4E0D;&#x786E;&#x5B9A;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x6392;&#x4E2A;&#x5E8F;&#x518D; assert</span>
+    result.sort();
+
+    <span class="hljs-built_in">assert_eq!</span>(result, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);
+}
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x9700;&#x6C42;&#xFF0C;&#x521A;&#x624D;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5C31;&#x53EF;&#x4EE5;&#x6EE1;&#x8DB3;&#xFF0C;&#x53EA;&#x662F; Sender &#x9700;&#x8981;&#x5B9E;&#x73B0; Clone trait&#x3002;&#x4E0D;&#x8FC7;&#x6211;&#x4EEC;&#x5728;&#x5199;&#x8FD9;&#x4E2A;&#x6D4B;&#x8BD5;&#x7684;&#x65F6;&#x5019;&#x7A0D;&#x5FAE;&#x6709;&#x4E9B;&#x522B;&#x626D;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E00;&#x884C;&#x6709;&#x4E0D;&#x65AD;&#x91CD;&#x590D;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> result = [r.recv().unwrap(), r.recv().unwrap(), r.recv().unwrap()];
+</code></pre>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x6D4B;&#x8BD5;&#x4EE3;&#x7801;&#x7684; DRY &#x4E5F;&#x5F88;&#x91CD;&#x8981;&#xFF0C;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x5F3A;&#x8C03;&#x8FC7;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5F53;&#x5199;&#x4E0B;&#x8FD9;&#x4E2A;&#x6D4B;&#x8BD5;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E5F;&#x8BB8;&#x4F1A;&#x60F3;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x5426;&#x63D0;&#x4F9B; Iterator &#x7684;&#x5B9E;&#x73B0;&#xFF1F;&#x6069;&#x8FD9;&#x4E2A;&#x60F3;&#x6CD5;&#x5148;&#x6682;&#x5B58;&#x4E0B;&#x6765;&#x3002;</p>
+<h3 id="&#x9700;&#x6C42;-3">&#x9700;&#x6C42; 3</h3>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x8003;&#x8651;&#x5F53;&#x961F;&#x5217;&#x7A7A;&#x7684;&#x65F6;&#x5019;&#xFF0C;receiver &#x6240;&#x5728;&#x7684;&#x7EBF;&#x7A0B;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#x8FD9;&#x4E2A;&#x9700;&#x6C42;&#x3002;&#x90A3;&#x4E48;&#xFF0C;&#x5982;&#x4F55;&#x5BF9;&#x8FD9;&#x4E2A;&#x9700;&#x6C42;&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;&#x5462;&#xFF1F;&#x8FD9;&#x5E76;&#x4E0D;&#x7B80;&#x5355;&#xFF0C;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x6BD4;&#x8F83;&#x76F4;&#x89C2;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x68C0;&#x6D4B;&#x7EBF;&#x7A0B;&#x7684;&#x72B6;&#x6001;&#x3002;</p>
+<p><strong>&#x4E0D;&#x8FC7;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x68C0;&#x6D4B;&#x201C;&#x7EBF;&#x7A0B;&#x662F;&#x5426;&#x9000;&#x51FA;&#x201D;&#x6765;&#x95F4;&#x63A5;&#x5224;&#x65AD;&#x7EBF;&#x7A0B;&#x662F;&#x5426;&#x88AB;&#x963B;&#x585E;</strong>&#x3002;&#x7406;&#x7531;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6CA1;&#x6709;&#x7EE7;&#x7EED;&#x5DE5;&#x4F5C;&#xFF0C;&#x53C8;&#x6CA1;&#x6709;&#x9000;&#x51FA;&#xFF0C;&#x90A3;&#x4E48;&#x4E00;&#x5B9A;&#x88AB;&#x963B;&#x585E;&#x4F4F;&#x4E86;&#x3002;&#x963B;&#x585E;&#x4F4F;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x7EE7;&#x7EED;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x6240;&#x5728;&#x7684;&#x7EBF;&#x7A0B;&#x4F1A;&#x88AB;&#x5524;&#x9192;&#xFF0C;&#x7EE7;&#x7EED;&#x5DE5;&#x4F5C;&#xFF0C;&#x6240;&#x4EE5;&#x6700;&#x7EC8;&#x961F;&#x5217;&#x957F;&#x5EA6;&#x5E94;&#x8BE5;&#x4E3A; 0&#x3002;&#x6211;&#x4EEC;&#x770B;&#x5355;&#x5143;&#x6D4B;&#x8BD5; 3&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[test]</span>
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">receiver_should_be_blocked_when_nothing_to_read</span></span>() {
+    <span class="hljs-keyword">let</span> (<span class="hljs-keyword">mut</span> s, r) = unbounded();
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> s1 = s.clone();
+    thread::spawn(move || {
+        <span class="hljs-keyword">for</span> (idx, i) <span class="hljs-keyword">in</span> r.into_iter().enumerate() {
+            <span class="hljs-comment">// &#x5982;&#x679C;&#x8BFB;&#x5230;&#x6570;&#x636E;&#xFF0C;&#x786E;&#x4FDD;&#x5B83;&#x548C;&#x53D1;&#x9001;&#x7684;&#x6570;&#x636E;&#x4E00;&#x81F4;</span>
+            <span class="hljs-built_in">assert_eq!</span>(idx, i);
+        }
+        <span class="hljs-comment">// &#x8BFB;&#x4E0D;&#x5230;&#x5E94;&#x8BE5;&#x4F11;&#x7720;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x4F1A;&#x6267;&#x884C;&#x5230;&#x8FD9;&#x4E00;&#x53E5;&#xFF0C;&#x6267;&#x884C;&#x5230;&#x8FD9;&#x4E00;&#x53E5;&#x8BF4;&#x660E;&#x903B;&#x8F91;&#x51FA;&#x9519;</span>
+        <span class="hljs-built_in">assert!</span>(<span class="hljs-literal">false</span>);
+    });
+
+    thread::spawn(move || {
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">0</span>..<span class="hljs-number">100usize</span> {
+            s.send(i).unwrap();
+        }
+    });
+
+    <span class="hljs-comment">// 1ms &#x8DB3;&#x591F;&#x8BA9;&#x751F;&#x4EA7;&#x8005;&#x53D1;&#x5B8C; 100 &#x4E2A;&#x6D88;&#x606F;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x6D88;&#x8D39;&#x5B8C; 100 &#x4E2A;&#x6D88;&#x606F;&#x5E76;&#x963B;&#x585E;</span>
+    thread::sleep(Duration::from_millis(<span class="hljs-number">1</span>));
+
+    <span class="hljs-comment">// &#x518D;&#x6B21;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF0C;&#x5524;&#x9192;&#x6D88;&#x8D39;&#x8005;</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">100</span>..<span class="hljs-number">200usize</span> {
+        s1.send(i).unwrap();
+    }
+
+    <span class="hljs-comment">// &#x7559;&#x70B9;&#x65F6;&#x95F4;&#x8BA9; receiver &#x5904;&#x7406;</span>
+    thread::sleep(Duration::from_millis(<span class="hljs-number">1</span>));
+
+    <span class="hljs-comment">// &#x5982;&#x679C; receiver &#x88AB;&#x6B63;&#x5E38;&#x5524;&#x9192;&#x5904;&#x7406;&#xFF0C;&#x90A3;&#x4E48;&#x961F;&#x5217;&#x91CC;&#x7684;&#x6570;&#x636E;&#x4F1A;&#x90FD;&#x88AB;&#x8BFB;&#x5B8C;</span>
+    <span class="hljs-built_in">assert_eq!</span>(s1.total_queued_items(), <span class="hljs-number">0</span>);
+}
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x6D4B;&#x8BD5;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5047;&#x5B9A; receiver &#x5B9E;&#x73B0;&#x4E86; Iterator&#xFF0C;&#x8FD8;&#x5047;&#x5B9A; sender &#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;total_queued_items()&#x3002;&#x8FD9;&#x4E9B;&#x53EF;&#x4EE5;&#x5728;&#x5B9E;&#x73B0;&#x7684;&#x65F6;&#x5019;&#x518D;&#x5904;&#x7406;&#x3002;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x82B1;&#x4E9B;&#x65F6;&#x95F4;&#x4ED4;&#x7EC6;&#x770B;&#x770B;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#xFF0C;&#x60F3;&#x60F3;&#x5176;&#x4E2D;&#x7684;&#x5904;&#x7406;&#x903B;&#x8F91;&#x3002;&#x867D;&#x7136;&#x4EE3;&#x7801;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x4F46;&#x662F;&#x628A;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x9700;&#x6C42;&#x8F6C;&#x5316;&#x6210;&#x5408;&#x9002;&#x7684;&#x6D4B;&#x8BD5;&#x4EE3;&#x7801;&#xFF0C;&#x8FD8;&#x662F;&#x8981;&#x9887;&#x8D39;&#x4E9B;&#x5FC3;&#x601D;&#x7684;&#x3002;</p>
+<p>&#x597D;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x80FD;&#x652F;&#x6301;&#x961F;&#x5217;&#x4E3A;&#x7A7A;&#x65F6;&#x963B;&#x585E;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4F7F;&#x7528; <a href="https://doc.rust-lang.org/std/sync/struct.Condvar.html" target="_blank">Condvar</a>&#x3002;&#x6240;&#x4EE5; Shared<t> &#x9700;&#x8981;&#x4FEE;&#x6539;&#x4E00;&#x4E0B;&#xFF1A;</t></p>
+<pre><code class="lang-rust"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Shared</span></span>&lt;T&gt; {
+    queue: Mutex&lt;VecDeque&lt;T&gt;&gt;,
+    available: Condvar,
+}
+</code></pre>
+<p>&#x8FD9;&#x6837;&#x5F53;&#x5B9E;&#x73B0; Receiver &#x7684; recv() &#x65B9;&#x6CD5;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x8BFB;&#x4E0D;&#x5230;&#x6570;&#x636E;&#x65F6;&#x963B;&#x585E;&#x7EBF;&#x7A0B;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-comment">// &#x62FF;&#x5230;&#x9501;</span>
+<span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> inner = <span class="hljs-keyword">self</span>.shared.queue.lock().unwrap();
+<span class="hljs-comment">// ... &#x5047;&#x8BBE;&#x8BFB;&#x4E0D;&#x5230;&#x6570;&#x636E;</span>
+<span class="hljs-comment">// &#x4F7F;&#x7528; condvar &#x548C; MutexGuard &#x963B;&#x585E;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;</span>
+<span class="hljs-keyword">self</span>.shared.available.wait(inner)
+</code></pre>
+<h3 id="&#x9700;&#x6C42;-4">&#x9700;&#x6C42; 4</h3>
+<p>&#x987A;&#x7740;&#x521A;&#x624D;&#x7684;&#x591A;&#x4E2A; sender&#x60F3;&#xFF0C;&#x5982;&#x679C;&#x73B0;&#x5728;&#x6240;&#x6709; Sender &#x90FD;&#x9000;&#x51FA;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;Receiver &#x7EE7;&#x7EED;&#x63A5;&#x6536;&#xFF0C;&#x5230;&#x6CA1;&#x6709;&#x6570;&#x636E;&#x53EF;&#x8BFB;&#x4E86;&#xFF0C;&#x8BE5;&#x600E;&#x4E48;&#x5904;&#x7406;&#xFF1F;&#x662F;&#x4E0D;&#x662F;&#x5E94;&#x8BE5;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x9519;&#x8BEF;&#xFF0C;&#x8BA9;&#x8C03;&#x7528;&#x8005;&#x77E5;&#x9053;&#xFF0C;&#x73B0;&#x5728; channel &#x7684;&#x53E6;&#x4E00;&#x4FA7;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x751F;&#x4EA7;&#x8005;&#x4E86;&#xFF0C;&#x518D;&#x8BFB;&#x4E5F;&#x8BFB;&#x4E0D;&#x51FA;&#x6570;&#x636E;&#x4E86;&#xFF1F;</p>
+<p>&#x6211;&#x4EEC;&#x6765;&#x5199;&#x5355;&#x5143;&#x6D4B;&#x8BD5; 4&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[test]</span>
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">last_sender_drop_should_error_when_receive</span></span>() {
+    <span class="hljs-keyword">let</span> (s, <span class="hljs-keyword">mut</span> r) = unbounded();
+    <span class="hljs-keyword">let</span> s1 = s.clone();
+    <span class="hljs-keyword">let</span> senders = [s, s1];
+    <span class="hljs-keyword">let</span> total = senders.len();
+
+    <span class="hljs-comment">// sender &#x5373;&#x7528;&#x5373;&#x629B;</span>
+    <span class="hljs-keyword">for</span> <span class="hljs-keyword">mut</span> sender <span class="hljs-keyword">in</span> senders {
+        thread::spawn(move || {
+            sender.send(<span class="hljs-string">&quot;hello&quot;</span>).unwrap();
+            <span class="hljs-comment">// sender &#x5728;&#x6B64;&#x88AB;&#x4E22;&#x5F03;</span>
+        })
+        .join()
+        .unwrap();
+    }
+
+    <span class="hljs-comment">// &#x867D;&#x7136;&#x6CA1;&#x6709; sender &#x4E86;&#xFF0C;&#x63A5;&#x6536;&#x8005;&#x4F9D;&#x7136;&#x53EF;&#x4EE5;&#x63A5;&#x53D7;&#x5DF2;&#x7ECF;&#x5728;&#x961F;&#x5217;&#x91CC;&#x7684;&#x6570;&#x636E;</span>
+    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-number">0</span>..total {
+        r.recv().unwrap();
+    }
+
+    <span class="hljs-comment">// &#x7136;&#x800C;&#xFF0C;&#x8BFB;&#x53D6;&#x66F4;&#x591A;&#x6570;&#x636E;&#x65F6;&#x4F1A;&#x51FA;&#x9519;</span>
+    <span class="hljs-built_in">assert!</span>(r.recv().is_err());
+}
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x6D4B;&#x8BD5;&#x4F9D;&#x65E7;&#x5F88;&#x7B80;&#x5355;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x60F3;&#x8C61;&#x4E00;&#x4E0B;&#xFF0C;&#x4F7F;&#x7528;&#x4EC0;&#x4E48;&#x6837;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x53EF;&#x4EE5;&#x8FBE;&#x5230;&#x8FD9;&#x6837;&#x7684;&#x76EE;&#x7684;&#x3002;</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x6BCF;&#x6B21; Clone &#x65F6;&#xFF0C;&#x8981;&#x589E;&#x52A0; Sender &#x7684;&#x8BA1;&#x6570;&#xFF1B;&#x5728; Sender Drop &#x65F6;&#xFF0C;&#x51CF;&#x5C11;&#x8FD9;&#x4E2A;&#x8BA1;&#x6570;&#xFF1B;&#x7136;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x4E3A; Receiver &#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5; total_senders()&#xFF0C;&#x6765;&#x8BFB;&#x53D6; Sender &#x7684;&#x8BA1;&#x6570;&#xFF0C;&#x5F53;&#x8BA1;&#x6570;&#x4E3A; 0&#xFF0C;&#x4E14;&#x961F;&#x5217;&#x4E2D;&#x6CA1;&#x6709;&#x6570;&#x636E;&#x53EF;&#x8BFB;&#x65F6;&#xFF0C;recv() &#x65B9;&#x6CD5;&#x5C31;&#x62A5;&#x9519;&#x3002;</p>
+<p>&#x6709;&#x4E86;&#x8FD9;&#x4E2A;&#x601D;&#x8DEF;&#xFF0C;&#x4F60;&#x60F3;&#x4E00;&#x60F3;&#xFF0C;&#x8FD9;&#x4E2A;&#x8BA1;&#x6570;&#x5668;&#x7528;&#x4EC0;&#x4E48;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5462;&#xFF1F;&#x7528;&#x9501;&#x4FDD;&#x62A4;&#x4E48;&#xFF1F;</p>
+<p>&#x54C8;&#xFF0C;&#x4F60;&#x4E00;&#x5B9A;&#x60F3;&#x5230;&#x4E86;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; atomics&#x3002;&#x5BF9;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528; AtomicUsize&#x3002;&#x6240;&#x4EE5;&#xFF0C;Shared &#x6570;&#x636E;&#x7ED3;&#x6784;&#x9700;&#x8981;&#x66F4;&#x65B0;&#x4E00;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Shared</span></span>&lt;T&gt; {
+    queue: Mutex&lt;VecDeque&lt;T&gt;&gt;,
+    available: Condvar,
+    senders: AtomicUsize,
+}
+</code></pre>
+<h3 id="&#x9700;&#x6C42;-5">&#x9700;&#x6C42; 5</h3>
+<p>&#x65E2;&#x7136;&#x6CA1;&#x6709; Sender &#x4E86;&#x8981;&#x62A5;&#x9519;&#xFF0C;&#x90A3;&#x4E48;&#x5982;&#x679C;&#x6CA1;&#x6709; Receiver&#x4E86;&#xFF0C;Sender &#x53D1;&#x9001;&#x65F6;&#x662F;&#x4E0D;&#x662F;&#x4E5F;&#x5E94;&#x8BE5;&#x9519;&#x8BEF;&#x8FD4;&#x56DE;&#xFF1F;&#x8FD9;&#x4E2A;&#x9700;&#x6C42;&#x548C;&#x4E0A;&#x9762;&#x7C7B;&#x4F3C;&#xFF0C;&#x5C31;&#x4E0D;&#x8D58;&#x8FF0;&#x4E86;&#x3002;&#x770B;&#x6784;&#x9020;&#x7684;&#x5355;&#x5143;&#x6D4B;&#x8BD5; 5&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[test]</span>
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">receiver_drop_should_error_when_send</span></span>() {
+    <span class="hljs-keyword">let</span> (<span class="hljs-keyword">mut</span> s1, <span class="hljs-keyword">mut</span> s2) = {
+        <span class="hljs-keyword">let</span> (s, _) = unbounded();
+        <span class="hljs-keyword">let</span> s1 = s.clone();
+        <span class="hljs-keyword">let</span> s2 = s.clone();
+        (s1, s2)
+    };
+
+    <span class="hljs-built_in">assert!</span>(s1.send(<span class="hljs-number">1</span>).is_err());
+    <span class="hljs-built_in">assert!</span>(s2.send(<span class="hljs-number">1</span>).is_err());
+}
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; channel&#xFF0C;&#x4EA7;&#x751F;&#x4E24;&#x4E2A; Sender &#x540E;&#x4FBF;&#x7ACB;&#x5373;&#x4E22;&#x5F03; Receiver&#x3002;&#x4E24;&#x4E2A; Sender &#x5728;&#x53D1;&#x9001;&#x65F6;&#x90FD;&#x4F1A;&#x51FA;&#x9519;&#x3002;</p>
+<p>&#x540C;&#x6837;&#x7684;&#xFF0C;Shared &#x6570;&#x636E;&#x7ED3;&#x6784;&#x8981;&#x66F4;&#x65B0;&#x4E00;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Shared</span></span>&lt;T&gt; {
+    queue: Mutex&lt;VecDeque&lt;T&gt;&gt;,
+    available: Condvar,
+    senders: AtomicUsize,
+    receivers: AtomicUsize,
+}
+</code></pre>
+<h2 id="&#x5B9E;&#x73B0;-mpsc-channel">&#x5B9E;&#x73B0; MPSC channel</h2>
+<p>&#x73B0;&#x5728;&#x5199;&#x4E86;&#x4E94;&#x4E2A;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x628A;&#x9700;&#x6C42;&#x6478;&#x900F;&#x4E86;&#xFF0C;&#x5E76;&#x4E14;&#x6709;&#x4E86;&#x57FA;&#x672C;&#x7684;&#x63A5;&#x53E3;&#x548C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x8BBE;&#x8BA1;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x5199;&#x5B9E;&#x73B0;&#x7684;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x9879;&#x76EE; <code>cargo new con_utils --lib</code>&#x3002;&#x5728; cargo.toml &#x4E2D;&#x6DFB;&#x52A0; anyhow &#x4F5C;&#x4E3A;&#x4F9D;&#x8D56;&#x3002;&#x5728; <a href="http://lib.rs" target="_blank">lib.rs</a> &#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x5199;&#x5165;&#x4E00;&#x53E5;&#xFF1A;<code>pub mod channel</code> , &#x7136;&#x540E;&#x521B;&#x5EFA; src/channel.rs&#xFF0C;&#x628A;&#x521A;&#x624D;&#x8BBE;&#x8BA1;&#x65F6;&#x4F7F;&#x7528;&#x7684; test case&#x3001;&#x8BBE;&#x8BA1;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x4EE5;&#x53CA; test case &#x91CC;&#x4F7F;&#x7528;&#x5230;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x7528;&#x4EE3;&#x7801;&#x5168;&#x90E8;&#x653E;&#x8FDB;&#x6765;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> anyhow::<span class="hljs-built_in">Result</span>;
+<span class="hljs-keyword">use</span> std::{
+    collections::VecDeque,
+    sync::{atomic::AtomicUsize, Arc, Condvar, Mutex},
+};
+
+<span class="hljs-comment">/// &#x53D1;&#x9001;&#x8005;</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Sender</span></span>&lt;T&gt; {
+    shared: Arc&lt;Shared&lt;T&gt;&gt;,
+}
+
+<span class="hljs-comment">/// &#x63A5;&#x6536;&#x8005;</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Receiver</span></span>&lt;T&gt; {
+    shared: Arc&lt;Shared&lt;T&gt;&gt;,
+}
+
+<span class="hljs-comment">/// &#x53D1;&#x9001;&#x8005;&#x548C;&#x63A5;&#x6536;&#x8005;&#x4E4B;&#x95F4;&#x5171;&#x4EAB;&#x4E00;&#x4E2A; VecDeque&#xFF0C;&#x7528; Mutex &#x4E92;&#x65A5;&#xFF0C;&#x7528; Condvar &#x901A;&#x77E5;</span>
+<span class="hljs-comment">/// &#x540C;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x8BB0;&#x5F55;&#x6709;&#x591A;&#x5C11;&#x4E2A; senders &#x548C; receivers</span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Shared</span></span>&lt;T&gt; {
+    queue: Mutex&lt;VecDeque&lt;T&gt;&gt;,
+    available: Condvar,
+    senders: AtomicUsize,
+    receivers: AtomicUsize,
+}
+
+<span class="hljs-keyword">impl</span>&lt;T&gt; Sender&lt;T&gt; {
+    <span class="hljs-comment">/// &#x751F;&#x4EA7;&#x8005;&#x5199;&#x5165;&#x4E00;&#x4E2A;&#x6570;&#x636E;</span>
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">send</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, t: T) -&gt; <span class="hljs-built_in">Result</span>&lt;()&gt; {
+        todo!()
+    }
+
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">total_receivers</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; usize {
+        todo!()
+    }
+
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">total_queued_items</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; usize {
+        todo!()
+    }
+}
+
+<span class="hljs-keyword">impl</span>&lt;T&gt; Receiver&lt;T&gt; {
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">recv</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Result</span>&lt;T&gt; {
+        todo!()
+    }
+
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">total_senders</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; usize {
+        todo!()
+    }
+}
+
+<span class="hljs-keyword">impl</span>&lt;T&gt; <span class="hljs-built_in">Iterator</span> <span class="hljs-keyword">for</span> Receiver&lt;T&gt; {
+    <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Item</span></span> = T;
+
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">next</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Option</span>&lt;Self::Item&gt; {
+        todo!()
+    }
+}
+
+<span class="hljs-comment">/// &#x514B;&#x9686; sender</span>
+<span class="hljs-keyword">impl</span>&lt;T&gt; <span class="hljs-built_in">Clone</span> <span class="hljs-keyword">for</span> Sender&lt;T&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">clone</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; <span class="hljs-keyword">Self</span> {
+        todo!()
+    }
+}
+
+<span class="hljs-comment">/// Drop sender</span>
+<span class="hljs-keyword">impl</span>&lt;T&gt; <span class="hljs-built_in">Drop</span> <span class="hljs-keyword">for</span> Sender&lt;T&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">drop</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) {
+        todo!()
+    }
+}
+
+<span class="hljs-keyword">impl</span>&lt;T&gt; <span class="hljs-built_in">Drop</span> <span class="hljs-keyword">for</span> Receiver&lt;T&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">drop</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) {
+        todo!()
+    }
+}
+
+<span class="hljs-comment">/// &#x521B;&#x5EFA;&#x4E00;&#x4E2A; unbounded channel</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">unbounded</span></span>&lt;T&gt;() -&gt; (Sender&lt;T&gt;, Receiver&lt;T&gt;) {
+    todo!()
+}
+
+<span class="hljs-meta">#[cfg(test)]</span>
+<span class="hljs-keyword">mod</span> tests {
+    <span class="hljs-keyword">use</span> std::{thread, time::Duration};
+
+    <span class="hljs-keyword">use</span> super::*;
+        <span class="hljs-comment">// &#x6B64;&#x5904;&#x7701;&#x7565;&#x6240;&#x6709; test case</span>
+}
+</code></pre>
+<p>&#x76EE;&#x524D;&#x8FD9;&#x4E2A;&#x4EE3;&#x7801;&#x867D;&#x7136;&#x80FD;&#x591F;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#xFF0C;&#x4F46;&#x56E0;&#x4E3A;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x5B9E;&#x73B0;&#xFF0C;&#x6240;&#x4EE5; cargo test &#x5168;&#x90E8;&#x51FA;&#x9519;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x4E00;&#x70B9;&#x70B9;&#x5B9E;&#x73B0;&#x529F;&#x80FD;&#x3002;</p>
+<h3 id="&#x521B;&#x5EFA;-unbounded-channel">&#x521B;&#x5EFA; unbounded channel</h3>
+<p>&#x521B;&#x5EFA; unbounded channel &#x7684;&#x63A5;&#x53E3;&#x5F88;&#x7B80;&#x5355;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">unbounded</span></span>&lt;T&gt;() -&gt; (Sender&lt;T&gt;, Receiver&lt;T&gt;) {
+    <span class="hljs-keyword">let</span> shared = Shared::default();
+    <span class="hljs-keyword">let</span> shared = Arc::new(shared);
+    (
+        Sender {
+            shared: shared.clone(),
+        },
+        Receiver { shared },
+    )
+}
+
+<span class="hljs-keyword">const</span> INITIAL_SIZE: usize = <span class="hljs-number">32</span>;
+<span class="hljs-keyword">impl</span>&lt;T&gt; <span class="hljs-built_in">Default</span> <span class="hljs-keyword">for</span> Shared&lt;T&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">default</span></span>() -&gt; <span class="hljs-keyword">Self</span> {
+        <span class="hljs-keyword">Self</span> {
+            queue: Mutex::new(VecDeque::with_capacity(INITIAL_SIZE)),
+            available: Condvar::new(),
+            senders: AtomicUsize::new(<span class="hljs-number">1</span>),
+            receivers: AtomicUsize::new(<span class="hljs-number">1</span>),
+        }
+    }
+}
+</code></pre>
+<p>&#x56E0;&#x4E3A;&#x8FD9;&#x91CC;&#x4F7F;&#x7528; default() &#x521B;&#x5EFA;&#x4E86; Shared<t> &#x7ED3;&#x6784;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4E3A;&#x5176;&#x5B9E;&#x73B0; Default&#x3002;&#x521B;&#x5EFA;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x6709; 1 &#x4E2A;&#x751F;&#x4EA7;&#x8005;&#x548C;1 &#x4E2A;&#x6D88;&#x8D39;&#x8005;&#x3002;</t></p>
+<h3 id="&#x5B9E;&#x73B0;&#x6D88;&#x8D39;&#x8005;">&#x5B9E;&#x73B0;&#x6D88;&#x8D39;&#x8005;</h3>
+<p>&#x5BF9;&#x4E8E;&#x6D88;&#x8D39;&#x8005;&#xFF0C;&#x6211;&#x4EEC;&#x4E3B;&#x8981;&#x9700;&#x8981;&#x5B9E;&#x73B0; recv &#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x5728; recv &#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x961F;&#x5217;&#x4E2D;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x90A3;&#x4E48;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#xFF1B;&#x5982;&#x679C;&#x6CA1;&#x6570;&#x636E;&#xFF0C;&#x4E14;&#x6240;&#x6709;&#x751F;&#x4EA7;&#x8005;&#x90FD;&#x79BB;&#x5F00;&#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x8FD4;&#x56DE;&#x9519;&#x8BEF;&#xFF1B;&#x5982;&#x679C;&#x6CA1;&#x6570;&#x636E;&#xFF0C;&#x4F46;&#x8FD8;&#x6709;&#x751F;&#x4EA7;&#x8005;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x963B;&#x585E;&#x6D88;&#x8D39;&#x8005;&#x7684;&#x7EBF;&#x7A0B;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">impl</span>&lt;T&gt; Receiver&lt;T&gt; {
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">recv</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Result</span>&lt;T&gt; {
+        <span class="hljs-comment">// &#x62FF;&#x5230;&#x961F;&#x5217;&#x7684;&#x9501;</span>
+        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> inner = <span class="hljs-keyword">self</span>.shared.queue.lock().unwrap();
+        <span class="hljs-keyword">loop</span> {
+            <span class="hljs-keyword">match</span> inner.pop_front() {
+                <span class="hljs-comment">// &#x8BFB;&#x5230;&#x6570;&#x636E;&#x8FD4;&#x56DE;&#xFF0C;&#x9501;&#x88AB;&#x91CA;&#x653E;</span>
+                <span class="hljs-literal">Some</span>(t) =&gt; {
+                    <span class="hljs-keyword">return</span> <span class="hljs-literal">Ok</span>(t);
+                }
+                <span class="hljs-comment">// &#x8BFB;&#x4E0D;&#x5230;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x4E14;&#x751F;&#x4EA7;&#x8005;&#x90FD;&#x9000;&#x51FA;&#x4E86;&#xFF0C;&#x91CA;&#x653E;&#x9501;&#x5E76;&#x8FD4;&#x56DE;&#x9519;&#x8BEF;</span>
+                <span class="hljs-literal">None</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">self</span>.total_senders() == <span class="hljs-number">0</span> =&gt; <span class="hljs-keyword">return</span> <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;no sender left&quot;</span>)),
+                <span class="hljs-comment">// &#x8BFB;&#x4E0D;&#x5230;&#x6570;&#x636E;&#xFF0C;&#x628A;&#x9501;&#x63D0;&#x4EA4;&#x7ED9; available Condvar&#xFF0C;&#x5B83;&#x4F1A;&#x91CA;&#x653E;&#x9501;&#x5E76;&#x6302;&#x8D77;&#x7EBF;&#x7A0B;&#xFF0C;&#x7B49;&#x5F85; notify</span>
+                <span class="hljs-literal">None</span> =&gt; {
+                    <span class="hljs-comment">// &#x5F53; Condvar &#x88AB;&#x5524;&#x9192;&#x540E;&#x4F1A;&#x8FD4;&#x56DE; MutexGuard&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5; loop &#x56DE;&#x53BB;&#x62FF;&#x6570;&#x636E;</span>
+                    <span class="hljs-comment">// &#x8FD9;&#x662F;&#x4E3A;&#x4EC0;&#x4E48; Condvar &#x8981;&#x5728; loop &#x91CC;&#x4F7F;&#x7528;</span>
+                    inner = <span class="hljs-keyword">self</span>
+                        .shared
+                        .available
+                        .wait(inner)
+                        .map_err(|_| anyhow!(<span class="hljs-string">&quot;lock poisoned&quot;</span>))?;
+                }
+            }
+        }
+    }
+
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">total_senders</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; usize {
+        <span class="hljs-keyword">self</span>.shared.senders.load(Ordering::SeqCst)
+    }
+}
+</code></pre>
+<p>&#x6CE8;&#x610F;&#x770B;&#x8FD9;&#x91CC; Condvar &#x7684;&#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x5728; wait() &#x65B9;&#x6CD5;&#x91CC;&#xFF0C;&#x5B83;&#x63A5;&#x6536;&#x4E00;&#x4E2A; MutexGuard&#xFF0C;&#x7136;&#x540E;&#x91CA;&#x653E;&#x8FD9;&#x4E2A; Mutex&#xFF0C;&#x6302;&#x8D77;&#x7EBF;&#x7A0B;&#x3002;&#x7B49;&#x5F97;&#x5230;&#x901A;&#x77E5;&#x540E;&#xFF0C;&#x5B83;&#x4F1A;&#x518D;&#x83B7;&#x53D6;&#x9501;&#xFF0C;&#x5F97;&#x5230;&#x4E00;&#x4E2A; MutexGuard&#xFF0C;&#x8FD4;&#x56DE;&#x3002;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x662F;&#xFF1A;</p>
+<pre><code class="lang-rust">inner = <span class="hljs-keyword">self</span>.shared.available.wait(inner).map_err(|_| anyhow!(<span class="hljs-string">&quot;lock poisoned&quot;</span>))?;
+</code></pre>
+<p>&#x56E0;&#x4E3A; recv() &#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x6240;&#x4EE5;&#x963B;&#x585E;&#x56DE;&#x6765;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x5E94;&#x8BE5;&#x5FAA;&#x73AF;&#x56DE;&#x53BB;&#x62FF;&#x6570;&#x636E;&#x3002;&#x8FD9;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x6BB5;&#x903B;&#x8F91;&#x8981;&#x88AB; loop {} &#x5305;&#x88F9;&#x3002;&#x6211;&#x4EEC;&#x524D;&#x9762;&#x5728;&#x8BBE;&#x8BA1;&#x65F6;&#x8003;&#x8651;&#x8FC7;&#xFF1A;&#x5F53;&#x53D1;&#x9001;&#x8005;&#x53D1;&#x9001;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x5E94;&#x8BE5;&#x901A;&#x77E5;&#x88AB;&#x963B;&#x585E;&#x7684;&#x6D88;&#x8D39;&#x8005;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5728;&#x5B9E;&#x73B0; Sender &#x7684; send() &#x65F6;&#xFF0C;&#x9700;&#x8981;&#x505A;&#x76F8;&#x5E94;&#x7684; notify &#x5904;&#x7406;&#x3002;</p>
+<p>&#x8BB0;&#x5F97;&#x8FD8;&#x8981;&#x5904;&#x7406;&#x6D88;&#x8D39;&#x8005;&#x7684; drop&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">impl</span>&lt;T&gt; <span class="hljs-built_in">Drop</span> <span class="hljs-keyword">for</span> Receiver&lt;T&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">drop</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) {
+        <span class="hljs-keyword">self</span>.shared.receivers.fetch_sub(<span class="hljs-number">1</span>, Ordering::AcqRel);
+    }
+}
+</code></pre>
+<p>&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x79BB;&#x5F00;&#x65F6;&#xFF0C;&#x5C06; receivers &#x51CF;&#x4E00;&#x3002;</p>
+<h3 id="&#x5B9E;&#x73B0;&#x751F;&#x4EA7;&#x8005;">&#x5B9E;&#x73B0;&#x751F;&#x4EA7;&#x8005;</h3>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x770B;&#x751F;&#x4EA7;&#x8005;&#x7684;&#x529F;&#x80FD;&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x5728;&#x6CA1;&#x6709;&#x6D88;&#x8D39;&#x8005;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5E94;&#x8BE5;&#x62A5;&#x9519;&#x3002;&#x6B63;&#x5E38;&#x5E94;&#x8BE5;&#x4F7F;&#x7528; thiserror &#x5B9A;&#x4E49;&#x81EA;&#x5DF1;&#x7684;&#x9519;&#x8BEF;&#xFF0C;&#x4E0D;&#x8FC7;&#x8FD9;&#x91CC;&#x4E3A;&#x4E86;&#x7B80;&#x5316;&#x4EE3;&#x7801;&#xFF0C;&#x5C31;&#x4F7F;&#x7528; anyhow! &#x5B8F;&#x4EA7;&#x751F;&#x4E00;&#x4E2A; adhoc &#x7684;&#x9519;&#x8BEF;&#x3002;&#x5982;&#x679C;&#x6D88;&#x8D39;&#x8005;&#x8FD8;&#x5728;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x83B7;&#x53D6; VecDeque &#x7684;&#x9501;&#xFF0C;&#x628A;&#x6570;&#x636E;&#x538B;&#x5165;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">impl</span>&lt;T&gt; Sender&lt;T&gt; {
+    <span class="hljs-comment">/// &#x751F;&#x4EA7;&#x8005;&#x5199;&#x5165;&#x4E00;&#x4E2A;&#x6570;&#x636E;</span>
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">send</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, t: T) -&gt; <span class="hljs-built_in">Result</span>&lt;()&gt; {
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x6CA1;&#x6709;&#x6D88;&#x8D39;&#x8005;&#x4E86;&#xFF0C;&#x5199;&#x5165;&#x65F6;&#x51FA;&#x9519;</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">self</span>.total_receivers() == <span class="hljs-number">0</span> {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;no receiver left&quot;</span>));
+        }
+
+        <span class="hljs-comment">// &#x52A0;&#x9501;&#xFF0C;&#x8BBF;&#x95EE; VecDeque&#xFF0C;&#x538B;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x7136;&#x540E;&#x7ACB;&#x523B;&#x91CA;&#x653E;&#x9501;</span>
+        <span class="hljs-keyword">let</span> was_empty = {
+            <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> inner = <span class="hljs-keyword">self</span>.shared.queue.lock().unwrap();
+            <span class="hljs-keyword">let</span> empty = inner.is_empty();
+            inner.push_back(t);
+            empty
+        };
+
+        <span class="hljs-comment">// &#x901A;&#x77E5;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x88AB;&#x6302;&#x8D77;&#x7B49;&#x5F85;&#x7684;&#x6D88;&#x8D39;&#x8005;&#x6709;&#x6570;&#x636E;</span>
+        <span class="hljs-keyword">if</span> was_empty {
+            <span class="hljs-keyword">self</span>.shared.available.notify_one();
+        }
+
+        <span class="hljs-literal">Ok</span>(())
+    }
+
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">total_receivers</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; usize {
+        <span class="hljs-keyword">self</span>.shared.receivers.load(Ordering::SeqCst)
+    }
+
+    <span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">total_queued_items</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; usize {
+        <span class="hljs-keyword">let</span> queue = <span class="hljs-keyword">self</span>.shared.queue.lock().unwrap();
+        queue.len()
+    }
+}
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#xFF0C;&#x83B7;&#x53D6; total_receivers &#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x4E86; Ordering::SeqCst&#xFF0C;&#x4FDD;&#x8BC1;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x770B;&#x5230;&#x540C;&#x6837;&#x987A;&#x5E8F;&#x7684;&#x5BF9; receivers &#x7684;&#x64CD;&#x4F5C;&#x3002;&#x8FD9;&#x4E2A;&#x503C;&#x662F;&#x6700;&#x65B0;&#x7684;&#x503C;&#x3002;</p>
+<p><strong>&#x5728;&#x538B;&#x5165;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x5224;&#x65AD;&#x4E00;&#x4E0B;&#x4E4B;&#x524D;&#x662F;&#x961F;&#x5217;&#x662F;&#x5426;&#x4E3A;&#x7A7A;&#xFF0C;&#x56E0;&#x4E3A;&#x961F;&#x5217;&#x4E3A;&#x7A7A;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7528; notify_one() &#x6765;&#x5524;&#x9192;&#x6D88;&#x8D39;&#x8005;</strong>&#x3002;&#x8FD9;&#x4E2A;&#x975E;&#x5E38;&#x91CD;&#x8981;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x5904;&#x7406;&#x7684;&#x8BDD;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x6D88;&#x8D39;&#x8005;&#x963B;&#x585E;&#x540E;&#x65E0;&#x6CD5;&#x590D;&#x539F;&#x63A5;&#x6536;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x4E2A;&#x751F;&#x4EA7;&#x8005;&#xFF0C;&#x6240;&#x4EE5;&#x8981;&#x5141;&#x8BB8;&#x5B83; clone&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">impl</span>&lt;T&gt; <span class="hljs-built_in">Clone</span> <span class="hljs-keyword">for</span> Sender&lt;T&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">clone</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; <span class="hljs-keyword">Self</span> {
+        <span class="hljs-keyword">self</span>.shared.senders.fetch_add(<span class="hljs-number">1</span>, Ordering::AcqRel);
+        <span class="hljs-keyword">Self</span> {
+            shared: Arc::clone(&amp;<span class="hljs-keyword">self</span>.shared),
+        }
+    }
+}
+</code></pre>
+<p>&#x5B9E;&#x73B0; Clone trait &#x7684;&#x65B9;&#x6CD5;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x4F46;&#x8BB0;&#x5F97;&#x8981;&#x628A; shared.senders &#x52A0; 1&#xFF0C;&#x4F7F;&#x5176;&#x4FDD;&#x6301;&#x548C;&#x5F53;&#x524D;&#x7684; senders &#x7684;&#x6570;&#x91CF;&#x4E00;&#x81F4;&#x3002;</p>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x5728; drop &#x7684;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x4E5F;&#x8981;&#x7EF4;&#x62A4; shared.senders &#x4F7F;&#x5176;&#x51CF; 1&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">impl</span>&lt;T&gt; <span class="hljs-built_in">Drop</span> <span class="hljs-keyword">for</span> Sender&lt;T&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">drop</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) {
+        <span class="hljs-keyword">self</span>.shared.senders.fetch_sub(<span class="hljs-number">1</span>, Ordering::AcqRel);
+
+    }
+}
+</code></pre>
+<h3 id="&#x5176;&#x5B83;&#x529F;&#x80FD;">&#x5176;&#x5B83;&#x529F;&#x80FD;</h3>
+<p>&#x76EE;&#x524D;&#x8FD8;&#x7F3A;&#x4E4F; Receiver &#x7684; Iterator &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x8FD9;&#x4E2A;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x5C31;&#x662F;&#x5728; next() &#x91CC;&#x8C03;&#x7528; recv() &#x65B9;&#x6CD5;&#xFF0C;Rust &#x63D0;&#x4F9B;&#x4E86;&#x652F;&#x6301;&#x5728; Option / Result &#x4E4B;&#x95F4;&#x5F88;&#x65B9;&#x4FBF;&#x8F6C;&#x6362;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x901A;&#x8FC7; ok() &#x6765;&#x5C06; Result &#x8F6C;&#x6362;&#x6210; Option&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">impl</span>&lt;T&gt; <span class="hljs-built_in">Iterator</span> <span class="hljs-keyword">for</span> Receiver&lt;T&gt; {
+    <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Item</span></span> = T;
+
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">next</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Option</span>&lt;Self::Item&gt; {
+        <span class="hljs-keyword">self</span>.recv().ok()
+    }
+}
+</code></pre>
+<p>&#x597D;&#xFF0C;&#x76EE;&#x524D;&#x6240;&#x6709;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x7684;&#x4EE3;&#x7801;&#x90FD;&#x5B9E;&#x73B0;&#x5B8C;&#x6BD5;&#xFF0C; <code>cargo test</code> &#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;&#x3002;wow&#xFF01;&#x6D4B;&#x8BD5;&#x4E00;&#x6B21;&#x6027;&#x901A;&#x8FC7;&#xFF01;&#x8FD9;&#x4E5F;&#x592A;&#x987A;&#x5229;&#x4E86;&#x5427;&#xFF01;</p>
+<p>&#x6700;&#x540E;&#x6765;&#x4ED4;&#x7EC6;&#x5BA1;&#x89C6;&#x4E00;&#x4E0B;&#x4EE3;&#x7801;&#x3002;&#x5F88;&#x5FEB;&#xFF0C;&#x6211;&#x4EEC;&#x53D1;&#x73B0; Sender &#x7684; Drop &#x5B9E;&#x73B0;&#x4F3C;&#x4E4E;&#x6709;&#x70B9;&#x95EE;&#x9898;&#x3002;<strong>&#x5982;&#x679C; Receiver &#x88AB;&#x963B;&#x585E;&#xFF0C;&#x800C;&#x6B64;&#x523B;&#x6240;&#x6709; Sender &#x90FD;&#x8D70;&#x4E86;&#xFF0C;&#x90A3;&#x4E48; Receiver &#x5C31;&#x6CA1;&#x6709;&#x4EBA;&#x5524;&#x9192;&#xFF0C;&#x4F1A;&#x5E26;&#x6765;&#x8D44;&#x6E90;&#x7684;&#x6CC4;&#x9732;</strong>&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x8FB9;&#x8FB9;&#x89D2;&#x89D2;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x6240;&#x4EE5;&#x4E4B;&#x524D;&#x7684;&#x6D4B;&#x8BD5;&#x6CA1;&#x6709;&#x8986;&#x76D6;&#x5230;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x6765;&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x573A;&#x666F;&#x8BA9;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x66B4;&#x9732;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[test]</span>
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">receiver_shall_be_notified_when_all_senders_exit</span></span>() {
+    <span class="hljs-keyword">let</span> (s, <span class="hljs-keyword">mut</span> r) = unbounded::&lt;usize&gt;();
+    <span class="hljs-comment">// &#x7528;&#x4E8E;&#x4E24;&#x4E2A;&#x7EBF;&#x7A0B;&#x540C;&#x6B65;</span>
+    <span class="hljs-keyword">let</span> (<span class="hljs-keyword">mut</span> sender, <span class="hljs-keyword">mut</span> receiver) = unbounded::&lt;usize&gt;();
+    <span class="hljs-keyword">let</span> t1 = thread::spawn(move || {
+        <span class="hljs-comment">// &#x4FDD;&#x8BC1; r.recv() &#x5148;&#x4E8E; t2 &#x7684; drop &#x6267;&#x884C;</span>
+        sender.send(<span class="hljs-number">0</span>).unwrap();
+        <span class="hljs-built_in">assert!</span>(r.recv().is_err());
+    });
+
+    thread::spawn(move || {
+        receiver.recv().unwrap();
+        <span class="hljs-built_in">drop</span>(s);
+    });
+
+    t1.join().unwrap();
+}
+</code></pre>
+<p>&#x5728;&#x6211;&#x8FDB;&#x4E00;&#x6B65;&#x89E3;&#x91CA;&#x4E4B;&#x524D;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x505C;&#x4E0B;&#x6765;&#x60F3;&#x60F3;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E2A;&#x6D4B;&#x8BD5;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x66B4;&#x9732;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF1F;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x66B4;&#x9732;&#x7684;&#xFF1F;&#x5982;&#x679C;&#x60F3;&#x4E0D;&#x5230;&#xFF0C;&#x518D; <code>cargo test</code> &#x770B;&#x770B;&#x4F1A;&#x51FA;&#x73B0;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x6765;&#x4E00;&#x8D77;&#x5206;&#x6790;&#x5206;&#x6790;&#xFF0C;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E86;&#x4E24;&#x4E2A;&#x7EBF;&#x7A0B; t1 &#x548C; t2&#xFF0C;&#x5206;&#x522B;&#x8BA9;&#x5B83;&#x4EEC;&#x5904;&#x7406;&#x6D88;&#x8D39;&#x8005;&#x548C;&#x751F;&#x4EA7;&#x8005;&#x3002;<strong>t1 &#x8BFB;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x6B64;&#x65F6;&#x6CA1;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x6240;&#x4EE5;&#x4F1A;&#x963B;&#x585E;&#xFF0C;&#x800C;t2 &#x76F4;&#x63A5;&#x628A;&#x751F;&#x4EA7;&#x8005; drop &#x6389;</strong>&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x6B64;&#x523B;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x4EBA;&#x5524;&#x9192; t1&#xFF0C;&#x90A3;&#x4E48; t1.join() &#x5C31;&#x4F1A;&#x4E00;&#x76F4;&#x7B49;&#x5F85;&#xFF0C;&#x56E0;&#x4E3A; t1 &#x4E00;&#x76F4;&#x6CA1;&#x6709;&#x9000;&#x51FA;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x4E00;&#x5B9A;&#x662F; t1 <code>r.recv()</code>&#x5148;&#x6267;&#x884C;&#x5BFC;&#x81F4;&#x963B;&#x585E;&#x3001;t2 &#x518D; <code>drop(s)</code>&#xFF0C;&#x6211;&#x4EEC;&#xFF08;eat your own dog food&#xFF09;&#x7528;&#x53E6;&#x4E00;&#x4E2A; channel &#x6765;&#x63A7;&#x5236;&#x4E24;&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x6267;&#x884C;&#x987A;&#x5E8F;&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x79CD;&#x5F88;&#x901A;&#x7528;&#x7684;&#x505A;&#x6CD5;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x597D;&#x597D;&#x7422;&#x78E8;&#x4E00;&#x4E0B;&#x3002;</p>
+<p>&#x8FD0;&#x884C; <code>cargo test</code> &#x540E;&#xFF0C;&#x6D4B;&#x8BD5;&#x88AB;&#x963B;&#x585E;&#x3002;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#xFF0C;t1 &#x6CA1;&#x6709;&#x673A;&#x4F1A;&#x5F97;&#x5230;&#x5524;&#x9192;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x4E2A;&#x6D4B;&#x8BD5;&#x5C31;&#x505C;&#x5728;&#x90A3;&#x91CC;&#x4E0D;&#x52A8;&#x4E86;&#x3002;</p>
+<p>&#x8981;&#x4FEE;&#x590D;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x59A5;&#x5584;&#x5904;&#x7406; Sender &#x7684; Drop&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">impl</span>&lt;T&gt; <span class="hljs-built_in">Drop</span> <span class="hljs-keyword">for</span> Sender&lt;T&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">drop</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) {
+        <span class="hljs-keyword">let</span> old = <span class="hljs-keyword">self</span>.shared.senders.fetch_sub(<span class="hljs-number">1</span>, Ordering::AcqRel);
+        <span class="hljs-comment">// sender &#x8D70;&#x5149;&#x4E86;&#xFF0C;&#x5524;&#x9192; receiver &#x8BFB;&#x53D6;&#x6570;&#x636E;&#xFF08;&#x5982;&#x679C;&#x961F;&#x5217;&#x4E2D;&#x8FD8;&#x6709;&#x7684;&#x8BDD;&#xFF09;&#xFF0C;&#x8BFB;&#x4E0D;&#x5230;&#x5C31;&#x51FA;&#x9519;</span>
+        <span class="hljs-keyword">if</span> old &lt;= <span class="hljs-number">1</span> {
+            <span class="hljs-comment">// &#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5B9E;&#x73B0;&#x7684;&#x662F; MPSC&#xFF0C;receiver &#x53EA;&#x6709;&#x4E00;&#x4E2A;&#xFF0C;&#x6240;&#x4EE5; notify_all &#x5B9E;&#x9645;&#x7B49;&#x4EF7; notify_one</span>
+            <span class="hljs-keyword">self</span>.shared.available.notify_all();
+        }
+    }
+}
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#xFF0C;&#x5982;&#x679C;&#x51CF;&#x4E00;&#x4E4B;&#x524D;&#xFF0C;&#x65E7;&#x7684; senders &#x7684;&#x6570;&#x91CF;&#x5C0F;&#x4E8E;&#x7B49;&#x4E8E; 1&#xFF0C;&#x610F;&#x5473;&#x7740;&#x73B0;&#x5728;&#x662F;&#x6700;&#x540E;&#x4E00;&#x4E2A; Sender &#x8981;&#x79BB;&#x5F00;&#x4E86;&#xFF0C;&#x4E0D;&#x7BA1;&#x600E;&#x6837;&#x6211;&#x4EEC;&#x90FD;&#x8981;&#x5524;&#x9192; Receiver &#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x4F7F;&#x7528;&#x4E86; notify_all()&#x3002;&#x5982;&#x679C; Receiver &#x4E4B;&#x524D;&#x5DF2;&#x7ECF;&#x88AB;&#x963B;&#x585E;&#xFF0C;&#x6B64;&#x523B;&#x5C31;&#x80FD;&#x88AB;&#x5524;&#x9192;&#x3002;&#x4FEE;&#x6539;&#x5B8C;&#x6210;&#xFF0C;<code>cargo test</code> &#x4E00;&#x5207;&#x6B63;&#x5E38;&#x3002;</p>
+<h2 id="&#x6027;&#x80FD;&#x4F18;&#x5316;">&#x6027;&#x80FD;&#x4F18;&#x5316;</h2>
+<p>&#x4ECE;&#x529F;&#x80FD;&#x4E0A;&#x6765;&#x8BF4;&#xFF0C;&#x76EE;&#x524D;&#x6211;&#x4EEC;&#x7684; MPSC unbounded channel &#x6CA1;&#x6709;&#x592A;&#x591A;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x53EF;&#x4EE5;&#x5E94;&#x7528;&#x5728;&#x4EFB;&#x4F55;&#x9700;&#x8981; MPSC channel &#x7684;&#x573A;&#x666F;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x6BCF;&#x6B21;&#x8BFB;&#x5199;&#x90FD;&#x9700;&#x8981;&#x83B7;&#x53D6;&#x9501;&#xFF0C;&#x867D;&#x7136;&#x9501;&#x7684;&#x7C92;&#x5EA6;&#x5F88;&#x5C0F;&#xFF0C;&#x4F46;&#x8FD8;&#x662F;&#x8BA9;&#x6574;&#x4F53;&#x7684;&#x6027;&#x80FD;&#x6253;&#x4E86;&#x4E2A;&#x6298;&#x6263;&#x3002;&#x6709;&#x6CA1;&#x6709;&#x53EF;&#x80FD;&#x4F18;&#x5316;&#x9501;&#x5462;&#xFF1F;</p>
+<p>&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x8BB2;&#x5230;&#xFF0C;&#x4F18;&#x5316;&#x9501;&#x7684;&#x624B;&#x6BB5;&#x65E0;&#x975E;&#x662F;<strong>&#x51CF;&#x5C0F;&#x4E34;&#x754C;&#x533A;&#x7684;&#x5927;&#x5C0F;</strong>&#xFF0C;&#x8BA9;&#x6BCF;&#x6B21;&#x52A0;&#x9501;&#x7684;&#x65F6;&#x95F4;&#x5F88;&#x77ED;&#xFF0C;&#x8FD9;&#x6837;&#x51B2;&#x7A81;&#x7684;&#x51E0;&#x7387;&#x5C31;&#x53D8;&#x5C0F;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x5C31;&#x662F;<strong>&#x964D;&#x4F4E;&#x52A0;&#x9501;&#x7684;&#x9891;&#x7387;&#xFF0C;</strong>&#x5BF9;&#x4E8E;&#x6D88;&#x8D39;&#x8005;&#x6765;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x80FD;&#x591F;&#x4E00;&#x6B21;&#x6027;&#x628A;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#x90FD;&#x8BFB;&#x5B8C;&#x7F13;&#x5B58;&#x8D77;&#x6765;&#xFF0C;&#x4EE5;&#x540E;&#x5728;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#x4ECE;&#x7F13;&#x5B58;&#x4E2D;&#x8BFB;&#x53D6;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x5927;&#x5927;&#x51CF;&#x5C11;&#x6D88;&#x8D39;&#x8005;&#x52A0;&#x9501;&#x7684;&#x9891;&#x6B21;&#x3002;</p>
+<p>&#x987A;&#x7740;&#x8FD9;&#x4E2A;&#x601D;&#x8DEF;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728; Receiver &#x7684;&#x7ED3;&#x6784;&#x4E2D;&#x653E;&#x4E00;&#x4E2A; cache&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">pub</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Receiver</span></span>&lt;T&gt; {
+    shared: Arc&lt;Shared&lt;T&gt;&gt;,
+    cache: VecDeque&lt;T&gt;,
+}
+</code></pre>
+<p>&#x5982;&#x679C;&#x4F60;&#x4E4B;&#x524D;&#x6709; C &#x8BED;&#x8A00;&#x5F00;&#x53D1;&#x7684;&#x7ECF;&#x9A8C;&#xFF0C;&#x4E5F;&#x8BB8;&#x4F1A;&#x60F3;&#xFF0C;&#x5230;&#x4E86;&#x8FD9;&#x4E00;&#x6B65;&#xFF0C;&#x4F55;&#x5FC5;&#x628A; queue &#x4E2D;&#x7684;&#x6570;&#x636E;&#x5168;&#x90E8;&#x8BFB;&#x51FA;&#x6765;&#xFF0C;&#x5B58;&#x5165; Receiver &#x7684; cache &#x5462;&#xFF1F;&#x8FD9;&#x6837;&#x6548;&#x7387;&#x592A;&#x4F4E;&#xFF0C;&#x5982;&#x679C;&#x80FD;&#x591F;&#x76F4;&#x63A5; swap &#x4E24;&#x4E2A;&#x7ED3;&#x6784;&#x5185;&#x90E8;&#x7684;&#x6307;&#x9488;&#xFF0C;&#x8FD9;&#x6837;&#xFF0C;&#x5373;&#x4FBF;&#x961F;&#x5217;&#x4E2D;&#x6709;&#x518D;&#x591A;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4E5F;&#x662F;&#x4E00;&#x4E2A; O(1) &#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x55EF;&#xFF0C;&#x522B;&#x6025;&#xFF0C;Rust &#x6709;&#x7C7B;&#x4F3C;&#x7684; <a href="https://doc.rust-lang.org/std/mem/fn.swap.html" target="_blank">std::mem::swap</a> &#x65B9;&#x6CD5;&#x3002;&#x6BD4;&#x5982;&#xFF08;<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=b68e503ae3413338f770fde2f6c7e861" target="_blank">&#x4EE3;&#x7801;</a>&#xFF09;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">use</span> std::mem;
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> x = <span class="hljs-string">&quot;hello world&quot;</span>.to_string();
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> y = <span class="hljs-string">&quot;goodbye world&quot;</span>.to_string();
+
+    mem::swap(&amp;<span class="hljs-keyword">mut</span> x, &amp;<span class="hljs-keyword">mut</span> y);
+
+    <span class="hljs-built_in">assert_eq!</span>(<span class="hljs-string">&quot;goodbye world&quot;</span>, x);
+    <span class="hljs-built_in">assert_eq!</span>(<span class="hljs-string">&quot;hello world&quot;</span>, y);
+}
+</code></pre>
+<p>&#x597D;&#xFF0C;&#x4E86;&#x89E3;&#x4E86; swap &#x65B9;&#x6CD5;&#xFF0C;&#x6211;&#x4EEC;&#x770B;&#x770B;&#x5982;&#x4F55;&#x4FEE;&#x6539; Receiver &#x7684; recv() &#x65B9;&#x6CD5;&#x6765;&#x63D0;&#x5347;&#x6027;&#x80FD;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">recv</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">Result</span>&lt;T&gt; {
+    <span class="hljs-comment">// &#x65E0;&#x9501; fast path</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-literal">Some</span>(v) = <span class="hljs-keyword">self</span>.cache.pop_front() {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">Ok</span>(v);
+    }
+
+    <span class="hljs-comment">// &#x62FF;&#x5230;&#x961F;&#x5217;&#x7684;&#x9501;</span>
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> inner = <span class="hljs-keyword">self</span>.shared.queue.lock().unwrap();
+    <span class="hljs-keyword">loop</span> {
+        <span class="hljs-keyword">match</span> inner.pop_front() {
+            <span class="hljs-comment">// &#x8BFB;&#x5230;&#x6570;&#x636E;&#x8FD4;&#x56DE;&#xFF0C;&#x9501;&#x88AB;&#x91CA;&#x653E;</span>
+            <span class="hljs-literal">Some</span>(t) =&gt; {
+                <span class="hljs-comment">// &#x5982;&#x679C;&#x5F53;&#x524D;&#x961F;&#x5217;&#x4E2D;&#x8FD8;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x628A;&#x6D88;&#x8D39;&#x8005;&#x81EA;&#x8EAB;&#x7F13;&#x5B58;&#x7684;&#x961F;&#x5217;&#xFF08;&#x7A7A;&#xFF09;&#x548C;&#x5171;&#x4EAB;&#x961F;&#x5217; swap &#x4E00;&#x4E0B;</span>
+                <span class="hljs-comment">// &#x8FD9;&#x6837;&#x4E4B;&#x540E;&#x518D;&#x8BFB;&#x53D6;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4ECE; self.queue &#x4E2D;&#x65E0;&#x9501;&#x8BFB;&#x53D6;</span>
+                <span class="hljs-keyword">if</span> !inner.is_empty() {
+                    std::mem::swap(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>.cache, &amp;<span class="hljs-keyword">mut</span> inner);
+                }
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">Ok</span>(t);
+            }
+            <span class="hljs-comment">// &#x8BFB;&#x4E0D;&#x5230;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x4E14;&#x751F;&#x4EA7;&#x8005;&#x90FD;&#x9000;&#x51FA;&#x4E86;&#xFF0C;&#x91CA;&#x653E;&#x9501;&#x5E76;&#x8FD4;&#x56DE;&#x9519;&#x8BEF;</span>
+            <span class="hljs-literal">None</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">self</span>.total_senders() == <span class="hljs-number">0</span> =&gt; <span class="hljs-keyword">return</span> <span class="hljs-literal">Err</span>(anyhow!(<span class="hljs-string">&quot;no sender left&quot;</span>)),
+            <span class="hljs-comment">// &#x8BFB;&#x4E0D;&#x5230;&#x6570;&#x636E;&#xFF0C;&#x628A;&#x9501;&#x63D0;&#x4EA4;&#x7ED9; available Condvar&#xFF0C;&#x5B83;&#x4F1A;&#x91CA;&#x653E;&#x9501;&#x5E76;&#x6302;&#x8D77;&#x7EBF;&#x7A0B;&#xFF0C;&#x7B49;&#x5F85; notify</span>
+            <span class="hljs-literal">None</span> =&gt; {
+                <span class="hljs-comment">// &#x5F53; Condvar &#x88AB;&#x5524;&#x9192;&#x540E;&#x4F1A;&#x8FD4;&#x56DE; MutexGuard&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5; loop &#x56DE;&#x53BB;&#x62FF;&#x6570;&#x636E;</span>
+                <span class="hljs-comment">// &#x8FD9;&#x662F;&#x4E3A;&#x4EC0;&#x4E48; Condvar &#x8981;&#x5728; loop &#x91CC;&#x4F7F;&#x7528;</span>
+                inner = <span class="hljs-keyword">self</span>
+                    .shared
+                    .available
+                    .wait(inner)
+                    .map_err(|_| anyhow!(<span class="hljs-string">&quot;lock poisoned&quot;</span>))?;
+            }
+        }
+    }
+}
+</code></pre>
+<p>&#x5F53; cache &#x4E2D;&#x6709;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x603B;&#x662F;&#x4ECE; cache &#x4E2D;&#x8BFB;&#x53D6;&#xFF1B;&#x5F53; cache &#x4E2D;&#x6CA1;&#x6709;&#xFF0C;&#x6211;&#x4EEC;&#x62FF;&#x5230;&#x961F;&#x5217;&#x7684;&#x9501;&#xFF0C;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#xFF0C;&#x7136;&#x540E;&#x770B;&#x770B;&#x961F;&#x5217;&#x662F;&#x5426;&#x8FD8;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x6709;&#x7684;&#x8BDD;&#xFF0C;&#x5C31; swap cache &#x548C; queue&#xFF0C;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x4E4B;&#x524D;&#x8BFB;&#x53D6;&#x7684;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x597D;&#xFF0C;&#x505A;&#x5B8C;&#x8FD9;&#x4E2A;&#x91CD;&#x6784;&#x548C;&#x4F18;&#x5316;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8FD0;&#x884C; <code>cargo test</code>&#xFF0C;&#x770B;&#x770B;&#x5DF2;&#x6709;&#x7684;&#x6D4B;&#x8BD5;&#x662F;&#x5426;&#x6B63;&#x5E38;&#x3002;&#x5982;&#x679C;&#x4F60;&#x9047;&#x5230;&#x62A5;&#x9519;&#xFF0C;&#x5E94;&#x8BE5;&#x662F; cache &#x6CA1;&#x6709;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x81EA;&#x884C;&#x89E3;&#x51B3;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">unbounded</span></span>&lt;T&gt;() -&gt; (Sender&lt;T&gt;, Receiver&lt;T&gt;) {
+    <span class="hljs-keyword">let</span> shared = Shared::default();
+    <span class="hljs-keyword">let</span> shared = Arc::new(shared);
+    (
+        Sender {
+            shared: shared.clone(),
+        },
+        Receiver {
+            shared,
+            cache: VecDeque::with_capacity(INITIAL_SIZE),
+        },
+    )
+}
+</code></pre>
+<p>&#x867D;&#x7136;&#x73B0;&#x6709;&#x7684;&#x6D4B;&#x8BD5;&#x5168;&#x6570;&#x901A;&#x8FC7;&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x5E76;&#x6CA1;&#x6709;&#x4E3A;&#x8FD9;&#x4E2A;&#x4F18;&#x5316;&#x5199;&#x6D4B;&#x8BD5;&#xFF0C;&#x8FD9;&#x91CC;&#x8865;&#x4E2A;&#x6D4B;&#x8BD5;&#xFF1A;</p>
+<pre><code class="lang-rust"><span class="hljs-meta">#[test]</span>
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">channel_fast_path_should_work</span></span>() {
+    <span class="hljs-keyword">let</span> (<span class="hljs-keyword">mut</span> s, <span class="hljs-keyword">mut</span> r) = unbounded();
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">0</span>..<span class="hljs-number">10usize</span> {
+        s.send(i).unwrap();
+    }
+
+    <span class="hljs-built_in">assert!</span>(r.cache.is_empty());
+    <span class="hljs-comment">// &#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#xFF0C;&#x6B64;&#x65F6;&#x5E94;&#x8BE5;&#x4F1A;&#x5BFC;&#x81F4; swap&#xFF0C;cache &#x4E2D;&#x6709;&#x6570;&#x636E;</span>
+    <span class="hljs-built_in">assert_eq!</span>(<span class="hljs-number">0</span>, r.recv().unwrap());
+    <span class="hljs-comment">// &#x8FD8;&#x6709; 9 &#x4E2A;&#x6570;&#x636E;&#x5728; cache &#x4E2D;</span>
+    <span class="hljs-built_in">assert_eq!</span>(r.cache.len(), <span class="hljs-number">9</span>);
+    <span class="hljs-comment">// &#x5728; queue &#x91CC;&#x6CA1;&#x6709;&#x6570;&#x636E;&#x4E86;</span>
+    <span class="hljs-built_in">assert_eq!</span>(s.total_queued_items(), <span class="hljs-number">0</span>);
+
+    <span class="hljs-comment">// &#x4ECE; cache &#x91CC;&#x8BFB;&#x53D6;&#x5269;&#x4E0B;&#x7684;&#x6570;&#x636E;</span>
+    <span class="hljs-keyword">for</span> (idx, i) <span class="hljs-keyword">in</span> r.into_iter().take(<span class="hljs-number">9</span>).enumerate() {
+        <span class="hljs-built_in">assert_eq!</span>(idx + <span class="hljs-number">1</span>, i);
+    }
+}
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x6D4B;&#x8BD5;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x8BE6;&#x7EC6;&#x6CE8;&#x91CA;&#x4E5F;&#x90FD;&#x5199;&#x4E0A;&#x4E86;&#x3002;</p>
+<h2 id="&#x5C0F;&#x7ED3;">&#x5C0F;&#x7ED3;</h2>
+<p>&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x4E00;&#x8D77;&#x7814;&#x7A76;&#x4E86;&#x5982;&#x4F55;&#x4F7F;&#x7528; atomics &#x548C; Condvar&#xFF0C;&#x7ED3;&#x5408; VecDeque &#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; MPSC unbounded channel&#x3002;&#x5B8C;&#x6574;&#x7684;&#x4EE3;&#x7801;&#x89C1; <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=042ee12817442a32bcfa05e31a1084f9" target="_blank">playground</a>&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x5728; GitHub repo &#x8FD9;&#x4E00;&#x8BB2;&#x7684;&#x76EE;&#x5F55;&#x4E2D;&#x627E;&#x5230;&#x3002;</p>
+<p>&#x4E0D;&#x540C;&#x4E8E;&#x4EE5;&#x5F80;&#x7684;&#x5B9E;&#x64CD;&#x9879;&#x76EE;&#xFF0C;&#x8FD9;&#x4E00;&#x8BB2;&#xFF0C;&#x6211;&#x4EEC;&#x5B8C;&#x5168;&#x987A;&#x7740;&#x9700;&#x6C42;&#x5199;&#x6D4B;&#x8BD5;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x5199;&#x6D4B;&#x8BD5;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x63A5;&#x53E3;&#x7684;&#x8BBE;&#x8BA1;&#x3002;&#x548C;&#x666E;&#x901A;&#x7684; TDD &#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;&#x6211;&#x4EEC;<strong>&#x5148;&#x4E00;&#x53E3;&#x6C14;&#x628A;&#x4E3B;&#x8981;&#x9700;&#x6C42;&#x6D89;&#x53CA;&#x7684;&#x884C;&#x4E3A;&#x7528;&#x6D4B;&#x8BD5;&#x6765;&#x8868;&#x8FF0;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x8868;&#x8FF0;&#xFF0C;&#x6784;&#x5EFA;&#x5408;&#x9002;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x4EE5;&#x53CA;&#x80FD;&#x591F;&#x8FD0;&#x884C;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;</strong>&#x3002;</p>
+<p>&#x5728;&#x5F00;&#x53D1;&#x4EA7;&#x54C1;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x4E00;&#x79CD;&#x975E;&#x5E38;&#x6709;&#x6548;&#x7684;&#x624B;&#x6BB5;&#xFF0C;&#x53EF;&#x4EE5;&#x8BA9;&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x6D4B;&#x8BD5;&#x5B8C;&#x5584;&#x8BBE;&#x8BA1;&#xFF0C;&#x6700;&#x7EC8;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x80FD;&#x591F;&#x8BA9;&#x6D4B;&#x8BD5;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#x7684;&#x3001;&#x5B8C;&#x5168;&#x6CA1;&#x6709;&#x5B9E;&#x73B0;&#x4EE3;&#x7801;&#x3001;&#x53EA;&#x6709;&#x63A5;&#x53E3;&#x7684;&#x7248;&#x672C;&#x3002;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#xFF0C;&#x5168;&#x90E8;&#x5B9E;&#x73B0;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#xFF0C;&#x8FD0;&#x884C;&#x6D4B;&#x8BD5;&#xFF0C;&#x770B;&#x770B;&#x662F;&#x5426;&#x51FA;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x5728;&#x5B66;&#x4E60;&#x8FD9;&#x4E00;&#x8BB2;&#x7684;&#x5185;&#x5BB9;&#x65F6;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x591A;&#x591A;&#x5173;&#x6CE8;&#x6784;&#x5EFA;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#x7684;&#x6280;&#x5DE7;&#x3002;&#x4E4B;&#x524D;&#x7684;&#x8BFE;&#x7A0B;&#x4E2D;&#xFF0C;&#x6211;&#x53CD;&#x590D;&#x5F3A;&#x8C03;&#x8FC7;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x7684;&#x91CD;&#x8981;&#x6027;&#xFF0C;&#x4E5F;&#x4EE5;&#x8EAB;&#x4F5C;&#x5219;&#x5728;&#x51E0;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x5B9E;&#x64CD;&#x4E2D;&#x90FD;&#x6709;&#x8BE6;&#x5C3D;&#x5730;&#x6D4B;&#x8BD5;&#x3002;&#x4E0D;&#x8FC7;&#x76F8;&#x6BD4;&#x4E4B;&#x524D;&#x5199;&#x7684;&#x6D4B;&#x8BD5;&#xFF0C;&#x8FD9;&#x4E00;&#x8BB2;&#x4E2D;&#x7684;&#x6D4B;&#x8BD5;&#x8981;&#x66F4;&#x96BE;&#x5199;&#x4E00;&#x4E9B;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x5728;&#x5E76;&#x53D1;&#x573A;&#x666F;&#x4E0B;&#x90A3;&#x4E9B;&#x8FB9;&#x8FB9;&#x89D2;&#x89D2;&#x7684;&#x529F;&#x80FD;&#x6D4B;&#x8BD5;&#x3002;</p>
+<p>&#x4E0D;&#x8981;&#x5C0F;&#x770B;&#x6D4B;&#x8BD5;&#x4EE3;&#x7801;&#xFF0C;&#x6709;&#x65F6;&#x5019;&#x6784;&#x9020;&#x6D4B;&#x8BD5;&#x4EE3;&#x7801;&#x6BD4;&#x64B0;&#x5199;&#x529F;&#x80FD;&#x4EE3;&#x7801;&#x8FD8;&#x8981;&#x70E7;&#x8111;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x5F53;&#x4F60;&#x6709;&#x4E86;&#x624E;&#x5B9E;&#x7684;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x8986;&#x76D6;&#x540E;&#xFF0C;&#x518D;&#x505A;&#x91CD;&#x6784;&#xFF0C;&#x6BD4;&#x5982;&#x6700;&#x540E;&#x6211;&#x4EEC;&#x505A;&#x548C;&#x6027;&#x80FD;&#x76F8;&#x5173;&#x7684;&#x91CD;&#x6784;&#xFF0C;&#x5C31;&#x53D8;&#x5F97;&#x8F7B;&#x677E;&#x5F88;&#x591A;&#xFF0C;<strong>&#x56E0;&#x4E3A;&#x53EA;&#x8981;</strong><code>cargo test</code><strong>&#x901A;&#x8FC7;&#xFF0C;&#x8D77;&#x7801;&#x8FD9;&#x4E2A;&#x91CD;&#x6784;&#x6CA1;&#x6709;&#x5F15;&#x8D77;&#x4EFB;&#x4F55;&#x56DE;&#x5F52;&#x95EE;&#x9898;&#xFF08;regression bug&#xFF09;</strong>&#x3002;</p>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x91CD;&#x6784;&#x6CA1;&#x6709;&#x5F15;&#x5165;&#x56DE;&#x5F52;&#x95EE;&#x9898;&#xFF0C;&#x5E76;&#x4E0D;&#x610F;&#x5473;&#x7740;&#x91CD;&#x6784;&#x5B8C;&#x5168;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x9700;&#x8981;&#x8003;&#x8651;&#x64B0;&#x5199;&#x65B0;&#x7684;&#x6D4B;&#x8BD5;&#xFF0C;&#x8986;&#x76D6;&#x91CD;&#x6784;&#x5E26;&#x6765;&#x7684;&#x6539;&#x52A8;&#x3002;</p>
+<h3 id="&#x601D;&#x8003;&#x9898;">&#x601D;&#x8003;&#x9898;</h3>
+<p>&#x6211;&#x4EEC;&#x5B9E;&#x73B0;&#x4E86;&#x4E00;&#x4E2A; unbounded MPSC channel&#xFF0C;&#x5982;&#x679C;&#x8981;&#x5C06;&#x5176;&#x4FEE;&#x6539;&#x4E3A; bounded MPSC channel&#xFF08;&#x961F;&#x5217;&#x5927;&#x5C0F;&#x662F;&#x53D7;&#x9650;&#x7684;&#xFF09;&#xFF0C;&#x9700;&#x8981;&#x600E;&#x4E48;&#x505A;&#xFF1F;</p>
+<p>&#x6B22;&#x8FCE;&#x5728;&#x7559;&#x8A00;&#x533A;&#x4EA4;&#x6D41;&#x4F60;&#x7684;&#x5B66;&#x4E60;&#x5FC3;&#x5F97;&#x548C;&#x601D;&#x8003;&#xFF0C;&#x611F;&#x8C22;&#x4F60;&#x7684;&#x6536;&#x542C;&#xFF0C;&#x4ECA;&#x5929;&#x4F60;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;Rust&#x5B66;&#x4E60;&#x7684;&#x7B2C;35&#x6B21;&#x6253;&#x5361;&#x3002;&#x5982;&#x679C;&#x4F60;&#x89C9;&#x5F97;&#x6709;&#x6536;&#x83B7;&#xFF0C;&#x4E5F;&#x6B22;&#x8FCE;&#x4F60;&#x5206;&#x4EAB;&#x7ED9;&#x8EAB;&#x8FB9;&#x7684;&#x670B;&#x53CB;&#xFF0C;&#x9080;&#x4ED6;&#x4E00;&#x8D77;&#x8BA8;&#x8BBA;&#x3002;&#x6211;&#x4EEC;&#x4E0B;&#x8282;&#x8BFE;&#x89C1;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="442217.html" class="navigation navigation-prev " aria-label="Previous page: 34｜并发处理（下）：从atomics到Channel，Rust都提供了什么工具？">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="445818.html" class="navigation navigation-next " aria-label="Next page: 用户故事｜绝望之谷：改变从学习开始">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"35｜实操项目：如何实现一个基本的MPSC channel？","level":"1.42","depth":1,"next":{"title":"用户故事｜绝望之谷：改变从学习开始","level":"1.43","depth":1,"path":"docs/445818.md","ref":"./docs/445818.md","articles":[]},"previous":{"title":"34｜并发处理（下）：从atomics到Channel，Rust都提供了什么工具？","level":"1.41","depth":1,"path":"docs/442217.md","ref":"./docs/442217.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"陈天 · Rust 编程第一课","language":"zh","gitbook":"*"},"file":{"path":"docs/445814.md","mtime":"2024-08-25T05:24:59.973Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-08-25T05:46:11.445Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
