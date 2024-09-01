@@ -4,7 +4,10 @@ use anyhow::{anyhow, Ok, Result};
 use clap::{command, Parser};
 use colored::Colorize;
 use mime::Mime;
-use reqwest::{header::{self, CONTENT_TYPE}, Client, Response, Url};
+use reqwest::{
+    header::{self, CONTENT_TYPE},
+    Client, Response, Url,
+};
 #[derive(Parser, Debug, Clone)]
 struct Get {
     /// http 请求的 url
@@ -29,10 +32,10 @@ enum SubCommand {
 }
 
 /// A naive httpie implementation with Rust, can you imagine how easy is it?
-/// derive 宏，为 Opts 自动派生（derive）Parser, Debug, Clone 特性（traits）的实现
-/// Parser 特性是 clap 库提供的，它允许 Opts 结构体用作命令行解析的目标。
-/// Debug 特性允许你使用 {:?} 格式化字符串打印 Opts 实例的调试信息。
-/// Clone 特性允许你复制 Opts 实例。
+// derive 宏，为 Opts 自动派生（derive）Parser, Debug, Clone 特性（traits）的实现
+// Parser 特性是 clap 库提供的，它允许 Opts 结构体用作命令行解析的目标。
+// Debug 特性允许你使用 {:?} 格式化字符串打印 Opts 实例的调试信息。
+// Clone 特性允许你复制 Opts 实例。
 #[derive(Parser, Debug, Clone)]
 // 这是 clap 的属性宏，用于定义命令的元数据。
 #[command(version = "1.0", about = None, author = "yi.hu")]
@@ -112,16 +115,16 @@ fn print_body(m: Option<Mime>, body: &String) {
         // 如果 为 APPLICATION_JSON 格式的返回，使用 pretty print 打印
         Some(v) if v == mime::APPLICATION_JSON => {
             println!("{}", jsonxf::pretty_print(body).unwrap().cyan())
-        },
-        _ => println!("{}", body)
+        }
+        _ => println!("{}", body),
     }
 }
 
 // 将服务器返回的 content-type 转化为 mime 类型
 fn get_content_type(resp: &Response) -> Option<Mime> {
     resp.headers()
-    .get(CONTENT_TYPE)
-    .map(|v| v.to_str().unwrap().parse().unwrap())
+        .get(CONTENT_TYPE)
+        .map(|v| v.to_str().unwrap().parse().unwrap())
 }
 
 // 打印整个响应
@@ -153,7 +156,7 @@ async fn main() -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     // 测试验证 parse_url 功能是否正常
     #[test]
     fn parse_url_works() {

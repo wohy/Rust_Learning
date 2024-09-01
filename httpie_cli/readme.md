@@ -1,4 +1,5 @@
-# 实现一个 类似于 curl 的命令行工具
+# 实现一个 类似于 curl 的命令行工具，实现 python 中的 HTTPie 工具
+本次实现 建议 post get 请求
 
 ## 使用到的 crates
 - clap 命令行解析工具
@@ -28,9 +29,24 @@
 一般用于单元测试
 使用 cargo test 执行
 
+## 开发阶段
+执行
+$ cargo build --quiet && target/debug/httpie post httpbin.org/post a=1 b=2
+或
+$ cargo run -- post httpbin.org/post a=1 b=2
+检测
+控制台输出：
+Opts { subcmd: Post(Post { url: "httpbin.org/post", body: ["a=1", "b=2"] }) }
+证明 url parse 等方法调用成功，Opts 成功构建
+
+
 
 # tokei src/main.rs
 tokei 代码行数统计工具
+全局安装 cargo install tokei
+执行
+tokei /path/to/directory
+或者直接在当前文件下执行 tokei
 
 # 命令行工具生效
 1. cargo build --release
