@@ -1,4 +1,5 @@
 mod abi;
+// 引入 abi 模块
 pub use abi::*;
 use anyhow::Ok;
 use base64::{decode_config, encode_config};
@@ -92,5 +93,22 @@ impl Spec {
         Self {
             data: Some(spec::Data::Watermark(Watermark { x, y })),
         }
+    }
+}
+
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use std::borrow::Borrow;
+    use std::convert::TryInto;
+
+    #[test]
+    fn encodeed_spec_could_be_decoded() {
+        let spec1 = Spec::new_resize(600, 600, resize::SampleFilter::CatmullRom);
+        let spec2 = Spec::new_filter(filter::Filter::Marine);
+        let image_spec = ImageSpec::new(vec![spec1, spec2]);
+        let s: String = image_spec.borrow().into();
+        assert_eq!(image_spec, s.as_str().try_into().unwrap());
     }
 }
