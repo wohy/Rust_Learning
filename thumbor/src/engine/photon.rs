@@ -54,6 +54,7 @@ impl Engine for Photon {
     }
 }
 
+// 泛型 实现 多态 / 特征实现抽象
 impl SpecTransform<&Crop> for Photon {
     fn transform(&mut self, op: &Crop) {
         let img = transform::crop(&mut self.0, op.x1, op.y1, op.x2, op.y2);
