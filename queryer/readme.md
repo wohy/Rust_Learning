@@ -25,3 +25,214 @@ cargo run --example dialect 执行例子
 
 # 实现自己的 sql 语法，让 datasource 可以是一个 url，即可以接受传入一个 csv 文件路径 
 
+# 使用模式匹配方式实现 类型转换 convert.rs
+sqlparser 解析 sql 生成 ast
+主要 结构 有一个 body 属性内包含了各种操作语句 Select 、 order_by 、 limit 、 offset 、 fetch
+即可匹配出 body 的各个语句，通过 实现 From 和 TryFrom trait 将语句类型转化为符合 polars 读取出的 datasource 的 AST 类型
+```rs
+Ok(
+    [
+        Query(
+            Query {
+                with: None,
+                body: Select(
+                    Select {
+                        distinct: false,
+                        top: None,
+                        projection: [
+                            ExprWithAlias {
+                                expr: Identifier(
+                                    Ident {
+                                        value: "a",
+                                        quote_style: None,
+                                    },
+                                ),
+                                alias: Ident {
+                                    value: "a1",
+                                    quote_style: None,
+                                },
+                            },
+                            UnnamedExpr(
+                                Identifier(
+                                    Ident {
+                                        value: "b",
+                                        quote_style: None,
+                                    },
+                                ),
+                            ),
+                            UnnamedExpr(
+                                Value(
+                                    Number(
+                                        "123",
+                                        false,
+                                    ),
+                                ),
+                            ),
+                            UnnamedExpr(
+                                Function(
+                                    Function {
+                                        name: ObjectName(
+                                            [
+                                                Ident {
+                                                    value: "myfunc",
+                                                    quote_style: None,
+                                                },
+                                            ],
+                                        ),
+                                        args: [
+                                            Unnamed(
+                                                Identifier(
+                                                    Ident {
+                                                        value: "b",
+                                                        quote_style: None,
+                                                    },
+                                                ),
+                                            ),
+                                        ],
+                                        over: None,
+                                        distinct: false,
+                                    },
+                                ),
+                            ),
+                            Wildcard,
+                        ],
+                        from: [
+                            TableWithJoins {
+                                relation: Table {
+                                    name: ObjectName(
+                                        [
+                                            Ident {
+                                                value: "data_source",
+                                                quote_style: None,
+                                            },
+                                        ],
+                                    ),
+                                    alias: None,
+                                    args: [],
+                                    with_hints: [],
+                                },
+                                joins: [],
+                            },
+                        ],
+                        lateral_views: [],
+                        selection: Some(
+                            BinaryOp {
+                                left: BinaryOp {
+                                    left: BinaryOp {
+                                        left: Identifier(
+                                            Ident {
+                                                value: "a",
+                                                quote_style: None,
+                                            },
+                                        ),
+                                        op: Gt,
+                                        right: Identifier(
+                                            Ident {
+                                                value: "b",
+                                                quote_style: None,
+                                            },
+                                        ),
+                                    },
+                                    op: And,
+                                    right: BinaryOp {
+                                        left: Identifier(
+                                            Ident {
+                                                value: "b",
+                                                quote_style: None,
+                                            },
+                                        ),
+                                        op: Lt,
+                                        right: Value(
+                                            Number(
+                                                "100",
+                                                false,
+                                            ),
+                                        ),
+                                    },
+                                },
+                                op: And,
+                                right: Between {
+                                    expr: Identifier(
+                                        Ident {
+                                            value: "c",
+                                            quote_style: None,
+                                        },
+                                    ),
+                                    negated: false,
+                                    low: Value(
+                                        Number(
+                                            "10",
+                                            false,
+                                        ),
+                                    ),
+                                    high: Value(
+                                        Number(
+                                            "20",
+                                            false,
+                                        ),
+                                    ),
+                                },
+                            },
+                        ),
+                        group_by: [],
+                        cluster_by: [],
+                        distribute_by: [],
+                        sort_by: [],
+                        having: None,
+                    },
+                ),
+                order_by: [
+                    OrderByExpr {
+                        expr: Identifier(
+                            Ident {
+                                value: "a",
+                                quote_style: None,
+                            },
+                        ),
+                        asc: Some(
+                            false,
+                        ),
+                        nulls_first: None,
+                    },
+                    OrderByExpr {
+                        expr: Identifier(
+                            Ident {
+                                value: "b",
+                                quote_style: None,
+                            },
+                        ),
+                        asc: None,
+                        nulls_first: None,
+                    },
+                ],
+                limit: Some(
+                    Value(
+                        Number(
+                            "50",
+                            false,
+                        ),
+                    ),
+                ),
+                offset: Some(
+                    Offset {
+                        value: Value(
+                            Number(
+                                "10",
+                                false,
+                            ),
+                        ),
+                        rows: None,
+                    },
+                ),
+                fetch: None,
+            },
+        ),
+    ],
+)
+```
+
+# 从文件或者url中获取源数据 fetcher.rs
+
+# 将源数据（csv 数据）读取为 DataFrame ，这里为 DataSet ， 自定义的 DataFrame 代理，面向工具使用方。 loader.ts
+
+# lib.rs 中定义好 DataSet，定义好 query 函数，传入 sql 字符串输出，sql 执行后得到的内容
