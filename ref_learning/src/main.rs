@@ -87,6 +87,7 @@ fn main() {
     let arr = Arc::new(vec![1]); 
     let arr1 = arr.clone();
     //  move, in order to give ownership of values to a thread。 arr1 的所有权转移到了闭包中
+    // 多线程访问同一个值
     std::thread::spawn(move || { 
         println!("the arr is {:?}", arr1); 
     }).join().unwrap();
